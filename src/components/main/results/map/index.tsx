@@ -1,3 +1,6 @@
+// React imports
+import { useState } from 'react';
+
 // App imports
 import { Points } from './points'
 import './styles.scss';
@@ -18,8 +21,9 @@ export const MapContainer = () => {
 				initialViewState={{...viewport, zoom: 2}}
 				mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN} 
 				mapStyle={mapStyle}
+				onLoad={() => setIsMapLoaded(true)}
 			>	
-				<Points/>
+				{isMapLoaded && <Points/>}
 			</Map>
 		</div>
 	)

@@ -1,5 +1,5 @@
 // React imports
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 // App imports
 import { Pin } from './pin';
@@ -21,6 +21,7 @@ export const MapContainer = () => {
 	const { markers, setMarkers, currentMarker, setCurrentMarker, activeTrash, rejectedMarkers, setRejectedMarkers, addPin } = useMarkers();
 	const { fillColor, setFillColor, colorPalette } = useSlider();
 	const { isDragging, onDragStart, onMouseMove, onDragEnd, onClick } = useMapEvents();
+	const [ isMapLoaded, setIsMapLoaded ] = useState(false);
 
 	const existingMarkers = markers.length > 0;
 
@@ -50,9 +51,10 @@ export const MapContainer = () => {
 		  onTouchMove={onMouseMove}
 		  onTouchEnd={onDragEnd}
 		  dragPan={!isDragging}
+		  onLoad={() => setIsMapLoaded(true)}
 		>
 		  {/*{markers && <Path markers={markers} rejectedMarkers={rejectedMarkers}/>}*/}
-		  {existingMarkers && filteredMarkers.map((marker: any, index: number) => (
+		  {isMapLoaded && existingMarkers && filteredMarkers.map((marker: any, index: number) => (
 		    <Pin
 		      index={index}
 		      marker={marker}
