@@ -1,0 +1,28 @@
+// App imports
+import { Points } from './points'
+import './styles.scss';
+
+// Context imports
+import { useMapbox } from '../../../context/maps/mapbox';
+
+// Third-party imports
+import 'mapbox-gl/dist/mapbox-gl.css';
+import { Map } from 'react-map-gl';
+
+export const MapContainer = () => {
+	const { viewport, mapStyle } = useMapbox();
+
+	return (
+		<div className="results-map-container">
+			<Map
+				initialViewState={{...viewport, zoom: 2}}
+				mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN} 
+				mapStyle={mapStyle}
+			>	
+				<Points/>
+			</Map>
+		</div>
+	)
+}
+
+MapContainer.displayName="MapContainer";

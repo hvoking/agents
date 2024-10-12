@@ -1,0 +1,10 @@
+.bars-wrapper {
+	display: grid; 
+	grid-template-rows: min-content min-content; 
+	white-space: nowrap;
+}
+.bars {
+	display: grid; 
+	grid-template-columns: auto 20px;  
+	text-align: center
+}

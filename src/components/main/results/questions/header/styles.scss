@@ -1,0 +1,28 @@
+.results-header {
+	text-align: center;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	display: grid;
+	grid-gap: 8px;
+}
+.results-header-title {
+	color: rgba(233, 12, 131, 1);
+	font-weight: 600;
+	font-size: 1.4em;
+}
+.results-header-subtitle {
+	color: rgba(126, 126, 132, 1);
+	font-weight: 600;
+	padding-right: 40px;
+	padding-left: 40px;
+}
+.results-header-click {
+	color: rgba(126, 126, 132, 1);
+}
+@media screen and (max-width: 1000px) {
+	.results-header {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		grid-gap: 0px;
+	}
+}

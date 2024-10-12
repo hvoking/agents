@@ -1,0 +1,27 @@
+.map-add-pin {
+	background-color: rgba(204, 255, 41, 1);
+	width: 55px;
+	height: 55px;
+	border-radius: 5px;
+	cursor: pointer;
+	display: grid;
+	box-shadow: 2px 2px 2px rgba(64, 64, 64, .12); 
+}
+.map-add-pin:hover {
+	background-color: rgba(33, 33, 43, 1);
+	img {
+		filter: brightness(0) invert(1);	
+	}
+	line {
+		stroke: rgba(255, 255, 255, 1);
+	}
+}
+.map-pin-wrapper {
+	position: relative;
+}
+.map-pin-image {
+	position: absolute;
+	width: 21px;
+	left: 15.5px;
+	bottom: 11px;
+}

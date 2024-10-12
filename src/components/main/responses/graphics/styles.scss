@@ -1,0 +1,94 @@
+.graphics {
+  display: grid;
+  overflow: hidden;
+  padding-left: 40px;
+  padding-right: 40px;
+  grid-gap: 20px;
+  grid-template-columns: repeat(3, 1fr) 2fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "ag rc ge lo"
+    "tg rc ge lo";
+}
+.graphics-title {
+  color: rgba(233, 12, 131, 1);
+  font-size: 1.6em;
+  font-weight: 600;
+  text-align: center;
+  padding-top: 20px;  
+}
+.age-graphics {
+  grid-area: ag;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(126, 126, 132, 1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.ability-graphics {
+  grid-area: tg;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(126, 126, 132, 1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.race-graphics {
+  grid-area: rc;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(126, 126, 132, 1);
+  border-radius: 10px;
+  display: grid;
+  grid-template-rows: min-content 4fr 40px 3fr;
+  overflow: hidden;
+}
+.gender-graphics {
+  grid-area: ge;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(126, 126, 132, 1);
+  border-radius: 10px;
+  display: grid;
+  grid-template-rows: min-content 4fr 40px 3fr;
+  overflow: hidden;
+}
+.location-graphics {
+  grid-area: lo;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(126, 126, 132, 1);
+  border-radius: 10px;
+  grid-template-rows: min-content 5fr 3fr;
+}
+.responses-number {
+  font-size: 1.4em;
+  font-weight: 700;
+  color: rgba(233, 12, 131, 1);
+  padding-right: 5px;
+}
+// mobile-style
+@media screen and (max-width: 768px) {
+ .graphics {
+   padding-left: 20px;
+   padding-right: 20px;
+   grid-gap: 10px;
+   overflow-y: scroll;
+   grid-template-columns: 1fr;
+   grid-template-rows: auto;
+   grid-template-areas:
+     "ag"
+     "tg"
+     "rc"
+     "ge"
+     "lo";
+ } 
+ .graphics-header {
+    padding-bottom: 5px;
+ }
+ .age-graphics,
+ .ability-graphics {
+  min-height: 250px;
+ }
+ .race-graphics,
+ .gender-graphics,
+ .location-graphics {
+    min-height: 400px;
+
+ }
+}

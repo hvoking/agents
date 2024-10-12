@@ -1,0 +1,28 @@
+.results {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: min-content auto;
+  overflow: hidden;
+  grid-template-areas:
+    "rl rm"
+    "rq rm";
+}
+.results-questions {
+  grid-area: rq;
+}
+.results-map-container {
+  grid-area: rm;
+}
+.results-logo {
+  grid-area: rl;
+}
+@media screen and (max-width: 768px) {
+  .results {
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content 2fr min-content;
+    grid-template-areas:
+      "rl"
+      "rm"
+      "rq";
+  }
+}
