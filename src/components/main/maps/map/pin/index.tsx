@@ -6,16 +6,18 @@ import { Path } from './path';
 import { Marker } from 'react-map-gl';
 
 export const Pin = ({ index, marker, currentMarker, setCurrentMarker, markers, setMarkers, fillColor, setFillColor, activeTrash,setRejectedMarkers }: any) => {
-	const isCurrentMarker = currentMarker && marker.id === currentMarker.id;
-	const currentFill = !currentMarker ? marker.color : isCurrentMarker ? fillColor : marker.color;
+	const { id, color, latitude, longitude } = marker;
+
+	const isCurrentMarker = currentMarker && id === currentMarker.id;
+	const currentFill = !currentMarker ? marker.color : isCurrentMarker ? fillColor : color;
 	const currentOpacity = !currentMarker || isCurrentMarker ? 1 : 0.6;
 
 	const onDragStart = () => {
-		setFillColor(marker.color)
+		setFillColor(color)
 		setCurrentMarker(marker);
 	} 
 	const onClick = () => {
-		setFillColor(marker.color)
+		setFillColor(color)
 		setCurrentMarker(marker);
 	}
 
@@ -24,7 +26,7 @@ export const Pin = ({ index, marker, currentMarker, setCurrentMarker, markers, s
 		const lng = event.lngLat.lng;
 
 		const updatedMarkers = markers.map((previousMarker: any) => {
-			const isCurrentMarker = previousMarker.id === marker.id;
+			const isCurrentMarker = previousMarker.id === id;
 			
 			if (isCurrentMarker) {
 				const updatedMarker = {...previousMarker, latitude: lat, longitude: lng};
@@ -46,8 +48,8 @@ export const Pin = ({ index, marker, currentMarker, setCurrentMarker, markers, s
 	return (
 			<Marker
 				key={index}
-				longitude={marker.longitude}
-				latitude={marker.latitude}
+				longitude={longitude}
+				latitude={latitude}
 				anchor="bottom"
 				draggable
 				onDragStart={onDragStart}

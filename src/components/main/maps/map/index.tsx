@@ -26,13 +26,13 @@ export const MapContainer = () => {
 	const existingMarkers = markers.length > 0;
 
 	useEffect(() => {
-	const updatedMarkers = existingMarkers && markers.map((marker: any) => {
-	  const isCurrentMarker = marker && currentMarker && marker.id === currentMarker.id;
-	  return (
-	    isCurrentMarker ? { ...marker, color: fillColor } : marker
-	  )
-	});
-	existingMarkers && setMarkers(updatedMarkers);
+		const updatedMarkers = existingMarkers && markers.map((marker: any) => {
+		  const isCurrentMarker = marker && currentMarker && marker.id === currentMarker.id;
+		  return (
+		    isCurrentMarker ? { ...marker, color: fillColor } : marker
+		  )
+		});
+		existingMarkers && setMarkers(updatedMarkers);
 	}, [ fillColor ]);
 
 	const filteredMarkers = existingMarkers && markers.filter((item: any) => !rejectedMarkers.includes(item));

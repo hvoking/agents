@@ -14,6 +14,7 @@ import { Map } from 'react-map-gl';
 
 export const MapContainer = () => {
 	const { viewport, mapStyle } = useMapbox();
+	const [ isMapLoaded, setIsMapLoaded ] = useState(false);
 
 	return (
 		<div className="results-map-container">

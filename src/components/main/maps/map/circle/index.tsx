@@ -1,5 +1,4 @@
 // Context imports
-import { useCircle } from '../../../../context/maps/circle';
 import { useMarkers } from '../../../../context/maps/markers';
 
 // Third party imports
@@ -10,30 +9,33 @@ export const Circle = () => {
 
     if (!currentMarker) return <></>
 
-const circleLayer: LayerProps = {
-    id: 'layer-mask',
-    type: 'circle',
-    source: 'circle-source',
-    paint: {
-      'circle-radius': [
-                'interpolate', ['exponential', 2], ['zoom'],
-                1, 40,
-                15, 30
-            ],
-      'circle-color': 'rgb(0, 0, 255)',
-      'circle-opacity': 0.1,
-      'circle-pitch-alignment': 'map',
-    }
-  };
+    const { latitude, longitude } = currentMarker;
+    const center = [ longitude, latitude ];
 
-  // Generate circle geometry based on current marker position
-  const circleGeometry = {
-    type: 'Feature',
-    geometry: {
-      type: 'Point',
-      coordinates: [currentMarker.longitude, currentMarker.latitude]
-    }
-  };
+    const circleLayer: LayerProps = {
+        id: 'layer-mask',
+        type: 'circle',
+        source: 'circle-source',
+        paint: {
+          'circle-radius': [
+                    'interpolate', ['exponential', 2], ['zoom'],
+                    1, 40,
+                    15, 30
+                ],
+          'circle-color': 'rgb(0, 0, 255)',
+          'circle-opacity': 0.1,
+          'circle-pitch-alignment': 'map',
+        }
+      };
+
+    // Generate circle geometry based on current marker position
+    const circleGeometry = {
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: center
+        }
+    };
 
     return (
         <Source 
