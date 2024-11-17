@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/geomiro/static/css/main.15f77acc.css",
-    "main.js": "/geomiro/static/js/main.d1c583cc.js",
-    "static/js/879.33ae2e2e.chunk.js": "/geomiro/static/js/879.33ae2e2e.chunk.js",
+    "main.js": "/geomiro/static/js/main.d9529b02.js",
+    "static/js/879.210a202c.chunk.js": "/geomiro/static/js/879.210a202c.chunk.js",
     "index.html": "/geomiro/index.html",
     "main.15f77acc.css.map": "/geomiro/static/css/main.15f77acc.css.map",
-    "main.d1c583cc.js.map": "/geomiro/static/js/main.d1c583cc.js.map",
-    "879.33ae2e2e.chunk.js.map": "/geomiro/static/js/879.33ae2e2e.chunk.js.map"
+    "main.d9529b02.js.map": "/geomiro/static/js/main.d9529b02.js.map",
+    "879.210a202c.chunk.js.map": "/geomiro/static/js/879.210a202c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.15f77acc.css",
-    "static/js/main.d1c583cc.js"
+    "static/js/main.d9529b02.js"
   ]
 }
