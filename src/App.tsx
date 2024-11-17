@@ -1,6 +1,6 @@
 // App imports
 import { AtlasRouter } from './routes';
-import { MainProvider } from './components/context';
+import { MainProvider } from './context';
 import './styles.scss';
 
 // Third-party imports

@@ -1,7 +1,7 @@
 // Routes
-import { Maps } from '../components/main/maps';
-import { Responses } from '../components/main/responses';
-import { Results } from '../components/main/results';
+import { Maps } from 'components/maps';
+import { Responses } from 'components/responses';
+import { Results } from 'components/results';
 
 // Third party imports
 import { Routes, Route } from 'react-router-dom';
