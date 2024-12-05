@@ -18,7 +18,7 @@ export const useMask = () => {
 
 export const MaskProvider = ({children}: any) => {
 	const { mapRef } = useMapbox();
-	const { currentMarker, circleGeometry } = useMarkers();
+	const { currentMarker, radius } = useMarkers();
 
 	const [ mapFeatures, setMapFeatures ] = useState([]);
 	const [ activeFeatures, setActiveFeatures ] = useState(false);
@@ -40,12 +40,12 @@ export const MaskProvider = ({children}: any) => {
 
 	const maskProperties = useMemo(() => {
 	    return mapFeatures.filter((item: any) => {
-	        if (item.source === 'airbnb-points') {
-	            return turf.booleanPointInPolygon(item.geometry, circleGeometry);
+	        if (item.source === 'points-rotterdam' && currentMarker) {
+	            return turf.booleanPointInPolygon(item.geometry, turf.circle([currentMarker.longitude, currentMarker.latitude], radius));
 	        }
 	    return false
 	    });
-	}, [ mapFeatures, currentMarker, circleGeometry ]);
+	}, [ mapFeatures, currentMarker ]);
 
 	return (
 		<MaskContext.Provider value={{ maskProperties }}>

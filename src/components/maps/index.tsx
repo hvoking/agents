@@ -8,6 +8,7 @@ import { UserPin } from './userPin';
 import { Circle } from './circle';
 import { Wrapper } from './wrapper';
 import { Points } from './points';
+import { Mask } from './mask';
 import './styles.scss';
 
 // Context imports
@@ -78,6 +79,7 @@ export const Maps = () => {
       <UserPin/>
       {isMapLoaded && <Circle/>}
       {isMapLoaded && <Points/>}
+      <Mask/>
     </Map>
       
     </Wrapper>

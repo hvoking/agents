@@ -18,6 +18,8 @@ export const MarkersProvider = ({children}: any) => {
 	const [ addPin, setAddPin ] = useState(false);
 	const [ rejectedMarkers, setRejectedMarkers ] = useState([]);
 
+	const [ radius, setRadius ] = useState(1);
+
   	const circleGeometry = currentMarker && {
   	    type: 'Feature',
   	    geometry: {
@@ -33,7 +35,8 @@ export const MarkersProvider = ({children}: any) => {
 			activeTrash, setActiveTrash,
 			rejectedMarkers, setRejectedMarkers,
 			addPin, setAddPin,
-			circleGeometry
+			circleGeometry, 
+			radius, setRadius
 		}}>
 			{children}
 		</MarkersContext.Provider>
