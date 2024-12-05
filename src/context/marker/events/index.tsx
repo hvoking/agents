@@ -3,7 +3,7 @@ import { useContext, createContext } from 'react';
 
 // Context imports
 import { useMarkers } from 'context/maps/markers';
-import { useSlider } from 'context/slider';
+import { useSlider } from 'context/marker/slider';
 
 const MarkerEventsContext: React.Context<any> = createContext(null);
 

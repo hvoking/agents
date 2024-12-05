@@ -1,10 +1,7 @@
 // App imports
-import { AtlasRouter } from './routes';
-import { MainProvider } from './context';
+import { Main } from 'components';
+import { MainProvider } from 'context';
 import './styles.scss';
-
-// Third-party imports
-import { HashRouter as Router } from 'react-router-dom';
 
 export const App = () => {
   let vh = window.innerHeight * 0.01;
@@ -17,11 +14,9 @@ export const App = () => {
   
   return (
     <div className="App">
-      <Router>
-        <MainProvider>
-          <AtlasRouter/>
-        </MainProvider>
-      </Router>
+      <MainProvider>
+        <Main/>
+      </MainProvider>
     </div>
   );
 }

@@ -32,7 +32,7 @@ export const MapEventsProvider = ({children}: any) => {
 
 	    const onDragStart = useCallback(
 	        (event: any) => {
-	            if (isClickInsideCircle(event.point)) {
+	            if (isClickInsideCircle(event.point) && currentMarker) {
 	                setIsDragging(true);
 	                const { x, y } = event.point;
 	                const projected = mapRef.current.project([currentMarker.longitude, currentMarker.latitude]);
