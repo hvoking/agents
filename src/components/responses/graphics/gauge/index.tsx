@@ -3,13 +3,13 @@ import { SVGWrapper } from './svg';
 import { Circle } from './circle';
 
 // Context imports
-import { useRaceSizes } from 'context/sizes/gauge/race';
+import { useGaugeSizes } from 'context/sizes/gauge';
 
 // Third party imports
 import * as d3 from "d3";
 
 export const Gauge = ({ data, name }: any) => {
-	const { innerWidth, innerHeight } = useRaceSizes();
+	const { innerWidth, innerHeight } = useGaugeSizes();
 	const radius = d3.min([innerWidth, innerHeight]) / 2;
 
 	let totalCircunference = 0;

@@ -1,6 +1,8 @@
 // React imports
 import { useState, useContext, createContext } from 'react';
 
+import { LayerProps } from 'react-map-gl';
+
 const MarkersContext: React.Context<any> = createContext(null);
 
 export const useMarkers = () => {
@@ -16,13 +18,22 @@ export const MarkersProvider = ({children}: any) => {
 	const [ addPin, setAddPin ] = useState(false);
 	const [ rejectedMarkers, setRejectedMarkers ] = useState([]);
 
+  	const circleGeometry = currentMarker && {
+  	    type: 'Feature',
+  	    geometry: {
+  	        type: 'Point',
+  	        coordinates: [currentMarker.longitude, currentMarker.latitude]
+  	    }
+  	};
+
 	return (
 		<MarkersContext.Provider value={{
 			markers, setMarkers,
 			currentMarker, setCurrentMarker,
 			activeTrash, setActiveTrash,
 			rejectedMarkers, setRejectedMarkers,
-			addPin, setAddPin
+			addPin, setAddPin,
+			circleGeometry
 		}}>
 			{children}
 		</MarkersContext.Provider>

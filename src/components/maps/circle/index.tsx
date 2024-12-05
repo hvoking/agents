@@ -1,18 +1,13 @@
 // Context imports
-import { useMarkers } from '../../../../context/maps/markers';
+import { useMarkers } from 'context/maps/markers';
 
 // Third party imports
-import { Source, Layer, LayerProps } from 'react-map-gl';
+import { Source, Layer } from 'react-map-gl';
 
 export const Circle = () => {
-    const { currentMarker } = useMarkers();
+    const { circleGeometry } = useMarkers();
 
-    if (!currentMarker) return <></>
-
-    const { latitude, longitude } = currentMarker;
-    const center = [ longitude, latitude ];
-
-    const circleLayer: LayerProps = {
+    const circleLayer: any = {
         id: 'layer-mask',
         type: 'circle',
         source: 'circle-source',
@@ -26,16 +21,8 @@ export const Circle = () => {
           'circle-opacity': 0.1,
           'circle-pitch-alignment': 'map',
         }
-      };
 
-    // Generate circle geometry based on current marker position
-    const circleGeometry = {
-        type: 'Feature',
-        geometry: {
-            type: 'Point',
-            coordinates: center
-        }
-    };
+      };
 
     return (
         <Source 

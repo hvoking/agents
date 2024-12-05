@@ -2,10 +2,10 @@
 import { useCallback, Children, cloneElement } from 'react';
 
 // Context imports
-import { useRaceSizes } from 'context/sizes/gauge/race';
+import { useGaugeSizes } from 'context/sizes/gauge';
 
 export const SVGWrapper = ({ children }: any) => {
-	const { width, height, setWidth, setHeight, margin } = useRaceSizes();
+	const { width, height, setWidth, setHeight, margin } = useGaugeSizes();
 
 	const parentRef = useCallback((node: any) => {
 		if (node) {

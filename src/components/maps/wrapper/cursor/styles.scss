@@ -1,9 +1,21 @@
+.maps-go-circle {
+    background-color: rgba(204, 255, 41, 0.8);
+    width: 55px;
+    height: 55px;
+    display: grid;
+    border-radius: 50%;
+}
+.maps-custom-cursor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 20;
+}
 .add-pin-message {
     position: absolute;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(233, 12, 131, 0.6);
+    background-color: rgba(25, 149, 206, 0.8);
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -27,4 +39,12 @@
     100% {
         opacity: 0;
     }
+}
+@media screen and (max-width: 768px) {
+  .maps-go-circle {
+    display: none;
+  }
+  .maps-custom-cursor {
+      display: none;
+  }
 }

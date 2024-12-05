@@ -3,6 +3,8 @@ import { Search } from './search';
 import { Switch } from './switch';
 import { ReCenter } from './reCenter';
 import { Title } from './title';
+import { Cursor } from './cursor';
+import { Left } from './left';
 
 export const Wrapper = ({ children }: any) => {
 	return (
@@ -12,6 +14,8 @@ export const Wrapper = ({ children }: any) => {
 			<Search/>
 			<Switch/>
 			<ReCenter/>
+			<Cursor/>
+			<Left/>
 		</div>
 	)
 }

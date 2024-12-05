@@ -5,8 +5,8 @@ import { useCallback } from 'react';
 import { Path } from './path';
 
 // Context imports
-import { useMapbox } from '../../../../context/maps/mapbox';
-import { useMarkers } from '../../../../context/maps/markers';
+import { useMapbox } from 'context/maps/mapbox';
+import { useMarkers } from 'context/maps/markers';
 
 // Third-party imports
 import { Marker } from 'react-map-gl';
