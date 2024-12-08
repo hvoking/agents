@@ -13,7 +13,7 @@ export const useReverseGeocodingApi = () => {
 }
 
 export const ReverseGeocodingApiProvider = ({children}: any) => {
-	const { viewport, isInitialState } = useMapbox();
+	const { viewport } = useMapbox();
 	const [ currentAddress, setCurrentAddress ] = useState<any>(null);
 
 	useEffect(() => {
@@ -31,8 +31,8 @@ export const ReverseGeocodingApiProvider = ({children}: any) => {
 	    const placeInformation = receivedData.address_components;
 	    setCurrentAddress(placeInformation);
 	  }
-	  !isInitialState && viewport && fetchData();
-	}, [ viewport, isInitialState ]);
+	  viewport && fetchData();
+	}, [ viewport ]);
 
 	let country = '';
 	let city = '';

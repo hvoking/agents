@@ -1,7 +1,5 @@
-.maps-wrapper {
-  position: relative;
-}
-.map-container {
-  position: relative;
-  height: 100%;
+.main-wrapper {
+	display: grid; 
+	grid-template-columns: min-content auto;
+	white-space: nowrap;
 }

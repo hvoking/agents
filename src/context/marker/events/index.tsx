@@ -3,7 +3,7 @@ import { useContext, createContext } from 'react';
 
 // Context imports
 import { useMarkers } from 'context/maps/markers';
-import { useSlider } from 'context/marker/slider';
+import { useColors } from 'context/colors';
 
 const MarkerEventsContext: React.Context<any> = createContext(null);
 
@@ -15,7 +15,7 @@ export const useMarkerEvents = () => {
 
 export const MarkerEventsProvider = ({children}: any) => {
 	const { markers, setMarkers, currentMarker, setCurrentMarker, setRejectedMarkers } = useMarkers();
-	const { setFillColor } = useSlider();
+	const { setFillColor } = useColors();
 
 	const onDragStart = (marker: any) => {
 		setFillColor(marker.color);

@@ -1,0 +1,27 @@
+.maps-search-wrapper {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.maps-search {
+  display: grid;
+  height: 30px;
+  grid-template-columns: min-content auto min-content;
+  position: relative;
+  border-radius: 5px;
+  align-items: center;
+  padding-top: 3px;
+}
+.maps-input {
+  border: none;
+  padding-left: 10px;
+  font-size: 16px
+}
+.maps-input::placeholder {
+  opacity: 0.4;
+  font-style: italic;
+}
+.maps-input:focus {
+  outline: none;
+}

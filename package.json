@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://hvoking.github.io/geomiro",
+  "homepage": "https://hvoking.github.io/agents",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@turf/turf": "^7.1.0",

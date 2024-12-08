@@ -1,5 +1,5 @@
 // React imports
-import { useState, useEffect, useMemo, useContext, createContext } from 'react';
+import { useState, useEffect, useContext, createContext } from 'react';
 
 // Context imports
 import { useMapbox } from 'context/maps/mapbox';
@@ -18,7 +18,7 @@ export const useMask = () => {
 
 export const MaskProvider = ({children}: any) => {
 	const { mapRef } = useMapbox();
-	const { currentMarker, radius } = useMarkers();
+	const { radius } = useMarkers();
 
 	const [ mapFeatures, setMapFeatures ] = useState([]);
 	const [ activeFeatures, setActiveFeatures ] = useState(false);
@@ -38,17 +38,19 @@ export const MaskProvider = ({children}: any) => {
 		setMapFeatures(features);
 	}, [ activeFeatures, mapRef.current ]);
 
-	const maskProperties = useMemo(() => {
-	    return mapFeatures.filter((item: any) => {
-	        if (item.source === 'points-rotterdam' && currentMarker) {
-	            return turf.booleanPointInPolygon(item.geometry, turf.circle([currentMarker.longitude, currentMarker.latitude], radius));
+	const getProperties = (center: any, source: any) => { 
+		const currentProperties = mapFeatures.filter((item: any) => {
+	        if (item.source === source) {
+	        	const circleBoundary = turf.circle(center, radius);
+	        	const pointsWithin = turf.booleanPointInPolygon(item.geometry, circleBoundary);
+	            return pointsWithin
 	        }
-	    return false
 	    });
-	}, [ mapFeatures, currentMarker ]);
+	    return currentProperties
+	}
 
 	return (
-		<MaskContext.Provider value={{ maskProperties }}>
+		<MaskContext.Provider value={{ getProperties }}>
 			{children}
 		</MaskContext.Provider>
 	)
