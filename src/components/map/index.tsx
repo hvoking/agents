@@ -40,10 +40,10 @@ export const MapContainer = () => {
 			  dragPan={!isDragging}
 			  onLoad={() => setIsMapLoaded(true)}
 			>
-			  <UserPin/>
+			  {/*<UserPin/>*/}
 			  {isMapLoaded && <Agent/>}
 			  {isMapLoaded && markers && <Path markers={markers} rejectedMarkers={rejectedMarkers}/>}
-			  {isMapLoaded && <Tiles/>}
+			  {/*{isMapLoaded && <Tiles/>}*/}
 			</Map>
 		</Wrapper>
 	)

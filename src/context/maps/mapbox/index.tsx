@@ -17,16 +17,9 @@ export const MapboxProvider = ({children}: any) => {
 	const worldRef = useRef<any>();
 	
 	const [ placeId, setPlaceId ] = useState<any>(null);
-	const [ cityName, setCityName ] = useState<any>(null);
-	const [ activeBasemap, setActiveBasemap ] =  useState(false);
-	const [ isInitialState, setIsInitialState ] = useState(true);
 	const [ viewport, setViewport ] = useState(Locations.rotterdam);
+	const [ mapStyle, setMapStyle ] = useState("mapbox://styles/hvoking/cm1h94yc901g001pc03jreug3");
 
-	const mapStyle = 
-		activeBasemap ? 
-		"mapbox://styles/mapbox/satellite-v9" : 
-		"mapbox://styles/hvoking/cm1h94yc901g001pc03jreug3";
-	
 	useEffect(() => {
 		const viewportFlyTo = () => {
 			const lat = viewport.latitude;
@@ -51,10 +44,8 @@ export const MapboxProvider = ({children}: any) => {
 	return (
 		<MapboxContext.Provider value={{
 			mapRef, worldRef, Locations, 
-			mapStyle, setActiveBasemap,
-			cityName, setCityName, 
+			mapStyle, setMapStyle, 
 			viewport, setViewport, 
-			isInitialState, setIsInitialState,
 			placeId, setPlaceId,
 		}}>
 			{children}

@@ -2,6 +2,7 @@
 import { Agents } from './agents';
 import { Listing } from './listing';
 import { Search } from './search';
+import { Basemaps } from './basemaps';
 import './styles.scss';
 
 // Context imports
@@ -16,6 +17,7 @@ export const Topics = () => {
 				{activePage === "add" && <Agents/>}
 				{activePage === "edit" && <Listing/>}
 				{activePage === "search" && <Search/>}
+				{activePage === "basemaps" && <Basemaps/>}
 			</div>}
 		</div>
 	)
