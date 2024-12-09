@@ -1,18 +1,11 @@
-.sidebar-wrapper {
+.sidebar-left {
   display: grid;
-  align-content: start;
+  grid-template-rows: min-content auto;
+  white-space: nowrap;
+  padding: 20px;
   background: linear-gradient(
     to bottom,
-    rgba(50, 50, 50, 1),
+    rgba(38, 37, 34, 1),
     rgba(30, 30, 30, 1)
   );
-}
-.sidebar-items-wrapper {
-  display: grid;
-  grid-template-columns: min-content auto;
-  padding-top: 20px;
-}
-.selected-options {
-  padding-left: 20px;
-  padding-right: 20px;
 }

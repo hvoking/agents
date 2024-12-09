@@ -1,0 +1,14 @@
+.topics-wrapper {
+	background: linear-gradient(145deg, #1a1a2e, #16213e);
+}
+.topics {
+	position: absolute; 
+	left: 0; 
+	top: 0; 
+	width: 320px; 
+	height: 100vh; 
+	backdrop-filter: blur(10px);	
+	background-color: rgba(20, 20, 19, 0.6);
+	z-index: 2;
+	box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+}

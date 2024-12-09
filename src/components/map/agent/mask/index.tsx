@@ -10,16 +10,17 @@ import { useMarkers } from 'context/maps/markers';
 import { Source, Layer } from 'react-map-gl';
 import * as d3 from 'd3';
 
-export const Mask = () => {
+export const Mask = ( { currentMarker, layer }: any) => {
   const { getProperties } = useMask();
   const { propertyTypeColors } = useColors();
-  const { currentMarker } = useMarkers();
 
   const scaleLinear = d3.scaleLinear()
     .domain([100, 400])
     .range([0.1, 0.3]);
 
-  const maskProperties = currentMarker && getProperties([currentMarker.longitude, currentMarker.latitude], 'points-rotterdam');
+  const { latitude, longitude } = currentMarker;
+  const center = [longitude, latitude];
+  const maskProperties = getProperties(center, layer);
 
   const geoJsonData = useMemo(() => {
     if (!maskProperties || maskProperties.length === 0) return null;

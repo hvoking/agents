@@ -44,7 +44,6 @@ export const MapContainer = () => {
 			  {isMapLoaded && <Agent/>}
 			  {isMapLoaded && markers && <Path markers={markers} rejectedMarkers={rejectedMarkers}/>}
 			  {isMapLoaded && <Tiles/>}
-			  
 			</Map>
 		</Wrapper>
 	)

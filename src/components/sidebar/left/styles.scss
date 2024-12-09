@@ -1,6 +1,15 @@
 .sidebar-left-wrapper {
 	display: grid; 
-	justify-items: center;
-	padding-left: 20px;
-	grid-gap: 10px;
+	grid-gap: 30px;
+	align-content: start;
+	padding-top: 20px;
+}
+.home-wrapper {
+	color: rgba(255, 255, 255, 0.8);
+	gap: 15px;
+	font-size: 1.2em;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
 }

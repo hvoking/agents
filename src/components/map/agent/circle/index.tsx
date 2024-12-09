@@ -4,14 +4,15 @@ import { useMarkers } from 'context/maps/markers';
 // Third party imports
 import { Source, Layer } from 'react-map-gl';
 
-export const Circle = () => {
-    const { currentMarker } = useMarkers();
+export const Circle = ({ currentMarker }: any) => {
+    const { latitude, longitude } = currentMarker;
+    const center = [ longitude, latitude ];
 
     const circleGeometry = currentMarker && {
         type: 'Feature',
         geometry: {
             type: 'Point',
-            coordinates: [currentMarker.longitude, currentMarker.latitude]
+            coordinates: center
         }
     };
 

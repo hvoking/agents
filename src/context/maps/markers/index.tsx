@@ -22,7 +22,7 @@ export const MarkersProvider = ({children}: any) => {
 	const [ addPin, setAddPin ] = useState(false);
 
 	// Sidebar Visibility
-	const [ activePage, setActivePage ] = useState("home");
+	const [ activePage, setActivePage ] = useState<any>(null);
 
 	const { fillColor } = useColors();
 
