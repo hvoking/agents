@@ -36,26 +36,20 @@ export const Cursor = () => {
 	if (!addPin) return <></>;
 
 	return (
-		<>
-			<div 
-				ref={customCursorRef} 
-				className="maps-go-circle maps-custom-cursor" 
-				id="go-cursor"
-			>
-				<div className="map-pin-wrapper">
-				<img 
-					className="map-pin-image"
-					src={process.env.PUBLIC_URL + "/static/icons/pin.svg"} 
-					alt="add-pin" 
-					style={{filter: "brightness(0) invert(1)"}}
-				/>
-				</div>
-				</div>
-				<div className="add-pin-message">
-					Tap anywhere on the <br/>
-					map to add a pin
-				</div>
-		</>
+		<div 
+			ref={customCursorRef} 
+			className="maps-go-circle maps-custom-cursor" 
+			id="go-cursor"
+		>
+			<div className="map-pin-wrapper">
+			<img 
+				className="map-pin-image"
+				src={process.env.PUBLIC_URL + "/static/icons/pin.svg"} 
+				alt="add-pin" 
+				style={{filter: "brightness(0) invert(1)"}}
+			/>
+			</div>
+		</div>
 	)
 }
 

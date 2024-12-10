@@ -2,13 +2,13 @@
 import { Points } from './points';
 
 // Context imports
-import { useStyles } from 'context/maps/styles';
+import { useStylesApi } from 'context/api/styles';
 
 export const Tiles = () => {
 	const tableSchema = "agents";
 	const tableName = "rotterdam";
 
-	const { getTilesUrl } = useStyles();
+	const { getTilesUrl } = useStylesApi();
 	const url = getTilesUrl(tableSchema, tableName);
 
 	return (

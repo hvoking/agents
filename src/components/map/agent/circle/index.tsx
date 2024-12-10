@@ -1,6 +1,3 @@
-// Context imports
-import { useMarkers } from 'context/maps/markers';
-
 // Third party imports
 import { Source, Layer } from 'react-map-gl';
 

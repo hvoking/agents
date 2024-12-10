@@ -1,7 +1,6 @@
 import { MapboxProvider } from './mapbox';
 import { MarkersProvider } from './markers';
 import { MapEventsProvider } from './events';
-import { StylesProvider } from './styles';
 import { MaskProvider } from './mask';
 
 export const MapsProvider = ({ children }: any) => {
@@ -9,11 +8,9 @@ export const MapsProvider = ({ children }: any) => {
 		<MapboxProvider>
 		<MarkersProvider>
 	    <MapEventsProvider>
-	    <StylesProvider>
 	    <MaskProvider>
 			{children}
 		</MaskProvider>
-	    </StylesProvider>
 	    </MapEventsProvider>
 	    </MarkersProvider>
 	    </MapboxProvider>

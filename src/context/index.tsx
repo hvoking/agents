@@ -1,6 +1,6 @@
 import { MapsProvider } from './maps';
 import { ApiProvider } from './api';
-import { MarkerProvider } from './marker';
+import { SliderProvider } from './slider';
 import { ColorsProvider } from './colors';
 import { EventsProvider } from './events';
 
@@ -9,11 +9,11 @@ export const MainProvider = ({children}: any) => {
     <ColorsProvider>
     <MapsProvider>
     <ApiProvider>
-    <MarkerProvider>
+    <SliderProvider>
     <EventsProvider>
       {children}
     </EventsProvider>
-    </MarkerProvider>
+    </SliderProvider>
     </ApiProvider>
     </MapsProvider> 
     </ColorsProvider>   

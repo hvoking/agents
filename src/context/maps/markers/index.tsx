@@ -15,9 +15,11 @@ export const useMarkers = () => {
 export const MarkersProvider = ({children}: any) => {
 	const [ markers, setMarkers ] = useState<any>([]);
 	const [ currentMarker, setCurrentMarker ] = useState<any>(null);
-	const [ activeTrash, setActiveTrash ] = useState(false);
+
 	const [ rejectedMarkers, setRejectedMarkers ] = useState<any>([]);
+
 	const [ radius, setRadius ] = useState(1);
+	const [ currentImage, setCurrentImage ] = useState<any>(null);
 
 	const [ addPin, setAddPin ] = useState(false);
 
@@ -44,12 +46,12 @@ export const MarkersProvider = ({children}: any) => {
 		<MarkersContext.Provider value={{
 			markers, setMarkers,
 			currentMarker, setCurrentMarker,
-			activeTrash, setActiveTrash,
 			rejectedMarkers, setRejectedMarkers,
 			radius, setRadius,
 			filteredMarkers,
 			addPin, setAddPin,
-			activePage, setActivePage
+			activePage, setActivePage,
+			currentImage, setCurrentImage
 		}}>
 			{children}
 		</MarkersContext.Provider>

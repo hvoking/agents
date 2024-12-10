@@ -4,22 +4,23 @@ import './styles.scss';
 // Context imports
 import { useMarkers } from 'context/maps/markers';
 
-export const Listing = () => {
+export const Edit = () => {
 	const { filteredMarkers } = useMarkers();
 
 	return (
-		<div className="agents-list-wrapper">
-			<>
+		<div className="agent-selector">
+			<div className="agent-selector-title">Edit your agent</div>
+			<div className="edit-selector-wrapper">
 				{filteredMarkers && filteredMarkers.map((item: any) => {
 					return(
-						<div className="agent-item">
+						<div className="edit-selector-item">
 							{item.id}
 						</div>
 					)
 				})}
-			</>
+			</div>
 		</div>
 	)
 }
 
-Listing.displayName="Listing";
+Edit.displayName="Edit";

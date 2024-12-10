@@ -1,0 +1,14 @@
+.edit-selector-wrapper {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 10px;
+	background-color: rgba(157, 239, 253, 0.2);
+	padding: 10px;
+}
+.edit-selector-item {
+  height: 90px;
+  border-radius: 2px;
+  overflow: hidden;
+  background-color: rgba(157, 239, 253, 0.6);
+  padding: 10px;
+}

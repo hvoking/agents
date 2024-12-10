@@ -1,4 +1,14 @@
-export const Character = ({ src, alt, onClick }: any) => {
+// Context imports
+import { useMarkers } from 'context/maps/markers';
+
+export const Character = ({ src, alt }: any) => {
+	const { setAddPin, setCurrentImage } = useMarkers();
+
+	const onClick = () => {
+		setAddPin((prev: boolean) => !prev);
+		setCurrentImage(src);
+	}
+
 	return (
 		<div className="agent-selector-item">
     		<img 

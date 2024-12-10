@@ -15,7 +15,7 @@ export const useMapEvents = () => {
 
 export const MapEventsProvider = ({children}: any) => {
 		const { mapRef } = useMapbox();
-		const { markers, setMarkers, currentMarker, setCurrentMarker, addPin, setAddPin } = useMarkers();
+		const { markers, setMarkers, currentMarker, setCurrentMarker, addPin, setAddPin, currentImage } = useMarkers();
 
 		const [ isDragging, setIsDragging ] = useState(false);
 		const [ dragOffset, setDragOffset ] = useState({ x: 0, y: 0 });
@@ -81,7 +81,8 @@ export const MapEventsProvider = ({children}: any) => {
           id: currentId,
           latitude: lat,
           longitude: lng,
-          color: "rgba(244, 173, 79, 1)"
+          color: "rgba(244, 173, 79, 1)",
+          image: currentImage
         };
 
         setCurrentMarker(newMarker);
