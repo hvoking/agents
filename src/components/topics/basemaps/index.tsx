@@ -13,7 +13,7 @@ export const Basemaps = () => {
 
 	return (
 		<div className="agent-selector">
-			<div className="agent-selector-title">Mapbox Basemaps</div>
+			<div className="agent-selector-title">MAPBOX BASEMAPS</div>
 			<div className="basemap-selectors">
 				{Object.keys(mapbox.mapas).map((item: any, index: number) => {
 					return (
@@ -35,7 +35,7 @@ export const Basemaps = () => {
 					)
 				})}
 			</div>
-			<div className="agent-selector-title">Carto Basemaps</div>
+			<div className="agent-selector-title">CARTO BASEMAPS</div>
 			<div className="basemap-selectors">
 				{Object.keys(carto.mapas).map((item: any, index: number) => {
 					return (
