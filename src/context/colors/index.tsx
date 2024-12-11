@@ -10,7 +10,7 @@ export const useColors = () => {
 }
 
 export const ColorsProvider = ({children}: any) => {
-	const [ fillColor, setFillColor ] = useState<any>(null);
+	const [ fillColor, setFillColor ] = useState<any>("rgba(244, 173, 79, 1)");
 
 	const colorPalette = [
 	    "rgba(155, 0, 55, 1)",

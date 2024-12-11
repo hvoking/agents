@@ -6,11 +6,12 @@ import { Tiles } from './tiles';
 import { Agent } from './agent';
 import { Path } from './path';
 import { UserPin } from './userPin';
+import { Isochrone } from './iso';
 import { Wrapper } from './wrapper';
 
 // Context imports
+import { useMapEvents } from 'context/events/maps';
 import { useMarkers } from 'context/maps/markers';
-import { useMapEvents } from 'context/maps/events';
 import { useMapbox } from 'context/maps/mapbox';
 
 // Third-party imports
@@ -20,7 +21,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 export const MapContainer = () => {
 	const { isDragging, onDragStart, onMouseMove, onDragEnd, onClick } = useMapEvents();
 	const { viewport, mapRef, mapStyle } = useMapbox();
-	const { markers, rejectedMarkers } = useMarkers();
+	const { currentMarker, markers, rejectedMarkers } = useMarkers();
 	const [ isMapLoaded, setIsMapLoaded ] = useState(false);
 
 	return (
@@ -41,6 +42,7 @@ export const MapContainer = () => {
 			  onLoad={() => setIsMapLoaded(true)}
 			>
 			  <UserPin/>
+			  {currentMarker && <Isochrone currentMarker={currentMarker}/>}
 			  {isMapLoaded && <Agent/>}
 			  {isMapLoaded && markers && <Path markers={markers} rejectedMarkers={rejectedMarkers}/>}
 			  {isMapLoaded && <Tiles/>}

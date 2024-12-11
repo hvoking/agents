@@ -1,6 +1,6 @@
 // App imports
 import { Sidebar } from './sidebar';
-import { MapContainer } from './map';
+import { MapContainer } from './maps';
 import './styles.scss';
 
 export const Main = () => {

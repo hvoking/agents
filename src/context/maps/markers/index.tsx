@@ -15,16 +15,12 @@ export const useMarkers = () => {
 export const MarkersProvider = ({children}: any) => {
 	const [ markers, setMarkers ] = useState<any>([]);
 	const [ currentMarker, setCurrentMarker ] = useState<any>(null);
-
+	const [ currentImage, setCurrentImage ] = useState<any>(null);
+	const [ activePage, setActivePage ] = useState<any>(null);
 	const [ rejectedMarkers, setRejectedMarkers ] = useState<any>([]);
 
-	const [ radius, setRadius ] = useState(1);
-	const [ currentImage, setCurrentImage ] = useState<any>(null);
-
+	const [ radius, setRadius ] = useState(0.5);
 	const [ addPin, setAddPin ] = useState(false);
-
-	// Sidebar Visibility
-	const [ activePage, setActivePage ] = useState<any>(null);
 
 	const { fillColor } = useColors();
 

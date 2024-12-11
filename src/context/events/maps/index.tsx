@@ -2,8 +2,8 @@
 import { useState, useEffect, useCallback, useContext, createContext } from 'react';
 
 // App imports
-import { useMapbox } from '../mapbox';
-import { useMarkers } from '../markers';
+import { useMapbox } from 'context/maps/mapbox';
+import { useMarkers } from 'context/maps/markers';
 
 const MapEventsContext: React.Context<any> = createContext(null);
 
@@ -50,21 +50,21 @@ export const MapEventsProvider = ({children}: any) => {
 	            	    y: event.point.y - dragOffset.y
 	            	});
 
-	            	const lat = newCenter.lat;
-	            	const lng = newCenter.lng;
+	            	const { lat, lng } = newCenter;
 	                
-                    const updatedMarkers = markers.map((previousMarker: any) => {
-        				const isCurrentMarker = previousMarker.id === currentMarker.id;
+                const updatedMarkers = markers.map((item: any) => {
+        					const isCurrentMarker = item.id === currentMarker.id;
         				
-        				if (isCurrentMarker) {
-        					const updatedMarker = {...previousMarker, latitude: lat, longitude: lng};
-        					setCurrentMarker(updatedMarker)
-        					return updatedMarker
-        				}
-        				return previousMarker
-        			});
-        			updatedMarkers && setMarkers(updatedMarkers);
+        					if (isCurrentMarker) {
+	        					const updatedMarker = {...item, latitude: lat, longitude: lng};
+	        					setCurrentMarker(updatedMarker)
+	        					return updatedMarker
+	        				}
+	        				return item
+	        			});
+        				updatedMarkers && setMarkers(updatedMarkers);
 	            }
+
 	        },[ isDragging, dragOffset, mapRef, setCurrentMarker ]);
 
 	    const onDragEnd = useCallback(() => {
@@ -74,8 +74,7 @@ export const MapEventsProvider = ({children}: any) => {
     const onClick = (event: any) => {
       if (addPin === true) {
         const currentId = markers.length > 0 ? markers.length + 1 : 1;
-        const lng = event.lngLat.lng;
-        const lat = event.lngLat.lat;
+        const { lng, lat } = event.lngLat;
 
         const newMarker = {
           id: currentId,
