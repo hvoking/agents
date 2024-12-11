@@ -5,13 +5,13 @@ import './styles.scss';
 import { useMarkers } from 'context/maps/markers';
 
 export const Edit = () => {
-	const { filteredMarkers } = useMarkers();
+	const { markers } = useMarkers();
 
 	return (
 		<div className="agent-selector">
 			<div className="agent-selector-title">EDIT YOUR AGENT</div>
 			<div className="edit-selector-wrapper">
-				{filteredMarkers && filteredMarkers.map((item: any) => {
+				{markers && markers.map((item: any) => {
 					return(
 						<div className="edit-selector-item">
 							<img src={item.image} alt="marker-icon" width="40px"/>

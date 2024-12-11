@@ -14,8 +14,11 @@ export const useMarkers = () => {
 
 export const MarkersProvider = ({children}: any) => {
 	const [ markers, setMarkers ] = useState<any>([]);
+
 	const [ currentMarker, setCurrentMarker ] = useState<any>(null);
+	
 	const [ currentImage, setCurrentImage ] = useState<any>(null);
+	
 	const [ activePage, setActivePage ] = useState<any>(null);
 	const [ rejectedMarkers, setRejectedMarkers ] = useState<any>([]);
 
@@ -27,16 +30,16 @@ export const MarkersProvider = ({children}: any) => {
   	const existingMarkers = markers.length > 0;
 
   	useEffect(() => {
-  	  const updatedMarkers = existingMarkers && markers.map((marker: any) => {
-  	    const isCurrentMarker = marker && currentMarker && marker.id === currentMarker.id;
-  	    return (
-  	      isCurrentMarker ? { ...marker, color: fillColor } : marker
-  	    )
-  	  });
-  	  existingMarkers && setMarkers(updatedMarkers);
-  	}, [ fillColor ]);
-
-  	const filteredMarkers = existingMarkers && markers.filter((item: any) => !rejectedMarkers.includes(item));
+	  	  const updatedMarkers = existingMarkers && markers.filter((marker: any) => {
+	  	  	if (!rejectedMarkers.includes(marker)) {
+		  	    const isCurrentMarker = marker && currentMarker && marker.id === currentMarker.id;
+		  	    return (
+		  	      isCurrentMarker ? { ...marker, color: fillColor } : marker
+		  	    )
+	  		}
+	  	  });
+	  	  existingMarkers && setMarkers(updatedMarkers);
+  	}, [ fillColor, rejectedMarkers ]);
 
 	return (
 		<MarkersContext.Provider value={{
@@ -44,7 +47,6 @@ export const MarkersProvider = ({children}: any) => {
 			currentMarker, setCurrentMarker,
 			rejectedMarkers, setRejectedMarkers,
 			radius, setRadius,
-			filteredMarkers,
 			addPin, setAddPin,
 			activePage, setActivePage,
 			currentImage, setCurrentImage

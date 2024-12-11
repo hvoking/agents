@@ -8,21 +8,22 @@ import { CustomMarker } from './marker';
 import { useMarkers } from 'context/maps/markers';
 
 export const Agent = () => {
-  const { filteredMarkers } = useMarkers();
+  const { markers } = useMarkers();
+  console.log(markers)
 
   return (
     <>
-      {filteredMarkers && filteredMarkers.length > 0 && (
+      {markers && markers.length > 0 && (
       	<>
-	        <Circle markers={filteredMarkers} />
+	        <Circle markers={markers} />
 	        <Mask 
-	          markers={filteredMarkers}
+	          markers={markers}
 	          layer="points-rotterdam"
 	        />
-          <Isochrone markers={filteredMarkers}/>
+          <Isochrone markers={markers}/>
         </>
       )}
-      {filteredMarkers && filteredMarkers.map((marker: any, index: number) => (
+      {markers && markers.map((marker: any, index: number) => (
         <CustomMarker
           key={marker.id || index}
           marker={marker}

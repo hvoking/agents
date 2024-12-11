@@ -2,9 +2,7 @@
 import { Source, Layer } from 'react-map-gl';
 
 export const Path = ({ markers, rejectedMarkers, existingMarkers }: any) => {
-  const filteredMarkers = markers.filter((item: any) => !rejectedMarkers.includes(item));
-  const coordinates: any = filteredMarkers.map((pin: any) => [ pin.longitude, pin.latitude ]);
-  
+  const coordinates: any = markers.map((pin: any) => [ pin.longitude, pin.latitude ]);
 
   const lineStringData: any = {
     type: 'Feature',
