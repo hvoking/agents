@@ -1,6 +1,7 @@
 // App imports
 import { Mask } from './mask';
 import { Circle } from './circle';
+import { Isochrone } from './iso';
 import { CustomMarker } from './marker';
 
 // Context imports
@@ -18,6 +19,7 @@ export const Agent = () => {
 	          markers={filteredMarkers}
 	          layer="points-rotterdam"
 	        />
+          <Isochrone markers={filteredMarkers}/>
         </>
       )}
       {filteredMarkers && filteredMarkers.map((marker: any, index: number) => (

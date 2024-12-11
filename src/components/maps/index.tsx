@@ -6,7 +6,6 @@ import { Tiles } from './tiles';
 import { Agent } from './agent';
 import { Path } from './path';
 import { UserPin } from './userPin';
-import { Isochrone } from './iso';
 import { Wrapper } from './wrapper';
 
 // Context imports
@@ -42,7 +41,6 @@ export const MapContainer = () => {
 			  onLoad={() => setIsMapLoaded(true)}
 			>
 			  <UserPin/>
-			  {currentMarker && <Isochrone currentMarker={currentMarker}/>}
 			  {isMapLoaded && <Agent/>}
 			  {isMapLoaded && markers && <Path markers={markers} rejectedMarkers={rejectedMarkers}/>}
 			  {isMapLoaded && <Tiles/>}
