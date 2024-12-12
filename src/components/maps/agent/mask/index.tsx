@@ -9,7 +9,9 @@ import { useColors } from 'context/colors';
 import { Source, Layer } from 'react-map-gl';
 import * as d3 from 'd3';
 
-export const Mask = ({ markers, layer }: any) => {
+const layer = "points-rotterdam";
+
+export const Mask = ({ markers }: any) => {
   const { getProperties } = useMask();
   const { propertyTypeColors } = useColors();
 
@@ -18,22 +20,21 @@ export const Mask = ({ markers, layer }: any) => {
     .range([2.5, 3.5]);
 
   const geoJsonData = useMemo(() => {
-    if (!markers || markers.length === 0) return null;
-
     const features = markers.flatMap((marker: any) => {
-      const { latitude, longitude } = marker;
-      const center = [longitude, latitude];
+      const center = [ marker.longitude, marker.latitude ];
       const maskProperties = getProperties(center, layer);
 
       if (!maskProperties || maskProperties.length === 0) return [];
 
       return maskProperties.flatMap((maskProp: any) => {
         const baseGeometries = [];
-        let { geometry, properties } = maskProp;
+        const { geometry, properties } = maskProp;
         const { price, property_type } = properties;
-        const currentPrice = price ? price.replace("$", "") : null;
 
-        if (currentPrice && propertyTypeColors[property_type]) {
+        const currentPrice = price ? price.replace("$", "") : null;
+        const currentColor = propertyTypeColors[property_type];
+
+        if (currentPrice && currentColor) {
           baseGeometries.push({
             type: 'Feature',
             geometry: {
@@ -42,7 +43,7 @@ export const Mask = ({ markers, layer }: any) => {
             },
             properties: {
               'price': scaleLinear(parseInt(currentPrice)),
-              'propertyTypeColors': propertyTypeColors[property_type],
+              'color': propertyTypeColors[property_type],
             },
           });
         }
@@ -52,7 +53,7 @@ export const Mask = ({ markers, layer }: any) => {
     });
 
     return features.length > 0 ? { type: 'FeatureCollection', features } : null;
-  }, [markers, layer, getProperties, propertyTypeColors]);
+  }, [markers, layer]);
 
   if (!geoJsonData) return null;
 
@@ -62,7 +63,7 @@ export const Mask = ({ markers, layer }: any) => {
     source: "mask-points",
     paint: {
       'circle-radius': ['get', 'price'],
-      'circle-color': ['get', 'propertyTypeColors']
+      'circle-color': ['get', 'color']
     }
   };
 

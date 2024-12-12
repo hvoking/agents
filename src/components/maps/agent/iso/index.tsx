@@ -10,48 +10,53 @@ import { Source, Layer } from 'react-map-gl';
 export const Isochrone = ({ markers }: any) => {
     const { fetchIsochrone } = useIsochroneApi();
 
-    const [isochroneData, setIsochroneData] = useState<any>([]);
+    const [ isochroneData, setIsochroneData ] = useState<any>([]);
 
     useEffect(() => {
-        const fetchDataForMarker = async (marker: any) => {
-            try {
-                const data = await fetchIsochrone(marker.longitude, marker.latitude);
-                setIsochroneData((prevData: any) => {
-                    const existing = prevData.find((iso: any) => iso.id === marker.id);
-                    if (existing) {
-                        // Update the existing isochrone
-                        return prevData.map((iso: any) =>
-                            iso.id === marker.id ? { id: marker.id, data } : iso
-                        );
-                    } else {
-                        // Add a new isochrone
-                        return [...prevData, { id: marker.id, data }];
-                    }
-                });
-            } catch (error) {
-                console.error(`Error fetching isochrone data for marker ${marker.id}:`, error);
-            }
+        const fetchData = async (marker: any) => {
+            const { id, longitude, latitude } = marker;
+            const data = await fetchIsochrone(longitude, latitude);
+
+            setIsochroneData((prev: any) => {
+                const currentIso = prev.find((iso: any) => iso.id === id);
+
+                if (currentIso) {
+                    const isoArray = prev.map((iso: any) => 
+                        iso.id === id ? 
+                        { id: id, data } : 
+                        iso
+                    );
+                    return isoArray
+                }
+                return [...prev, { id: id, data }];
+            });
         };
 
         markers.forEach((marker: any) => {
-            const existing = isochroneData.find((iso: any) => iso.id === marker.id);
-            if (!existing || existing.data.features[0].geometry.coordinates !== marker.coordinates) {
-                fetchDataForMarker(marker);
-            }
+            const currentIso = isochroneData.find((iso: any) => iso.id === marker.id);
+            const isoCoordinates = currentIso && currentIso.data.features[0].geometry.coordinates
+            const difCoordinates = isoCoordinates !== marker.coordinates;
+            (!currentIso || difCoordinates) && fetchData(marker);
         });
-    }, [fetchIsochrone, markers]);
+    }, [ markers ]);
 
     if (!isochroneData.length) return <></>;
 
     return (
         <>
             {isochroneData.map((iso: any) => {
+                const activeMarker = markers.find((marker: any) => marker.id === iso.id);
+                const currentColor = activeMarker ? activeMarker.color : 'rgb(206, 171, 165)';
+                const layerId = `isolayer-${iso.id}`;
+                const sourceId = `isoSource-${iso.id}`;
+                const coordinates = iso.data.features[0].geometry.coordinates;
+
                 const isoLayer: any = {
-                    id: `isolayer-${iso.id}`,
+                    id: layerId,
                     type: 'fill',
-                    source: `isoSource-${iso.id}`,
+                    source: sourceId,
                     paint: {
-                        'fill-color': 'rgb(206, 171, 165)',
+                        'fill-color': currentColor,
                         'fill-opacity': 0.4,
                     },
                 };
@@ -65,7 +70,7 @@ export const Isochrone = ({ markers }: any) => {
                                 type: 'Feature',
                                 geometry: {
                                     type: 'Polygon',
-                                    coordinates: iso.data.features[0].geometry.coordinates,
+                                    coordinates: coordinates,
                                 },
                             },
                         ],
@@ -73,7 +78,7 @@ export const Isochrone = ({ markers }: any) => {
                 };
 
                 return (
-                    <Source key={iso.id} id={`isoSource-${iso.id}`} {...isoSource}>
+                    <Source key={iso.id} id={sourceId} {...isoSource}>
                         <Layer {...isoLayer} />
                     </Source>
                 );

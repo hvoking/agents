@@ -1,8 +1,8 @@
 // Third-party imports
 import { Source, Layer } from 'react-map-gl';
 
-export const Path = ({ markers, rejectedMarkers, existingMarkers }: any) => {
-  const coordinates: any = markers.map((pin: any) => [ pin.longitude, pin.latitude ]);
+export const Path = ({ markers }: any) => {
+  const coordinates: any = markers.map((marker: any) => [ marker.longitude, marker.latitude ]);
 
   const lineStringData: any = {
     type: 'Feature',

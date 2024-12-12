@@ -53,9 +53,7 @@ export const MapEventsProvider = ({children}: any) => {
 	            	const { lat, lng } = newCenter;
 	                
                 const updatedMarkers = markers.map((item: any) => {
-        					const isCurrentMarker = item.id === currentMarker.id;
-        				
-        					if (isCurrentMarker) {
+        					if (item.id === currentMarker.id) {
 	        					const updatedMarker = {...item, latitude: lat, longitude: lng};
 	        					setCurrentMarker(updatedMarker)
 	        					return updatedMarker
@@ -71,7 +69,7 @@ export const MapEventsProvider = ({children}: any) => {
 	        setIsDragging(false);
 	    }, []);
 
-    const onClick = (event: any) => {
+    const addNewMarker = (event: any) => {
       if (addPin === true) {
         const currentId = markers.length > 0 ? markers.length + 1 : 1;
         const { lng, lat } = event.lngLat;
@@ -105,7 +103,7 @@ export const MapEventsProvider = ({children}: any) => {
 			onDragStart,
 			onMouseMove,
 			onDragEnd,
-			onClick
+			addNewMarker
 		}}>
 			{children}
 		</MapEventsContext.Provider>
