@@ -13,7 +13,7 @@ export const Agent = () => {
 
   return (
     <>
-      {markers && markers.length > 0 && (
+      {markers.length > 0 && (
       	<>
           <Isochrone markers={markers}/>
 	        <Circle markers={markers} />

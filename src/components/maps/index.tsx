@@ -4,7 +4,7 @@ import { useState } from 'react';
 // App imports
 import { Tiles } from './tiles';
 import { Agent } from './agent';
-import { UserPin } from './userPin';
+import { Pin } from './pin';
 import { Wrapper } from './wrapper';
 
 // Context imports
@@ -38,7 +38,7 @@ export const MapContainer = () => {
 			  dragPan={!isDragging}
 			  onLoad={() => setIsMapLoaded(true)}
 			>
-			  <UserPin/>
+			  <Pin/>
 			  {isMapLoaded && 
 				  <>
 					  <Agent/>

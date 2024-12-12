@@ -11,7 +11,7 @@ import { useMarkers } from 'context/maps/markers';
 // Third-party imports
 import { Marker } from 'react-map-gl';
 
-export const UserPin = () => {
+export const Pin = () => {
 	const { viewport, setViewport } = useMapbox();
 	const { setCurrentMarker } = useMarkers();
 
@@ -19,7 +19,7 @@ export const UserPin = () => {
 
 	const onMarkerDragEnd = useCallback((event: any) => {
 		const { lng, lat } = event.lngLat;
-	    setViewport({...viewport, longitude: lng, latitude: lat});
+	    setViewport((prev: any) => ({...prev, longitude: lng, latitude: lat}));
 	}, []);
 
 
@@ -35,7 +35,7 @@ export const UserPin = () => {
 	      <svg 
 	      	viewBox="0 0 45.1 63.3"
 	      	width="30px" 
-	      	fill="rgba(33, 33, 43, 1)"
+	      	fill="rgba(255, 0, 0, 1)"
 	      >
 	        <Path/>
 	      </svg>
@@ -43,4 +43,4 @@ export const UserPin = () => {
 	)
 }
 
-UserPin.displayName="UserPin";
+Pin.displayName="Pin";

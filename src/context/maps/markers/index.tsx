@@ -14,9 +14,7 @@ export const useMarkers = () => {
 
 export const MarkersProvider = ({children}: any) => {
 	const [ markers, setMarkers ] = useState<any>([]);
-
 	const [ currentMarker, setCurrentMarker ] = useState<any>(null);
-	
 	const [ currentImage, setCurrentImage ] = useState<any>(null);
 	
 	const [ activePage, setActivePage ] = useState<any>(null);
