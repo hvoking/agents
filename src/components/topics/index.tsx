@@ -13,12 +13,14 @@ export const Topics = () => {
 
 	return (
 		<div className="topics-wrapper">
-			{activePage && <div className="topics">
-				{activePage === "add" && <Agents/>}
-				{activePage === "edit" && <Edit/>}
-				{activePage === "search" && <Search/>}
-				{activePage === "basemaps" && <Basemaps/>}
-			</div>}
+			{activePage && 
+				<div className="topics">
+					{activePage === "bot" && <Agents/>}
+					{activePage === "edit" && <Edit/>}
+					{activePage === "search" && <Search/>}
+					{activePage === "basemaps" && <Basemaps/>}
+				</div>
+			}
 		</div>
 	)
 }

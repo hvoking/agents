@@ -1,9 +1,12 @@
-export const Trash = ({ marker, addRejectedId }: any) => {
+// App imports
+import './styles.scss';
+
+export const CancelCross = ({ marker, addRejectedId }: any) => {
 	return (
       	<svg 
       		viewBox="0 0 20 20" 
       		width="20" 
-      		style={{position: "absolute", zIndex: "10", right: "-20", top: "-10", cursor: "pointer"}}
+      		className="cancel-cross-map"
       		onClick={(e: any) => addRejectedId(e, marker)}
       	>
       		<circle
@@ -37,3 +40,5 @@ export const Trash = ({ marker, addRejectedId }: any) => {
 		</svg>
 	)
 }
+
+CancelCross.displayName="CancelCross";
