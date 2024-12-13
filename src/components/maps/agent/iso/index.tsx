@@ -1,5 +1,5 @@
 // React imports
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // Context imports
 import { useIsochroneApi } from 'context/api/isochrone';
@@ -9,47 +9,48 @@ import { Source, Layer } from 'react-map-gl';
 
 export const Isochrone = ({ markers }: any) => {
     const { fetchIsochrone } = useIsochroneApi();
+    const [isochroneData, setIsochroneData] = useState<any>(new Map());
 
-    const [ isochroneData, setIsochroneData ] = useState<any>([]);
+    const previousMarkersRef = useRef<any>(new Map());
 
     useEffect(() => {
         const fetchData = async (marker: any) => {
             const { id, longitude, latitude } = marker;
             const data = await fetchIsochrone(longitude, latitude);
-
-            setIsochroneData((prev: any) => {
-                const currentIso = prev.find((iso: any) => iso.id === id);
-
-                if (currentIso) {
-                    const isoArray = prev.map((iso: any) => 
-                        iso.id === id ? 
-                        { id: id, data } : 
-                        iso
-                    );
-                    return isoArray
-                }
-                return [...prev, { id: id, data }];
-            });
+            setIsochroneData((prev: any) => new Map(prev).set(id, { id, data }));
         };
 
-        markers.forEach((marker: any) => {
-            const currentIso = isochroneData.find((iso: any) => iso.id === marker.id);
-            const isoCoordinates = currentIso && currentIso.data.features[0].geometry.coordinates
-            const difCoordinates = isoCoordinates !== marker.coordinates;
-            (!currentIso || difCoordinates) && fetchData(marker);
-        });
+        const updateIsochrones = () => {
+            const newMarkers: any = new Map(markers.map((m: any) => [m.id, m]));
+
+            for (const [id, marker] of newMarkers) {
+                const existingIso = isochroneData.get(id);
+                const hasMoved =
+                    existingIso &&
+                    JSON.stringify(existingIso.data.features[0].geometry.coordinates) !==
+                        JSON.stringify(marker.coordinates);
+
+                (!existingIso || hasMoved) && fetchData(marker);
+            }
+
+            previousMarkersRef.current = newMarkers;
+        };
+
+        updateIsochrones();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ markers ]);
 
-    if (!isochroneData.length) return <></>;
+    if (!isochroneData.size) return null;
 
     return (
         <>
-            {isochroneData.map((iso: any) => {
+            {Array.from(isochroneData.values()).map((iso: any) => {
                 const activeMarker = markers.find((marker: any) => marker.id === iso.id);
                 const currentColor = activeMarker ? activeMarker.color : 'rgb(206, 171, 165)';
+                const coordinates = iso.data.features[0].geometry.coordinates;
+
                 const layerId = `isolayer-${iso.id}`;
                 const sourceId = `isoSource-${iso.id}`;
-                const coordinates = iso.data.features[0].geometry.coordinates;
 
                 const isoLayer: any = {
                     id: layerId,
@@ -78,7 +79,11 @@ export const Isochrone = ({ markers }: any) => {
                 };
 
                 return (
-                    <Source key={iso.id} id={sourceId} {...isoSource}>
+                    <Source 
+                        key={iso.id} 
+                        id={sourceId} 
+                        {...isoSource}
+                    >
                         <Layer {...isoLayer} />
                     </Source>
                 );

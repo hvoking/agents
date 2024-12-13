@@ -38,7 +38,7 @@ export const MaskProvider = ({children}: any) => {
 		setMapFeatures(features);
 	}, [ activeFeatures, mapRef.current ]);
 
-	const getProperties = (center: any, source: any) => { 
+	const getPoints = (center: any, source: any) => { 
 		const currentProperties = mapFeatures.filter((item: any) => {
 	        if (item.source === source) {
 	        	const circleBoundary = turf.circle(center, radius);
@@ -49,8 +49,53 @@ export const MaskProvider = ({children}: any) => {
 	    return currentProperties
 	}
 
+	const getLines = (center: any, source: any) => {
+	    return mapFeatures.flatMap((item: any) => {
+	        if (item.source === source && item.geometry.type === 'LineString') {
+	            const circleBoundary = turf.circle(center, radius);
+
+	            // Find intersection points
+	            const intersections = turf.lineIntersect(item.geometry, circleBoundary);
+
+	            // Split line manually using intersection points
+	            const splitSegments = [];
+	            const lineCoords = item.geometry.coordinates;
+	            let currentSegment: any = [];
+
+	            for (let i = 0; i < lineCoords.length - 1; i++) {
+	                const start = lineCoords[i];
+	                const end = lineCoords[i + 1];
+
+	                currentSegment.push(start);
+
+	                intersections.features.forEach((point: any) => {
+	                    const intersection = point.geometry.coordinates;
+	                    if (turf.booleanPointOnLine(intersection, { type: 'LineString', coordinates: [start, end] })) {
+	                        currentSegment.push(intersection);
+	                        splitSegments.push(currentSegment);
+	                        currentSegment = [intersection];
+	                    }
+	                });
+
+	                currentSegment.push(end);
+	            }
+
+	            splitSegments.push(currentSegment);
+
+	            // Filter segments entirely within the circle
+	            const insideSegments = splitSegments.filter((segment: any) =>
+	                segment.every(([lng, lat]: any) => turf.booleanPointInPolygon([lng, lat], circleBoundary))
+	            );
+
+	            // Return the geometry of inside segments
+	            return insideSegments
+	        }
+	        return [];
+	    });
+	};
+
 	return (
-		<MaskContext.Provider value={{ getProperties }}>
+		<MaskContext.Provider value={{ getPoints, getLines }}>
 			{children}
 		</MaskContext.Provider>
 	)

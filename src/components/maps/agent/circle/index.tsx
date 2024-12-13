@@ -1,19 +1,20 @@
 // Third party imports
 import { Source, Layer } from 'react-map-gl';
-import * as turf from '@turf/turf';
 
 export const Circle = ({ markers }: any) => {
     const circleGeometry = {
         type: 'FeatureCollection',
         features: markers.map((marker: any) => {
+            const { id, longitude, latitude } = marker;
+
             return {
                 type: 'Feature',
                 geometry: {
                     type: 'Point',
-                    coordinates: [ marker.longitude, marker.latitude ]
+                    coordinates: [ longitude, latitude ]
                 },
                 properties: {
-                    id: marker.id,
+                    id: id,
                 },
             };
         }),

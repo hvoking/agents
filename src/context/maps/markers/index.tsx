@@ -16,6 +16,7 @@ export const MarkersProvider = ({children}: any) => {
 	const [ markers, setMarkers ] = useState<any>([]);
 	const [ currentMarker, setCurrentMarker ] = useState<any>(null);
 	const [ currentImage, setCurrentImage ] = useState<any>(null);
+	const [ pointsLayer, setPointsLayer ] = useState<any>("points-rotterdam");
 	
 	const [ activePage, setActivePage ] = useState<any>(null);
 	const [ rejectedMarkers, setRejectedMarkers ] = useState<any>([]);
@@ -47,7 +48,8 @@ export const MarkersProvider = ({children}: any) => {
 			radius, setRadius,
 			addPin, setAddPin,
 			activePage, setActivePage,
-			currentImage, setCurrentImage
+			currentImage, setCurrentImage,
+			pointsLayer, setPointsLayer,
 		}}>
 			{children}
 		</MarkersContext.Provider>

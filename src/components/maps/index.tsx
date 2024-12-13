@@ -16,7 +16,7 @@ import { Map } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 export const MapContainer = () => {
-	const { isDragging, onDragStart, onMouseMove, onDragEnd, addNewMarker } = useMapEvents();
+	const { isDragging, onDragStart, onMouseMove, onDragEnd, addMarker } = useMapEvents();
 	const { viewport, mapRef, mapStyle } = useMapbox();
 	
 	const [ isMapLoaded, setIsMapLoaded ] = useState(false);
@@ -28,7 +28,7 @@ export const MapContainer = () => {
 			  initialViewState={viewport}
 			  mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
 			  mapStyle={mapStyle}
-			  onClick={addNewMarker}
+			  onClick={addMarker}
 			  onMouseDown={onDragStart}
 			  onMouseMove={onMouseMove}
 			  onMouseUp={onDragEnd}

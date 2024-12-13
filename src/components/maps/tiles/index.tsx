@@ -1,22 +1,16 @@
 // App imports
 import { Points } from './points';
-
-// Context imports
-import { useStylesApi } from 'context/api/styles';
+import { Roads } from './roads';
 
 export const Tiles = () => {
-	const tableSchema = "agents";
-	const tableName = "rotterdam";
-
-	const { getTilesUrl } = useStylesApi();
-	const url = getTilesUrl(tableSchema, tableName);
-
 	return (
-		<Points 
-			tableSchema={tableSchema}
-			tableName={tableName}
-			url={url}
-		/>
+		<>
+			<Points 
+				tableSchema={"agents"}
+				tableName={"rotterdam"}
+			/>
+			<Roads/>
+		</>
 	)
 }
 

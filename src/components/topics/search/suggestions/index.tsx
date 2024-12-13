@@ -1,7 +1,14 @@
 // App imports
 import './styles.scss';
 
-export const Suggestions = ({ suggestions, 	suggestionIndex, setSuggestionIndex, handleClick }: any) => {
+// Context imports
+import { useSearchEvents } from 'context/events/search';
+
+export const Suggestions = () => {
+	const { handleClick, suggestionIndex, setSuggestionIndex, suggestions, suggestionsActive } = useSearchEvents();
+
+	if (!(suggestionsActive && suggestions)) return <></>
+
 	return (
 		<ul className="search-suggestions">
 			{

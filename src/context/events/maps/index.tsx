@@ -15,31 +15,26 @@ export const useMapEvents = () => {
 
 export const MapEventsProvider = ({children}: any) => {
 		const { mapRef } = useMapbox();
-		const { markers, setMarkers, currentMarker, setCurrentMarker, addPin, setAddPin, currentImage } = useMarkers();
+		const { markers, setMarkers, currentMarker, setCurrentMarker, addPin, setAddPin, currentImage, pointsLayer } = useMarkers();
 
 		const [ isDragging, setIsDragging ] = useState(false);
 		const [ dragOffset, setDragOffset ] = useState({ x: 0, y: 0 });
 
-		const isClickInsideCircle = useCallback(
-	        (point: { x: number, y: number }) => {
-	            const features = mapRef.current?.queryRenderedFeatures(point, {
-	                layers: ['layer-mask']
-	            });
-	            return features && features.length > 0;
-	        },
-	        [ mapRef ]
-	    );
+		const isClickInsideCircle = useCallback((point: { x: number, y: number }) => {
+      const features = mapRef.current?.queryRenderedFeatures(point, {layers: ['layer-mask']});
+      return features && features.length > 0;
+    }, [ mapRef ]);
 
 	    const onDragStart = useCallback(
-	        (event: any) => {
-	            if (isClickInsideCircle(event.point) && currentMarker) {
-	                setIsDragging(true);
-	                const { x, y } = event.point;
-	                const projected = mapRef.current.project([currentMarker.longitude, currentMarker.latitude]);
-	                setDragOffset({ x: x - projected.x, y: y - projected.y });
-	            }
-	        },
-	        [ isClickInsideCircle, currentMarker, mapRef ]
+        (event: any) => {
+          if (isClickInsideCircle(event.point) && currentMarker) {
+              setIsDragging(true);
+              const { x, y } = event.point;
+              const projected = mapRef.current.project([currentMarker.longitude, currentMarker.latitude]);
+              setDragOffset({ x: x - projected.x, y: y - projected.y });
+          }
+        },
+        [ isClickInsideCircle, currentMarker, mapRef ]
 	    );
 
 	    const onMouseMove = useCallback(
@@ -69,7 +64,7 @@ export const MapEventsProvider = ({children}: any) => {
 	        setIsDragging(false);
 	    }, []);
 
-    const addNewMarker = (event: any) => {
+    const addMarker = (event: any) => {
       if (addPin === true) {
         const currentId = markers.length > 0 ? markers.length + 1 : 1;
         const { lng, lat } = event.lngLat;
@@ -79,7 +74,8 @@ export const MapEventsProvider = ({children}: any) => {
           latitude: lat,
           longitude: lng,
           color: "rgba(244, 173, 79, 1)",
-          image: currentImage
+          image: currentImage,
+          layer: pointsLayer
         };
 
         setCurrentMarker(newMarker);
@@ -103,7 +99,7 @@ export const MapEventsProvider = ({children}: any) => {
 			onDragStart,
 			onMouseMove,
 			onDragEnd,
-			addNewMarker
+			addMarker
 		}}>
 			{children}
 		</MapEventsContext.Provider>

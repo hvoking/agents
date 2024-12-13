@@ -27,7 +27,11 @@ export const Path = ({ markers }: any) => {
   };
 
   return (
-      <Source id="line-source" type="geojson" data={lineStringData}>
+      <Source 
+        id="line-source" 
+        type="geojson" 
+        data={lineStringData}
+      >
         <Layer {...lineLayer} />
       </Source>
   );

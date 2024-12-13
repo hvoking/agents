@@ -1,7 +1,13 @@
 // Third party imports
 import { Source, Layer } from 'react-map-gl';
 
-export const Points = ({ tableSchema, tableName, url }: any) => {
+// Context imports
+import { useStylesApi } from 'context/api/styles';
+
+export const Points = ({ tableSchema, tableName }: any) => {
+	const { getTilesUrl } = useStylesApi();
+	const url = getTilesUrl(tableSchema, tableName);
+
 	const sourceId = `points-${tableName}`
 
 	const layerStyle: any = {

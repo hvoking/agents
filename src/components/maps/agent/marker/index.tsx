@@ -30,18 +30,17 @@ export const CustomMarker = ({ markers }: any) => {
 						onDrag={(e: any) => onDrag(e, marker)}
 						onClick={onClick(marker)}
 					>
-						{activePage === "edit" && <CancelCross 
-							marker={marker} 
-							addRejectedId={addRejectedId}
-						/>}
-						<div className="marker-content-wrapper">
-							<div className="marker-content-active">
+						<div className="marker-wrapper">
+							<div className="marker-active">
 								<img 
 									src={image} 
 									alt="agent-avatar" 
-									className="zoomed-image"
 									width="100%"
 								/>
+								{activePage === "edit" && <CancelCross 
+									marker={marker} 
+									addRejectedId={addRejectedId}
+								/>}
 							</div>
 						</div>
 				    </Marker>

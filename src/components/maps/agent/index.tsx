@@ -13,15 +13,17 @@ export const Agent = () => {
 
   return (
     <>
-      {markers.length > 0 && (
+      {markers.length > 0 &&
       	<>
-          <Isochrone markers={markers}/>
+          {/*<Isochrone markers={markers}/>*/}
 	        <Circle markers={markers} />
 	        <Mask markers={markers}/>
           <CustomMarker markers={markers}/>
           <Path markers={markers}/>
         </>
-      )}
+      }
     </>
   );
 };
+
+Agent.displayName="Agent";
