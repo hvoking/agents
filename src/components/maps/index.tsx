@@ -16,8 +16,8 @@ import { Map } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 export const MapContainer = () => {
-	const { isDragging, onDragStart, onMouseMove, onDragEnd, addMarker } = useMapEvents();
 	const { viewport, mapRef, mapStyle } = useMapbox();
+	const { isDragging, onDragStart, onMouseMove, onDragEnd, addAgent } = useMapEvents();
 	
 	const [ isMapLoaded, setIsMapLoaded ] = useState(false);
 
@@ -28,7 +28,7 @@ export const MapContainer = () => {
 			  initialViewState={viewport}
 			  mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
 			  mapStyle={mapStyle}
-			  onClick={addMarker}
+			  onClick={addAgent}
 			  onMouseDown={onDragStart}
 			  onMouseMove={onMouseMove}
 			  onMouseUp={onDragEnd}
@@ -38,13 +38,11 @@ export const MapContainer = () => {
 			  dragPan={!isDragging}
 			  onLoad={() => setIsMapLoaded(true)}
 			>
-			  <Pin/>
-			  {isMapLoaded && 
-				  <>
-					  <Agent/>
-					  <Tiles/>
-				  </>
-			}
+				{isMapLoaded && <>
+					<Pin/>
+					<Agent/>
+					<Tiles/>
+				</>}
 			</Map>
 		</Wrapper>
 	)

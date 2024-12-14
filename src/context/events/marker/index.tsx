@@ -3,7 +3,6 @@ import { useContext, createContext } from 'react';
 
 // Context imports
 import { useMarkers } from 'context/maps/markers';
-import { useColors } from 'context/colors';
 
 const MarkerEventsContext: React.Context<any> = createContext(null);
 
@@ -15,38 +14,24 @@ export const useMarkerEvents = () => {
 
 export const MarkerEventsProvider = ({children}: any) => {
 	const { markers, setMarkers, currentMarker, setCurrentMarker, setRejectedMarkers } = useMarkers();
-	const { setFillColor } = useColors();
 
 	const onDragStart = (marker: any) => {
-		setFillColor(marker.color);
 		setCurrentMarker(marker);
 	} 
 
 	const onClick = (marker: any) => {
-		setFillColor(marker.color);
 		setCurrentMarker(marker);
 	}
 
 	const onDrag = (event: any, marker: any) => {
-		const { lat, lng } = event.lngLat;
+	    const { lat, lng } = event.lngLat;
 
-		const updatedMarkers = markers.map((previousMarker: any, markers: any) => {
-			const isCurrentMarker = previousMarker.id === marker.id;
+	    const updatedMarkers = markers.map((item: any) =>
+	        item.id === marker.id ? { ...item, latitude: lat, longitude: lng } : item
+	    );
 
-			if (isCurrentMarker) {
-				const updatedMarker = {
-					...previousMarker, 
-					latitude: lat, 
-					longitude: lng
-				};
-				setCurrentMarker(updatedMarker)
-				return updatedMarker
-			}
-
-			return previousMarker
-		});
-		setMarkers(updatedMarkers);
-	}
+	    setMarkers(updatedMarkers);
+	};
 
 	const addRejectedId = (e: any, marker: any) => {
 		e.stopPropagation();

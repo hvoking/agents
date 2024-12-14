@@ -50,47 +50,61 @@ export const MaskProvider = ({children}: any) => {
 	}
 
 	const getLines = (center: any, source: any) => {
-	    return mapFeatures.flatMap((item: any) => {
-	        if (item.source === source && item.geometry.type === 'LineString') {
-	            const circleBoundary = turf.circle(center, radius);
+	    const circleBoundary = turf.circle(center, radius);
+	    const circlePolygon = turf.polygon(circleBoundary.geometry.coordinates);
 
-	            // Find intersection points
-	            const intersections = turf.lineIntersect(item.geometry, circleBoundary);
+	    const relevantFeatures = mapFeatures.filter(
+            (item: any) =>
+                item.source === source &&
+                item.geometry.type === 'LineString' &&
+                !turf.booleanDisjoint(item.geometry, circlePolygon)
+        );
 
-	            // Split line manually using intersection points
-	            const splitSegments = [];
-	            const lineCoords = item.geometry.coordinates;
-	            let currentSegment: any = [];
+	    return relevantFeatures.flatMap((item: any) => {
+	        const intersections = turf.lineIntersect(item.geometry, circleBoundary);
+	        
+	        const intersectionPoints = new Set(
+	            intersections.features.map((point: any) =>
+	                point.geometry.coordinates.join(',')
+	            )
+	        );
 
-	            for (let i = 0; i < lineCoords.length - 1; i++) {
-	                const start = lineCoords[i];
-	                const end = lineCoords[i + 1];
+	        const lineCoords = item.geometry.coordinates;
+	        const splitSegments: any[] = [];
+	        let currentSegment: any[] = [];
 
-	                currentSegment.push(start);
+	        for (let i = 0; i < lineCoords.length - 1; i++) {
+	            const start = lineCoords[i];
+	            const end = lineCoords[i + 1];
 
-	                intersections.features.forEach((point: any) => {
-	                    const intersection = point.geometry.coordinates;
-	                    if (turf.booleanPointOnLine(intersection, { type: 'LineString', coordinates: [start, end] })) {
-	                        currentSegment.push(intersection);
-	                        splitSegments.push(currentSegment);
-	                        currentSegment = [intersection];
-	                    }
-	                });
+	            currentSegment.push(start);
 
-	                currentSegment.push(end);
-	            }
-
-	            splitSegments.push(currentSegment);
-
-	            // Filter segments entirely within the circle
-	            const insideSegments = splitSegments.filter((segment: any) =>
-	                segment.every(([lng, lat]: any) => turf.booleanPointInPolygon([lng, lat], circleBoundary))
-	            );
-
-	            // Return the geometry of inside segments
-	            return insideSegments
+	            intersections.features.forEach((point: any) => {
+	                const intersection = point.geometry.coordinates;
+	                if (
+	                    intersectionPoints.has(intersection.join(',')) &&
+	                    turf.booleanPointOnLine(intersection, {
+	                        type: 'LineString',
+	                        coordinates: [start, end],
+	                    })
+	                ) {
+	                    currentSegment.push(intersection);
+	                    splitSegments.push([...currentSegment]);
+	                    currentSegment = [intersection];
+	                }
+	            });
+	            currentSegment.push(end);
 	        }
-	        return [];
+
+	        if (currentSegment.length > 0) {
+	            splitSegments.push(currentSegment);
+	        }
+
+	        return splitSegments.filter((segment: any) =>
+	            segment.every(([lng, lat]: any) => 
+	                turf.booleanPointInPolygon([lng, lat], circlePolygon)
+	            )
+	        );
 	    });
 	};
 

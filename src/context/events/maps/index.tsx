@@ -64,7 +64,7 @@ export const MapEventsProvider = ({children}: any) => {
 	        setIsDragging(false);
 	    }, []);
 
-    const addMarker = (event: any) => {
+    const addAgent = (event: any) => {
       if (addPin === true) {
         const currentId = markers.length > 0 ? markers.length + 1 : 1;
         const { lng, lat } = event.lngLat;
@@ -99,7 +99,7 @@ export const MapEventsProvider = ({children}: any) => {
 			onDragStart,
 			onMouseMove,
 			onDragEnd,
-			addMarker
+			addAgent
 		}}>
 			{children}
 		</MapEventsContext.Provider>
