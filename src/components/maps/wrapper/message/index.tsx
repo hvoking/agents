@@ -2,7 +2,7 @@
 import './styles.scss';
 
 // Context imports
-import { useMarkers } from 'context/maps/markers';
+import { useMarkers } from 'context/agents/markers';
 
 export const Message = () => {
 	const { addPin } = useMarkers();
@@ -11,8 +11,8 @@ export const Message = () => {
 		<>
 			{addPin && 
 				<div className="add-pin-message">
-					Tap anywhere on the <br/>
-					map to add the Agent
+					Tap anywhere to<br/>
+					add the Agent
 				</div>
 			}
 		</>

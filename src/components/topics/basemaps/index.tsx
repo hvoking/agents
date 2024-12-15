@@ -3,10 +3,10 @@ import { listOfBaseMaps } from './options';
 import './styles.scss';
 
 // Context imports
-import { useMapbox } from 'context/maps/mapbox';
+import { useGeo } from 'context/geo';
 
 export const Basemaps = () => {
-	const { setMapStyle } = useMapbox();
+	const { setMapStyle } = useGeo();
 
 	const mapbox: any = listOfBaseMaps[0];
 	const carto: any = listOfBaseMaps[1];

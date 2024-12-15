@@ -2,7 +2,7 @@
 import { useState, useEffect, useContext, createContext } from 'react';
 
 // Context imports
-import { useMapbox } from '../../../maps/mapbox';
+import { useGeo } from 'context/geo';
 
 const ReverseGeocodingApiContext: React.Context<any> = createContext(null)
 
@@ -13,7 +13,7 @@ export const useReverseGeocodingApi = () => {
 }
 
 export const ReverseGeocodingApiProvider = ({children}: any) => {
-	const { viewport } = useMapbox();
+	const { viewport } = useGeo();
 	const [ currentAddress, setCurrentAddress ] = useState<any>(null);
 
 	useEffect(() => {

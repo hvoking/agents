@@ -2,7 +2,7 @@
 import { useMemo } from 'react';
 
 // Context imports
-import { useMask } from 'context/maps/mask';
+import { useMask } from 'context/agents/mask';
 import { useColors } from 'context/colors';
 
 // Third-party imports
@@ -13,17 +13,17 @@ export const Points = ({ markers }: any) => {
   const { getPoints } = useMask();
   const { propertyTypeColors } = useColors();
 
+  const pointsLayer = "points-rotterdam"
+
   const scaleLinear = d3.scaleLinear()
     .domain([60, 300])
     .range([3, 3.5]);
 
   const geoJsonData = useMemo(() => {
     const features = markers.flatMap((marker: any) => {
-      
-      const { longitude, latitude, layer } = marker;
+      const { longitude, latitude } = marker;
       const center = [ longitude, latitude ];
-
-      const maskProperties = getPoints(center, layer);
+      const maskProperties = getPoints(center, pointsLayer);
 
       if (!maskProperties || maskProperties.length === 0) return [];
 

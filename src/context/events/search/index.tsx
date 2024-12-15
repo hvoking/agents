@@ -3,7 +3,7 @@ import { useState, useContext, createContext } from 'react';
 
 // Context imports
 import { useGoogleSearchApi } from 'context/api/google/search';
-import { useMapbox } from 'context/maps/mapbox';
+import { useGeo } from 'context/geo';
 
 const SearchEventsContext: React.Context<any> = createContext(null);
 
@@ -17,7 +17,7 @@ export const SearchEventsProvider = ({children}: any) => {
 	const [ suggestionIndex, setSuggestionIndex ] = useState(0);
 	const [ suggestionsActive, setSuggestionsActive ]= useState(false);
 	
-	const { setPlaceId } = useMapbox();
+	const { setPlaceId } = useGeo();
 	const { googleSearchData, setSearchText } = useGoogleSearchApi();
 
 	const suggestions = googleSearchData && googleSearchData.predictions.reduce((total: any, item: any) => {

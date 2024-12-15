@@ -1,17 +1,14 @@
-import { MapboxProvider } from './mapbox';
 import { MarkersProvider } from './markers';
 import { MaskProvider } from './mask';
 
-export const MapsProvider = ({ children }: any) => {
+export const AgentsProvider = ({ children }: any) => {
 	return (
-		<MapboxProvider>
 		<MarkersProvider>
 	    <MaskProvider>
 			{children}
 		</MaskProvider>
 	    </MarkersProvider>
-	    </MapboxProvider>
 	)
 }
 
-MapsProvider.displayName="MapsProvider";
+AgentsProvider.displayName="AgentsProvider";

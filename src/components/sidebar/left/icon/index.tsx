@@ -2,7 +2,7 @@
 import './styles.scss';
 
 // Context imports
-import { useMarkers } from 'context/maps/markers';
+import { useMarkers } from 'context/agents/markers';
 
 export const Icon = ({activeValue, title}: any) => {
 	const { setActivePage } = useMarkers();

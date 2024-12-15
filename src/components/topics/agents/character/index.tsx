@@ -1,5 +1,5 @@
 // Context imports
-import { useMarkers } from 'context/maps/markers';
+import { useMarkers } from 'context/agents/markers';
 
 export const Character = ({ src, alt }: any) => {
 	const { setAddPin, setCurrentImage } = useMarkers();

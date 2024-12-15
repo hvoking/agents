@@ -6,7 +6,7 @@ import { Basemaps } from './basemaps';
 import './styles.scss';
 
 // Context imports
-import { useMarkers } from 'context/maps/markers';
+import { useMarkers } from 'context/agents/markers';
 
 export const Topics = () => {
 	const { activePage } = useMarkers();

@@ -7,7 +7,7 @@ import { useStylesApi } from 'context/api/styles';
 // Third party imports
 import { Source, Layer } from 'react-map-gl';
 
-export const Roads = () => {
+export const Lines = () => {
 	const { fetchData, getTilesUrl } = useStylesApi();
 	const [ styleData, setStyleData ] = useState<any[]>([]);
 
@@ -25,6 +25,7 @@ export const Roads = () => {
 	const url = getTilesUrl(schemaName, tableName)
 
   	const layers = styleData.map((style: any, index: number) => {
+  		style.paint['line-opacity'] = 0;
 		return (
 			<Layer key={index} {...style}/>
 		)
@@ -41,4 +42,4 @@ export const Roads = () => {
 	)
 }
 
-Roads.displayName="Roads"
+Lines.displayName="Lines"

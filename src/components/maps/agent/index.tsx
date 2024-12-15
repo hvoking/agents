@@ -1,12 +1,12 @@
 // App imports
 import { Mask } from './mask';
 import { Circle } from './circle';
-import { Isochrone } from './iso';
+// import { Isochrone } from './iso';
 import { CustomMarker } from './marker';
 import { Path } from './path';
 
 // Context imports
-import { useMarkers } from 'context/maps/markers';
+import { useMarkers } from 'context/agents/markers';
 
 export const Agent = () => {
   const { markers } = useMarkers();

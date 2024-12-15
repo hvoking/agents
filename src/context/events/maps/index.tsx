@@ -2,8 +2,8 @@
 import { useState, useEffect, useCallback, useContext, createContext } from 'react';
 
 // App imports
-import { useMapbox } from 'context/maps/mapbox';
-import { useMarkers } from 'context/maps/markers';
+import { useGeo } from 'context/geo';
+import { useMarkers } from 'context/agents/markers';
 
 const MapEventsContext: React.Context<any> = createContext(null);
 
@@ -14,8 +14,8 @@ export const useMapEvents = () => {
 }
 
 export const MapEventsProvider = ({children}: any) => {
-		const { mapRef } = useMapbox();
-		const { markers, setMarkers, currentMarker, setCurrentMarker, addPin, setAddPin, currentImage, pointsLayer } = useMarkers();
+		const { mapRef } = useGeo();
+		const { markers, setMarkers, currentMarker, setCurrentMarker, addPin, setAddPin, currentImage } = useMarkers();
 
 		const [ isDragging, setIsDragging ] = useState(false);
 		const [ dragOffset, setDragOffset ] = useState({ x: 0, y: 0 });
@@ -74,8 +74,7 @@ export const MapEventsProvider = ({children}: any) => {
           latitude: lat,
           longitude: lng,
           color: "rgba(244, 173, 79, 1)",
-          image: currentImage,
-          layer: pointsLayer
+          image: currentImage
         };
 
         setCurrentMarker(newMarker);

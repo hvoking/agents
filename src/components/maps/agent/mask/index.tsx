@@ -5,7 +5,7 @@ import { Lines } from './lines';
 export const Mask = ({ markers }: any) => {
   return (
     <>
-      {/*<Points markers={markers}/>*/}
+      <Points markers={markers}/>
       <Lines markers={markers}/>
     </>
   )

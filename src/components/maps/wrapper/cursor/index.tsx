@@ -4,7 +4,7 @@ import './styles.scss';
 // React imports
 import { useEffect, useRef } from 'react';
 
-import { useMarkers } from 'context/maps/markers';
+import { useMarkers } from 'context/agents/markers';
 
 export const Cursor = () => {
 	const { addPin } = useMarkers();

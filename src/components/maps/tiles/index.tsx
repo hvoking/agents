@@ -1,6 +1,6 @@
 // App imports
 import { Points } from './points';
-import { Roads } from './roads';
+import { Lines } from './lines';
 
 export const Tiles = () => {
 	return (
@@ -9,7 +9,7 @@ export const Tiles = () => {
 				tableSchema={"agents"}
 				tableName={"rotterdam"}
 			/>
-			<Roads/>
+			<Lines/>
 		</>
 	)
 }

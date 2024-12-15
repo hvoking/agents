@@ -5,14 +5,14 @@ import { useCallback } from 'react';
 import { Path } from './path';
 
 // Context imports
-import { useMapbox } from 'context/maps/mapbox';
-import { useMarkers } from 'context/maps/markers';
+import { useGeo } from 'context/geo';
+import { useMarkers } from 'context/agents/markers';
 
 // Third-party imports
 import { Marker } from 'react-map-gl';
 
 export const Pin = () => {
-	const { viewport, setViewport } = useMapbox();
+	const { viewport, setViewport } = useGeo();
 	const { setCurrentMarker } = useMarkers();
 
 	const { longitude, latitude } = viewport;

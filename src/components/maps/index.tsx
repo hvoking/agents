@@ -9,14 +9,14 @@ import { Wrapper } from './wrapper';
 
 // Context imports
 import { useMapEvents } from 'context/events/maps';
-import { useMapbox } from 'context/maps/mapbox';
+import { useGeo } from 'context/geo';
 
 // Third-party imports
 import { Map } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 export const MapContainer = () => {
-	const { viewport, mapRef, mapStyle } = useMapbox();
+	const { viewport, mapRef, mapStyle } = useGeo();
 	const { isDragging, onDragStart, onMouseMove, onDragEnd, addAgent } = useMapEvents();
 	
 	const [ isMapLoaded, setIsMapLoaded ] = useState(false);

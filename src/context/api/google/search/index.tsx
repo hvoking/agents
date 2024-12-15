@@ -2,7 +2,7 @@
 import { useState, useEffect, useContext, createContext } from 'react';
 
 // Context imports
-import { useMapbox } from '../../../maps/mapbox';
+import { useGeo } from 'context/geo';
 
 const GoogleSearchApiContext: React.Context<any> = createContext(null)
 
@@ -16,7 +16,7 @@ export const GoogleSearchApiProvider = ({children}: any) => {
 	const [ searchText, setSearchText ] = useState('');
 	const [ googleSearchData, setGoogleSearchData ] = useState(null);
 
-	const { viewport } = useMapbox();
+	const { viewport } = useGeo();
 	const latitude = viewport.latitude;
 	const longitude = viewport.longitude;
 

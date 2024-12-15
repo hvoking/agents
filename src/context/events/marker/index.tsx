@@ -2,7 +2,7 @@
 import { useContext, createContext } from 'react';
 
 // Context imports
-import { useMarkers } from 'context/maps/markers';
+import { useMarkers } from 'context/agents/markers';
 
 const MarkerEventsContext: React.Context<any> = createContext(null);
 

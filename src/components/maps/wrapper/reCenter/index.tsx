@@ -2,10 +2,10 @@
 import './styles.scss';
 
 // Context imports
-import { useMapbox } from 'context/maps/mapbox'
+import { useGeo } from 'context/geo'
 
 export const ReCenter = () => {
-	const { viewport, setViewport } = useMapbox();
+	const { viewport, setViewport } = useGeo();
 
 	const reCenter = () => {
 		setViewport({...viewport})
