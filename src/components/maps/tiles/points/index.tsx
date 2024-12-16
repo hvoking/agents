@@ -1,3 +1,6 @@
+// React imports
+import { useState, useEffect } from 'react';
+
 // Third party imports
 import { Source, Layer } from 'react-map-gl';
 
@@ -5,21 +8,27 @@ import { Source, Layer } from 'react-map-gl';
 import { useStylesApi } from 'context/api/styles';
 
 export const Points = ({ tableSchema, tableName }: any) => {
-	const { getTilesUrl } = useStylesApi();
+	const { fetchData, getTilesUrl } = useStylesApi();
+	const [ styleData, setStyleData ] = useState<any[]>([]);
+	
 	const url = getTilesUrl(tableSchema, tableName);
 
 	const sourceId = `points-${tableName}`
 
-	const layerStyle: any = {
-	    id: "point-layer",
-	    type: "circle",
-	    source: sourceId,
-	    'source-layer': "default",
-	    paint: {
-	      'circle-radius': 3,
-	      'circle-color': 'rgba(33, 33, 73, 0.2)'
-	    }
-	};
+  	useEffect(() => {
+    	const loadData = async () => {
+			const data = await fetchData(tableSchema, tableName);
+			setStyleData(data);
+		}
+		loadData();
+	}, []);
+
+  	const layers = styleData.map((style: any, index: number) => {
+  		style.paint['circle-opacity'] = 0;
+		return (
+			<Layer key={index} {...style}/>
+		)
+	});
 	
 	return (
 		<Source 
@@ -27,7 +36,7 @@ export const Points = ({ tableSchema, tableName }: any) => {
 			type="vector" 
 			tiles={[ url ]}
 		>
-			<Layer {...layerStyle} />
+			{layers}
 		</Source>
 
 	)

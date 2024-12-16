@@ -1,7 +1,12 @@
 // App imports
 import './styles.scss';
 
-export const CancelCross = ({ marker, addRejectedId }: any) => {
+// Context imports
+import { useMarkerEvents } from 'context/events/marker';
+
+export const CancelCross = ({ marker }: any) => {
+	const { addRejectedId } = useMarkerEvents();
+
 	return (
       	<svg
       		className="cancel-cross-map" 
@@ -9,11 +14,7 @@ export const CancelCross = ({ marker, addRejectedId }: any) => {
       		width="20" 
       		onClick={(e: any) => addRejectedId(e, marker)}
       	>
-      		<circle
-      			cx={10}
-      			cy={10}
-      			r={9}
-      		/>
+      		<circle cx={10} cy={10} r={9}/>
       		<line
 				x1={5}
 				x2={15}

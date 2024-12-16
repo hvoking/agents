@@ -10,8 +10,8 @@ import { useMarkerEvents } from 'context/events/marker';
 import { Marker } from 'react-map-gl';
 
 export const CustomMarker = ({ markers }: any) => {
+	const { onDragStart, onClick, onDrag } = useMarkerEvents();
 	const { activePage } = useMarkers();
-	const { onDragStart, onClick, onDrag, addRejectedId } = useMarkerEvents();
 
 	return (
 		<>
@@ -26,21 +26,14 @@ export const CustomMarker = ({ markers }: any) => {
 						latitude={latitude}
 						anchor="bottom"
 						draggable
-						onDragStart={onDragStart(marker)}
+						onDragStart={() => onDragStart(marker)}
 						onDrag={(e: any) => onDrag(e, marker)}
-						onClick={onClick(marker)}
+						onClick={() => onClick(marker)}
 					>
 						<div className="marker-wrapper">
 							<div className="marker-active">
-								<img 
-									src={image} 
-									alt="agent-avatar" 
-									width="100%"
-								/>
-								{activePage === "edit" && <CancelCross 
-									marker={marker} 
-									addRejectedId={addRejectedId}
-								/>}
+								<img src={image} alt="agent-avatar" width="100%"/>
+								{activePage === "edit" && <CancelCross marker={marker}/>}
 							</div>
 						</div>
 				    </Marker>

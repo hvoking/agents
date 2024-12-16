@@ -3,7 +3,6 @@ import { useMemo } from 'react';
 
 // Context imports
 import { useMask } from 'context/agents/mask';
-import { propertyTypeColors } from './colors';
 
 // Third-party imports
 import { Source, Layer } from 'react-map-gl';
@@ -32,9 +31,8 @@ export const Points = ({ markers }: any) => {
         const { price, property_type } = properties;
 
         const currentPrice = price ? price.replace("$", "") : null;
-        const currentColor = propertyTypeColors[property_type];
 
-        if (currentPrice && currentColor) {
+        if (currentPrice) {
           baseGeometries.push({
             type: 'Feature',
             geometry: {
@@ -43,7 +41,7 @@ export const Points = ({ markers }: any) => {
             },
             properties: {
               'price': scaleLinear(parseInt(currentPrice)),
-              'color': currentColor,
+              'circle-color': properties['circle-color'],
             },
           });
         }
@@ -60,7 +58,7 @@ export const Points = ({ markers }: any) => {
     source: "mask-points",
     paint: {
       'circle-radius': ['get', 'price'],
-      'circle-color': ['get', 'color']
+      'circle-color': ['get', 'circle-color']
     }
   };
 

@@ -3,7 +3,7 @@ import { Mask } from './mask';
 import { Circle } from './circle';
 // import { Isochrone } from './iso';
 import { CustomMarker } from './marker';
-import { Path } from './path';
+// import { Path } from './path';
 
 // Context imports
 import { useMarkers } from 'context/agents/markers';
@@ -19,7 +19,7 @@ export const Agent = () => {
 	        <Circle markers={markers} />
 	        <Mask markers={markers}/>
           <CustomMarker markers={markers}/>
-          <Path markers={markers}/>
+          {/*<Path markers={markers}/>*/}
         </>
       }
     </>

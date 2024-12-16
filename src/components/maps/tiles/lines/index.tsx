@@ -22,7 +22,7 @@ export const Lines = () => {
 		loadData();
 	}, []);
 
-	const url = getTilesUrl(schemaName, tableName)
+	const url = getTilesUrl(schemaName, tableName);
 
   	const layers = styleData.map((style: any, index: number) => {
   		style.paint['line-opacity'] = 0;

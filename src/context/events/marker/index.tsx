@@ -27,14 +27,16 @@ export const MarkerEventsProvider = ({children}: any) => {
 	    const { lat, lng } = event.lngLat;
 
 	    const updatedMarkers = markers.map((item: any) =>
-	        item.id === marker.id ? { ...item, latitude: lat, longitude: lng } : item
+	        item.id === marker.id ? 
+	        { ...item, latitude: lat, longitude: lng } : 
+	        item
 	    );
 
 	    setMarkers(updatedMarkers);
 	};
 
-	const addRejectedId = (e: any, marker: any) => {
-		e.stopPropagation();
+	const addRejectedId = (event: any, marker: any) => {
+		event.stopPropagation();
 		currentMarker === marker && setCurrentMarker(null);
 		setRejectedMarkers((prev: any) => [...prev, marker]);
 	}

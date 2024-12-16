@@ -38,23 +38,12 @@ export const MaskProvider = ({children}: any) => {
 		setMapFeatures(features);
 	}, [ activeFeatures, mapRef.current ]);
 
-	const getPoints = (center: any, source: any) => { 
-		const currentProperties = mapFeatures.filter((item: any) => {
-	        if (item.source === source) {
-	        	const circleBoundary = turf.circle(center, radius);
-	        	const pointsWithin = turf.booleanPointInPolygon(item.geometry, circleBoundary);
-	            return pointsWithin
-	        }
-	    });
-	    return currentProperties
-	}
-
 	// Need to process the line-color because is changed inside the layer
-	const processPaintProperties = (paint: any) => {
+	const processPaintProperties = (paint: any, property: string) => {
         const processedPaint = { ...paint };
-        if (paint['line-color']) {
-            const color = paint['line-color'];
-            processedPaint['line-color'] = `
+        if (paint[property]) {
+            const color = paint[property];
+            processedPaint[property] = `
             	rgba(
             		${Math.round(color.r * 255)}, 
             		${Math.round(color.g * 255)}, 
@@ -66,17 +55,35 @@ export const MaskProvider = ({children}: any) => {
         return processedPaint;
     };
 
+    const getPoints = (center: any, source: any) => { 
+		const circleBoundary = turf.circle(center, radius);
+
+		const currentProperties = mapFeatures.filter((item: any) =>
+			item.source === source &&
+            item.geometry.type === "Point" &&
+			turf.booleanPointInPolygon(item.geometry, circleBoundary)
+		);
+	    return currentProperties.map((item: any) => ({
+	        type: 'Feature',
+	        geometry: item.geometry,
+	        properties: {
+	            ...item.properties,
+	            ...processPaintProperties(item.layer.paint, 'circle-color') // Apply processing to circle-color
+	        },
+	    }));
+	}
+
 	const getLines = (center: any, source: any) => {
 	    const circleBoundary = turf.circle(center, radius);
 	    const circlePolygon = turf.polygon(circleBoundary.geometry.coordinates);
 
-	    const relevantFeatures = mapFeatures.filter((item: any) =>
-	            item.source === source &&
-	            item.geometry.type === 'LineString' &&
-	            turf.booleanIntersects(item.geometry, circlePolygon)
+	    const currentProperties = mapFeatures.filter((item: any) =>
+            item.source === source &&
+            item.geometry.type === 'LineString' &&
+            turf.booleanIntersects(item.geometry, circlePolygon)
 	    );
 
-	    return relevantFeatures.reduce((total: any[], item: any) => {
+	    return currentProperties.reduce((total: any[], item: any) => {
 	        const isFullyInside = turf.booleanWithin(item.geometry, circleBoundary);
 
 	        if (isFullyInside) {
@@ -85,7 +92,7 @@ export const MaskProvider = ({children}: any) => {
 	                geometry: item.geometry,
 	                properties: { 
 	                	...item.properties, 
-	                	...processPaintProperties(item.layer.paint) 
+	                	...processPaintProperties(item.layer.paint, 'line-color') 
 	                },
 	            });
 	        } else {
@@ -100,7 +107,7 @@ export const MaskProvider = ({children}: any) => {
 	                    geometry: line.geometry,
 	                    properties: { 
 		                	...item.properties, 
-		                	...processPaintProperties(item.layer.paint) 
+		                	...processPaintProperties(item.layer.paint, 'line-color') 
 		                },
 	                }))
 	            );

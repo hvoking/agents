@@ -3,5 +3,5 @@ export const sections = [
 	{section: "bot", title: "Add Agent"}, 
 	{section: "edit", title: "Edit"}, 
 	{section: "search", title: "Search"}, 
-	{section: "basemaps", title: "basemaps"}
+	{section: "basemaps", title: "Basemaps"}
 ];
