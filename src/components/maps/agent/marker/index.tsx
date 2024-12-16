@@ -16,7 +16,7 @@ export const CustomMarker = ({ markers }: any) => {
 	return (
 		<>
 			{markers.map((marker: any) => {
-				const { id, color, latitude, longitude, image } = marker;
+				const { id, latitude, longitude, color, image } = marker;
 				document.documentElement.style.setProperty('--currentFill', color);
 
 				return (

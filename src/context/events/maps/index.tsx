@@ -15,7 +15,7 @@ export const useMapEvents = () => {
 
 export const MapEventsProvider = ({children}: any) => {
 		const { mapRef } = useGeo();
-		const { markers, setMarkers, currentMarker, setCurrentMarker, addPin, setAddPin, currentImage } = useMarkers();
+		const { markers, setMarkers, currentMarker, setCurrentMarker, setAddPin, currentImage } = useMarkers();
 
 		const [ isDragging, setIsDragging ] = useState(false);
 		const [ dragOffset, setDragOffset ] = useState({ x: 0, y: 0 });
@@ -65,23 +65,21 @@ export const MapEventsProvider = ({children}: any) => {
 	    }, []);
 
     const addAgent = (event: any) => {
-      if (addPin === true) {
-        const currentId = markers.length > 0 ? markers.length + 1 : 1;
-        const { lng, lat } = event.lngLat;
+      const currentId = markers.length > 0 ? markers.length + 1 : 1;
+      const { lng, lat } = event.lngLat;
 
-        const newMarker = {
-          id: currentId,
-          latitude: lat,
-          longitude: lng,
-          color: "rgba(244, 173, 79, 1)",
-          image: currentImage
-        };
+      const newMarker = {
+        id: currentId,
+        latitude: lat,
+        longitude: lng,
+        color: "rgba(244, 173, 79, 1)",
+        image: currentImage
+      };
 
-        setCurrentMarker(newMarker);
-        const updatedMarkers = markers.length > 0 ? [...markers, newMarker] : [newMarker];
-        setMarkers(updatedMarkers);
-        setAddPin(false);
-      }
+      setCurrentMarker(newMarker);
+      const updatedMarkers = markers.length > 0 ? [...markers, newMarker] : [newMarker];
+      setMarkers(updatedMarkers);
+      setAddPin(false);
     };
 
 	useEffect(() => {

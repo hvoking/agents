@@ -1,8 +1,5 @@
 // React imports
-import { useState, useEffect, useContext, createContext } from 'react';
-
-// Context imports
-import { useColors } from 'context/colors';
+import { useState, useContext, createContext } from 'react';
 
 const MarkersContext: React.Context<any> = createContext(null);
 
@@ -16,7 +13,6 @@ export const MarkersProvider = ({children}: any) => {
 	const [ markers, setMarkers ] = useState<any>([]);
 	const [ currentMarker, setCurrentMarker ] = useState<any>(null);
 	const [ currentImage, setCurrentImage ] = useState<any>(null);
-	const [ pointsLayer, setPointsLayer ] = useState<any>("points-rotterdam");
 	
 	const [ activePage, setActivePage ] = useState<any>(null);
 	const [ rejectedMarkers, setRejectedMarkers ] = useState<any>([]);
@@ -24,32 +20,15 @@ export const MarkersProvider = ({children}: any) => {
 	const [ radius, setRadius ] = useState(0.5);
 	const [ addPin, setAddPin ] = useState(false);
 
-	const { fillColor } = useColors();
-
-  	const existingMarkers = markers.length > 0;
-
-  	useEffect(() => {
-	  	  const updatedMarkers = existingMarkers && markers.filter((marker: any) => {
-	  	  	if (!rejectedMarkers.includes(marker)) {
-		  	    const isCurrentMarker = marker && currentMarker && marker.id === currentMarker.id;
-		  	    return (
-		  	      isCurrentMarker ? { ...marker, color: fillColor } : marker
-		  	    )
-	  		}
-	  	  });
-	  	  existingMarkers && setMarkers(updatedMarkers);
-  	}, [ fillColor, rejectedMarkers ]);
-
 	return (
 		<MarkersContext.Provider value={{
 			markers, setMarkers,
 			currentMarker, setCurrentMarker,
+			currentImage, setCurrentImage,
+			activePage, setActivePage,
 			rejectedMarkers, setRejectedMarkers,
 			radius, setRadius,
 			addPin, setAddPin,
-			activePage, setActivePage,
-			currentImage, setCurrentImage,
-			pointsLayer, setPointsLayer,
 		}}>
 			{children}
 		</MarkersContext.Provider>

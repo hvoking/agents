@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 
 // Context imports
 import { useMask } from 'context/agents/mask';
-import { useColors } from 'context/colors';
+import { propertyTypeColors } from './colors';
 
 // Third-party imports
 import { Source, Layer } from 'react-map-gl';
@@ -11,7 +11,6 @@ import * as d3 from 'd3';
 
 export const Points = ({ markers }: any) => {
   const { getPoints } = useMask();
-  const { propertyTypeColors } = useColors();
 
   const pointsLayer = "points-rotterdam"
 

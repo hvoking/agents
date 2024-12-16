@@ -18,7 +18,7 @@ export const GeoProvider = ({children}: any) => {
 	
 	const [ placeId, setPlaceId ] = useState<any>(null);
 	const [ viewport, setViewport ] = useState(Locations.rotterdam);
-	const [ mapStyle, setMapStyle ] = useState("mapbox://styles/hvoking/cm1h94yc901g001pc03jreug3");
+	const [ mapStyle, setMapStyle ] = useState("mapbox://styles/hvoking/cm16kxow500ez01pc3psqc4pv");
 
 	useEffect(() => {
 		const viewportFlyTo = () => {

@@ -2,11 +2,9 @@ import { AgentsProvider } from './agents';
 import { GeoProvider } from './geo';
 import { ApiProvider } from './api';
 import { EventsProvider } from './events';
-import { ColorsProvider } from './colors';
 
 export const MainProvider = ({children}: any) => {
   return (
-    <ColorsProvider>
     <GeoProvider>
     <AgentsProvider>
     <ApiProvider>
@@ -16,7 +14,6 @@ export const MainProvider = ({children}: any) => {
     </ApiProvider>
     </AgentsProvider>
     </GeoProvider>
-    </ColorsProvider> 
   )
 }
 
