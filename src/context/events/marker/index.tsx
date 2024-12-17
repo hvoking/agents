@@ -4,6 +4,9 @@ import { useContext, createContext } from 'react';
 // Context imports
 import { useMarkers } from 'context/agents/markers';
 
+// Third party imports
+import * as turf from '@turf/turf';
+
 const MarkerEventsContext: React.Context<any> = createContext(null);
 
 export const useMarkerEvents = () => {
@@ -13,7 +16,7 @@ export const useMarkerEvents = () => {
 }
 
 export const MarkerEventsProvider = ({children}: any) => {
-	const { markers, setMarkers, currentMarker, setCurrentMarker, setRejectedMarkers } = useMarkers();
+	const { markers, setMarkers, currentMarker, setCurrentMarker, setRejectedMarkers, radius } = useMarkers();
 
 	const onDragStart = (marker: any) => {
 		setCurrentMarker(marker);
@@ -28,7 +31,7 @@ export const MarkerEventsProvider = ({children}: any) => {
 
 	    const updatedMarkers = markers.map((item: any) =>
 	        item.id === marker.id ? 
-	        { ...item, latitude: lat, longitude: lng } : 
+	        { ...item, latitude: lat, longitude: lng, circle: turf.circle([lng, lat], radius, { steps: 31 }) } : 
 	        item
 	    );
 

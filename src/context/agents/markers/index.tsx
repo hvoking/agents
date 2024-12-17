@@ -21,12 +21,10 @@ export const MarkersProvider = ({children}: any) => {
 	const [ addPin, setAddPin ] = useState(false);
 
 	useEffect(() => {
-		const existingMarkers = markers.length > 0;
-		if (existingMarkers) {
-			const updatedMarkers = markers.filter((marker: any) => !rejectedMarkers.includes(marker))
-			setMarkers(updatedMarkers);
-		}
-  	}, [ rejectedMarkers ]);
+	   setMarkers((prev: any) => 
+	      prev.filter((item: any) => !rejectedMarkers.includes(item))
+	   );
+	}, [ rejectedMarkers ]);
 
 	return (
 		<MarkersContext.Provider value={{

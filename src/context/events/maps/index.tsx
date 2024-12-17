@@ -5,6 +5,9 @@ import { useState, useEffect, useCallback, useContext, createContext } from 'rea
 import { useGeo } from 'context/geo';
 import { useMarkers } from 'context/agents/markers';
 
+// Third party imports
+import * as turf from '@turf/turf';
+
 const MapEventsContext: React.Context<any> = createContext(null);
 
 export const useMapEvents = () => {
@@ -15,7 +18,7 @@ export const useMapEvents = () => {
 
 export const MapEventsProvider = ({children}: any) => {
 		const { mapRef } = useGeo();
-		const { markers, setMarkers, currentMarker, setCurrentMarker, addPin, setAddPin, currentImage } = useMarkers();
+		const { markers, setMarkers, currentMarker, setCurrentMarker, addPin, setAddPin, currentImage, radius } = useMarkers();
 
 		const [ isDragging, setIsDragging ] = useState(false);
 		const [ dragOffset, setDragOffset ] = useState({ x: 0, y: 0 });
@@ -30,7 +33,8 @@ export const MapEventsProvider = ({children}: any) => {
           if (isClickInsideCircle(event.point) && currentMarker) {
 						setIsDragging(true);
 						const { x, y } = event.point;
-						const projected = mapRef.current.project([currentMarker.longitude, currentMarker.latitude]);
+						const { longitude, latitude } = currentMarker;
+						const projected = mapRef.current.project([longitude, latitude]);
 						setDragOffset({ x: x - projected.x, y: y - projected.y });
           }
         },
@@ -40,16 +44,18 @@ export const MapEventsProvider = ({children}: any) => {
 	    const onMouseMove = useCallback(
         (event: any) => {
             if (isDragging) {
-            	const newCenter = mapRef.current.unproject({
-            	    x: event.point.x - dragOffset.x,
-            	    y: event.point.y - dragOffset.y
-            	});
+            	const { x, y } = event.point;
+            	const updatedX = x - dragOffset.x;
+            	const updatedY = y - dragOffset.y;
+
+            	const newCenter = mapRef.current.unproject({x: updatedX, y: updatedY});
 
             	const { lat, lng } = newCenter;
                 
               const updatedMarkers = markers.map((item: any) => {
       					if (item.id === currentMarker.id) {
-        					const updatedMarker = {...item, latitude: lat, longitude: lng};
+      						const updatedCircle = turf.circle([lng, lat], radius, { steps: 31 })
+        					const updatedMarker = {...item, latitude: lat, longitude: lng, circle: updatedCircle};
         					setCurrentMarker(updatedMarker)
         					return updatedMarker
         				}
@@ -81,8 +87,10 @@ export const MapEventsProvider = ({children}: any) => {
 	        latitude: lat,
 	        longitude: lng,
 	        color: "rgba(244, 173, 79, 1)",
-	        image: currentImage
+	        image: currentImage,
+	        circle: turf.circle([lng, lat], radius, { steps: 31 })
 	      };
+
 	      setCurrentMarker(newMarker);
 	      setMarkers((prev: any) => [...prev, newMarker]);
 	      setAddPin(false);
