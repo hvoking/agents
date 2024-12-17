@@ -7,7 +7,6 @@ import * as turf from '@turf/turf';
 
 export const Circle = ({ markers }: any) => {
     const { radius } = useMarkers();
-    const expandedRadius = radius + 0.0001;
 
   const circleGeometry = {
     type: 'FeatureCollection',
@@ -15,7 +14,7 @@ export const Circle = ({ markers }: any) => {
       const { id, longitude, latitude } = marker;
 
       // Create a circle with 0.5 km radius (500 meters)
-      const circle = turf.circle([longitude, latitude], expandedRadius, { steps: 31 });
+      const circle = turf.circle([longitude, latitude], radius, { steps: 31 });
 
       return {
         type: 'Feature',

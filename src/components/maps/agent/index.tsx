@@ -16,8 +16,8 @@ export const Agent = () => {
       {markers.length > 0 &&
       	<>
           {/*<Isochrone markers={markers}/>*/}
-	        <Circle markers={markers} />
 	        <Mask markers={markers}/>
+          <Circle markers={markers} />
           <CustomMarker markers={markers}/>
           {/*<Path markers={markers}/>*/}
         </>
