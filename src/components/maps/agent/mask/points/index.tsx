@@ -6,21 +6,17 @@ import { useMask } from 'context/agents/mask';
 
 // Third-party imports
 import { Source, Layer } from 'react-map-gl';
-import * as d3 from 'd3';
 
 export const Points = ({ markers }: any) => {
   const { getPoints } = useMask();
 
   const pointsLayer = "points-rotterdam"
 
-  const scaleLinear = d3.scaleLinear()
-    .domain([60, 300])
-    .range([3, 3.5]);
-
   const geoJsonData = useMemo(() => {
     const features = markers.flatMap((marker: any) => {
       const { longitude, latitude } = marker;
       const center = [ longitude, latitude ];
+      
       const maskProperties = getPoints(center, pointsLayer);
 
       if (!maskProperties || maskProperties.length === 0) return [];
@@ -28,23 +24,14 @@ export const Points = ({ markers }: any) => {
       return maskProperties.flatMap((maskProp: any) => {
         const baseGeometries = [];
         const { geometry, properties } = maskProp;
-        const { price, property_type } = properties;
-
-        const currentPrice = price ? price.replace("$", "") : null;
-
-        if (currentPrice) {
-          baseGeometries.push({
-            type: 'Feature',
-            geometry: {
-              type: 'Point',
-              coordinates: geometry.coordinates,
-            },
-            properties: {
-              'price': scaleLinear(parseInt(currentPrice)),
-              'circle-color': properties['circle-color'],
-            },
-          });
-        }
+        baseGeometries.push({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: geometry.coordinates,
+          },
+          properties: properties,
+        });
         return baseGeometries;
       });
     });
@@ -57,7 +44,7 @@ export const Points = ({ markers }: any) => {
     type: "circle",
     source: "mask-points",
     paint: {
-      'circle-radius': ['get', 'price'],
+      'circle-radius': ['get', 'circle_size'],
       'circle-color': ['get', 'circle-color']
     }
   };

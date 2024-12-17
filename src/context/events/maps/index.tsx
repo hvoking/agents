@@ -28,10 +28,10 @@ export const MapEventsProvider = ({children}: any) => {
 	    const onDragStart = useCallback(
         (event: any) => {
           if (isClickInsideCircle(event.point) && currentMarker) {
-              setIsDragging(true);
-              const { x, y } = event.point;
-              const projected = mapRef.current.project([currentMarker.longitude, currentMarker.latitude]);
-              setDragOffset({ x: x - projected.x, y: y - projected.y });
+						setIsDragging(true);
+						const { x, y } = event.point;
+						const projected = mapRef.current.project([currentMarker.longitude, currentMarker.latitude]);
+						setDragOffset({ x: x - projected.x, y: y - projected.y });
           }
         },
         [ isClickInsideCircle, currentMarker, mapRef ]
@@ -66,8 +66,15 @@ export const MapEventsProvider = ({children}: any) => {
 
     const addAgent = (event: any) => {
     	if (addPin === true) {
-	      const currentId = markers.length > 0 ? markers.length + 1 : 1;
-	      const { lng, lat } = event.lngLat;
+    		const { lng, lat } = event.lngLat;
+
+    		const lastIndex = markers.length - 1;
+    		const lastMarker = markers[lastIndex];
+	      
+	      const currentId = 
+	      	markers.length > 0 ? 
+	      	lastMarker.id + 1 : 
+	      	1;
 
 	      const newMarker = {
 	        id: currentId,
@@ -76,7 +83,6 @@ export const MapEventsProvider = ({children}: any) => {
 	        color: "rgba(244, 173, 79, 1)",
 	        image: currentImage
 	      };
-
 	      setCurrentMarker(newMarker);
 	      setMarkers((prev: any) => [...prev, newMarker]);
 	      setAddPin(false);

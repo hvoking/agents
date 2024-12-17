@@ -1,6 +1,9 @@
 // React imports
 import { useState, useEffect, useContext, createContext } from 'react';
 
+// App imports
+import { processPaintProperties } from './color';
+
 // Context imports
 import { useGeo } from 'context/geo';
 import { useMarkers } from '../markers';
@@ -37,23 +40,6 @@ export const MaskProvider = ({children}: any) => {
 		const features = map.queryRenderedFeatures();
 		setMapFeatures(features);
 	}, [ activeFeatures, mapRef.current ]);
-
-	// Need to process the line-color because is changed inside the layer
-	const processPaintProperties = (paint: any, property: string) => {
-        const processedPaint = { ...paint };
-        if (paint[property]) {
-            const color = paint[property];
-            processedPaint[property] = `
-            	rgba(
-            		${Math.round(color.r * 255)}, 
-            		${Math.round(color.g * 255)}, 
-            		${Math.round(color.b * 255)}, 
-            		${color.a}
-            	)
-            `.replace(/\s/g, '');
-        }
-        return processedPaint;
-    };
 
     const getPoints = (center: any, source: any) => { 
 		const circleBoundary = turf.circle(center, radius);
