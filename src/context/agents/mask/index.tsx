@@ -103,8 +103,19 @@ export const MaskProvider = ({children}: any) => {
 	    }, []);
 	};
 
+	const getBuildings = (center: any, source: any) => {
+		const circleBoundary = turf.circle(center, radius);
+		return mapFeatures.filter((item: any) => {
+		    if (item.source === source) {
+		        const featureGeometry = item.geometry;
+		        const featureCentroid = turf.centroid(featureGeometry);
+		        return turf.booleanPointInPolygon(featureCentroid, circleBoundary);
+		    }
+		});
+	}
+
 	return (
-		<MaskContext.Provider value={{ getPoints, getLines }}>
+		<MaskContext.Provider value={{ getPoints, getLines, getBuildings }}>
 			{children}
 		</MaskContext.Provider>
 	)

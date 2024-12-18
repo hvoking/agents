@@ -7,16 +7,14 @@ import { useMask } from 'context/agents/mask';
 // Third-party imports
 import { Source, Layer } from 'react-map-gl';
 
-export const Lines = ({ markers }: any) => {
+export const Lines = ({ markers, layer }: any) => {
 	const { getLines } = useMask();
-
-	const roadsLayer = "rotterdam_roads";
 
 	const geoJsonData = useMemo(() => {
     const features = markers.flatMap((marker: any) => {
 	    const { longitude, latitude } = marker;
 	    const center = [longitude, latitude];
-	    const maskProperties = getLines(center, roadsLayer);
+	    const maskProperties = getLines(center, layer);
 
   	  if (!maskProperties || maskProperties.length === 0) return [];
 
