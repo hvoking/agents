@@ -5,10 +5,8 @@ import { Lines } from './lines';
 export const Tiles = () => {
 	return (
 		<>
-			<Points 
-				tableSchema={"agents"}
-				tableName={"rotterdam"}
-			/>
+			<Points tableSchema={"agents"} tableName={"rotterdam"} sourceId={"points-airbnb"}/>
+			<Points tableSchema={"agents"} tableName={"rotterdam_foursquare"} sourceId={"points-foursquare"}/>
 			<Lines/>
 		</>
 	)

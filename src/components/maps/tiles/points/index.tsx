@@ -7,13 +7,11 @@ import { Source, Layer } from 'react-map-gl';
 // Context imports
 import { useStylesApi } from 'context/api/styles';
 
-export const Points = ({ tableSchema, tableName }: any) => {
+export const Points = ({ tableSchema, tableName, sourceId }: any) => {
 	const { fetchData, getTilesUrl } = useStylesApi();
 	const [ styleData, setStyleData ] = useState<any[]>([]);
 	
 	const url = getTilesUrl(tableSchema, tableName);
-
-	const sourceId = `points-${tableName}`
 
   	useEffect(() => {
     	const loadData = async () => {
