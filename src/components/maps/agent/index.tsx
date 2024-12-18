@@ -1,8 +1,8 @@
 // App imports
 import { Mask } from './mask';
 import { Circle } from './circle';
-// import { Isochrone } from './iso';
 import { CustomMarker } from './marker';
+// import { Isochrone } from './iso';
 // import { Path } from './path';
 
 // Context imports

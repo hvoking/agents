@@ -35,8 +35,21 @@ export const StylesApiProvider = ({children}: any) => {
 	    return url
 	}
 
+	const getTilesSectionUrl = (tableSchema: string, tableName: string, x: any, y: any, z: any) => {
+		const url = `
+	    	${process.env.REACT_APP_API_URL}
+	    	/circle_tiles
+	    	?table_schema=${tableSchema}
+	    	&table_name=${tableName}
+	    	&x=${x}
+	    	&y=${y}
+	    	&z=${z}
+	    `.replace(/\s/g, '');
+	    return url
+	}
+
 	return (
-		<StylesApiContext.Provider value={{ fetchData, getTilesUrl }}>
+		<StylesApiContext.Provider value={{ fetchData, getTilesUrl, getTilesSectionUrl }}>
 			{children}
 		</StylesApiContext.Provider>
 	)
