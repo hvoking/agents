@@ -1,25 +1,17 @@
 .map-pin-wrapper {
-    width: 25px;
     justify-self: center;
     align-self: center;
 }
 .maps-go-circle {
-    background-color: rgba(204, 255, 41, 0.8);
-    width: 55px;
-    height: 55px;
+    border: 2px solid rgba(204, 255, 41, 0.8);
+    width: 45px;
+    height: 45px;
     display: grid;
     border-radius: 50%;
+    overflow: hidden;
 }
 .maps-custom-cursor {
     position: fixed;
     pointer-events: none;
-    z-index: 20;
-}
-@media screen and (max-width: 768px) {
-  .maps-go-circle {
-    display: none;
-  }
-  .maps-custom-cursor {
-      display: none;
-  }
+    z-index: 6;
 }

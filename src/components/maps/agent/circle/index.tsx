@@ -1,6 +1,3 @@
-// Context imports
-import { useMarkers } from 'context/agents/markers';
-
 // Third party imports
 import { Source, Layer } from 'react-map-gl';
 
@@ -8,14 +5,12 @@ export const Circle = ({ markers }: any) => {
   return (
     <>
       {markers.map((marker: any, index: number) => {
-        const { circle } = marker;
-
         const sourceId = `circle-source-${index}`;
-        const fillLayerId = `layer-mask-${index}`
-        const circleLayerId = `circle-border-${index}`;
+        const layerId = `circle-layer-${index}`
+        const borderId = `circle-border-${index}`;
 
         const fillLayer: any = {
-          id: fillLayerId,
+          id: layerId,
           type: 'fill',
           source: sourceId,
           paint: {
@@ -25,7 +20,7 @@ export const Circle = ({ markers }: any) => {
         };
 
         const borderLayer: any = {
-          id: circleLayerId,
+          id: borderId,
           type: 'circle',
           source: sourceId,
           paint: {
@@ -46,14 +41,14 @@ export const Circle = ({ markers }: any) => {
         };
 
         return (
-          <Source
-            key={sourceId}
-            id={sourceId}
-            type="geojson"
-            data={circle}
+          <Source 
+            key={sourceId} 
+            id={sourceId} 
+            type="geojson" 
+            data={marker.circle}
           >
-              <Layer {...fillLayer} />
-              <Layer {...borderLayer} />
+              <Layer {...fillLayer}/>
+              <Layer {...borderLayer}/>
           </Source>
         )
       })}

@@ -7,7 +7,7 @@ import { useEffect, useRef } from 'react';
 import { useMarkers } from 'context/agents/markers';
 
 export const Cursor = () => {
-	const { addPin } = useMarkers();
+	const { addPin, currentImage } = useMarkers();
 
 	const customCursorRef = useRef<any>(null);
 	
@@ -42,12 +42,12 @@ export const Cursor = () => {
 			id="go-cursor"
 		>
 			<div className="map-pin-wrapper">
-			<img 
-				className="map-pin-image"
-				src={process.env.PUBLIC_URL + "/static/icons/pin.svg"} 
-				alt="add-pin" 
-				style={{filter: "brightness(0) invert(1)"}}
-			/>
+				<img 
+					className="map-pin-image"
+					src={currentImage} 
+					alt="add-pin" 
+					width="100%"
+				/>
 			</div>
 		</div>
 	)
