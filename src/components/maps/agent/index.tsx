@@ -20,14 +20,14 @@ export const Agent = () => {
       {/*<Isochrone markers={markers}/>*/}
       
       {markers.map((marker: any, index: number) => 
-        <>
+        <div key={index}>
           <Circle marker={marker} index={index}/>
           <Icon marker={marker}/>
           <Lines marker={marker} layer="rotterdam_roads" index={index}/>
           <Points marker={marker} layer="points-airbnb" index={index}/>
           <Buildings marker={marker} layer="buildings-overture" index={index}/>
           <Clusters marker={marker} layer="points-foursquare" index={index}/>
-        </>
+        </div>
       )}
       
     </>

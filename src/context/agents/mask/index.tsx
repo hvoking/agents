@@ -54,7 +54,7 @@ export const MaskProvider = ({children}: any) => {
 	        geometry: item.geometry,
 	        properties: {
 	            ...item.properties,
-	            ...processPaintProperties(item.layer.paint, 'circle-color') // Apply processing to circle-color
+	            ...processPaintProperties(item.layer.paint, 'circle-color')
 	        },
 	    }));
 	}

@@ -17,7 +17,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 export const MapContainer = () => {
 	const { viewport, mapRef, mapStyle } = useGeo();
-	const { isDragging, onDragStart, onMouseMove, onDragEnd, addAgent } = useMapEvents();
+	const { addAgent } = useMapEvents();
 	
 	const [ isMapLoaded, setIsMapLoaded ] = useState(false);
 
@@ -29,13 +29,6 @@ export const MapContainer = () => {
 			  mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
 			  mapStyle={mapStyle}
 			  onClick={addAgent}
-			  onMouseDown={onDragStart}
-			  onMouseMove={onMouseMove}
-			  onMouseUp={onDragEnd}
-			  onTouchStart={onDragStart}
-			  onTouchMove={onMouseMove}
-			  onTouchEnd={onDragEnd}
-			  dragPan={!isDragging}
 			  onLoad={() => setIsMapLoaded(true)}
 			>
 				{isMapLoaded && <>
