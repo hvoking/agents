@@ -16,23 +16,6 @@ export const Lines = ({ marker, layer, index }: any) => {
 
   if (!maskProperties || maskProperties.length === 0) return <></>;
 
-	const features = maskProperties.flatMap((maskProp: any) => {
-		const { geometry, properties } = maskProp;
-		const baseGeometries = [];
-
-		baseGeometries.push({
-			type: 'Feature',
-			geometry: {
-			  type: 'LineString',
-			  coordinates: geometry.coordinates,
-			},
-			properties: properties
-		});
-		return baseGeometries;
-  });
-
-	const geoJsonData = features.length > 0 ? { type: 'FeatureCollection', features } : null;
-
 	const layerStyle: any = {
     id: layerId,
     type: "line",
@@ -47,7 +30,7 @@ export const Lines = ({ marker, layer, index }: any) => {
 		<Source 
 		  id={sourceId} 
 		  type="geojson" 
-		  data={geoJsonData}
+		  data={maskProperties}
 		>
 		  <Layer {...layerStyle} />
 		</Source>

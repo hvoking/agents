@@ -73,7 +73,7 @@ export const MaskProvider = ({children}: any) => {
             turf.booleanIntersects(item.geometry, circlePolygon)
 	    );
 
-	    return currentProperties.reduce((total: any[], item: any) => {
+	    const features = currentProperties.reduce((total: any[], item: any) => {
 	        const isFullyInside = turf.booleanWithin(item.geometry, circleBoundary);
 
 	        if (isFullyInside) {
@@ -102,20 +102,36 @@ export const MaskProvider = ({children}: any) => {
 	                }))
 	            );
 	        }
-
 	        return total;
 	    }, []);
+
+	    return {
+	      type: 'FeatureCollection',
+	      features: features.map((item: any) => ({
+	        type: 'Feature',
+	        geometry: item.geometry,
+	        properties: item.properties,
+	      })),
+	    };
 	};
 
 	const getBuildings = (center: any, source: any) => {
 		const circleBoundary = turf.circle(center, radius);
-		return mapFeatures.filter((item: any) => {
+		const currentProperties = mapFeatures.filter((item: any) => {
 		    if (item.source === source) {
 		        const featureGeometry = item.geometry;
 		        const featureCentroid = turf.centroid(featureGeometry);
 		        return turf.booleanPointInPolygon(featureCentroid, circleBoundary);
 		    }
 		});
+		return {
+		  type: 'FeatureCollection',
+		  features: currentProperties.map((item: any) => ({
+		    type: 'Feature',
+		    geometry: item.geometry,
+		    properties: item.properties,
+		  })),
+		};
 	}
 
 	return (

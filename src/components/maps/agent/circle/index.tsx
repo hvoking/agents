@@ -4,6 +4,7 @@ import { Source, Layer } from 'react-map-gl';
 export const Circle = ({ marker, index }: any) => {
   const sourceId = `circle-source-${index}`;
   const layerId = `circle-layer-${index}`;
+  const circleLayerId = `circle-border-${index}`;
 
   const fillLayer: any = {
     id: layerId,
@@ -15,6 +16,27 @@ export const Circle = ({ marker, index }: any) => {
     }
   };
 
+  const borderLayer: any = {
+    id: circleLayerId,
+    type: 'circle',
+    source: sourceId,
+    paint: {
+      'circle-radius': [
+        'interpolate',
+        ['exponential', 2],
+        ['zoom'],
+        11, 0,
+        12, 4,
+        13, 5,
+        14, 10,
+        16, 5,
+      ],
+      'circle-color': 'rgb(0, 0, 255)',
+      'circle-opacity': 0.2,
+      'circle-pitch-alignment': 'map',
+    },
+  };
+
   return (
     <Source 
       key={sourceId} 
@@ -23,6 +45,7 @@ export const Circle = ({ marker, index }: any) => {
       data={marker.circle}
     >
         <Layer {...fillLayer}/>
+        <Layer {...borderLayer}/>
     </Source>
   );
 };
