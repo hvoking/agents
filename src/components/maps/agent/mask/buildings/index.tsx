@@ -4,11 +4,8 @@ import { useMask } from 'context/agents/mask';
 // Third-party imports
 import { Source, Layer } from 'react-map-gl';
 
-export const Buildings = ({ marker, layer, index }: any) => {
+export const Buildings = ({ center, layer, index }: any) => {
 	const { getBuildings } = useMask();
-    const { longitude, latitude } = marker;
-    const center = [ longitude, latitude ];
-
     const maskProperties = getBuildings(center, layer);
 
     const sourceId = `polygons-source-${index}`;

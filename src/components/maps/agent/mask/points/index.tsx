@@ -4,10 +4,8 @@ import { useMask } from 'context/agents/mask';
 // Third-party imports
 import { Source, Layer } from 'react-map-gl';
 
-export const Points = ({ marker, layer, index }: any) => {
+export const Points = ({ center, layer, index }: any) => {
   const { getPoints } = useMask();
-  const { longitude, latitude } = marker;
-  const center = [ longitude, latitude ];
   
   const maskProperties = getPoints(center, layer);
 

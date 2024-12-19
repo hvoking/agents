@@ -13,7 +13,7 @@ import { Circles } from './circles';
 // Sports and Recreation
 // Travel and Transportation
 
-export const Clusters = ({ marker, layer, index }: any) => {
+export const Clusters = ({ center, layer, index }: any) => {
 	const artsClusterLayer = createLayer('Arts and Entertainment', 'rgba(51, 106, 239, ', index);
 	const artsClusterText = createText('Arts and Entertainment', index);
 
@@ -26,7 +26,7 @@ export const Clusters = ({ marker, layer, index }: any) => {
 	return (
 		<>
 			<Circles
-				marker={marker}
+				center={center}
 				layer={layer}
 				label="Arts and Entertainment"
 				clusterLayer={artsClusterLayer}
@@ -34,7 +34,7 @@ export const Clusters = ({ marker, layer, index }: any) => {
 				index={index}
 			/>
 			<Circles 
-				marker={marker}
+				center={center}
 				layer={layer}
 				label="Business and Professional Services"
 				clusterLayer={businessClusterLayer}
@@ -42,7 +42,7 @@ export const Clusters = ({ marker, layer, index }: any) => {
 				index={index}
 			/>
 			<Circles
-				marker={marker}
+				center={center}
 				layer={layer}
 				label="Retail"
 				clusterLayer={retailClusterLayer}

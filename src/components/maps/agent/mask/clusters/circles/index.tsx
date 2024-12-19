@@ -7,12 +7,8 @@ import { Source, Layer } from 'react-map-gl';
 // Context imports
 import { useMask } from 'context/agents/mask';
 
-export const Circles = ({ marker,  layer, label, clusterLayer, textLayer, index }: any) => {
+export const Circles = ({ center,  layer, label, clusterLayer, textLayer, index }: any) => {
 	const { getPoints } = useMask();
-
-	const { longitude, latitude } = marker;
-	const center = [ longitude, latitude ];
-	
 	const maskProperties = getPoints(center, layer);
 
 	if (!maskProperties) return <></>;
