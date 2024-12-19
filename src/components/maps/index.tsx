@@ -32,9 +32,9 @@ export const MapContainer = () => {
 			  onLoad={() => setIsMapLoaded(true)}
 			>
 				{isMapLoaded && <>
+					<Tiles/>
 					<Pin/>
 					<Agent/>
-					<Tiles/>
 				</>}
 			</Map>
 		</Wrapper>

@@ -6,12 +6,12 @@ import { Source, Layer } from 'react-map-gl';
 
 export const Lines = ({ center, layer, index }: any) => {
 	const { getLines } = useMask();
-  const maskProperties = getLines(center, layer);
+  const geoJsonData = getLines(center, layer);
 
   const sourceId = `lines-source-${index}`;
   const layerId = `lines-layer-${index}`;
 
-  if (!maskProperties || maskProperties.length === 0) return <></>;
+  if (!geoJsonData) return <></>;
 
 	const layerStyle: any = {
     id: layerId,
@@ -27,9 +27,9 @@ export const Lines = ({ center, layer, index }: any) => {
 		<Source 
 		  id={sourceId} 
 		  type="geojson" 
-		  data={maskProperties}
+		  data={geoJsonData}
 		>
-		  <Layer {...layerStyle} />
+		  <Layer {...layerStyle}/>
 		</Source>
 	)
 }

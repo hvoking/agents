@@ -13,7 +13,7 @@ export const Isochrone = ({ marker, index }: any) => {
 
     useEffect(() => {
         const fetchData = async (marker: any) => {
-            const { id, longitude, latitude } = marker;
+            const { longitude, latitude } = marker;
             const data = await fetchIsochrone(longitude, latitude);
             setIsochroneData(data);
         };
