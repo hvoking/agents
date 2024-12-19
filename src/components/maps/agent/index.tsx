@@ -26,7 +26,7 @@ export const Agent = () => {
           <Lines marker={marker} layer="rotterdam_roads" index={index}/>
           <Points marker={marker} layer="points-airbnb" index={index}/>
           <Buildings marker={marker} layer="buildings-overture" index={index}/>
-          <Clusters markers={markers} layer="points-foursquare"/>
+          <Clusters marker={marker} layer="points-foursquare" index={index}/>
         </>
       )}
       

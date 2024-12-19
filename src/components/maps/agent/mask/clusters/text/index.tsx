@@ -1,10 +1,10 @@
 // Third party imports
 import type { LayerProps } from 'react-map-gl';
 
-export const createText = (source: string): LayerProps => ({
-  id: `${source}-cluster-count`,
+export const createText = (source: string, index: any): LayerProps => ({
+  id: `${source}-${index}-cluster-count`,
   type: 'symbol',
-  source: `${source}-clusters`,
+  source: `${source}-${index}-clusters`,
   filter: ['has', 'point_count'],
   layout: {
     'text-field': '{point_count_abbreviated}',

@@ -7,40 +7,35 @@ import { Source, Layer } from 'react-map-gl';
 // Context imports
 import { useMask } from 'context/agents/mask';
 
-export const Circles = ({ markers,  layer, label, clusterLayer, textLayer }: any) => {
+export const Circles = ({ marker,  layer, label, clusterLayer, textLayer, index }: any) => {
 	const { getPoints } = useMask();
 
-	const geoJsonData = useMemo(() => {
-	    const features = markers.flatMap((marker: any) => {
-	      const { longitude, latitude } = marker;
-	      const center = [ longitude, latitude ];
-	      
-	      const maskProperties = getPoints(center, layer);
+	const { longitude, latitude } = marker;
+	const center = [ longitude, latitude ];
+	
+	const maskProperties = getPoints(center, layer);
 
-	      if (!maskProperties || maskProperties.length === 0) return [];
+	if (!maskProperties || maskProperties.length === 0) return <></>;
+    const features = maskProperties.filter((item: any) => item.properties.category === label).flatMap((maskProp: any) => {
+        const baseGeometries = [];
+        const { geometry, properties } = maskProp;
 
-	      return maskProperties.filter((item: any) => item.properties.category === label).flatMap((maskProp: any) => {
-	        const baseGeometries = [];
-	        const { geometry, properties } = maskProp;
+        baseGeometries.push({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: geometry.coordinates,
+          },
+          properties: properties,
+        });
+        return baseGeometries;
+      });
 
-	        baseGeometries.push({
-	          type: 'Feature',
-	          geometry: {
-	            type: 'Point',
-	            coordinates: geometry.coordinates,
-	          },
-	          properties: properties,
-	        });
-	        return baseGeometries;
-	      });
-	    });
-
-	    return features.length > 0 ? { type: 'FeatureCollection', features } : null;
-	  }, [ markers ]);
+    const geoJsonData = { type: 'FeatureCollection', features };
 
 	return (
 			<Source
-			  id={`${label}-clusters`}
+			  id={`${label}-${index}-clusters`}
 			  type="geojson"
 			  data={geoJsonData}
 			  cluster={true}
