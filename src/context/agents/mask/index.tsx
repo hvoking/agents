@@ -42,22 +42,26 @@ export const MaskProvider = ({children}: any) => {
 	}, [ activeFeatures, mapRef.current ]);
 
     const getPoints = (center: any, source: any) => { 
-		const circleBoundary = turf.circle(center, radius);
+	  const circleBoundary = turf.circle(center, radius);
 
-		const currentProperties = mapFeatures.filter((item: any) =>
-			item.source === source &&
-            item.geometry.type === "Point" &&
-			turf.booleanPointInPolygon(item.geometry, circleBoundary)
-		);
-	    return currentProperties.map((item: any) => ({
-	        type: 'Feature',
-	        geometry: item.geometry,
-	        properties: {
-	            ...item.properties,
-	            ...processPaintProperties(item.layer.paint, 'circle-color')
-	        },
-	    }));
-	}
+	  const currentProperties = mapFeatures.filter((item: any) =>
+	    item.source === source &&
+	    item.geometry.type === "Point" &&
+	    turf.booleanPointInPolygon(item.geometry, circleBoundary)
+	  );
+
+	  return {
+	    type: 'FeatureCollection',
+	    features: currentProperties.map((item: any) => ({
+	      type: 'Feature',
+	      geometry: item.geometry,
+	      properties: {
+	        ...item.properties,
+	        ...processPaintProperties(item.layer.paint, 'circle-color'),
+	      },
+	    })),
+	  };
+	};
 
 	const getLines = (center: any, source: any) => {
 	    const circleBoundary = turf.circle(center, radius);

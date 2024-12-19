@@ -14,23 +14,7 @@ export const Points = ({ marker, layer, index }: any) => {
   const sourceId = `points-source-${index}`;
   const layerId = `points-layer-${index}`;
 
-  if (!maskProperties || maskProperties.length === 0) return <></>;
-
-  const features = maskProperties.flatMap((maskProp: any) => {
-    const baseGeometries = [];
-    const { geometry, properties } = maskProp;
-    baseGeometries.push({
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: geometry.coordinates,
-      },
-      properties: properties,
-    });
-    return baseGeometries;
-  });
-
-  const geoJsonData = features.length > 0 ? { type: 'FeatureCollection', features } : null;
+  if (!maskProperties) return <></>;
 
   const layerStyle: any = {
     id: layerId,
@@ -46,7 +30,7 @@ export const Points = ({ marker, layer, index }: any) => {
     <Source 
       id={sourceId} 
       type="geojson" 
-      data={geoJsonData}
+      data={maskProperties}
     >
       <Layer {...layerStyle} />
     </Source>

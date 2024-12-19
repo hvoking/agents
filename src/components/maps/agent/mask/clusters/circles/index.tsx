@@ -15,8 +15,8 @@ export const Circles = ({ marker,  layer, label, clusterLayer, textLayer, index 
 	
 	const maskProperties = getPoints(center, layer);
 
-	if (!maskProperties || maskProperties.length === 0) return <></>;
-    const features = maskProperties.filter((item: any) => item.properties.category === label).flatMap((maskProp: any) => {
+	if (!maskProperties) return <></>;
+    const features = maskProperties.features.filter((item: any) => item.properties.category === label).flatMap((maskProp: any) => {
         const baseGeometries = [];
         const { geometry, properties } = maskProp;
 
