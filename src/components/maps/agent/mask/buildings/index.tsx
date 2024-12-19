@@ -1,50 +1,46 @@
-// React imports
-import { useMemo } from 'react';
-
-// App context
-import './styles.scss';
-
 // Context imports
 import { useMask } from 'context/agents/mask';
 
 // Third-party imports
 import { Source, Layer } from 'react-map-gl';
-import * as d3 from 'd3';
 
-export const Buildings = ({ markers, layer }: any) => {
+export const Buildings = ({ marker, layer, index }: any) => {
 	const { getBuildings } = useMask();
+    const { longitude, latitude } = marker;
+    const center = [ longitude, latitude ];
 
-	const geoJsonData = useMemo(() => {
-	  const features = markers.flatMap((marker: any) => {
-	    const { longitude, latitude } = marker;
-	    const center = [ longitude, latitude ];
-	    
-	    const maskProperties = getBuildings(center, layer);
+    const maskProperties = getBuildings(center, layer);
 
-	    if (!maskProperties || maskProperties.length === 0) return [];
+    const sourceId = `polygons-source-${index}`;
+  	const layerId = `polygons-layer-${index}`;
 
-	    return maskProperties.flatMap((maskProp: any) => {
-	      const baseGeometries = [];
-	      const { geometry, properties } = maskProp;
-	      baseGeometries.push({
-	        type: 'Feature',
-	        geometry: {
-	          type: 'Polygon',
-	          coordinates: geometry.coordinates,
-	        },
-	        properties: properties,
-	      });
-	      return baseGeometries;
-	    });
-	  });
+    if (!maskProperties || maskProperties.length === 0) return <></>;
 
-	  return features.length > 0 ? { type: 'FeatureCollection', features } : null;
-	}, [ markers ]);
+	const features = maskProperties.flatMap((maskProp: any) => {
+		const baseGeometries = [];
+		const { geometry, properties } = maskProp;
+
+		baseGeometries.push({
+			type: 'Feature',
+			geometry: {
+				type: 'Polygon',
+				coordinates: geometry.coordinates
+			},
+			properties: properties,
+		});
+      return baseGeometries;
+    });
+
+    const geoJsonData = features.length > 0 ? { type: 'FeatureCollection', features } : null;
 
 	return (
-		<Source id="polygon-data" type="geojson" data={geoJsonData}>
+		<Source 
+			id={sourceId} 
+			type="geojson" 
+			data={geoJsonData}
+		>
 	        <Layer
-	          id="extruded-polygons"
+	          id={layerId}
 	          type="fill-extrusion"
 	          paint={{
 	            'fill-extrusion-color': "rgb(222, 122, 222)",

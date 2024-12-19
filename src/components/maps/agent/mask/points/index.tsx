@@ -1,57 +1,50 @@
-// React imports
-import { useMemo } from 'react';
-
 // Context imports
 import { useMask } from 'context/agents/mask';
 
 // Third-party imports
 import { Source, Layer } from 'react-map-gl';
 
-export const Points = ({ markers, layer }: any) => {
+export const Points = ({ marker, layer, index }: any) => {
   const { getPoints } = useMask();
+  const { longitude, latitude } = marker;
+  const center = [ longitude, latitude ];
+  
+  const maskProperties = getPoints(center, layer);
 
-  const geoJsonData = useMemo(() => {
-    const features = markers.flatMap((marker: any) => {
-      const { longitude, latitude } = marker;
-      const center = [ longitude, latitude ];
-      
-      const maskProperties = getPoints(center, layer);
+  const sourceId = `points-source-${index}`;
+  const layerId = `points-layer-${index}`;
 
-      if (!maskProperties || maskProperties.length === 0) return [];
+  if (!maskProperties || maskProperties.length === 0) return <></>;
 
-      return maskProperties.flatMap((maskProp: any) => {
-        const baseGeometries = [];
-        const { geometry, properties } = maskProp;
-        baseGeometries.push({
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: geometry.coordinates,
-          },
-          properties: properties,
-        });
-        return baseGeometries;
-      });
+  const features = maskProperties.flatMap((maskProp: any) => {
+    const baseGeometries = [];
+    const { geometry, properties } = maskProp;
+    baseGeometries.push({
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: geometry.coordinates,
+      },
+      properties: properties,
     });
+    return baseGeometries;
+  });
 
-    return features.length > 0 ? { type: 'FeatureCollection', features } : null;
-  }, [ markers ]);
+  const geoJsonData = features.length > 0 ? { type: 'FeatureCollection', features } : null;
 
   const layerStyle: any = {
-    id: "point-mask",
+    id: layerId,
     type: "circle",
-    source: "mask-points",
+    source: sourceId,
     paint: {
       'circle-radius': ['get', 'circle_size'],
       'circle-color': ['get', 'circle-color']
     }
   };
 
-  if (!geoJsonData) return null;
-
   return (
     <Source 
-      id="mask-points" 
+      id={sourceId} 
       type="geojson" 
       data={geoJsonData}
     >

@@ -1,7 +1,10 @@
 // App imports
-import { Mask } from './mask';
 import { Circle } from './circle';
 import { Icon } from './icon';
+import { Lines } from './mask/lines';
+import { Points } from './mask/points';
+import { Buildings } from './mask/buildings';
+import { Clusters } from './mask/clusters';
 // import { Isochrone } from './iso';
 
 // Context imports
@@ -15,11 +18,15 @@ export const Agent = () => {
   return (
     <>
       {/*<Isochrone markers={markers}/>*/}
-      <Mask markers={markers}/>
+      
       {markers.map((marker: any, index: number) => 
         <>
           <Circle marker={marker} index={index}/>
           <Icon marker={marker}/>
+          <Lines marker={marker} layer="rotterdam_roads" index={index}/>
+          <Points marker={marker} layer="points-airbnb" index={index}/>
+          <Buildings marker={marker} layer="buildings-overture" index={index}/>
+          <Clusters markers={markers} layer="points-foursquare"/>
         </>
       )}
       
