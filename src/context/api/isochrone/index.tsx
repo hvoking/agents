@@ -1,9 +1,6 @@
 // React imports
 import { useState, useContext, createContext } from 'react';
 
-// Context imports
-import { useMarkers } from 'context/agents/markers';
-
 const IsochroneApiContext: React.Context<any> = createContext(null)
 
 export const useIsochroneApi = () => {
@@ -15,7 +12,7 @@ export const useIsochroneApi = () => {
 export const IsochroneApiProvider = ({children}: any) => {
 	const [ routingProfile, setRoutingProfile ] = useState("walking");
 	const [ contoursType, setContoursType ] = useState("meters");
-	const [ contoursMeters, setContoursMeters ] = useState(1000);
+	const [ contoursMeters, setContoursMeters ] = useState(500);
 
 	const fetchIsochrone = async (longitude: any, latitude: any) => {
 		const tempUrl = `

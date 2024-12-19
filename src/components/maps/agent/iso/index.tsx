@@ -9,7 +9,7 @@ import { Source, Layer } from 'react-map-gl';
 
 export const Isochrone = ({ markers }: any) => {
     const { fetchIsochrone } = useIsochroneApi();
-    const [isochroneData, setIsochroneData] = useState<any>(new Map());
+    const [ isochroneData, setIsochroneData ] = useState<any>(new Map());
 
     const previousMarkersRef = useRef<any>(new Map());
 
@@ -44,20 +44,18 @@ export const Isochrone = ({ markers }: any) => {
 
     return (
         <>
-            {Array.from(isochroneData.values()).map((iso: any) => {
-                const activeMarker = markers.find((marker: any) => marker.id === iso.id);
-                const currentColor = activeMarker ? activeMarker.color : 'rgb(206, 171, 165)';
+            {Array.from(isochroneData.values()).map((iso: any, index: number) => {
                 const coordinates = iso.data.features[0].geometry.coordinates;
 
-                const layerId = `isolayer-${iso.id}`;
-                const sourceId = `isoSource-${iso.id}`;
+                const sourceId = `iso-source-${index}`;
+                const layerId = `iso-layer-${index}`
 
                 const isoLayer: any = {
                     id: layerId,
                     type: 'fill',
                     source: sourceId,
                     paint: {
-                        'fill-color': currentColor,
+                        'fill-color': 'rgb(206, 171, 165)',
                         'fill-opacity': 0.4,
                     },
                 };
@@ -80,7 +78,7 @@ export const Isochrone = ({ markers }: any) => {
 
                 return (
                     <Source 
-                        key={iso.id} 
+                        key={sourceId} 
                         id={sourceId} 
                         {...isoSource}
                     >
