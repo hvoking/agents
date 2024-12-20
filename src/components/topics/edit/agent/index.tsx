@@ -18,7 +18,6 @@ export const Agent = () => {
 						<img 
 							src={marker.image} 
 							alt="marker-icon" 
-							width="40px"
 						/>
 					</div>
 				)

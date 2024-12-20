@@ -42,7 +42,6 @@ export const MaskProvider = ({children}: any) => {
 	}, [ activeFeatures, mapRef.current ]);
 
     const getPoints = (boundary: any, source: any) => { 
-    	console.log(mapFeatures)
 		const currentProperties = mapFeatures.filter((item: any) =>
 			item.source === source &&
 			item.geometry.type === "Point" &&

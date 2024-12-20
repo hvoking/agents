@@ -2,9 +2,9 @@
 import { Character } from './character';
 import './styles.scss';
 
-export const Agents = () => {
-	const baseUrl = process.env.PUBLIC_URL + '/static/thumbnails/thumbnail_';
-	const imageUrls = Array.from({ length: 11 }, (_, i) => `${baseUrl}${i + 1}.jpg`);
+export const Add = () => {
+	const baseUrl = process.env.PUBLIC_URL + '/static/thumbnails/';
+	const imageUrls = Array.from({ length: 6 }, (_, i) => `${baseUrl}${i + 1}.svg`);
 
 	return (
 		<div className="agent-selector">
@@ -16,7 +16,7 @@ export const Agents = () => {
 					<Character 
 						key={index} 
 						src={url} 
-						alt={`thumbnail_${index + 1}`} 
+						alt={`${index + 1}`} 
 					/>
 				))}
 			</div>
@@ -24,4 +24,4 @@ export const Agents = () => {
 	);
 };
 
-Agents.displayName="Agents";
+Add.displayName="Add";

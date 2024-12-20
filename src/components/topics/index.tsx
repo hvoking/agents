@@ -1,5 +1,5 @@
 // App imports
-import { Agents } from './agents';
+import { Add } from './add';
 import { Edit } from './edit';
 import { Search } from './search';
 import { Basemaps } from './basemaps';
@@ -15,7 +15,7 @@ export const Topics = () => {
 		<div className="topics-wrapper">
 			{activePage && 
 				<div className="topics">
-					{activePage === "bot" && <Agents/>}
+					{activePage === "bot" && <Add/>}
 					{activePage === "edit" && <Edit/>}
 					{activePage === "search" && <Search/>}
 					{activePage === "basemaps" && <Basemaps/>}

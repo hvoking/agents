@@ -12,11 +12,13 @@ export const Agent = () => {
   return (
     <>
       {markers.map((marker: any, index: number) => {
-        const { longitude, latitude } = marker;
-        const center = [ longitude, latitude ];
-
         return (
-          <Mask id={index} center={center} marker={marker}/>
+          <Mask 
+            key={`mask-${index}`} 
+            id={index} 
+            center={[ marker.longitude, marker.latitude ]} 
+            marker={marker}
+          />
       )})}
       
     </>

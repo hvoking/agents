@@ -10,17 +10,17 @@
 }
 .agent-selector-wrapper {
 	display: grid;
+	grid-gap: 15px;
 	grid-template-columns: 1fr 1fr 1fr;
-	grid-gap: 10px;
-	justify-self: center;
-	background-color: rgba(157, 239, 253, 0.2);
-	padding: 10px;
+
 }
 .agent-selector-item {
-  width: 100%;
-  height: 90px;
   border-radius: 2px;
   overflow: hidden;
   transition: transform 0.3s;
   justify-self: center;
+  padding: 5px;
+  background-color: rgba(157, 239, 253, 0.2);
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
