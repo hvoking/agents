@@ -1,6 +1,3 @@
-// React imports
-import { useMemo } from 'react';
-
 // Third party imports
 import { Source, Layer } from 'react-map-gl';
 
