@@ -1,7 +1,7 @@
 // Context imports
 import { useMarkers } from 'context/agents/markers';
 
-export const Character = ({ src, alt }: any) => {
+export const Agent = ({ src, alt }: any) => {
 	const { setAddPin, setCurrentImage } = useMarkers();
 
 	const onClick = () => {
@@ -21,4 +21,4 @@ export const Character = ({ src, alt }: any) => {
 	)
 }
 
-Character.displayName="Character";
+Agent.displayName="Agent";

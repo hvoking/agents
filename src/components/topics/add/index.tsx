@@ -1,5 +1,6 @@
 // App imports
-import { Character } from './character';
+import { Agent } from './agent';
+import { Title } from './title';
 import './styles.scss';
 
 export const Add = () => {
@@ -8,12 +9,10 @@ export const Add = () => {
 
 	return (
 		<div className="agent-selector">
-			<div className="agent-selector-title">
-				SELECT YOUR AGENT
-			</div>
+			<Title/>
 			<div className="agent-selector-wrapper">
 				{imageUrls.map((url, index) => (
-					<Character 
+					<Agent 
 						key={index} 
 						src={url} 
 						alt={`${index + 1}`} 

@@ -3,12 +3,9 @@
     align-self: center;
 }
 .maps-go-circle {
-    border: 2px solid rgba(204, 255, 41, 0.8);
     width: 45px;
     height: 45px;
     display: grid;
-    border-radius: 50%;
-    overflow: hidden;
 }
 .maps-custom-cursor {
     position: fixed;

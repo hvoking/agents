@@ -27,7 +27,7 @@ export const CustomMarker = ({ marker }: any) => {
 			onDrag={(e: any) => onDrag(e, marker)}
 			onClick={() => onClick(marker)}
 		>
-			<div className="marker-wrapper">
+			<div className="marker-wrapper" title={`Latitude: ${latitude}, Longitude: ${longitude}`}>
 				<div className="marker-active">
 					<img src={image} alt="agent-avatar" width="100%"/>
 					{activePage === "edit" && <CancelCross marker={marker}/>}
