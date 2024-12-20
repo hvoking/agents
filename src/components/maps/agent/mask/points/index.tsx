@@ -4,9 +4,9 @@ import { useMask } from 'context/agents/mask';
 // Third-party imports
 import { Source, Layer } from 'react-map-gl';
 
-export const Points = ({ center, layer, index }: any) => {
+export const Points = ({ boundary, layer, index }: any) => {
   const { getPoints } = useMask();
-  const geoJsonData = getPoints(center, layer);
+  const geoJsonData = getPoints(boundary, layer);
 
   const sourceId = `points-source-${index}`;
   const layerId = `points-layer-${index}`;

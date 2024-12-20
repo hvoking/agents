@@ -7,9 +7,9 @@ import { Source, Layer } from 'react-map-gl';
 // Context imports
 import { useMask } from 'context/agents/mask';
 
-export const Circles = ({ center,  layer, label, clusterLayer, textLayer, index }: any) => {
+export const Circles = ({ boundary,  layer, label, clusterLayer, textLayer, index }: any) => {
 	const { getPoints } = useMask();
-	const maskProperties = getPoints(center, layer);
+	const maskProperties = getPoints(boundary, layer);
 
 	if (!maskProperties) return <></>;
     const features = maskProperties.features.filter((item: any) => item.properties.category === label).flatMap((maskProp: any) => {

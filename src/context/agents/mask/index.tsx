@@ -41,40 +41,36 @@ export const MaskProvider = ({children}: any) => {
 		setMapFeatures(features);
 	}, [ activeFeatures, mapRef.current ]);
 
-    const getPoints = (center: any, source: any) => { 
-	  const circleBoundary = turf.circle(center, radius);
+    const getPoints = (boundary: any, source: any) => { 
+    	console.log(mapFeatures)
+		const currentProperties = mapFeatures.filter((item: any) =>
+			item.source === source &&
+			item.geometry.type === "Point" &&
+			turf.booleanPointInPolygon(item.geometry, boundary)
+		);
 
-	  const currentProperties = mapFeatures.filter((item: any) =>
-	    item.source === source &&
-	    item.geometry.type === "Point" &&
-	    turf.booleanPointInPolygon(item.geometry, circleBoundary)
-	  );
-
-	  return {
-	    type: 'FeatureCollection',
-	    features: currentProperties.map((item: any) => ({
-	      type: 'Feature',
-	      geometry: item.geometry,
-	      properties: {
-	        ...item.properties,
-	        ...processPaintProperties(item.layer.paint, 'circle-color'),
-	      },
-	    })),
-	  };
+		return {
+			type: 'FeatureCollection',
+			features: currentProperties.map((item: any) => ({
+			type: 'Feature',
+			geometry: item.geometry,
+			properties: {
+				...item.properties,
+				...processPaintProperties(item.layer.paint, 'circle-color'),
+			},
+			})),
+		};
 	};
 
-	const getLines = (center: any, source: any) => {
-	    const circleBoundary = turf.circle(center, radius);
-	    const circlePolygon = turf.polygon(circleBoundary.geometry.coordinates);
-
+	const getLines = (boundary: any, source: any) => {
 	    const currentProperties = mapFeatures.filter((item: any) =>
             item.source === source &&
             item.geometry.type === 'LineString' &&
-            turf.booleanIntersects(item.geometry, circlePolygon)
+            turf.booleanIntersects(item.geometry, boundary)
 	    );
 
 	    const features = currentProperties.reduce((total: any[], item: any) => {
-	        const isFullyInside = turf.booleanWithin(item.geometry, circleBoundary);
+	        const isFullyInside = turf.booleanWithin(item.geometry, boundary);
 
 	        if (isFullyInside) {
 	            total.push({
@@ -86,9 +82,9 @@ export const MaskProvider = ({children}: any) => {
 	                },
 	            });
 	        } else {
-	            const clipped = turf.lineSplit(item, circleBoundary);
+	            const clipped = turf.lineSplit(item, boundary);
 	            const filteredLines = clipped.features.filter((line: any) =>
-	                turf.booleanWithin(line.geometry, circlePolygon)
+	                turf.booleanWithin(line.geometry, boundary)
 	            );
 	            // Normalize the structure of each clipped line before adding
 	            total.push(
@@ -115,13 +111,12 @@ export const MaskProvider = ({children}: any) => {
 	    };
 	};
 
-	const getBuildings = (center: any, source: any) => {
-		const circleBoundary = turf.circle(center, radius);
+	const getBuildings = (boundary: any, source: any) => {
 		const currentProperties = mapFeatures.filter((item: any) => {
 		    if (item.source === source) {
 		        const featureGeometry = item.geometry;
 		        const featureCentroid = turf.centroid(featureGeometry);
-		        return turf.booleanPointInPolygon(featureCentroid, circleBoundary);
+		        return turf.booleanPointInPolygon(featureCentroid, boundary);
 		    }
 		});
 		return {

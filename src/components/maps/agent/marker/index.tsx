@@ -9,9 +9,10 @@ import { useMarkerEvents } from 'context/events/marker';
 // Third-party imports
 import { Marker } from 'react-map-gl';
 
-export const Icon = ({ marker }: any) => {
+export const CustomMarker = ({ marker }: any) => {
 	const { onDragStart, onClick, onDrag } = useMarkerEvents();
 	const { activePage } = useMarkers();
+	
 	const { id, latitude, longitude, color, image } = marker;
 	document.documentElement.style.setProperty('--currentFill', color);
 
@@ -36,4 +37,4 @@ export const Icon = ({ marker }: any) => {
 	)
 }
 
-Icon.displayName="Icon";
+CustomMarker.displayName="CustomMarker";

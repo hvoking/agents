@@ -1,7 +1,7 @@
 // Third party imports
 import { Source, Layer } from 'react-map-gl';
 
-export const Circle = ({ marker, index }: any) => {
+export const Circle = ({ boundary, index }: any) => {
   const sourceId = `circle-source-${index}`;
   const layerId = `circle-layer-${index}`;
   const circleLayerId = `circle-border-${index}`;
@@ -42,7 +42,7 @@ export const Circle = ({ marker, index }: any) => {
       key={sourceId} 
       id={sourceId} 
       type="geojson" 
-      data={marker.circle}
+      data={boundary}
     >
         <Layer {...fillLayer}/>
         <Layer {...borderLayer}/>
