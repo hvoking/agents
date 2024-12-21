@@ -1,5 +1,5 @@
 // React imports
-import { useState, useEffect, useContext, createContext } from 'react';
+import { useContext, createContext } from 'react';
 
 // App imports
 import { processPaintProperties } from './color';
@@ -39,22 +39,38 @@ export const MaskProvider = ({children}: any) => {
 		return {
 			type: 'FeatureCollection',
 			features: currentProperties.map((item: any) => ({
-			type: 'Feature',
-			geometry: item.geometry,
-			properties: {
-				...item.properties,
-				...processPaintProperties(item.layer.paint, 'circle-color'),
-			},
+				type: 'Feature',
+				geometry: item.geometry,
+				properties: {
+					...item.properties,
+					...processPaintProperties(item.layer.paint, 'circle-color'),
+				},
 			})),
 		};
 	};
+
+	const getPolygons = (boundary: any, source: any) => {
+		const currentProperties = mapFeatures.value.filter((item: any) => 
+			item.source === source &&
+			item.geometry.type === 'Polygon' &&
+	        turf.booleanPointInPolygon(turf.centroid(item.geometry), boundary)
+		);
+
+		return {
+		  type: 'FeatureCollection',
+		  features: currentProperties.map((item: any) => ({
+		    type: 'Feature',
+		    geometry: item.geometry,
+		    properties: item.properties,
+		  })),
+		};
+	}
 
 	const getLines = (boundary: any, source: any) => {
 	    const currentProperties = mapFeatures.value.filter((item: any) =>
             item.source === source &&
             item.geometry.type === 'LineString' &&
-            turf.booleanIntersects(item.geometry, boundary)
-	    );
+            turf.booleanIntersects(item.geometry, boundary));
 
 	    const features = currentProperties.reduce((total: any[], item: any) => {
 	        const isFullyInside = turf.booleanWithin(item.geometry, boundary);
@@ -68,10 +84,12 @@ export const MaskProvider = ({children}: any) => {
 	                	...processPaintProperties(item.layer.paint, 'line-color') 
 	                },
 	            });
-	        } else {
-	            const clipped = turf.lineSplit(item, boundary);
-	            const filteredLines = clipped.features.filter((line: any) =>
-	                turf.booleanWithin(line.geometry, boundary)
+	        } 
+	        else {
+	            const filteredLines = 
+	            	turf.lineSplit(item, boundary)
+	            		.features.filter((line: any) =>
+	            			turf.booleanWithin(line.geometry, boundary)
 	            );
 	            // Normalize the structure of each clipped line before adding
 	            total.push(
@@ -98,23 +116,6 @@ export const MaskProvider = ({children}: any) => {
 	    };
 	};
 
-	const getPolygons = (boundary: any, source: any) => {
-		const currentProperties = mapFeatures.value.filter((item: any) => {
-		    if (item.source === source) {
-		        const featureGeometry = item.geometry;
-		        const featureCentroid = turf.centroid(featureGeometry);
-		        return turf.booleanPointInPolygon(featureCentroid, boundary);
-		    }
-		});
-		return {
-		  type: 'FeatureCollection',
-		  features: currentProperties.map((item: any) => ({
-		    type: 'Feature',
-		    geometry: item.geometry,
-		    properties: item.properties,
-		  })),
-		};
-	}
 
 	return (
 		<MaskContext.Provider value={{ getPoints, getLines, getPolygons }}>
