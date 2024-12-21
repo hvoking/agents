@@ -29,42 +29,55 @@ export const MaskProvider = ({children}: any) => {
 
     mapFeatures.value = map?.queryRenderedFeatures();
 
-    const getPoints = (boundary: any, source: any) => { 
-		const currentProperties = mapFeatures.value.filter((item: any) =>
-			item.source === source &&
-			item.geometry.type === "Point" &&
-			turf.booleanPointInPolygon(item.geometry, boundary)
-		);
-		return {
+    const toFeatureCollection = (features: any, paintProperty: any) => {
+    	const geoJsonData = {
 			type: 'FeatureCollection',
-			features: currentProperties.flatMap((item: any) => ({
+			features: features.flatMap((item: any) => ({
 				type: 'Feature',
 				geometry: item.geometry,
 				properties: {
 					...item.properties,
-					...processPaintProperties(item.layer.paint, 'circle-color'),
+					...item.layer.paint,
+					...processPaintProperties(item.layer.paint, paintProperty),
 				},
 			})),
 		};
+		return geoJsonData
+    }
+
+    const getPoints = (boundary: any, source: any) => { 
+    	const geometryType = "Point";
+    	const paintProperty = 'circle-color';
+
+		const features = mapFeatures.value.filter((item: any) =>
+			item.source === source &&
+			item.geometry.type === geometryType &&
+			turf.booleanPointInPolygon(item.geometry, boundary)
+		);
+		const geoJsonData = toFeatureCollection(features, paintProperty);
+		return geoJsonData
 	};
 
 	const getPolygons = (boundary: any, source: any) => {
+		const geometryType = "Polygon";
+		const paintProperty = 'fill-color';
+
 		const features = mapFeatures.value.filter((item: any) => 
 			item.source === source &&
-			item.geometry.type === 'Polygon' &&
+			item.geometry.type === geometryType &&
 	        turf.booleanPointInPolygon(turf.centroid(item.geometry), boundary)
 		);
 
-		return {
-		  type: 'FeatureCollection',
-		  features
-		};
+		const geoJsonData = toFeatureCollection(features, paintProperty);
+		return geoJsonData
 	}
 
 	const getLines = (boundary: any, source: any) => {
+		const geometryType = 'LineString';
+		
 	    const currentProperties = mapFeatures.value.filter(item =>
 			item.source === source &&
-			item.geometry.type === 'LineString' &&
+			item.geometry.type === geometryType &&
 			turf.booleanIntersects(item.geometry, boundary)
 		);
 

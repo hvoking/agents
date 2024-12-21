@@ -19,8 +19,8 @@ export const Polygons = ({ boundary, layer, index }: any) => {
 	    type: "fill-extrusion",
 	    source: sourceId,
 	    paint: {
-			'fill-extrusion-color': "rgb(222, 122, 222)",
-			'fill-extrusion-height': 20,
+			'fill-extrusion-color': ['get', 'fill-color'],
+			'fill-extrusion-height': ['coalesce', ['get', 'height'], 10],
 			'fill-extrusion-base': 0,
 	    },
 	};
