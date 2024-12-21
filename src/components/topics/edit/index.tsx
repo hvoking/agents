@@ -1,12 +1,11 @@
 // App imports
 import { Agent } from './agent';
+import { Title } from './title';
 
 export const Edit = () => {
 	return (
 		<div className="agent-selector">
-			<div className="agent-selector-title">
-				EDIT YOUR AGENT
-			</div>
+			<Title/>
 			<Agent/>
 		</div>
 	)

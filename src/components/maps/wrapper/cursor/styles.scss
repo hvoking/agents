@@ -3,12 +3,12 @@
     align-self: center;
 }
 .maps-go-circle {
-    width: 45px;
-    height: 45px;
-    display: grid;
+    width: 42px;
+    height: 42px;
 }
 .maps-custom-cursor {
     position: fixed;
+    transform: translateY(-15px);
     pointer-events: none;
     z-index: 6;
 }

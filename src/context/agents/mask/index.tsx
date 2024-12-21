@@ -10,6 +10,7 @@ import { useMarkers } from '../markers';
 
 // Third-party imports
 import * as turf from '@turf/turf';
+import { signal } from '@preact/signals-react';
 
 const MaskContext: React.Context<any> = createContext(null)
 
@@ -23,26 +24,13 @@ export const MaskProvider = ({children}: any) => {
 	const { mapRef } = useGeo();
 	const { radius } = useMarkers();
 
-	const [ mapFeatures, setMapFeatures ] = useState([]);
-	const [ activeFeatures, setActiveFeatures ] = useState(false);
+	const mapFeatures = signal<any[]>([]);
+	const map = mapRef.current;
 
-	useEffect(() => {
-		const map = mapRef.current;
-		if (!map) return;
-		const onData = (e: any) => e.tile && setActiveFeatures((prev) => !prev);
-	    map.on('data', onData);
-	    return () => {map.off('data', onData)};
-	}, [ mapRef.current ]);
-
-	useEffect(() => {
-		const map = mapRef.current;
-		if (!map) return;
-		const features = map.queryRenderedFeatures();
-		setMapFeatures(features);
-	}, [ activeFeatures, mapRef.current ]);
+    mapFeatures.value = map?.queryRenderedFeatures();
 
     const getPoints = (boundary: any, source: any) => { 
-		const currentProperties = mapFeatures.filter((item: any) =>
+		const currentProperties = mapFeatures.value.filter((item: any) =>
 			item.source === source &&
 			item.geometry.type === "Point" &&
 			turf.booleanPointInPolygon(item.geometry, boundary)
@@ -62,7 +50,7 @@ export const MaskProvider = ({children}: any) => {
 	};
 
 	const getLines = (boundary: any, source: any) => {
-	    const currentProperties = mapFeatures.filter((item: any) =>
+	    const currentProperties = mapFeatures.value.filter((item: any) =>
             item.source === source &&
             item.geometry.type === 'LineString' &&
             turf.booleanIntersects(item.geometry, boundary)
@@ -110,8 +98,8 @@ export const MaskProvider = ({children}: any) => {
 	    };
 	};
 
-	const getBuildings = (boundary: any, source: any) => {
-		const currentProperties = mapFeatures.filter((item: any) => {
+	const getPolygons = (boundary: any, source: any) => {
+		const currentProperties = mapFeatures.value.filter((item: any) => {
 		    if (item.source === source) {
 		        const featureGeometry = item.geometry;
 		        const featureCentroid = turf.centroid(featureGeometry);
@@ -129,7 +117,7 @@ export const MaskProvider = ({children}: any) => {
 	}
 
 	return (
-		<MaskContext.Provider value={{ getPoints, getLines, getBuildings }}>
+		<MaskContext.Provider value={{ getPoints, getLines, getPolygons }}>
 			{children}
 		</MaskContext.Provider>
 	)

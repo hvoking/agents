@@ -7,7 +7,7 @@ import { Circle } from '../circle';
 // import { Isochrone } from './iso';
 import { Lines } from './lines';
 import { Points } from './points';
-import { Buildings } from './buildings';
+import { Polygons } from './polygons';
 import { Clusters } from './clusters';
 
 // Third party imports
@@ -22,10 +22,10 @@ export const Mask = ({ id, center, marker }: any) => {
 			{/*<Isochrone marker={marker} index={index}/>*/}
 			<Circle boundary={boundaryGeometry.value} index={id}/>
 
-			<Buildings boundary={boundaryGeometry.value} layer="buildings-overture" index={id}/>
+			<Polygons boundary={boundaryGeometry.value} layer="buildings-overture" index={id}/>
 			<Lines boundary={boundaryGeometry.value} layer="rotterdam_roads" index={id}/>
-
 			<Points boundary={boundaryGeometry.value} layer="points-airbnb" index={id}/>
+
 			<Clusters boundary={boundaryGeometry.value} layer="points-foursquare" index={id}/>
 
 			<CustomMarker marker={marker}/>

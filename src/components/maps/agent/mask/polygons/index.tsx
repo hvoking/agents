@@ -4,9 +4,10 @@ import { useMask } from 'context/agents/mask';
 // Third-party imports
 import { Source, Layer } from 'react-map-gl';
 
-export const Buildings = ({ boundary, layer, index }: any) => {
-	const { getBuildings } = useMask();
-    const geoJsonData = getBuildings(boundary, layer);
+export const Polygons = ({ boundary, layer, index }: any) => {
+	const { getPolygons } = useMask();
+    
+    const geoJsonData = getPolygons(boundary, layer);
 
     const sourceId = `polygons-source-${index}`;
   	const layerId = `polygons-layer-${index}`;
@@ -35,4 +36,4 @@ export const Buildings = ({ boundary, layer, index }: any) => {
 	);
 };
 
-Buildings.displayName = "Buildings";
+Polygons.displayName = "Polygons";
