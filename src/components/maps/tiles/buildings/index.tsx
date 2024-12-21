@@ -21,12 +21,14 @@ export const Buildings = ({ tableSchema, tableName, sourceId }: any) => {
 		loadData();
 	}, []);
 
-  	const layers = styleData.map((style: any, index: number) => {
-  		style.paint['fill-opacity'] = 0;
-		return (
-			<Layer key={index} {...style}/>
-		)
-	});
+  	const layers = styleData
+  		.filter((style: any) => style.type === "fill")
+  		.map((style: any, index: number) => {
+  			style.paint['fill-opacity'] = 0;
+			return (
+				<Layer key={index} {...style}/>
+			)
+		});
 	
 	return (
 		<Source 

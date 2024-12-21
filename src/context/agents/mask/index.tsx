@@ -35,10 +35,9 @@ export const MaskProvider = ({children}: any) => {
 			item.geometry.type === "Point" &&
 			turf.booleanPointInPolygon(item.geometry, boundary)
 		);
-
 		return {
 			type: 'FeatureCollection',
-			features: currentProperties.map((item: any) => ({
+			features: currentProperties.flatMap((item: any) => ({
 				type: 'Feature',
 				geometry: item.geometry,
 				properties: {
@@ -80,6 +79,7 @@ export const MaskProvider = ({children}: any) => {
 	                },
 	            }];
 	        }
+
             return turf.lineSplit(item, boundary)
                 .features
                 .filter(line => turf.booleanWithin(line.geometry, boundary))
