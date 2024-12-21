@@ -50,7 +50,7 @@ export const MaskProvider = ({children}: any) => {
 	};
 
 	const getPolygons = (boundary: any, source: any) => {
-		const currentProperties = mapFeatures.value.filter((item: any) => 
+		const features = mapFeatures.value.filter((item: any) => 
 			item.source === source &&
 			item.geometry.type === 'Polygon' &&
 	        turf.booleanPointInPolygon(turf.centroid(item.geometry), boundary)
@@ -58,62 +58,45 @@ export const MaskProvider = ({children}: any) => {
 
 		return {
 		  type: 'FeatureCollection',
-		  features: currentProperties.map((item: any) => ({
-		    type: 'Feature',
-		    geometry: item.geometry,
-		    properties: item.properties,
-		  })),
+		  features
 		};
 	}
 
 	const getLines = (boundary: any, source: any) => {
-	    const currentProperties = mapFeatures.value.filter((item: any) =>
-            item.source === source &&
-            item.geometry.type === 'LineString' &&
-            turf.booleanIntersects(item.geometry, boundary));
+	    const currentProperties = mapFeatures.value.filter(item =>
+			item.source === source &&
+			item.geometry.type === 'LineString' &&
+			turf.booleanIntersects(item.geometry, boundary)
+		);
 
-	    const features = currentProperties.reduce((total: any[], item: any) => {
-	        const isFullyInside = turf.booleanWithin(item.geometry, boundary);
-
-	        if (isFullyInside) {
-	            total.push({
+	    const features = currentProperties.flatMap((item: any) => {
+	        if (turf.booleanWithin(item.geometry, boundary)) {
+	            return [{
 	                type: 'Feature',
 	                geometry: item.geometry,
 	                properties: { 
 	                	...item.properties, 
 	                	...processPaintProperties(item.layer.paint, 'line-color') 
 	                },
-	            });
-	        } 
-	        else {
-	            const filteredLines = 
-	            	turf.lineSplit(item, boundary)
-	            		.features.filter((line: any) =>
-	            			turf.booleanWithin(line.geometry, boundary)
-	            );
-	            // Normalize the structure of each clipped line before adding
-	            total.push(
-	                ...filteredLines.map((line: any) => ({
-	                    type: 'Feature',
-	                    geometry: line.geometry,
-	                    properties: { 
-		                	...item.properties, 
-		                	...processPaintProperties(item.layer.paint, 'line-color') 
-		                },
-	                }))
-	            );
+	            }];
 	        }
-	        return total;
-	    }, []);
+            return turf.lineSplit(item, boundary)
+                .features
+                .filter(line => turf.booleanWithin(line.geometry, boundary))
+                .map(line => ({
+                    type: 'Feature',
+                    geometry: line.geometry,
+                    properties: {
+                        ...item.properties,
+                        ...processPaintProperties(item.layer.paint, 'line-color'),
+                    },
+                }));
+	    });
 
 	    return {
-	      type: 'FeatureCollection',
-	      features: features.map((item: any) => ({
-	        type: 'Feature',
-	        geometry: item.geometry,
-	        properties: item.properties,
-	      })),
-	    };
+			type: 'FeatureCollection',
+			features
+		}
 	};
 
 
