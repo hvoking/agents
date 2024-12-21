@@ -2,10 +2,11 @@
 import { Source, Layer } from 'react-map-gl';
 
 export const Circle = ({ boundary, index }: any) => {
+
   const sourceId = `circle-source-${index}`;
   const layerId = `circle-layer-${index}`;
   const circleLayerId = `circle-border-${index}`;
-  const eraserId = `eraser-${index}`;
+  const eraserId = `circle-eraser-${index}`;
 
   const fillLayer: any = {
     id: layerId,
