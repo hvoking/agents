@@ -5,6 +5,7 @@ export const Circle = ({ boundary, index }: any) => {
   const sourceId = `circle-source-${index}`;
   const layerId = `circle-layer-${index}`;
   const circleLayerId = `circle-border-${index}`;
+  const eraserId = `eraser-${index}`;
 
   const fillLayer: any = {
     id: layerId,
@@ -37,6 +38,16 @@ export const Circle = ({ boundary, index }: any) => {
     },
   };
 
+  const eraserLayer: any = {
+    id: eraserId,
+    type: 'clip',
+    source: sourceId,
+    layout: {
+      'clip-layer': ['building-extrusion']
+    },
+    minzoom: 14
+  };
+
   return (
     <Source 
       key={sourceId} 
@@ -46,6 +57,7 @@ export const Circle = ({ boundary, index }: any) => {
     >
         <Layer {...fillLayer}/>
         <Layer {...borderLayer}/>
+        <Layer {...eraserLayer}/>
     </Source>
   );
 };
