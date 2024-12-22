@@ -20,8 +20,8 @@ export const CustomMarker = ({ marker }: any) => {
 			latitude={latitude}
 			anchor="bottom"
 			draggable
-			onClick={() => handleMarkerEvent(marker)}
-            onDragStart={() => handleMarkerEvent(marker)}
+			onClick={() => handleMarkerEvent(id)}
+            onDragStart={() => handleMarkerEvent(id)}
             onDrag={(e: any) => onDrag(e, id)}
 		>
 			<div className="marker-wrapper">

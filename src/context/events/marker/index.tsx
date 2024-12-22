@@ -1,5 +1,5 @@
 // React imports
-import { useContext, createContext } from 'react';
+import { useCallback, useContext, createContext } from 'react';
 
 // Context imports
 import { useMarkers } from 'context/agents/markers';
@@ -13,29 +13,39 @@ export const useMarkerEvents = () => {
 }
 
 export const MarkerEventsProvider = ({children}: any) => {
-	const { setMarkers, setCurrentMarker, setRejectedMarkers } = useMarkers();
+	const { markers, setMarkers, setCurrentMarker, setRejectedMarkers } = useMarkers();
 
-    const handleMarkerEvent = (marker: any) => {
-    	setCurrentMarker(marker);
-    } 
+    const handleMarkerEvent = useCallback(
+        (id: number) => {
+            const marker = markers.find((item: any) => item.id === id);
+            setCurrentMarker(marker);
+        },
+        [ markers, setCurrentMarker ]
+    );
 
-    const onDrag = (event: any, id: any) => {
-        const { lat, lng } = event.lngLat;
+    const onDrag = useCallback(
+        (event: any, id: number) => {
+            const { lat, lng } = event.lngLat;
 
-        setMarkers((prev: any) =>
-            prev.map((item: any) =>
-                item.id === id
-                    ? { ...item, latitude: lat, longitude: lng }
-                    : item
-            )
-        );
-    };
+            setMarkers((prev: any) =>
+                prev.map((item: any) =>
+                    item.id === id
+                        ? { ...item, latitude: lat, longitude: lng }
+                        : item
+                )
+            );
+        },
+        [ setMarkers ]
+    );
 
-    const addRejectedId = (event: any, marker: any) => {
-    	event.stopPropagation();
-    	setCurrentMarker((prev: any) => (prev === marker ? null : prev));
-    	setRejectedMarkers((prev: any) => [...prev, marker]);
-    }
+    const addRejectedId = useCallback(
+        (event: any, marker: any) => {
+            event.stopPropagation();
+            setCurrentMarker((prev: any) => (prev === marker ? null : prev));
+            setRejectedMarkers((prev: any) => [...prev, marker]);
+        },
+        [ setCurrentMarker, setRejectedMarkers ]
+    );
 
 	return (
 		<MarkerEventsContext.Provider value={{
