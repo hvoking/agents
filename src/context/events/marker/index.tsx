@@ -13,38 +13,33 @@ export const useMarkerEvents = () => {
 }
 
 export const MarkerEventsProvider = ({children}: any) => {
-	const { setMarkers, currentMarker, setCurrentMarker, setRejectedMarkers } = useMarkers();
+	const { setMarkers, setCurrentMarker, setRejectedMarkers } = useMarkers();
 
-	const onDragStart = (marker: any) => {
-		setCurrentMarker(marker);
-	} 
+    const handleMarkerEvent = (marker: any) => {
+    	setCurrentMarker(marker);
+    } 
 
-	const onClick = (marker: any) => {
-		setCurrentMarker(marker);
-	}
+    const onDrag = (event: any, id: any) => {
+        const { lat, lng } = event.lngLat;
 
-	const onDrag = (event: any, marker: any) => {
-	    const { lat, lng } = event.lngLat;
+        setMarkers((prev: any) =>
+            prev.map((item: any) =>
+                item.id === id
+                    ? { ...item, latitude: lat, longitude: lng }
+                    : item
+            )
+        );
+    };
 
-	    setMarkers((prev: any) => 
-	        prev.map((item: any) => 
-	            item.id === marker.id 
-	                ? { ...item, latitude: lat, longitude: lng }
-	                : item
-	        )
-	    );
-	};
-
-	const addRejectedId = (event: any, marker: any) => {
-		event.stopPropagation();
-		currentMarker === marker && setCurrentMarker(null);
-		setRejectedMarkers((prev: any) => [...prev, marker]);
-	}
+    const addRejectedId = (event: any, marker: any) => {
+    	event.stopPropagation();
+    	setCurrentMarker((prev: any) => (prev === marker ? null : prev));
+    	setRejectedMarkers((prev: any) => [...prev, marker]);
+    }
 
 	return (
 		<MarkerEventsContext.Provider value={{
-			onDragStart,
-			onClick,
+			handleMarkerEvent,
 			onDrag,
 			addRejectedId,
 		}}>

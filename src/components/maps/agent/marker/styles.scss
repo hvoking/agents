@@ -1,14 +1,12 @@
 .marker-wrapper {
   position: relative;
   cursor: pointer;
-}
-.marker-wrapper:hover {
-  transform: scale(1.2); /* Scale on hover */
-}
-.marker-wrapper:active {
-  transform: scale(1.2); /* Scale on active */
-}
-.marker-active {
   width: 42px;
   height: 42px;
+}
+.marker-wrapper:hover {
+  transform: scale(1.2);
+}
+.marker-wrapper:active {
+  transform: scale(1.2);
 }
