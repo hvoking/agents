@@ -3,7 +3,6 @@ import { CancelCross } from './cross';
 import './styles.scss';
 
 // Context imports
-
 import { useMarkerEvents } from 'context/events/marker';
 
 // Third-party imports

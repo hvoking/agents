@@ -17,8 +17,6 @@ export const Mask = ({ id, center, marker }: any) => {
 	const boundaryGeometry = signal<any>(null);
     boundaryGeometry.value = turf.circle(center, 0.5, { steps: 31 });
 
-
-
 	return (
 		<div key={id}>
 			{/*<Isochrone marker={marker} index={index}/>*/}

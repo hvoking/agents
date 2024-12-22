@@ -49,9 +49,7 @@ export const MarkerEventsProvider = ({children}: any) => {
 
 	return (
 		<MarkerEventsContext.Provider value={{
-			handleMarkerEvent,
-			onDrag,
-			addRejectedId,
+			handleMarkerEvent, onDrag, addRejectedId,
 		}}>
 			{children}
 		</MarkerEventsContext.Provider>
