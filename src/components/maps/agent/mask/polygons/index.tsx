@@ -19,9 +19,18 @@ export const Polygons = ({ boundary, layer, index }: any) => {
 	    type: "fill-extrusion",
 	    source: sourceId,
 	    paint: {
-			'fill-extrusion-color': ['get', 'fill-color'],
-			'fill-extrusion-height': ['coalesce', ['get', 'height'], 10],
-			'fill-extrusion-base': 0,
+	        'fill-extrusion-color': [
+	            'case',
+	            ['has', 'facade_color'], ['get', 'facade_color'], // Use 'facade_color' if available
+	            ['get', 'fill-color']
+	        ],
+	        'fill-extrusion-height': [
+	            'coalesce',
+	            ['get', 'height'],
+	            10
+	        ],
+	        'fill-extrusion-base': 0,
+	        'fill-extrusion-opacity': 0.6,
 	    },
 	};
 

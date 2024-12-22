@@ -9,18 +9,20 @@ export const Circles = ({ boundary,  layer, label, clusterLayer, textLayer, inde
 	const maskProperties = getPoints(boundary, layer);
 
 	if (!maskProperties) return <></>;
-    const features = maskProperties.features.filter((item: any) => item.properties.category === label).flatMap((maskProp: any) => {
-        const baseGeometries = [];
-        const { geometry, properties } = maskProp;
-
-        baseGeometries.push({
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: geometry.coordinates,
-          },
-          properties: properties,
-        });
+    const features = 
+    	maskProperties.features
+    		.filter((item: any) => item.properties.category === label)
+    		.flatMap((maskProp: any) => {
+        	const baseGeometries = [];
+        	const { geometry, properties } = maskProp;
+	        baseGeometries.push({
+	          type: 'Feature',
+	          geometry: {
+	            type: 'Point',
+	            coordinates: geometry.coordinates,
+	          },
+	          properties: properties,
+	        });
         return baseGeometries;
       });
 

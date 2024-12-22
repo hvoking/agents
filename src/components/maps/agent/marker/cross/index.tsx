@@ -2,10 +2,14 @@
 import './styles.scss';
 
 // Context imports
+import { useMarkers } from 'context/agents/markers';
 import { useMarkerEvents } from 'context/events/marker';
 
 export const CancelCross = ({ marker }: any) => {
 	const { addRejectedId } = useMarkerEvents();
+	const { activePage } = useMarkers();
+
+	if (!(activePage === "edit")) return <></> 
 
 	return (
       	<svg

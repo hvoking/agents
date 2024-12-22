@@ -7,11 +7,9 @@ import { useMarkers } from 'context/agents/markers';
 export const Agent = () => {
   const { markers } = useMarkers();
 
-  if (!(markers.length > 0)) return <></>
-
   return (
     <>
-      {markers.map((marker: any, index: number) => {
+      {markers.length > 0 && markers.map((marker: any, index: number) => {
         return (
           <Mask 
             key={`mask-${index}`} 
@@ -19,8 +17,8 @@ export const Agent = () => {
             center={[ marker.longitude, marker.latitude ]} 
             marker={marker}
           />
-      )})}
-      
+        )
+      })}
     </>
   );
 };

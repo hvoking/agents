@@ -20,20 +20,16 @@ export const MapEventsProvider = ({children}: any) => {
 		const lastMarker = markers[lastIndex];
 		const currentId = markers.length > 0 ? lastMarker.id + 1 : 1;
 		return currentId
-
 	}
 
     const addAgent = (event: any) => {
     	if (addPin === true) {
     		const { lng, lat } = event.lngLat;
-
-    		const currentId = getId(markers);
 			
 			const newMarker = {
-				id: currentId,
+				id: getId(markers),
 				latitude: lat,
 				longitude: lng,
-				color: "rgba(244, 173, 79, 1)",
 				image: currentImage,
 			};
 

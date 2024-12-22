@@ -14,41 +14,30 @@ import { Circles } from './circles';
 // Travel and Transportation
 
 export const Clusters = ({ boundary, layer, index }: any) => {
-	const artsClusterLayer = createLayer('Arts and Entertainment', 'rgba(51, 106, 239, ', index);
-	const artsClusterText = createText('Arts and Entertainment', index);
-
-	const businessClusterLayer = createLayer('Business and Professional Services', 'rgba(255, 173, 158, ', index);
-	const businessClusterText = createText('Business and Professional Services', index);
-
-	const retailClusterLayer = createLayer('Retail', 'rgba(253, 188, 85, ', index);
-	const retailClusterText = createText('Retail', index);
+	const categories = [
+		{ label: "Arts and Entertainment", color: "rgba(51, 106, 239, " },
+		{ label: "Business and Professional Services", color: "rgba(255, 173, 158, " },
+		{ label: "Retail", color: "rgba(253, 188, 85, " },
+	];
 
 	return (
 		<>
-			<Circles
-				boundary={boundary}
-				layer={layer}
-				label="Arts and Entertainment"
-				clusterLayer={artsClusterLayer}
-				textLayer={artsClusterText}
-				index={index}
-			/>
-			<Circles 
-				boundary={boundary}
-				layer={layer}
-				label="Business and Professional Services"
-				clusterLayer={businessClusterLayer}
-				textLayer={businessClusterText}
-				index={index}
-			/>
-			<Circles
-				boundary={boundary}
-				layer={layer}
-				label="Retail"
-				clusterLayer={retailClusterLayer}
-				textLayer={retailClusterText}
-				index={index}
-			/>
+			{categories.map(({ label, color }) => {
+				const clusterLayer = createLayer(label, color, index);
+				const textLayer = createText(label, index);
+				
+				return (
+					<Circles
+						key={label}
+						boundary={boundary}
+						layer={layer}
+						label={label}
+						clusterLayer={clusterLayer}
+						textLayer={textLayer}
+						index={index}
+					/>
+				);
+			})}
 		</>
 	)
 }

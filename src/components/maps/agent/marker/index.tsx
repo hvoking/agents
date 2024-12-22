@@ -3,7 +3,7 @@ import { CancelCross } from './cross';
 import './styles.scss';
 
 // Context imports
-import { useMarkers } from 'context/agents/markers';
+
 import { useMarkerEvents } from 'context/events/marker';
 
 // Third-party imports
@@ -11,10 +11,7 @@ import { Marker } from 'react-map-gl';
 
 export const CustomMarker = ({ marker }: any) => {
 	const { onDragStart, onClick, onDrag } = useMarkerEvents();
-	const { activePage } = useMarkers();
-	
-	const { id, latitude, longitude, color, image } = marker;
-	document.documentElement.style.setProperty('--currentFill', color);
+	const { id, latitude, longitude, image } = marker;
 
 	return (
 		<Marker
@@ -27,10 +24,14 @@ export const CustomMarker = ({ marker }: any) => {
 			onDrag={(e: any) => onDrag(e, marker)}
 			onClick={() => onClick(marker)}
 		>
-			<div className="marker-wrapper" title={`Latitude: ${latitude}, Longitude: ${longitude}`}>
+			<div className="marker-wrapper">
 				<div className="marker-active">
-					<img src={image} alt="agent-avatar" width="100%"/>
-					{activePage === "edit" && <CancelCross marker={marker}/>}
+					<img 
+						src={image} 
+						alt="agent-avatar" 
+						width="100%"
+					/>
+					<CancelCross marker={marker}/>
 				</div>
 			</div>
 	    </Marker>
