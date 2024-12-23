@@ -1,48 +1,38 @@
 // App imports
-import { signal } from '@preact/signals-react';
-
-// App imports
 import { CustomMarker } from '../marker';
 import { Circle } from '../circle';
-// import { Isochrone } from './iso';
+// import { Isochrone } from '../iso';
 import { Lines } from './lines';
 import { Points } from './points';
 import { Polygons } from './polygons';
 import { Clusters } from './clusters';
 
-// Third party imports
-import * as turf from '@turf/turf';
-
-export const Mask = ({ id, center, marker }: any) => {
-	const boundaryGeometry = signal<any>(null);
-    boundaryGeometry.value = turf.circle(center, 0.5, { steps: 31 });
-
+export const Mask = ({ id, boundary, marker }: any) => {
 	return (
 		<div key={id}>
-			{/*<Isochrone marker={marker} index={index}/>*/}
+			{/*<Isochrone marker={marker} index={id}/>*/}
 			<Circle 
-				boundary={boundaryGeometry.value} 
+				boundary={boundary} 
 				index={id}
 			/>
-
 			<Polygons 
-				boundary={boundaryGeometry.value} 
+				boundary={boundary} 
 				layer="buildings-overture" 
 				index={id}
 			/>
 			<Lines 
-				boundary={boundaryGeometry.value} 
+				boundary={boundary} 
 				layer="rotterdam_roads" 
 				index={id}
 			/>
 			<Points 
-				boundary={boundaryGeometry.value} 
+				boundary={boundary} 
 				layer="points-airbnb" 
 				index={id}
 			/>
 
 			<Clusters 
-				boundary={boundaryGeometry.value} 
+				boundary={boundary} 
 				layer="points-foursquare" 
 				index={id}
 			/>

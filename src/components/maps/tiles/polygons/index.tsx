@@ -1,13 +1,13 @@
 // React imports
 import { useState, useEffect } from 'react';
 
-// Third party imports
-import { Source, Layer } from 'react-map-gl';
-
 // Context imports
 import { useStylesApi } from 'context/api/styles';
 
-export const Buildings = ({ tableSchema, tableName, sourceId }: any) => {
+// Third party imports
+import { Source, Layer } from 'react-map-gl';
+
+export const Polygons = ({ tableSchema, tableName, styleName }: any) => {
 	const { fetchData, getTilesUrl } = useStylesApi();
 	const [ styleData, setStyleData ] = useState<any[]>([]);
 	
@@ -32,7 +32,7 @@ export const Buildings = ({ tableSchema, tableName, sourceId }: any) => {
 	
 	return (
 		<Source 
-			id={sourceId} 
+			id={styleName} 
 			type="vector" 
 			tiles={[ url ]}
 		>
@@ -41,3 +41,5 @@ export const Buildings = ({ tableSchema, tableName, sourceId }: any) => {
 
 	)
 }
+
+Polygons.displayName="Polygons";

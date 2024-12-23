@@ -5,14 +5,18 @@ import { useMask } from 'context/agents/mask';
 import { Source, Layer } from 'react-map-gl';
 
 export const Polygons = ({ boundary, layer, index }: any) => {
-	const { getPolygons } = useMask();
-    
+	const { getPolygons, sharedGeoJsonDataMap } = useMask();
     const geoJsonData = getPolygons(boundary, layer);
 
     const sourceId = `polygons-source-${index}`;
   	const layerId = `polygons-layer-${index}`;
 
     if (!geoJsonData) return <></>;
+
+    sharedGeoJsonDataMap.value = {
+		...sharedGeoJsonDataMap.value,
+		[sourceId]: geoJsonData.features.map((item: any) => item.properties),
+	};
 
 	const layerStyle: any = {
 	    id: layerId,
@@ -21,7 +25,7 @@ export const Polygons = ({ boundary, layer, index }: any) => {
 	    paint: {
 	        'fill-extrusion-color': [
 	            'case',
-	            ['has', 'facade_color'], ['get', 'facade_color'], // Use 'facade_color' if available
+	            ['has', 'facade_color'], ['get', 'facade_color'],
 	            ['get', 'fill-color']
 	        ],
 	        'fill-extrusion-height': [

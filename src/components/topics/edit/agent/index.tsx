@@ -1,5 +1,6 @@
 // App imports
 import { CancelCross } from './cross';
+import { Graphics } from './graphics';
 import './styles.scss';
 
 // Context imports
@@ -21,6 +22,7 @@ export const Agent = () => {
 							src={marker.image} 
 							alt="marker-icon" 
 						/>
+						<Graphics id={index}/>
 					</div>
 				)
 			})}

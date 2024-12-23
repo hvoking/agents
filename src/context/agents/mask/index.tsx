@@ -25,6 +25,8 @@ export const MaskProvider = ({children}: any) => {
 	const { radius } = useMarkers();
 
 	const mapFeatures = signal<any[]>([]);
+	const sharedGeoJsonDataMap = signal({});
+
 	const map = mapRef.current;
 
     mapFeatures.value = map?.queryRenderedFeatures();
@@ -114,7 +116,7 @@ export const MaskProvider = ({children}: any) => {
 
 
 	return (
-		<MaskContext.Provider value={{ getPoints, getLines, getPolygons }}>
+		<MaskContext.Provider value={{ getPoints, getLines, getPolygons, sharedGeoJsonDataMap }}>
 			{children}
 		</MaskContext.Provider>
 	)

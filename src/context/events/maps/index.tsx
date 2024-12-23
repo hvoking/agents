@@ -36,8 +36,8 @@ export const MapEventsProvider = ({children}: any) => {
 			setCurrentMarker(newMarker);
 			setMarkers((prev: any) => [...prev, newMarker]);
 			setAddPin(false);
-			}
-		};
+		}
+	};
 
     // Remove add pin state
 	useEffect(() => {

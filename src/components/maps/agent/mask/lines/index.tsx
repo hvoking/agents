@@ -5,13 +5,18 @@ import { useMask } from 'context/agents/mask';
 import { Source, Layer } from 'react-map-gl';
 
 export const Lines = ({ boundary, layer, index }: any) => {
-	const { getLines } = useMask();
+	const { getLines, sharedGeoJsonDataMap } = useMask();
   const geoJsonData = getLines(boundary, layer);
 
   const sourceId = `lines-source-${index}`;
   const layerId = `lines-layer-${index}`;
 
   if (!geoJsonData) return <></>;
+
+	sharedGeoJsonDataMap.value = {
+		...sharedGeoJsonDataMap.value,
+		[sourceId]: geoJsonData.features.map((item: any) => item.properties),
+	};
 
 	const layerStyle: any = {
     id: layerId,

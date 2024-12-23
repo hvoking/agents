@@ -36,6 +36,7 @@ export const Circle = ({ boundary, index }: any) => {
       'circle-color': 'rgb(0, 0, 255)',
       'circle-opacity': 0.2,
       'circle-pitch-alignment': 'map',
+      'circle-blur': 0.5
     },
   };
 

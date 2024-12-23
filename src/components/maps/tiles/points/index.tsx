@@ -1,13 +1,13 @@
 // React imports
 import { useState, useEffect } from 'react';
 
-// Third party imports
-import { Source, Layer } from 'react-map-gl';
-
 // Context imports
 import { useStylesApi } from 'context/api/styles';
 
-export const Points = ({ tableSchema, tableName, sourceId }: any) => {
+// Third party imports
+import { Source, Layer } from 'react-map-gl';
+
+export const Points = ({ tableSchema, tableName, styleName }: any) => {
 	const { fetchData, getTilesUrl } = useStylesApi();
 	const [ styleData, setStyleData ] = useState<any[]>([]);
 	
@@ -21,16 +21,17 @@ export const Points = ({ tableSchema, tableName, sourceId }: any) => {
 		loadData();
 	}, []);
 
-  	const layers = styleData.map((style: any, index: number) => {
-  		style.paint['circle-opacity'] = 0;
-		return (
-			<Layer key={index} {...style}/>
-		)
-	});
+  	const layers = styleData
+  		.map((style: any, index: number) => {
+	  		style.paint['circle-opacity'] = 0;
+			return (
+				<Layer key={index} {...style}/>
+			)
+		});
 	
 	return (
 		<Source 
-			id={sourceId} 
+			id={styleName} 
 			type="vector" 
 			tiles={[ url ]}
 		>

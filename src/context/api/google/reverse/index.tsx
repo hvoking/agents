@@ -16,42 +16,39 @@ export const ReverseGeocodingApiProvider = ({children}: any) => {
 	const { viewport } = useGeo();
 	const [ currentAddress, setCurrentAddress ] = useState<any>(null);
 
+	const { longitude, latitude } = viewport;
+
 	useEffect(() => {
-	  const fetchData = async () => {
-	    const tempUrl = `
-	    	${process.env.REACT_APP_API_URL}/
-	    	reverse_api
-	    	?language=en
-	    	&latitude=${viewport.latitude}
-	    	&longitude=${viewport.longitude}
-	    `;
-	    const url = tempUrl.replace(/\s/g, '');
-	    const res = await fetch(url);
-	    const receivedData = await res.json();
-	    const placeInformation = receivedData.address_components;
-	    setCurrentAddress(placeInformation);
-	  }
-	  viewport && fetchData();
+		const fetchData = async () => {
+			const tempUrl = `
+				${process.env.REACT_APP_API_URL}/
+				reverse_api
+				?language=en
+				&latitude=${latitude}
+				&longitude=${longitude}
+			`;
+			const url = tempUrl.replace(/\s/g, '');
+			const res = await fetch(url);
+			const receivedData = await res.json();
+			const placeInformation = receivedData.address_components;
+			setCurrentAddress(placeInformation);
+		}
+		fetchData();
 	}, [ viewport ]);
 
 	let country = '';
 	let city = '';
 
-	if (currentAddress) {
-		currentAddress.forEach((item: any) => {
-		    if (item.types.includes('country')) {
-		        country = item.long_name;
-		    }
-		    if (
-		    	item.types.includes('administrative_area_level_2') ||
-		    	item.types.includes('locality') || 
-	        	item.types.includes('postal_town') || 
-	        	item.types.includes('city')
-	        ) {
-		        city = item.long_name;
-		    }
-		});
-	}
+	const addressLevels = [ 'administrative_area_level_2', 'locality', 'postal_town', 'city' ]
+
+	currentAddress?.forEach((item: any) => {
+	    if (item.types.includes('country')) {
+	        country = item.long_name;
+	    }
+	    if (item.types.some((type: string) => addressLevels.includes(type))) {
+	        city = item.long_name;
+	    }
+	});
 
 	const placeInfo = city ? [ city, country ].join(", ") : country ? country : ""; 
 

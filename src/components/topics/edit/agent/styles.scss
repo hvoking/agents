@@ -1,14 +1,14 @@
 .edit-selector-wrapper {
 	display: grid;
-	grid-gap: 10px;
-	border-radius: 10px;
+	grid-gap: 20px;
 }
 .edit-selector-item {
   border-radius: 5px;
   background-color: rgba(157, 239, 253, 0.6);
   padding: 10px;
   position: relative;
+  overflow: hidden;
 }
 .edit-agent {
-	width: 60px;
+	width: 50px;
 }
