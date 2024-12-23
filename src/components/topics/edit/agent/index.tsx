@@ -18,9 +18,9 @@ export const Agent = () => {
 					<div key={index} className="edit-selector-item">
 						<CancelCross marker={marker}/>
 						<img 
-							className="edit-agent"
+							className="agent-icon"
 							src={marker.image} 
-							alt="marker-icon" 
+							alt="agent-icon" 
 						/>
 						<Graphics id={index}/>
 					</div>

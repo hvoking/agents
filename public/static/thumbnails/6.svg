@@ -1,1 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="Layer_2" width="203.2" height="200.2"><defs><style>.cls-1{fill:none;stroke:#c97d39;stroke-miterlimit:10;stroke-width:7px}.cls-2{fill:#23233d;stroke-width:0}</style></defs><g id="Layer_2-2"><circle cx="103.1" cy="100.1" r="100.1" class="cls-2"/><path id="Layer_1-2" d="M62 89a6 6 0 0 1-12 0c0-4 3-7 6-7s6 3 6 7Z" class="cls-2"/><ellipse cx="85.3" cy="94.8" rx="85.3" ry="46.1" style="fill:#c6ed20;stroke-width:0"/><ellipse cx="42.4" cy="93.2" class="cls-2" rx="30.7" ry="23.4" transform="rotate(-89 42 93)"/><ellipse cx="126.5" cy="94.8" class="cls-2" rx="30.7" ry="23.4" transform="rotate(-89 126 95)"/><ellipse cx="42.4" cy="93.2" class="cls-1" rx="10.1" ry="12.9"/><ellipse cx="126.5" cy="94.8" class="cls-1" rx="10.1" ry="12.9"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="203.2" height="200.2">
+	<defs>
+		<style>
+			.cls-1 {
+				fill:none;
+				stroke:#c97d39;
+				stroke-miterlimit:10;
+				stroke-width:7px}
+			.cls-2 {
+				fill:#23233d;
+				stroke-width:0
+			}
+		</style>
+	</defs>
+	<g>
+		<circle cx="103.1" cy="100.1" r="100.1" class="cls-2"/>
+		<ellipse cx="85.3" cy="94.8" rx="85.3" ry="46.1" style="fill:#c6ed20;stroke-width:0"/>
+		<ellipse cx="42.4" cy="93.2" class="cls-2" rx="30.7" ry="23.4" transform="rotate(-89 42 93)"/>
+		<ellipse cx="126.5" cy="94.8" class="cls-2" rx="30.7" ry="23.4" transform="rotate(-89 126 95)"/>
+		<ellipse cx="42.4" cy="93.2" class="cls-1" rx="10.1" ry="12.9"/>
+		<ellipse cx="126.5" cy="94.8" class="cls-1" rx="10.1" ry="12.9"/>
+	</g>
+</svg>

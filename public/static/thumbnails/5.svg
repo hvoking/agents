@@ -1,1 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="Layer_2" width="278.8" height="278.8"><defs><style>.cls-2{fill:#23233d;stroke-width:0}</style></defs><g id="Layer_2-2"><circle cx="139.4" cy="139.4" r="139.4" class="cls-2"/><circle cx="139.4" cy="139.8" r="121.5" style="fill:#c97d39;stroke-width:0"/><ellipse cx="109.3" cy="140.5" class="cls-2" rx="37.5" ry="35.9" transform="rotate(-86 109 140)"/><ellipse cx="218.9" cy="134.6" class="cls-2" rx="36.1" ry="34.5" transform="rotate(-86 219 135)"/><ellipse cx="109.3" cy="140.5" rx="25.8" ry="24.6" style="fill:none;stroke:#cf3;stroke-miterlimit:10;stroke-width:9px" transform="rotate(-86 109 140)"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="278.8" height="278.8">
+	<defs>
+		<style>
+			.cls-2{
+				fill:#23233d;
+				stroke-width:0
+			}
+		</style>
+	</defs>
+	<g>
+		<circle cx="139.4" cy="139.4" r="139.4" class="cls-2"/>
+		<circle cx="139.4" cy="139.8" r="121.5" style="fill:#c97d39;stroke-width:0"/>
+		<ellipse cx="109.3" cy="140.5" class="cls-2" rx="37.5" ry="35.9" transform="rotate(-86 109 140)"/>
+		<ellipse cx="218.9" cy="134.6" class="cls-2" rx="36.1" ry="34.5" transform="rotate(-86 219 135)"/>
+		<ellipse cx="109.3" cy="140.5" rx="25.8" ry="24.6" style="fill:none;stroke:#cf3;stroke-miterlimit:10;stroke-width:9px" transform="rotate(-86 109 140)"/>
+	</g>
+</svg>

@@ -15,14 +15,14 @@ export const Mask = ({ id, boundary, marker }: any) => {
 				boundary={boundary} 
 				index={id}
 			/>
-			<Polygons 
-				boundary={boundary} 
-				layer="buildings-overture" 
-				index={id}
-			/>
 			<Lines 
 				boundary={boundary} 
 				layer="rotterdam_roads" 
+				index={id}
+			/>
+			<Polygons 
+				boundary={boundary} 
+				layer="buildings-overture" 
 				index={id}
 			/>
 			<Points 
@@ -30,7 +30,6 @@ export const Mask = ({ id, boundary, marker }: any) => {
 				layer="points-airbnb" 
 				index={id}
 			/>
-
 			<Clusters 
 				boundary={boundary} 
 				layer="points-foursquare" 

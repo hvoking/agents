@@ -18,9 +18,21 @@ export const Graphics = ({ id }: any) => {
 
 	return (
 		<div className="gauges-wrapper">
-			<Gauge data={linesData} name="road_class" colorLabel='line-color'/>
-			<Gauge data={pointsData} name="property_type" colorLabel='circle-color'/>
-			<Gauge data={polygonsData} name="class" colorLabel='fill-color'/>
+			<Gauge 
+				data={linesData} 
+				name="road_class" 
+				colorLabel='line-color'
+			/>
+			<Gauge 
+				data={pointsData} 
+				name="property_type" 
+				colorLabel='circle-color'
+			/>
+			<Gauge 
+				data={polygonsData} 
+				name="class" 
+				colorLabel='fill-color'
+			/>
 		</div>
 	)
 }
