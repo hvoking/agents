@@ -28,7 +28,7 @@ export const MaskProvider = ({children}: any) => {
 	const sharedGeoJsonDataMap = signal({});
 
 	const map = mapRef.current;
-
+	
     mapFeatures.value = map?.queryRenderedFeatures();
 
     const toFeatureCollection = (features: any, paintProperty: any) => {
@@ -39,7 +39,6 @@ export const MaskProvider = ({children}: any) => {
 				geometry: item.geometry,
 				properties: {
 					...item.properties,
-					...item.layer.paint,
 					...processPaintProperties(item.layer.paint, paintProperty),
 				},
 			})),

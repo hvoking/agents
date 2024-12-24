@@ -1,5 +1,6 @@
 // App imports
 import { Gauge } from './gauge';
+import { Legend } from './legend';
 import './styles.scss';
 
 // Context imports
@@ -18,21 +19,42 @@ export const Graphics = ({ id }: any) => {
 
 	return (
 		<div className="gauges-wrapper">
-			<Gauge 
-				data={linesData} 
-				name="road_class" 
-				colorLabel='line-color'
-			/>
-			<Gauge 
-				data={pointsData} 
-				name="property_type" 
-				colorLabel='circle-color'
-			/>
-			<Gauge 
-				data={polygonsData} 
-				name="class" 
-				colorLabel='fill-color'
-			/>
+			<div className="gauge">
+				<Gauge 
+					data={linesData} 
+					name="road_class" 
+					colorLabel='line-color'
+				/>
+				<Legend 
+					data={linesData} 
+					name="road_class"
+					colorLabel='line-color'
+				/>
+			</div>
+			<div className="gauge">
+				<Gauge 
+					data={pointsData} 
+					name="property_type" 
+					colorLabel='circle-color'
+				/>
+				<Legend 
+					data={pointsData} 
+					name="property_type" 
+					colorLabel='circle-color'
+				/>
+			</div>
+			<div className="gauge">
+				<Gauge 
+					data={polygonsData} 
+					name="class" 
+					colorLabel='fill-color'
+				/>
+				<Legend 
+					data={polygonsData} 
+					name="class" 
+					colorLabel='fill-color'
+				/>
+			</div>
 		</div>
 	)
 }

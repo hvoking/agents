@@ -1,13 +1,16 @@
 .edit-selector-wrapper {
 	display: grid;
 	grid-gap: 20px;
+  grid-template-rows: 1fr 1fr 1fr;
 }
 .edit-selector-item {
   border-radius: 5px;
-  background-color: rgba(227, 242, 253, 1);
   padding: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: rgba(157, 239, 253, 0.6);
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
   position: relative;
 }
 .agent-icon {

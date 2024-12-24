@@ -1,4 +1,9 @@
 .gauges-wrapper {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+}
+.gauge {
+	display: grid;
+	grid-gap: 10px;
+	grid-template-rows: 100px min-content;
 }

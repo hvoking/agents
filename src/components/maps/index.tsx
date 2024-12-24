@@ -33,7 +33,7 @@ export const MapContainer = () => {
 			>
 				{isMapLoaded && <>
 					<Tiles/>
-					<Pin/>
+					{/*<Pin/>*/}
 					<Agent/>
 				</>}
 			</Map>
