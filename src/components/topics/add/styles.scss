@@ -6,12 +6,6 @@
 	display: grid;
 	grid-gap: 10px;
 	grid-template-columns: 1fr 1fr 1fr;
-}
-.agent-selector-item {
-  overflow: hidden;
-  padding: 10px;
-  background-color: rgba(157, 239, 253, 0.6);
-  border-radius: 5px;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(10px);
+	background-color: rgba(119, 137, 139, 1);
+	padding: 10px;
 }

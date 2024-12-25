@@ -15,7 +15,7 @@ export const Agent = () => {
 		<div className="edit-selector-wrapper">
 			{markers.map((marker: any, index: number) => {
 				return(
-					<div key={index} className="edit-selector-item">
+					<div key={index} className="agent-stats-wrapper">
 						<CancelCross marker={marker}/>
 						<img 
 							className="agent-icon"

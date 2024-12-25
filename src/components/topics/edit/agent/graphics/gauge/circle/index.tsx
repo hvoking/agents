@@ -1,25 +1,17 @@
-export const Circle = ({
-	innerWidth,
-	innerHeight,
-	innerRadius,
-	strokeWidth,
-	currentCircunference,
-	circumference,
-	totalCircunference,
-	currentPercent,
-	stroke,
-}: any) => {
+export const Circle = ({ cx, cy, innerRadius, strokeWidth, currentCircunference, circumference,	totalCircunference,	stroke }: any) => {
+	const strokeDasharray = `${currentCircunference} ${circumference - currentCircunference}`;
+	const strokeDashoffset = -(totalCircunference - currentCircunference);
+	
 	return (
 		<circle
-			cx={innerWidth/2}
-			cy={innerHeight/2}
+			cx={cx}
+			cy={cy}
 			fill="none"
 			r={innerRadius}
 			stroke={stroke}
 			strokeWidth= {strokeWidth}
-			strokeDasharray={`${currentCircunference} ${circumference - currentCircunference}`}
-			strokeDashoffset={-(totalCircunference - currentCircunference)}
-			style={{cursor: "pointer"}}
+			strokeDasharray={strokeDasharray}
+			strokeDashoffset={strokeDashoffset}
 		/>
 	)
 }

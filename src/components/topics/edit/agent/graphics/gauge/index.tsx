@@ -55,14 +55,13 @@ export const Gauge = ({ data, name, colorLabel }: any) => {
 					<g key={item}>
 						{currentCircunference && 
 							<Circle
-								innerWidth={innerWidth}
-								innerHeight={innerHeight}
+								cx={innerWidth / 2}
+								cy={innerHeight / 2}
 								innerRadius={innerRadius}
 								strokeWidth={strokeWidth}
 								currentCircunference={currentCircunference}
 								circumference={circumference}
 								totalCircunference={totalCircunference}
-								currentPercent={currentPercent}
 								stroke={currentColor}
 							/>
 						 }

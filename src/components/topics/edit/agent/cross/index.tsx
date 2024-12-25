@@ -8,18 +8,13 @@ export const CancelCross = ({ marker }: any) => {
 	const { addRejectedId } = useMarkerEvents();
 
 	return (
-		<div style={{position: "absolute", right: "25px"}}>
+		<div style={{position: "absolute", right: "35px", top: "10px"}}>
 	      	<svg
 	      		className="cancel-cross-map" 
 	      		viewBox="0 0 20 20" 
-	      		width="20" 
+	      		width="30" 
 	      		onClick={(e: any) => addRejectedId(e, marker)}
 	      	>
-	      		<circle
-	      			cx={10}
-	      			cy={10}
-	      			r={9}
-	      		/>
 	      		<line
 					x1={5}
 					x2={15}

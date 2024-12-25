@@ -1,3 +1,6 @@
+// App imports
+import './styles.scss';
+
 // Context imports
 import { useMarkers } from 'context/agents/markers';
 
