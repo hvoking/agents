@@ -1,0 +1,15 @@
+.agent-icon {
+  width: 50px;
+}
+.agent-data {
+   display: grid; 
+   grid-gap: 5px; 
+   font-size: 20px;
+   font-weight: 500;
+}
+.agent-location {
+  display: grid; 
+  grid-gap: 5px; 
+  grid-template-columns: min-content auto; 
+  font-size: 0.8em
+}

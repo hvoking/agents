@@ -1,6 +1,6 @@
-export const Circle = ({ cx, cy, innerRadius, strokeWidth, currentCircunference, circumference,	totalCircunference,	stroke }: any) => {
-	const strokeDasharray = `${currentCircunference} ${circumference - currentCircunference}`;
-	const strokeDashoffset = -(totalCircunference - currentCircunference);
+export const Circle = ({ cx, cy, innerRadius, strokeWidth, currentCircumference, circumference,	totalCircumference,	stroke }: any) => {
+	const strokeDasharray = `${currentCircumference} ${circumference - currentCircumference}`;
+	const strokeDashoffset = -(totalCircumference - currentCircumference);
 	
 	return (
 		<circle
