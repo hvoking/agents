@@ -21,11 +21,7 @@ export const Charts = () => {
 					<div key={index} className="agent-card">
 						<CancelCross marker={marker}/>
 						<div>
-							<img 
-								className="agent-icon"
-								src={marker.image} 
-								alt="agent-icon" 
-							/>
+							<img className="agent-icon" src={marker.image} alt="agent-icon"/>
 							<div className="agent-data">
 								<div>{`Agent ${index + 1}`}</div>
 								<div className="agent-location">
