@@ -1,9 +1,7 @@
 // App imports
-import { processData } from '../utils';
 import './styles.scss';
 
-export const Legend = ({ data, name, colorLabel }: any) => {
-	const { distribution, colors } = processData(data, name, colorLabel);
+export const Legend = ({ distribution, colors }: any) => {
 	const sortedDistribution = Object.entries(distribution).sort(([, a]: any, [, b]: any) => b - a);
 
 	return (
@@ -14,7 +12,7 @@ export const Legend = ({ data, name, colorLabel }: any) => {
 						<span 
 							className="chart-legend-icon" 
 							style={{backgroundColor: colors[item[0]]}}
-						></span>
+						/>
 						<div>{item[0]}</div>
 					</div>
 				)

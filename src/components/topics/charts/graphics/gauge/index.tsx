@@ -9,14 +9,17 @@ import { useGaugeSizes } from 'context/sizes/gauge';
 // Third party imports
 import * as d3 from "d3";
 
-export const Gauge = ({ data, name, colorLabel }: any) => {
+export const Gauge = ({ distribution, colors }: any) => {
 	const { innerWidth, innerHeight } = useGaugeSizes();
+
 	const radius = d3.min([innerWidth, innerHeight]) / 2;
+
 	const strokeWidth = radius * 0.3;
+
 	const innerRadius = radius - ( strokeWidth / 2 );
+
 	const circumference = innerRadius * 2 * Math.PI;
 
-	const { distribution, colors } = processData(data, name, colorLabel);
   	const sumOfValues = d3.sum(Object.values(distribution));
 
 	let totalCircumference = 0;
@@ -26,7 +29,6 @@ export const Gauge = ({ data, name, colorLabel }: any) => {
 			{Object.entries(distribution).map(([key, value]: any) => {
 				const currentPercent = value / sumOfValues;
 				const currentCircumference = Math.round(circumference * currentPercent);
-				const currentColor = colors[key];
 
 				if (currentCircumference) {totalCircumference += currentCircumference}
 
@@ -41,7 +43,7 @@ export const Gauge = ({ data, name, colorLabel }: any) => {
 								currentCircumference={currentCircumference}
 								circumference={circumference}
 								totalCircumference={totalCircumference}
-								stroke={currentColor}
+								stroke={colors[key]}
 							/>
 						 }
 					</g>

@@ -1,6 +1,7 @@
 // App imports
 import { Gauge } from './gauge';
 import { Legend } from './legend';
+import { processData } from './utils';
 import './styles.scss';
 
 // Context imports
@@ -21,10 +22,12 @@ export const Graphics = ({ id }: any) => {
 		<div className="chart-card">
 			{sourceTypes.map(({ id: typeId, name, colorLabel }) => {
 		        const data = getSourceData(typeId);
+		        const { distribution, colors } = processData(data, name, colorLabel);
+
 		        return (
 					<div key={typeId} className="gauge">
-						<Gauge data={data} name={name} colorLabel={colorLabel} />
-						<Legend data={data} name={name} colorLabel={colorLabel} />
+						<Gauge distribution={distribution} colors={colors}/>
+						<Legend distribution={distribution} colors={colors}/>
 					</div>
 		        );
 		      })}
