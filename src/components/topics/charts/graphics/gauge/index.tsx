@@ -1,7 +1,6 @@
 // App imports
 import { SVGWrapper } from './svg';
 import { Circle } from './circle';
-import { processData } from '../utils';
 
 // Context imports
 import { useGaugeSizes } from 'context/sizes/gauge';
