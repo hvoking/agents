@@ -1,12 +1,18 @@
-.marker-wrapper {
+.map-marker {
   position: relative;
   cursor: pointer;
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
+  border: 3px solid white;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-.marker-wrapper:hover {
-  transform: scale(1.2);
+.map-marker:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
-.marker-wrapper:active {
-  transform: scale(1.2);
+.map-marker:active {
+  transform: scale(1.1);
+  border-color: #ecf0f1;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }

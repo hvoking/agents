@@ -23,7 +23,7 @@ export const CustomMarker = ({ marker }: any) => {
             onDragStart={() => handleMarkerEvent(id)}
             onDrag={(e: any) => onDrag(e, id)}
 		>
-			<div className="marker-wrapper">
+			<div className="map-marker">
 				<img 
 					src={image} 
 					alt="agent-avatar" 
