@@ -3,13 +3,13 @@ import { Agent } from './agent';
 import { Title } from './title';
 import './styles.scss';
 
-export const Edit = () => {
+export const Charts = () => {
 	return (
-		<div className="agent-edit-selector">
+		<div className="charts-wrapper">
 			<Title/>
 			<Agent/>
 		</div>
 	)
 }
 
-Edit.displayName="Edit";
+Charts.displayName="Charts";

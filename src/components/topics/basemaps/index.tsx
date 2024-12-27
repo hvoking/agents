@@ -18,14 +18,7 @@ export const Basemaps = () => {
 			<div className="basemap-selectors">
 				{Object.keys(mapbox.mapas).map((item: any, index: number) => {
 					return (
-						<div 
-							style={{
-								width: "100%", 
-								height: "80px", 
-								backgroundColor: "rgba(121, 244, 244, 0.2)"
-							}}
-							onClick={() => setMapStyle(mapbox.mapas[item])}
-							>
+						<div className="basemap" onClick={() => setMapStyle(mapbox.mapas[item])}>
 							<img 
 								src={process.env.PUBLIC_URL + `/static/basemaps/mapbox/${index + 1}.png`} 
 								alt={`mapbox-${index + 1}`}
@@ -40,14 +33,7 @@ export const Basemaps = () => {
 			<div className="basemap-selectors">
 				{Object.keys(carto.mapas).map((item: any, index: number) => {
 					return (
-						<div 
-							style={{
-								width: "100%", 
-								height: "80px", 
-								backgroundColor: "rgba(121, 244, 244, 0.2)"
-							}}
-							onClick={() => setMapStyle(carto.mapas[item])}
-						>
+						<div className="basemap" onClick={() => setMapStyle(carto.mapas[item])}>
 							<img 
 								src={process.env.PUBLIC_URL + `/static/basemaps/carto/${index + 1}.png`} 
 								alt={`carto-${index + 1}`}
@@ -62,14 +48,7 @@ export const Basemaps = () => {
 			<div className="basemap-selectors">
 				{Object.keys(custom.mapas).map((item: any, index: number) => {
 					return (
-						<div 
-							style={{
-								width: "100%", 
-								height: "80px", 
-								backgroundColor: "rgba(121, 244, 244, 0.2)"
-							}}
-							onClick={() => setMapStyle(custom.mapas[item])}
-						>
+						<div className="basemap" onClick={() => setMapStyle(custom.mapas[item])}>
 							<img 
 								src={process.env.PUBLIC_URL + `/static/basemaps/custom/${index + 1}.png`} 
 								alt={`custom-${index + 1}`}

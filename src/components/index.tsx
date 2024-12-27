@@ -1,12 +1,12 @@
 // App imports
-import { Sidebar } from './sidebar';
+import { Panel } from './panel';
 import { MapContainer } from './maps';
 import './styles.scss';
 
 export const Main = () => {
   return (
     <div className="main-wrapper">
-      <Sidebar/>
+      <Panel/>
       <MapContainer/>
     </div>
   );

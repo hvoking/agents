@@ -1,6 +1,6 @@
 // App imports
 import { Add } from './add';
-import { Edit } from './edit';
+import { Charts } from './charts';
 import { Search } from './search';
 import { Basemaps } from './basemaps';
 import './styles.scss';
@@ -16,7 +16,7 @@ export const Topics = () => {
 			{activePage && 
 				<div className="topics">
 					{activePage === "bot" && <Add/>}
-					{activePage === "edit" && <Edit/>}
+					{activePage === "charts" && <Charts/>}
 					{activePage === "search" && <Search/>}
 					{activePage === "basemaps" && <Basemaps/>}
 				</div>

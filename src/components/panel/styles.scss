@@ -1,0 +1,9 @@
+@import 'variables';
+
+.panel {
+  display: grid;
+  grid-template-rows: min-content auto;
+  white-space: nowrap;
+  padding: 20px;
+  background: var(--bg-color);
+}

@@ -5,27 +5,28 @@ import './styles.scss';
 // Context imports
 import { useMarkers } from 'context/agents/markers';
 
-export const Left = () => {
+export const Selectors = () => {
 	const { setActivePage } = useMarkers();
-	const onClick = (section: any) => 
+
+	const activatePage = (section: any) => 
 		section === "home" ? 
 		setActivePage(null) : 
 		setActivePage(section);
 
 	return (
-		<div className="sidebar-left-wrapper">
+		<div className="selectors">
 			{sections.map((item: any, index: number) => {
 				const title = item.title;
 				const section = item.section;
-				const path = `${process.env.PUBLIC_URL}/static/icons/${section}.svg`;
+				const iconPath = `${process.env.PUBLIC_URL}/static/icons/${section}.svg`;
 
 				return (
 					<div 
 						key={index} 
-						className="home-wrapper" 
-						onClick={() => onClick(section)}
+						className="menu-item" 
+						onClick={() => activatePage(section)}
 					>
-						<img src={path} alt={title} width="30px"/>
+						<img src={iconPath} alt={title} width="30px"/>
 						<div>{title}</div>
 					</div>
 				)
@@ -34,4 +35,4 @@ export const Left = () => {
 	)
 }
 
-Left.displayName="Left";
+Selectors.displayName="Selectors";

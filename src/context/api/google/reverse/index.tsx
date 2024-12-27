@@ -18,6 +18,21 @@ export const ReverseGeocodingApiProvider = ({children}: any) => {
 
 	const { longitude, latitude } = viewport;
 
+	const getCurrentAddress = async (lng: any, lat: any) => {
+		const tempUrl = `
+			${process.env.REACT_APP_API_URL}/
+			reverse_api
+			?language=en
+			&latitude=${lat}
+			&longitude=${lng}
+		`;
+		const url = tempUrl.replace(/\s/g, '');
+		const res = await fetch(url);
+		const receivedData = await res.json();
+		const placeInformation = receivedData.address_components;
+		return placeInformation
+	}
+
 	useEffect(() => {
 		const fetchData = async () => {
 			const tempUrl = `
@@ -53,7 +68,7 @@ export const ReverseGeocodingApiProvider = ({children}: any) => {
 	const placeInfo = city ? [ city, country ].join(", ") : country ? country : ""; 
 
 	return (
-		<ReverseGeocodingApiContext.Provider value={{ currentAddress, setCurrentAddress, placeInfo }}>
+		<ReverseGeocodingApiContext.Provider value={{ getCurrentAddress, currentAddress, setCurrentAddress, placeInfo }}>
 			{children}
 		</ReverseGeocodingApiContext.Provider>
 	)

@@ -14,7 +14,7 @@ export const Gauge = ({ data, name, colorLabel }: any) => {
 
 	let totalCircunference = 0;
 	
-	const strokeWidth = radius * 0.27;
+	const strokeWidth = radius * 0.3;
 	const innerRadius = radius - ( strokeWidth / 2 );
 
 	const circumference = innerRadius * 2 * Math.PI;
