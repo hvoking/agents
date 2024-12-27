@@ -1,4 +1,6 @@
+@import 'variables';
+
 .agent-selector-item {
 	padding: 10px;
-	background-color: rgba(191, 240, 249, 1);
+	background-color: $light-bg;
 }

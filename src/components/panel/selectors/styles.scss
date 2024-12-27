@@ -1,23 +1,22 @@
 .selectors {
 	display: grid; 
-	grid-gap: 30px;
 	align-content: start;
 	padding-top: 20px;
 }
 .menu-item {
-	display: flex;
-	gap: 15px;
-	font-size: 1.2em;
-	font-weight: 600;
-	align-items: center;
-	color: var(--menu-text-color);
-	cursor: pointer;
-	padding: 10px 15px;
-	border-radius: 8px;
-	background-color: rgba(0, 90, 0, 0);
-	border: none;
-
+  padding: 15px;
+  margin: 5px 0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: var(--text-white);
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 16px;
 }
-.menu-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.menu-item:hover,
+.menu-item.active {
+  background-color: var(--btn-bg);
+  color: var(--panel-bg);
 }

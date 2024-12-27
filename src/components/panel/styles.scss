@@ -1,9 +1,10 @@
 @import 'variables';
 
 .panel {
-  display: grid;
-  grid-template-rows: min-content auto;
+  background: $panel-bg;
+  color: $text-light;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
   white-space: nowrap;
-  padding: 20px;
-  background: var(--bg-color);
 }

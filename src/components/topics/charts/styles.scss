@@ -1,31 +1,29 @@
 @import 'variables';
 
-.edit-selector-wrapper {
+.charts {
 	display: grid;
 	grid-gap: 10px;
-}
-.agent-stats-wrapper {
   padding: 10px;
-  overflow: hidden;
+  color: $text-dark;
+}
+.agent-card {
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  padding: 15px;
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s, border-color 0.3s;
   position: relative;
-  background: var(--bg-chart-color);
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  display: grid;
-  grid-gap: 10px;
-
 }
 .agent-icon {
   width: 50px;
 }
-.agent-details {
-  display: grid; 
-  grid-template-columns: min-content auto;
-}
 .agent-data {
-   padding-left: 10px; 
    display: grid; 
    grid-gap: 5px; 
-   align-content: center
+   font-size: 20px;
+   font-weight: 500;
 }
 .agent-location {
   display: grid; 

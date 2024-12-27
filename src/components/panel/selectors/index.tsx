@@ -6,7 +6,7 @@ import './styles.scss';
 import { useMarkers } from 'context/agents/markers';
 
 export const Selectors = () => {
-	const { setActivePage } = useMarkers();
+	const { activePage, setActivePage } = useMarkers();
 
 	const activatePage = (section: any) => 
 		section === "home" ? 
@@ -23,11 +23,11 @@ export const Selectors = () => {
 				return (
 					<div 
 						key={index} 
-						className="menu-item" 
+						className={"menu-item"} 
 						onClick={() => activatePage(section)}
 					>
 						<img src={iconPath} alt={title} width="30px"/>
-						<div>{title}</div>
+						<span>{title}</span>
 					</div>
 				)
 			})}

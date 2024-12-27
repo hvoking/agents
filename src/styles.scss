@@ -9,4 +9,5 @@ body {
   overflow: hidden;
   display: grid;
   max-height: calc(var(--vh, 1vh) * 100);
+  background-color: $light-gray;
 }

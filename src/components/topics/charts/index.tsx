@@ -13,14 +13,14 @@ export const Charts = () => {
 	if (!(markers.length > 0)) return <></>
 
 	return (
-		<div className="edit-selector-wrapper">
+		<div className="charts">
 			{markers.map((marker: any, index: number) => {
 				const imagePath = process.env.PUBLIC_URL + "/static/icons/pin.svg";
 				
 				return(
-					<div key={index} className="agent-stats-wrapper">
+					<div key={index} className="agent-card">
 						<CancelCross marker={marker}/>
-						<div className="agent-details">
+						<div>
 							<img 
 								className="agent-icon"
 								src={marker.image} 

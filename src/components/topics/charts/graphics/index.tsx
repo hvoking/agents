@@ -18,7 +18,7 @@ export const Graphics = ({ id }: any) => {
 	const polygonsData = sharedGeoJsonDataMap.value[polygonsSourceId];
 
 	return (
-		<div className="gauges-wrapper">
+		<div className="chart-card">
 			<div className="gauge">
 				<Gauge 
 					data={linesData} 
