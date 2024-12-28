@@ -1,17 +1,18 @@
 .basemap-selector {
   padding: 20px;
   margin: auto;
-}
-.basemap-category {
-  h3 {
-    font-size: 24px;
+  h2 {
+    font-size: 1.8em;
     margin-bottom: 10px;
+    color: rgba(44, 62, 80, 1);
   }
 }
 .thumbnail-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   gap: 10px;
+  text-align: center;
+  padding-bottom: 20px;
 }
 .thumbnail {
   border: 1px solid rgba(189, 195, 199, 1);
