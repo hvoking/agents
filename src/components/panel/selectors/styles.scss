@@ -1,3 +1,5 @@
+@import 'variables';
+
 .selectors {
 	display: grid; 
 	align-content: start;
@@ -11,12 +13,12 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  color: var(--text-white);
+  color: $text-light;
   transition: background-color 0.3s, color 0.3s;
   font-size: 16px;
 }
 .menu-item:hover,
 .menu-item.active {
-  background-color: var(--btn-bg);
-  color: var(--panel-bg);
+  background-color: $primary;
+  color: $panel-bg;
 }

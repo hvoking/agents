@@ -1,8 +1,10 @@
 @import 'variables';
-  
+
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  color: $text-dark;
+  line-height: 1.6;
 }
 .App {
   height: 100vh;

@@ -10,15 +10,10 @@ import * as d3 from "d3";
 
 export const Gauge = ({ distribution, colors }: any) => {
 	const { innerWidth, innerHeight } = useGaugeSizes();
-
 	const radius = d3.min([innerWidth, innerHeight]) / 2;
-
 	const strokeWidth = radius * 0.3;
-
 	const innerRadius = radius - ( strokeWidth / 2 );
-
 	const circumference = innerRadius * 2 * Math.PI;
-
   	const sumOfValues = d3.sum(Object.values(distribution));
 
 	let totalCircumference = 0;

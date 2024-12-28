@@ -23,13 +23,13 @@ export const Graphics = ({ id }: any) => {
 		        const data = getSourceData(typeId);
 
 		        const { distribution, colors } = data.reduce((acc: any, curr: any) => {
-					const key = curr[name];
-					if (key) {
-						acc.distribution[key] = (acc.distribution[key] || 0) + 1;
-						acc.colors[key] = curr[colorLabel];
-					}
-					return acc;
-				},{ distribution: {}, colors: {} });
+		        	const key = curr[name];
+		        	if (key) {
+		        		acc.distribution[key] = (acc.distribution[key] || 0) + 1;
+		        		acc.colors[key] = curr[colorLabel];
+		        	}
+		        	return acc;
+		        }, { distribution: {}, colors: {} });
 
 		        return (
 					<div key={typeId} className="gauge">

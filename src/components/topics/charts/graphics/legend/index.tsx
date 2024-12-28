@@ -2,11 +2,9 @@
 import './styles.scss';
 
 export const Legend = ({ distribution, colors }: any) => {
-	const sortedDistribution = Object.entries(distribution).sort(([, a]: any, [, b]: any) => b - a);
-
 	return (
 		<div className="chart-legend">
-			{sortedDistribution.map((item: any) => {
+			{Object.entries(distribution).map((item: any) => {
 				return (
 					<div key={item} className="chart-legend-item">
 						<span 

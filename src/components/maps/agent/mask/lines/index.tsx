@@ -23,7 +23,7 @@ export const Lines = ({ boundary, layer, index }: any) => {
     type: "line",
     source: sourceId,
     paint: {
-      'line-width': 2,
+      'line-width': ['get', 'line-width'],
       'line-color': ['get', 'line-color'],
     },
 	};
