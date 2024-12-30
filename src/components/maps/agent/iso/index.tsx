@@ -28,16 +28,6 @@ export const Isochrone = ({ marker, index }: any) => {
     const sourceId = `iso-source-${index}`;
     const layerId = `iso-layer-${index}`
 
-    const isoLayer: any = {
-        id: layerId,
-        type: 'fill',
-        source: sourceId,
-        paint: {
-            'fill-color': 'rgb(206, 171, 165)',
-            'fill-opacity': 0.4,
-        },
-    };
-
     const isoSource: any = {
         type: 'geojson',
         data: {
@@ -54,13 +44,33 @@ export const Isochrone = ({ marker, index }: any) => {
         },
     };
 
+    const borderLayer: any = {
+      id: layerId,
+      type: 'line',
+      source: sourceId,
+      paint: {
+        'line-width': [
+          'interpolate',
+          ['exponential', 2],
+          ['zoom'],
+          11, 1,
+          14, 3,
+          16, 6,
+        ],
+        'line-color': 'rgba(128, 0, 128, 0.6)',
+        'line-opacity': 0.8,
+        'line-dasharray': [4, 2],
+        'line-blur': 1.5,
+      },
+    };
+
     return (
         <Source 
             key={sourceId} 
             id={sourceId} 
             {...isoSource}
         >
-            <Layer {...isoLayer} />
+            <Layer {...borderLayer}/>
         </Source>
     );
 };

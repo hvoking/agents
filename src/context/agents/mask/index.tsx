@@ -113,7 +113,6 @@ export const MaskProvider = ({children}: any) => {
 		}
 	};
 
-
 	return (
 		<MaskContext.Provider value={{ getPoints, getLines, getPolygons, sharedGeoJsonDataMap }}>
 			{children}

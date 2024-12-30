@@ -7,20 +7,20 @@ import './styles.scss';
 // Context imports
 import { useMarkers } from 'context/agents/markers';
 
-export const Topics = () => {
+export const Sections = () => {
 	const { activePage } = useMarkers();
 
 	return (
-		<div className="topics-wrapper">
+		<>
 			{activePage && 
 				<div className="topics">
-					{activePage === "bot" && <Add/>}
+					{activePage === "agent" && <Add/>}
 					{activePage === "charts" && <Charts/>}
 					{activePage === "basemaps" && <Basemaps/>}
 				</div>
 			}
-		</div>
+		</>
 	)
 }
 
-Topics.displayName="Topics";
+Sections.displayName="Sections";

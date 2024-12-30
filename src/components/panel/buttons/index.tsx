@@ -5,7 +5,7 @@ import './styles.scss';
 // Context imports
 import { useMarkers } from 'context/agents/markers';
 
-export const Selectors = () => {
+export const Buttons = () => {
 	const { activePage, setActivePage } = useMarkers();
 
 	const activatePage = (section: any) => 
@@ -14,16 +14,18 @@ export const Selectors = () => {
 		setActivePage(section);
 
 	return (
-		<div className="selectors">
+		<div className="buttons-wrapper">
 			{sections.map((item: any, index: number) => {
 				const title = item.title;
 				const section = item.section;
 				const iconPath = `${process.env.PUBLIC_URL}/static/icons/${section}.svg`;
 
+				const isActiveSection = activePage === section ? "active" : "";
+
 				return (
 					<div 
 						key={index} 
-						className={"menu-item"} 
+						className={`menu-item ${isActiveSection}`} 
 						onClick={() => activatePage(section)}
 					>
 						<img src={iconPath} alt={title} width="30px"/>
@@ -35,4 +37,4 @@ export const Selectors = () => {
 	)
 }
 
-Selectors.displayName="Selectors";
+Buttons.displayName="Buttons";

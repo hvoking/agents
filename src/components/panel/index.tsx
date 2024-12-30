@@ -1,13 +1,13 @@
 // App imports
 import { Logo } from './logo';
-import { Selectors } from './selectors';
+import { Buttons } from './buttons';
 import './styles.scss';
 
 export const Panel = () => {
   return (
       <div className="panel">
         <Logo/>
-        <Selectors/>
+        <Buttons/>
       </div>
   )
 }

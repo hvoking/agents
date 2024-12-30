@@ -1,5 +1,4 @@
 // App imports
-import { Preview } from './preview';
 import { Grid } from './grid';
 import './styles.scss';
 
@@ -14,7 +13,6 @@ export const Add = () => {
 		  	Choose an agent from the options below to explore the data they represent.
 		  </p>
 		  <Grid imageUrls={imageUrls}/>
-		  <Preview/>
 		</div>
 	);
 };

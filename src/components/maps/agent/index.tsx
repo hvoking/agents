@@ -20,7 +20,7 @@ export const Agent = () => {
         const center = [ longitude, latitude ];
 
         const boundaryGeometry = signal<any>(null);
-        boundaryGeometry.value = turf.circle(center, 0.5, { steps: 31 });
+        boundaryGeometry.value = turf.circle(center, 0.5, { steps: 36 });
         
         return (
           <Mask 

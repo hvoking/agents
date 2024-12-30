@@ -25,16 +25,16 @@ export const Mask = ({ id, boundary, marker }: any) => {
 				layer="buildings-overture" 
 				index={id}
 			/>
-			<Points 
+			{/*<Points 
 				boundary={boundary} 
 				layer="points-airbnb" 
 				index={id}
-			/>
-			<Clusters 
+			/>*/}
+			{/*<Clusters 
 				boundary={boundary} 
 				layer="points-foursquare" 
 				index={id}
-			/>
+			/>*/}
 			<CustomMarker marker={marker}/>
 		</div>
 	)
