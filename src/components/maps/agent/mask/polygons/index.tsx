@@ -23,18 +23,24 @@ export const Polygons = ({ boundary, layer, index }: any) => {
 	    type: "fill-extrusion",
 	    source: sourceId,
 	    paint: {
-	        'fill-extrusion-color': [
-	            'case',
-	            ['has', 'facade_color'], ['get', 'facade_color'],
-	            ['get', 'fill-color']
-	        ],
+	        "fill-extrusion-color": ["get", "fill-color"],
 	        'fill-extrusion-height': [
 	            'coalesce',
 	            ['get', 'height'],
 	            10
 	        ],
 	        'fill-extrusion-base': 0,
-	        'fill-extrusion-opacity': 0.6,
+	        "fill-extrusion-vertical-gradient": true,
+		    "fill-extrusion-opacity": 0.6,
+		    "fill-extrusion-shadow": [
+		      "interpolate",
+		      ["linear"],
+		      ["zoom"],
+		      15,
+		      0.1,
+		      18,
+		      0.4
+		    ]
 	    },
 	};
 
