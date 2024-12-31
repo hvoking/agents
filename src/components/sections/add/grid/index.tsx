@@ -17,13 +17,17 @@ export const Grid = ({ imageUrls }: any) => {
 
 	return (
 		<div className="agent-grid">
-		  {providers.map((name: any, index: any) => {
+		  {providers.map((name: any) => {
 		  	const url = baseUrl + name + '.svg';
 		  	const processedName = name.replace("_", " ");
 
 		  	return (
-			  <div key={index} onClick={() => onClick(url, processedName)} className="agent-grid-card">
-			    <img src={url} alt={name} />
+			  <div 
+			  	key={name}
+			  	className="agent-grid-card"
+			  	onClick={() => onClick(url, processedName)} 
+			  >
+			    <img src={url} alt={name}/>
 			    <span>{processedName}</span>
 			  </div>
 		  )})}

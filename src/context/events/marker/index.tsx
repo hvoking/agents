@@ -38,7 +38,7 @@ export const MarkerEventsProvider = ({children}: any) => {
         [ setMarkers ]
     );
 
-    const addRejectedId = useCallback(
+    const rejectMarker = useCallback(
         (event: any, marker: any) => {
             event.stopPropagation();
             setCurrentMarker((prev: any) => (prev === marker ? null : prev));
@@ -49,7 +49,7 @@ export const MarkerEventsProvider = ({children}: any) => {
 
 	return (
 		<MarkerEventsContext.Provider value={{
-			handleMarkerEvent, onDrag, addRejectedId,
+			handleMarkerEvent, onDrag, rejectMarker,
 		}}>
 			{children}
 		</MarkerEventsContext.Provider>

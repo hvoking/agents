@@ -5,7 +5,7 @@ import './styles.scss';
 import { useMarkerEvents } from 'context/events/marker';
 
 export const CancelCross = ({ marker }: any) => {
-	const { addRejectedId } = useMarkerEvents();
+	const { rejectMarker } = useMarkerEvents();
 
 	return (
 		<div style={{position: "absolute", right: "25px", top: "10px"}}>
@@ -13,7 +13,7 @@ export const CancelCross = ({ marker }: any) => {
 	      		className="cancel-cross-map" 
 	      		viewBox="0 0 20 20" 
 	      		width="20" 
-	      		onClick={(e: any) => addRejectedId(e, marker)}
+	      		onClick={(e: any) => rejectMarker(e, marker)}
 	      	>
 	      		<line
 					x1={5}

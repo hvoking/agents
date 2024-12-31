@@ -6,17 +6,17 @@ import { useMarkers } from 'context/agents/markers';
 import { useMarkerEvents } from 'context/events/marker';
 
 export const CancelCross = ({ marker }: any) => {
-	const { addRejectedId } = useMarkerEvents();
+	const { rejectMarker } = useMarkerEvents();
 	const { activePage } = useMarkers();
 
-	if (!(activePage === "edit")) return <></> 
+	if (!(activePage === "charts")) return <></> 
 
 	return (
       	<svg
       		className="cancel-cross-map" 
       		viewBox="0 0 20 20" 
       		width="20" 
-      		onClick={(e: any) => addRejectedId(e, marker)}
+      		onClick={(e: any) => rejectMarker(e, marker)}
       	>
       		<circle cx={10} cy={10} r={9}/>
       		<line

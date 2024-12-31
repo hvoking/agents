@@ -29,7 +29,7 @@ export const CustomMarker = ({ marker }: any) => {
 					alt="agent-avatar" 
 					width="100%"
 				/>
-				<CancelCross marker={marker}/>
+				{/*<CancelCross marker={marker}/>*/}
 			</div>
 	    </Marker>
 	)

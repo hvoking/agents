@@ -15,7 +15,7 @@ export const Charts = () => {
   return (
     <div className="charts">
       {markers.map((marker: any, index: number) => (
-        <div key={index} className="agent-card">
+        <div key={marker.id} className="agent-card">
           <CancelCross marker={marker}/>
           <Header marker={marker}/>
           <Card id={index}/>
