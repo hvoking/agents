@@ -22,7 +22,7 @@ export const Grid = ({ imageUrls }: any) => {
 		  	const processedName = name.replace("_", " ");
 
 		  	return (
-			  <div onClick={() => onClick(url, processedName)} className="agent-grid-card">
+			  <div key={index} onClick={() => onClick(url, processedName)} className="agent-grid-card">
 			    <img src={url} alt={name} />
 			    <span>{processedName}</span>
 			  </div>

@@ -32,15 +32,6 @@ export const Polygons = ({ boundary, layer, index }: any) => {
 	        'fill-extrusion-base': 0,
 	        "fill-extrusion-vertical-gradient": true,
 		    "fill-extrusion-opacity": 0.6,
-		    "fill-extrusion-shadow": [
-		      "interpolate",
-		      ["linear"],
-		      ["zoom"],
-		      15,
-		      0.1,
-		      18,
-		      0.4
-		    ]
 	    },
 	};
 
