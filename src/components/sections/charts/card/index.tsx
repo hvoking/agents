@@ -23,18 +23,24 @@ export const Card = ({ id }: any) => {
 			<Arrow onClick={onClick}/>
 			{activeCharts && 
 				<div className="chart-card">
-	        	<div className="chart-wrapper">
-	        		<div className="chart-title">roads</div>
-					<Graphic data={getSourceData('lines')} name={'road_class'} colorLabel={'line-color'}/>
-				</div>
-				<div className="chart-wrapper">
-	        		<div className="chart-title">buildings</div>
-					<Graphic data={getSourceData('polygons')} name={'subtype'} colorLabel={'fill-color'}/>
-				</div>
-				{/*<div className="chart-wrapper">
-	        		<div className="chart-title">properties</div>
-					<Graphic data={getSourceData('points')} name={'property_type'} colorLabel={'circle-color'}/>
-				</div>*/}
+					<Graphic 
+						data={getSourceData('lines')} 
+						name={'road_class'} 
+						colorLabel={'line-color'} 
+						title="roads"
+					/>
+					<Graphic 
+						data={getSourceData('polygons')} 
+						name={'subtype'} 
+						colorLabel={'fill-color'} 
+						title="buildings"
+					/>
+					{/*<Graphic 
+						data={getSourceData('points')} 
+						name={'property_type'} 
+						colorLabel={'circle-color'} 
+						title="properties"
+					/>*/}
 				</div>
 			}
 		</>
