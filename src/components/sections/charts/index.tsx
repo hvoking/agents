@@ -18,7 +18,7 @@ export const Charts = () => {
         <div key={marker.id} className="agent-card">
           <CancelCross marker={marker}/>
           <Header marker={marker}/>
-          <Card id={index}/>
+          <Card id={marker.id}/>
         </div>
       ))}
     </div>

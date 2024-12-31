@@ -15,7 +15,7 @@ export const Agent = () => {
 
   return (
     <>
-      {markers.map((marker: any, index: number) => {
+      {markers.map((marker: any) => {
         const { longitude, latitude } = marker;
         const center = [ longitude, latitude ];
 
@@ -24,8 +24,8 @@ export const Agent = () => {
         
         return (
           <Mask 
-            key={`mask-${index}`} 
-            id={index} 
+            key={marker.id} 
+            id={marker.id} 
             boundary={boundaryGeometry.value}
             marker={marker}
           />
