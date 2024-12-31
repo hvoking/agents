@@ -15,10 +15,13 @@ export const MarkersProvider = ({children}: any) => {
 	
 	const [ currentMarker, setCurrentMarker ] = useState<any>(null);
 	const [ currentImage, setCurrentImage ] = useState<any>(null);
+	const [ currentName, setCurrentName ] = useState<any>(null);
 	const [ activePage, setActivePage ] = useState<any>(null);
 
 	const [ radius, setRadius ] = useState(0.5);
 	const [ addPin, setAddPin ] = useState(false);
+
+	const providers = ["overture", "foursquare", "inside_airbnb"]
 
 	useEffect(() => {
 	   setMarkers((prev: any) => 
@@ -31,10 +34,12 @@ export const MarkersProvider = ({children}: any) => {
 			markers, setMarkers,
 			currentMarker, setCurrentMarker,
 			currentImage, setCurrentImage,
+			currentName, setCurrentName,
 			activePage, setActivePage,
 			rejectedMarkers, setRejectedMarkers,
 			radius, setRadius,
 			addPin, setAddPin,
+			providers
 		}}>
 			{children}
 		</MarkersContext.Provider>

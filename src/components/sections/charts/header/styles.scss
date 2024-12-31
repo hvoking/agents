@@ -1,0 +1,13 @@
+.agent-header-wrapper {
+  display: grid;
+  grid-template-columns: min-content min-content;
+  white-space: nowrap;
+  grid-gap: 10px;
+}
+.agent-icon {
+  width: 40px;
+}
+.agent-data {
+   font-size: 1.2em;
+   font-weight: 500;
+}

@@ -1,0 +1,19 @@
+.chart-legend {
+	overflow: hidden;
+}
+.chart-legend-item {
+	display: grid; 
+	grid-template-columns: min-content auto;
+	grid-gap: 5px; 
+	// white-space: nowrap;
+	font-size: 0.8em;
+	align-items: center;
+	text-transform: capitalize;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.chart-legend-icon {
+	width: 10px; 
+	height: 10px;
+	border-radius: 100%;
+}

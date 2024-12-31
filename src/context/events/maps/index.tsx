@@ -13,7 +13,7 @@ export const useMapEvents = () => {
 }
 
 export const MapEventsProvider = ({children}: any) => {
-	const { markers, setMarkers, setCurrentMarker, addPin, setAddPin, currentImage } = useMarkers();
+	const { markers, setMarkers, setCurrentMarker, addPin, setAddPin, currentImage, currentName } = useMarkers();
 
 	const getId = (markers: any) => {
 		const lastIndex = markers.length - 1;
@@ -31,6 +31,7 @@ export const MapEventsProvider = ({children}: any) => {
 				latitude: lat,
 				longitude: lng,
 				image: currentImage,
+				name: currentName
 			};
 
 			setCurrentMarker(newMarker);
