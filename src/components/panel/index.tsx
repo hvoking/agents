@@ -1,13 +1,17 @@
 // App imports
 import { Logo } from './logo';
-import { Buttons } from './buttons';
+import { Section } from './section'
 import './styles.scss';
 
 export const Panel = () => {
   return (
       <div className="panel">
         <Logo/>
-        <Buttons/>
+        <div className="section-wrapper">
+          <Section section={"agent"} title={"Add Agent"} />
+          <Section section={"charts"} title={"Charts"} />
+          <Section section={"basemaps"} title={"Basemaps"} />
+        </div>
       </div>
   )
 }

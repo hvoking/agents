@@ -1,10 +1,5 @@
 @import 'variables';
 
-.buttons-wrapper {
-	display: grid; 
-	align-content: start;
-	padding-top: 20px;
-}
 .menu-item {
   padding: 15px;
   margin: 5px 0;
@@ -13,9 +8,7 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  color: $text-light;
   transition: background-color 0.3s, color 0.3s;
-  font-size: 16px;
 }
 .menu-item:hover {
   background-color: $primary;

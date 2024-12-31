@@ -10,13 +10,15 @@ import './styles.scss';
 // Context imports
 import { useMask } from 'context/agents/mask';
 
-export const Card = ({ id }: any) => {
+export const Card = ({ marker }: any) => {
 	const [ activeCharts, setActiveCharts ] = useState(true);
 	const { sharedGeoJsonDataMap } = useMask();
 
-	const getSourceData = (type: string) => sharedGeoJsonDataMap.value[`${type}-source-${id}`];
-
 	const onClick = () => setActiveCharts((prev: boolean) => !prev);
+
+	const linesData = sharedGeoJsonDataMap.value[`lines-source-${marker.id}`];
+	const polygonsData = sharedGeoJsonDataMap.value[`polygons-source-${marker.id}`];
+	// const pointsData = sharedGeoJsonDataMap.value[`points-source-${marker.id}`];
 
 	return (
 		<>
@@ -24,19 +26,19 @@ export const Card = ({ id }: any) => {
 			{activeCharts && 
 				<div className="chart-card">
 					<Graphic 
-						data={getSourceData('lines')} 
+						data={linesData} 
 						name={'road_class'} 
 						colorLabel={'line-color'} 
 						title="roads"
 					/>
 					<Graphic 
-						data={getSourceData('polygons')} 
+						data={polygonsData} 
 						name={'subtype'} 
 						colorLabel={'fill-color'} 
 						title="buildings"
 					/>
 					{/*<Graphic 
-						data={getSourceData('points')} 
+						data={pointsData} 
 						name={'property_type'} 
 						colorLabel={'circle-color'} 
 						title="properties"

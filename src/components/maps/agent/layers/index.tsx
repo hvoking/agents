@@ -1,8 +1,8 @@
 // App imports
-import { Lines } from '../lines';
-import { Points } from '../points';
-import { Polygons } from '../polygons';
-import { Clusters } from '../clusters';
+import { Lines } from './lines';
+import { Points } from './points';
+import { Polygons } from './polygons';
+import { Clusters } from './clusters';
 
 export const Layers = ({ boundary, marker }: any) => {
 	return (
