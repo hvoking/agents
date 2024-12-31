@@ -1,8 +1,7 @@
 // App imports
 import { CancelCross } from './cross';
 import { Header } from './header';
-import { Graphics } from './graphics';
-import { Dropdown } from './dropdown';
+import { Card } from './card';
 import './styles.scss';
 
 // Context imports
@@ -19,8 +18,7 @@ export const Charts = () => {
         <div key={index} className="agent-card">
           <CancelCross marker={marker}/>
           <Header marker={marker}/>
-          {/*<Dropdown index={index}/>*/}
-          <Graphics id={index}/>
+          <Card id={index}/>
         </div>
       ))}
     </div>

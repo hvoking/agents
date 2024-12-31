@@ -1,3 +1,5 @@
+@import 'variables';
+
  .agent-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
@@ -6,7 +8,7 @@
   text-transform: capitalize;
 }
 .agent-grid-card {
-  background: rgba(236, 240, 241, 0.8);
+  background: $grid-bg;
   border: 1px solid rgba(189, 195, 199, 1);
   border-radius: 8px;
   padding: 15px;
@@ -32,7 +34,7 @@
   }
 
   &:hover {
-    background: rgba(52, 152, 219, 0.2);
+    background: $light-blue;
     transform: scale(1.05);
   }
 }

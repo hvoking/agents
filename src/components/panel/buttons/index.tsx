@@ -8,11 +8,6 @@ import { useMarkers } from 'context/agents/markers';
 export const Buttons = () => {
 	const { activePage, setActivePage } = useMarkers();
 
-	const activatePage = (section: any) => 
-		section === "home" ? 
-		setActivePage(null) : 
-		setActivePage(section);
-
 	return (
 		<div className="buttons-wrapper">
 			{sections.map((item: any, index: number) => {
@@ -26,7 +21,7 @@ export const Buttons = () => {
 					<div 
 						key={index} 
 						className={`menu-item ${isActiveSection}`} 
-						onClick={() => activatePage(section)}
+						onClick={() => setActivePage(section)}
 					>
 						<img src={iconPath} alt={title} width="30px"/>
 						<span>{title}</span>

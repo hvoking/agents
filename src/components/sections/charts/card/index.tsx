@@ -2,10 +2,7 @@
 import { useState } from 'react';
 
 // App imports
-import { Gauge } from './gauge';
-import { Legend } from './legend';
-import { Dots } from './dots';
-import { Lines } from './lines';
+import { Graphic } from './graphic';
 import { Arrow } from './arrow';
 import './styles.scss';
 
@@ -21,7 +18,7 @@ const sourceTypes = [
 	// { id: 'points', title: "properties", name: 'property_type', colorLabel: 'circle-color' },
 ];
 
-export const Graphics = ({ id }: any) => {
+export const Card = ({ id }: any) => {
 	const [ activeCharts, setActiveCharts ] = useState(true);
 
 	const { sharedGeoJsonDataMap } = useMask();
@@ -54,25 +51,24 @@ export const Graphics = ({ id }: any) => {
 	return (
 		<>
 			<Arrow onClick={onClick}/>
-			{activeCharts && <div className="chart-card">
-				{sourceTypes.map(({ id, title, name, colorLabel }) => {
-			        const data = getSourceData(id);
-			        const { distribution, colors } = processData(data, name, colorLabel);
-			        const sumOfValues = d3.sum(Object.values(distribution));
-
-			        return (
-						<div key={id} className="chart-wrapper">
-							<div className="chart-title">{title}</div>
-							{/*<Gauge distribution={distribution} colors={colors} sumOfValues={sumOfValues}/>*/}
-							<Dots distribution={distribution} colors={colors} sumOfValues={sumOfValues}/>
-							{/*<Lines distribution={distribution} colors={colors} sumOfValues={sumOfValues}/>*/}
-							<Legend distribution={distribution} colors={colors}/>
-						</div>
-			        );
-			      })}
-			</div>}
+			{activeCharts && 
+				<div className="chart-card">
+					{sourceTypes.map(({ id, title, name, colorLabel }) => {
+				        const data = getSourceData(id);
+				        
+				        const { distribution, colors } = processData(data, name, colorLabel);
+				        const sumOfValues = d3.sum(Object.values(distribution));
+				        return (
+				        	<div key={id} className="chart-wrapper">
+				        		<div className="chart-title">{title}</div>
+								<Graphic distribution={distribution} colors={colors} sumOfValues={sumOfValues}/>
+							</div>
+				        );
+				      })}
+				</div>
+			}
 		</>
 	)
 }
 
-Graphics.displayName="Graphics";
+Card.displayName="Card";
