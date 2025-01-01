@@ -1,5 +1,5 @@
 // React imports
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 
 // App imports
 import { CustomMarker } from './marker';
@@ -7,7 +7,7 @@ import { Boundary } from './boundary';
 import { Layers } from './layers';
 
 // Context imports
-import { useIsochroneApi } from 'context/api/isochrone';
+// import { useIsochroneApi } from 'context/api/isochrone';
 
 // Third party imports
 import * as turf from '@turf/turf';
@@ -17,24 +17,24 @@ export const Mask = ({ marker }: any) => {
   const center = [ longitude, latitude ];
   const boundary = turf.circle(center, 0.5);
 
-  const { fetchIsochrone } = useIsochroneApi();
-  const [ isochroneData, setIsochroneData ] = useState<any>(null);
+  // const { fetchIsochrone } = useIsochroneApi();
+  // const [ isoFeatures, setIsoFeatures ] = useState<any>(null);
 
-  useEffect(() => {
-      const fetchData = async (marker: any) => {
-          const { longitude, latitude } = marker;
-          const data = await fetchIsochrone(longitude, latitude);
-          setIsochroneData(data);
-      };
+  // useEffect(() => {
+  //     const getFeatures = async (marker: any) => {
+  //         const { longitude, latitude } = marker;
+  //         const data = await fetchIsochrone(longitude, latitude);
+  //         setIsoFeatures(data.features[0]);
+  //     };
 
-      fetchData(marker)
-  }, [ marker ]);
+  //     getFeatures(marker)
+  // }, [ marker ]);
 
   return (
     <div key={id}>
-      {isochroneData && <Boundary marker={marker} data={isochroneData.features[0]}/>}
+      <Boundary marker={marker} data={boundary}/>
       <CustomMarker marker={marker}/>
-      {isochroneData && <Layers marker={marker} boundary={isochroneData.features[0]} />}
+      <Layers marker={marker} boundary={boundary}/>
     </div>
   )
 };

@@ -7,6 +7,8 @@ import { Source } from 'react-map-gl';
 
 export const Boundary = ({ marker, data }: any) => {
     const sourceId = `boundary-source-${marker.id}`;
+
+    if (!data) return <></>
     
     return (
       <Source 

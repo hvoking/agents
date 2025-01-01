@@ -5,6 +5,8 @@ import { Polygons } from './polygons';
 import { Clusters } from './clusters';
 
 export const Layers = ({ boundary, marker }: any) => {
+	if (!boundary) return <></>;
+	
 	return (
 		<>
 			<Lines 
