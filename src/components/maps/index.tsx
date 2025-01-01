@@ -3,13 +3,14 @@ import { useState } from 'react';
 
 // App imports
 import { Tiles } from './tiles';
-import { Agent } from './agent';
+import { Mask } from './mask';
 import { Pin } from './pin';
 import { Wrapper } from './wrapper';
 
 // Context imports
 import { useMapEvents } from 'context/events/maps';
 import { useGeo } from 'context/geo';
+import { useMarkers } from 'context/agents/markers';
 
 // Third-party imports
 import { Map } from 'react-map-gl';
@@ -18,6 +19,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 export const MapContainer = () => {
 	const { viewport, mapRef, mapStyle } = useGeo();
 	const { addAgent } = useMapEvents();
+	const { markers } = useMarkers();
 	
 	const [ isMapLoaded, setIsMapLoaded ] = useState(false);
 
@@ -34,7 +36,10 @@ export const MapContainer = () => {
 				{isMapLoaded && <>
 					<Tiles/>
 					{/*<Pin/>*/}
-					<Agent/>
+					{
+						markers.length > 0 && 
+						markers.map((marker: any) => <Mask marker={marker}/>)
+					}
 				</>}
 			</Map>
 		</Wrapper>
