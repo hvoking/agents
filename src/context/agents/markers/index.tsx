@@ -21,7 +21,7 @@ export const MarkersProvider = ({children}: any) => {
 	const [ radius, setRadius ] = useState(0.5);
 	const [ addPin, setAddPin ] = useState(false);
 
-	const providers = ["overture", "foursquare", "inside_airbnb"]
+	const providers = [ "overture", "foursquare", "inside_airbnb" ]
 
 	useEffect(() => {
 	   setMarkers((prev: any) => 

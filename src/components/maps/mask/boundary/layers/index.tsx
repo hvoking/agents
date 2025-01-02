@@ -13,7 +13,7 @@ export const Layers = ({ marker, sourceId }: any) => {
 	    type: 'fill',
 	    source: sourceId,
 	    paint: {
-			"fill-color": "rgba(0, 123, 255)",
+			"fill-color": "rgba(0, 123, 255, 0.6)",
 			"fill-opacity": 0.2
 	    }
 	  };
@@ -48,5 +48,5 @@ export const Layers = ({ marker, sourceId }: any) => {
 
 	const layers: any = [ fillLayer, borderLayer, eraserLayer ]
 
-	return layers.map((currentLayer: any) => <Layer {...currentLayer}/>)
+	return layers.map((currentLayer: any) => <Layer key={currentLayer.id} {...currentLayer}/>)
 }

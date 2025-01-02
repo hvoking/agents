@@ -38,7 +38,7 @@ export const MapContainer = () => {
 					{/*<Pin/>*/}
 					{
 						markers.length > 0 && 
-						markers.map((marker: any) => <Mask marker={marker}/>)
+						markers.map((marker: any) => <Mask key={marker.id} marker={marker}/>)
 					}
 				</>}
 			</Map>

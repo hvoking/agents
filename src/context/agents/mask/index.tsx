@@ -2,7 +2,7 @@
 import { useState, useContext, createContext } from 'react';
 
 // App imports
-import { processPaintProperties } from './color';
+import { getColor } from './color';
 
 // Context imports
 import { useGeo } from 'context/geo';
@@ -40,7 +40,7 @@ export const MaskProvider = ({children}: any) => {
 				geometry: item.geometry,
 				properties: {
 					...item.properties,
-					...processPaintProperties(item.layer.paint, paintProperty),
+					...getColor(item.layer.paint, paintProperty),
 				},
 			})),
 		};
@@ -90,7 +90,7 @@ export const MaskProvider = ({children}: any) => {
 	                geometry: item.geometry,
 	                properties: { 
 	                	...item.properties, 
-	                	...processPaintProperties(item.layer.paint, 'line-color') 
+	                	...getColor(item.layer.paint, 'line-color') 
 	                },
 	            }];
 	        }
@@ -103,7 +103,7 @@ export const MaskProvider = ({children}: any) => {
                     geometry: line.geometry,
                     properties: {
                         ...item.properties,
-                        ...processPaintProperties(item.layer.paint, 'line-color'),
+                        ...getColor(item.layer.paint, 'line-color'),
                     },
                 }));
 	    });
