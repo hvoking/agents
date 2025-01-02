@@ -5,9 +5,9 @@ import { Source, Layer } from 'react-map-gl';
 import { useMask } from 'context/agents/mask';
 
 export const Circles = ({ boundary,  layer, label, clusterLayer, textLayer, index }: any) => {
-	const { getPoints } = useMask();
-	const maskProperties = getPoints(boundary, layer);
-
+	const { getGeoJson, sharedGeoJsonDataMap } = useMask();
+  const maskProperties = getGeoJson(boundary, layer, 'Point');
+  
 	if (!maskProperties) return <></>;
   
   const features = 

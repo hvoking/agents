@@ -2,14 +2,13 @@
 import { useState, useContext, createContext } from 'react';
 
 // App imports
-import { getColor } from './color';
+import { fillProperties, toFeatureCollection, filterFeatures } from './helpers';
 
 // Context imports
 import { useGeo } from 'context/geo';
 import { useMarkers } from '../markers';
 
 // Third-party imports
-import * as turf from '@turf/turf';
 import { signal } from '@preact/signals-react';
 
 const MaskContext: React.Context<any> = createContext(null)
@@ -23,100 +22,25 @@ export const useMask = () => {
 export const MaskProvider = ({children}: any) => {
 	const { mapRef } = useGeo();
 	const { radius } = useMarkers();
+	
+	const [ markerGeometryType, setMarkerGeometryType ] = useState({});
 
 	const mapFeatures = signal<any[]>([]);
 	const sharedGeoJsonDataMap = signal({});
-	const [ markerGeometryType, setMarkerGeometryType ] = useState({});
 
 	const map = mapRef.current;
-	
-    mapFeatures.value = map?.queryRenderedFeatures();
+	mapFeatures.value = map?.queryRenderedFeatures();
 
-    const toFeatureCollection = (features: any, paintProperty: any) => {
-    	const geoJsonData = {
-			type: 'FeatureCollection',
-			features: features.flatMap((item: any) => ({
-				type: 'Feature',
-				geometry: item.geometry,
-				properties: {
-					...item.properties,
-					...getColor(item.layer.paint, paintProperty),
-				},
-			})),
-		};
-		return geoJsonData
+	const getGeoJson = (boundary: any, source: string, geometryType: string) =>	{
+		const features = filterFeatures(mapFeatures.value, boundary, source, geometryType);
+		const fillProperty = fillProperties[geometryType] || 'fill-color';
+		const featureCollection = toFeatureCollection(features, fillProperty);
+		return featureCollection
     }
-
-    const getPoints = (boundary: any, source: any) => { 
-    	const geometryType = "Point";
-    	const paintProperty = 'circle-color';
-
-		const features = mapFeatures.value.filter((item: any) =>
-			item.source === source &&
-			item.geometry.type === geometryType &&
-			turf.booleanPointInPolygon(item.geometry, boundary)
-		);
-		const geoJsonData = toFeatureCollection(features, paintProperty);
-		return geoJsonData
-	};
-
-	const getPolygons = (boundary: any, source: any) => {
-		const geometryType = "Polygon";
-		const paintProperty = 'fill-color';
-
-		const features = mapFeatures.value.filter((item: any) => 
-			item.source === source &&
-			item.geometry.type === geometryType &&
-	        turf.booleanPointInPolygon(turf.centroid(item.geometry), boundary)
-		);
-
-		const geoJsonData = toFeatureCollection(features, paintProperty);
-		return geoJsonData
-	}
-
-	const getLines = (boundary: any, source: any) => {
-		const geometryType = 'LineString';
-		
-	    const currentProperties = mapFeatures.value.filter(item =>
-			item.source === source &&
-			item.geometry.type === geometryType &&
-			turf.booleanIntersects(item.geometry, boundary)
-		);
-
-	    const features = currentProperties.flatMap((item: any) => {
-	        if (turf.booleanWithin(item.geometry, boundary)) {
-	            return [{
-	                type: 'Feature',
-	                geometry: item.geometry,
-	                properties: { 
-	                	...item.properties, 
-	                	...getColor(item.layer.paint, 'line-color') 
-	                },
-	            }];
-	        }
-
-            return turf.lineSplit(item, boundary)
-                .features
-                .filter(line => turf.booleanWithin(line.geometry, boundary))
-                .map(line => ({
-                    type: 'Feature',
-                    geometry: line.geometry,
-                    properties: {
-                        ...item.properties,
-                        ...getColor(item.layer.paint, 'line-color'),
-                    },
-                }));
-	    });
-
-	    return {
-			type: 'FeatureCollection',
-			features
-		}
-	};
 
 	return (
 		<MaskContext.Provider value={{ 
-			getPoints, getLines, getPolygons, 
+			getGeoJson, 
 			sharedGeoJsonDataMap,
 			markerGeometryType, setMarkerGeometryType 
 		}}>
