@@ -4,28 +4,28 @@ import { Points } from './points';
 import { Polygons } from './polygons';
 import { Clusters } from './clusters';
 
-export const Layers = ({ boundary, marker }: any) => {
-	if (!boundary) return <></>;
+export const Layers = ({ data, marker }: any) => {
+	if (!data) return <></>;
 	
 	return (
 		<>
 			<Lines 
-				boundary={boundary} 
+				boundary={data} 
 				layer="rotterdam_roads" 
 				index={marker.id}
 			/>
 			<Polygons 
-				boundary={boundary} 
+				boundary={data} 
 				layer="buildings-overture" 
 				index={marker.id}
 			/>
 			{/*<Points 
-				boundary={boundary} 
+				boundary={data} 
 				layer="points-airbnb" 
 				index={marker.id}
 			/>
 			<Clusters 
-				boundary={boundary} 
+				boundary={data} 
 				layer="points-foursquare" 
 				index={marker.id}
 			/>*/}

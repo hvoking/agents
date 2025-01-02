@@ -1,5 +1,5 @@
 // React imports
-import { useContext, createContext } from 'react';
+import { useState, useContext, createContext } from 'react';
 
 // App imports
 import { processPaintProperties } from './color';
@@ -26,6 +26,7 @@ export const MaskProvider = ({children}: any) => {
 
 	const mapFeatures = signal<any[]>([]);
 	const sharedGeoJsonDataMap = signal({});
+	const [ markerGeometryType, setMarkerGeometryType ] = useState({});
 
 	const map = mapRef.current;
 	
@@ -114,7 +115,11 @@ export const MaskProvider = ({children}: any) => {
 	};
 
 	return (
-		<MaskContext.Provider value={{ getPoints, getLines, getPolygons, sharedGeoJsonDataMap }}>
+		<MaskContext.Provider value={{ 
+			getPoints, getLines, getPolygons, 
+			sharedGeoJsonDataMap,
+			markerGeometryType, setMarkerGeometryType 
+		}}>
 			{children}
 		</MaskContext.Provider>
 	)

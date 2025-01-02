@@ -11,8 +11,8 @@ export const useIsochroneApi = () => {
 
 export const IsochroneApiProvider = ({children}: any) => {
 	const [ routingProfile, setRoutingProfile ] = useState("walking");
-	const [ contoursType, setContoursType ] = useState("meters");
-	const [ contoursMeters, setContoursMeters ] = useState(1000);
+	const [ contoursType, setContoursType ] = useState("minutes");
+	const [ contoursMeters, setContoursMeters ] = useState(10);
 
 	const fetchIsochrone = async (longitude: any, latitude: any) => {
 		const tempUrl = `
