@@ -4,14 +4,7 @@ import { useState } from 'react';
 // App imports
 import './styles.scss';
 
-const layerOptions = [
-  { id: 'overture-buildings', label: 'Overture Buildings' },
-  { id: 'overture-roads', label: 'Overture Roads' },
-  { id: 'foursquare-poi', label: 'Foursquare POI' },
-  { id: 'inside-airbnb', label: 'Inside Airbnb' },
-];
-
-export const Dropdown = ({ index }: any) => {
+export const Dropdown = ({ layerOptions }: any) => {
 	const [isDropdownOpen, setDropdownOpen] = useState(false);
 
 	return (
@@ -24,14 +17,14 @@ export const Dropdown = ({ index }: any) => {
 		  </button>
 		  {isDropdownOpen && (
 		    <div className="dropdown-menu">
-		      {layerOptions.map((layer) => (
+		      {layerOptions.map((layer: any) => (
 		        <div key={layer.id} className="layer-option">
 		          <input
 		            type="checkbox"
-		            id={`${layer.id}-${index}`}
-		            name={`${layer.id}-${index}`}
+		            id={layer.id}
+		            name={layer.label}
 		          />
-		          <label htmlFor={`${layer.id}-${index}`}>{layer.label}</label>
+		          <label htmlFor={layer.id}>{layer.label}</label>
 		        </div>
 		      ))}
 		    </div>
