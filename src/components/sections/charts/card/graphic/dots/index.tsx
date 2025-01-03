@@ -10,8 +10,8 @@ import { useDotsSizes } from 'context/sizes/dots';
 export const Dots = ({ distribution, colors, sumOfValues }: any) => {
     const { innerWidth, innerHeight } = useDotsSizes();
 
-    const numOfColumns = 15;
-    const numOfRows = 10;
+    const numOfColumns = 8;
+    const numOfRows = 8;
 
     const dotWidth = innerWidth / numOfColumns;
     const dotHeight = innerHeight / numOfRows;

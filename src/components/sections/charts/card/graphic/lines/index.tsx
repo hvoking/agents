@@ -45,11 +45,11 @@ export const Lines = ({ distribution, colors, sumOfValues }: any) => {
 			{dotsData.map(({ cx, cy, color }: any, index: any) => (
                 <line
                     key={index}
-                    x1={cx + 1}
+                    x1={cx + 0.5}
                     y1={cy}
-                    x2={cx + dotWidth - 2}
+                    x2={cx + dotWidth - 1}
                     y2={cy}
-                    strokeWidth={6}
+                    strokeWidth={10}
                     stroke={color}
                 />
             ))}

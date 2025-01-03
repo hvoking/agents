@@ -2,33 +2,47 @@
 import { Lines } from './lines';
 import { Points } from './points';
 import { Polygons } from './polygons';
-import { Clusters } from './clusters';
+
+// Context imports
+import { useMarkers } from 'context/agents/markers';
 
 export const Layers = ({ boundary, marker }: any) => {
+	const { providers } = useMarkers();
+
 	if (!boundary) return <></>;
 	
+	const layers = providers[marker.provider];
+
 	return (
 		<>
-			<Lines 
-				boundary={boundary} 
-				layer="rotterdam_roads" 
-				index={marker.id}
-			/>
-			<Polygons 
-				boundary={boundary} 
-				layer="buildings-overture" 
-				index={marker.id}
-			/>
-			{/*<Points 
-				boundary={boundary} 
-				layer="points-airbnb" 
-				index={marker.id}
-			/>
-			<Clusters 
-				boundary={boundary} 
-				layer="points-foursquare" 
-				index={marker.id}
-			/>*/}
+			{layers.map((item: any) => {
+				return (
+					<>
+						{item.type === 'LineString' && 
+							<Lines 
+								boundary={boundary} 
+								layer={item.layer}
+								index={marker.id}
+							/>
+						}
+						{item.type === 'Polygon' && 
+							<Polygons 
+								boundary={boundary} 
+								layer={item.layer}
+								index={marker.id}
+							/>
+						}
+						{item.type === 'Point' && 
+							<Points 
+								boundary={boundary} 
+								layer={item.layer}
+								index={marker.id}
+							/>
+						}
+					</>
+				)
+			})}
+			
 		</>
 	)
 }

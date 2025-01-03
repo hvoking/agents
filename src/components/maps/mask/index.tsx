@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 
 // App imports
-import { CustomMarker } from './marker';
+import { Pin } from './pin';
 import { Boundary } from './boundary';
 import { Layers } from './layers';
 
@@ -38,7 +38,7 @@ export const Mask = ({ marker }: any) => {
     <div key={marker.id}>
       <Boundary marker={marker} boundary={boundary}/>
       <Layers marker={marker} boundary={boundary}/>
-      <CustomMarker marker={marker}/>
+      <Pin marker={marker}/>
     </div>
   )
 };

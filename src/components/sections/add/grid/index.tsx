@@ -5,19 +5,19 @@ import './styles.scss';
 import { useMarkers } from 'context/agents/markers';
 
 export const Grid = ({ imageUrls }: any) => {
-	const { setAddPin, setCurrentImage, setCurrentName, providers } = useMarkers();
+	const { setAddPin, setCurrentImage, setCurrentProvider, setCurrentName, providers } = useMarkers();
 
 	const onClick = (src: any, name: any) => {
 		setAddPin((prev: boolean) => !prev);
 		setCurrentImage(src);
-		setCurrentName(name);
+		setCurrentProvider(name);
 	}
 
 	const baseUrl = process.env.PUBLIC_URL + '/static/agents/';
 
 	return (
 		<div className="agent-grid">
-		  {providers.map((name: any) => {
+		  {Object.keys(providers).map((name: any) => {
 		  	const url = baseUrl + name + '.svg';
 		  	const processedName = name.replace("_", " ");
 
@@ -25,7 +25,7 @@ export const Grid = ({ imageUrls }: any) => {
 			  <div 
 			  	key={name}
 			  	className="agent-grid-card"
-			  	onClick={() => onClick(url, processedName)} 
+			  	onClick={() => onClick(url, name)} 
 			  >
 			    <img src={url} alt={name}/>
 			    <span>{processedName}</span>

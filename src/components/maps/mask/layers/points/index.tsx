@@ -23,7 +23,7 @@ export const Points = ({ boundary, layer, index }: any) => {
     type: "circle",
     source: sourceId,
     paint: {
-      'circle-radius': ['get', 'circle_size'],
+      'circle-radius': 3,
       'circle-color': ['get', 'circle-color']
     }
   };

@@ -44,11 +44,10 @@ export const toFeatureCollection = (features: any[], paintProperty: string) => {
 export const filterFeatures = (mapFeatures: any[], boundary: any, source: string, geometryType: string) =>
   mapFeatures.filter((item) => {
     if (item.source === source && item.geometry.type === geometryType) {
-
     	const isWithin =  
-    		geometryType === 'LineString' ? 
-			turf.booleanIntersects(item.geometry, boundary) :
-			turf.booleanPointInPolygon(turf.centroid(item.geometry), boundary);
+	    	geometryType === 'LineString' ? 
+	    	turf.booleanIntersects(item.geometry, boundary) :
+	    	turf.booleanPointInPolygon(turf.centroid(item.geometry), boundary);
 
 		return isWithin
     }

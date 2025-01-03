@@ -2,17 +2,16 @@
 
 .chart-card {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
 	grid-gap: 10px;
+	max-height: 200px;
 }
 .chart-wrapper {
-  display: grid;
   background-color: $light-bg;
   padding: 5px;
   overflow: hidden;
-  grid-template-rows: min-content auto;
 }
 .chart-title {
 	font-weight: 500;
 	padding-left: 5px;
+	padding-bottom: 5px;
 }

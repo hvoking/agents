@@ -4,12 +4,11 @@ import { useState } from 'react';
 // App imports
 import { Tiles } from './tiles';
 import { Mask } from './mask';
-import { Pin } from './pin';
 import { Wrapper } from './wrapper';
 
 // Context imports
-import { useMapEvents } from 'context/events/maps';
 import { useGeo } from 'context/geo';
+import { useMapEvents } from 'context/events/maps';
 import { useMarkers } from 'context/agents/markers';
 
 // Third-party imports
@@ -35,9 +34,7 @@ export const MapContainer = () => {
 			>
 				{isMapLoaded && <>
 					<Tiles/>
-					{/*<Pin/>*/}
-					{
-						markers.length > 0 && 
+					{markers.length > 0 && 
 						markers.map((marker: any) => <Mask key={marker.id} marker={marker}/>)
 					}
 				</>}
