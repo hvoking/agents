@@ -23,9 +23,11 @@ export const MarkersProvider = ({children}: any) => {
 	const [ addPin, setAddPin ] = useState(false);
 
 	const providers = {
-		"overture": [
-			{layer: 'buildings-overture', label: 'Buildings', type: "Polygon", columnName: "subtype", graphicType: "bars"},
-			{layer: 'rotterdam_roads', label: 'Roads', type: "LineString", columnName: "road_class", graphicType: "bars"},
+		"streets": [
+			{layer: 'rotterdam_roads', label: 'Roads', type: "LineString", columnName: "road_class", graphicType: "dots"},
+		],
+		"buildings": [
+			{layer: 'buildings-overture', label: 'Buildings', type: "Polygon", columnName: "subtype", graphicType: "dots"},
 		],
 		"foursquare": [
 			{layer: 'points-foursquare', label: 'Points of Interest', type: "Point", columnName: "category", graphicType: "dots"},

@@ -33,7 +33,7 @@ export const Basemaps = () => {
 					)
 				})}
 			</div>
-			<div className="thumbnail-container">
+	{/*		<div className="thumbnail-container">
 				{Object.keys(light.mapas).map((item: any, index: number) => {
 					return (
 						<div>
@@ -47,7 +47,7 @@ export const Basemaps = () => {
 						</div>
 					)
 				})}
-			</div>
+			</div>*/}
 			<div className="thumbnail-container">
 				{Object.keys(color.mapas).map((item: any, index: number) => {
 					return (

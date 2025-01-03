@@ -11,7 +11,7 @@ export const Legend = ({ distribution, colors }: any) => {
 							className="chart-legend-icon" 
 							style={{backgroundColor: colors[key]}}
 						/>
-						<div>{key.toLowerCase()}</div>
+						<div>{key.toLowerCase().split(" ")[0]}</div>
 					</div>
 				)
 			})}

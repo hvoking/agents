@@ -15,9 +15,9 @@ export const Layers = ({ boundary, marker }: any) => {
 
 	return (
 		<>
-			{layers.map((item: any) => {
+			{layers.map((item: any, index: any) => {
 				return (
-					<>
+					<div key={index}>
 						{item.type === 'LineString' && 
 							<Lines 
 								boundary={boundary} 
@@ -39,7 +39,7 @@ export const Layers = ({ boundary, marker }: any) => {
 								index={marker.id}
 							/>
 						}
-					</>
+					</div>
 				)
 			})}
 			

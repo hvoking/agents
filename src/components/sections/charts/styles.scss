@@ -18,8 +18,3 @@
   grid-gap: 10px;
   cursor: pointer;
 }
-.agent-card:hover {
-  transition: transform 0.3s;
-  background: $grid-bg;
-  transform: scale(1.03);
-}

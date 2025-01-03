@@ -17,8 +17,8 @@ export const listOfBaseMaps = [
 	{
 		"provider": "color",
 		"mapas": {
-			"Custom": "mapbox://styles/hvoking/cm16kxow500ez01pc3psqc4pv",
 			"Voyager": "https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json",
+			"Custom": "mapbox://styles/hvoking/cm16kxow500ez01pc3psqc4pv",
 		}
 	},
 ]

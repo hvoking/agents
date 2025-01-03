@@ -11,7 +11,7 @@ export const Dots = ({ distribution, colors, sumOfValues }: any) => {
     const { innerWidth, innerHeight } = useDotsSizes();
 
     const numOfColumns = 8;
-    const numOfRows = 8;
+    const numOfRows = 6;
 
     const dotWidth = innerWidth / numOfColumns;
     const dotHeight = innerHeight / numOfRows;
