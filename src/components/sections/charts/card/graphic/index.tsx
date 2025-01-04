@@ -1,6 +1,5 @@
 // App imports
 import { Gauge } from './gauge';
-import { Legend } from './legend';
 import { Dots } from './dots';
 import { Lines } from './lines';
 import { Bars } from './bars';
@@ -16,9 +15,8 @@ export const Graphic = ({ data, name, colorLabel, title, graphicType }: any) => 
 	return (
 		<div className="chart-wrapper">
 	        <div className="chart-title">{title}</div>
-			{graphicType === "bars" && <Bars distribution={distribution} colors={colors} sumOfValues={sumOfValues}/>}
 			<div style={{display: "grid", gridTemplateColumns: "1fr 1fr", alignItems: "start"}}>
-				{graphicType !== "bars" && <Legend distribution={distribution} colors={colors}/>}
+				<Bars distribution={distribution} colors={colors} sumOfValues={sumOfValues}/>
 				{graphicType === "gauge" && <Gauge distribution={distribution} colors={colors} sumOfValues={sumOfValues}/>}
 				{graphicType === "dots" && <Dots distribution={distribution} colors={colors} sumOfValues={sumOfValues}/>}
 				{graphicType === "lines" && <Lines distribution={distribution} colors={colors} sumOfValues={sumOfValues}/>}

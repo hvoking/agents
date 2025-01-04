@@ -14,14 +14,13 @@ export const Filters = ({ marker }: any) => {
 
 	return (
 		<>
-			{activateFilters && <Settings marker={marker}/>}
 			<Button 
 				linesColor={linesColor} 
 				circleColor={circleColor}
 				setActivateFilters={setActivateFilters}
 				setHoverActivate={setHoverActivate}
 			/>
-			
+			{activateFilters && <Settings marker={marker}/>}
 		</>
 	)
 }
