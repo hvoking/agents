@@ -35,9 +35,9 @@ export const Settings = ({ marker }: any) => {
 			<div>
 				{!isIsoActive && 
 					<>
-						<div>Set the circle radius</div>
-						<div style={{width: "200px", height: "60px"}}>
-							<Slider/>
+						<div>Circle radius</div>
+						<div style={{width: "100%", height: "60px"}}>
+							<Slider marker={marker}/>
 						</div>
 					</>
 				}
@@ -63,12 +63,8 @@ export const Settings = ({ marker }: any) => {
 					<div>
 						Minutes
 					</div>
-					<div style={{display: "grid", gridTemplateColumns: "1fr 1fr", justifyItems: "center"}}>
-						{Object.entries(minutesDict).map(([key, value]: any) => {
-							return (
-								<div key={key}>{key}</div>
-							)
-						})}
+					<div style={{width: "100%", height: "60px"}}>
+						<Slider marker={marker}/>
 					</div>
 					</>
 				}

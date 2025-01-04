@@ -27,7 +27,7 @@ export const Mask = ({ marker }: any) => {
         const data = await fetchIsochrone(longitude, latitude);
         setBoundary(data.features[0]);
       } else {
-        setBoundary(turf.circle([ longitude, latitude ], 0.5));
+        setBoundary(turf.circle([ longitude, latitude ], marker.radius));
       }
     };
 

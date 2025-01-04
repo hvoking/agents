@@ -6,14 +6,13 @@ import './styles.scss';
 // Context imports
 import { useMarkers } from 'context/agents/markers';
 
-
-export const Charts = () => {
+export const Features = () => {
   const { markers } = useMarkers();
 
   if (!(markers.length > 0)) return <></>;
 
   return (
-    <div className="charts">
+    <div className="features-wrapper">
       {markers.map((marker: any, index: number) => (
         <div key={marker.id} className="agent-card">
           <Header marker={marker}/>
@@ -24,4 +23,4 @@ export const Charts = () => {
   );
 };
 
-Charts.displayName = 'Charts';
+Features.displayName = 'Features';

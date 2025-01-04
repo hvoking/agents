@@ -4,16 +4,17 @@ import { Dots } from './dots';
 import { Lines } from './lines';
 import { Bars } from './bars';
 import { processData } from './data';
+import './styles.scss';
 
 // Third-party imports
 import * as d3 from 'd3';
 
-export const Graphic = ({ data, name, colorLabel, title, graphicType }: any) => {
+export const Charts = ({ data, name, colorLabel, title, graphicType, backgroundColor }: any) => {
 	const { distribution, colors } = processData(data, name, colorLabel);
 	const sumOfValues = d3.sum(Object.values(distribution));
 
 	return (
-		<div className="chart-wrapper">
+		<div className="chart-wrapper" style={{backgroundColor: backgroundColor}}>
 	        <div className="chart-title">{title}</div>
 			<div style={{display: "grid", gridTemplateColumns: "1fr 1fr", alignItems: "start"}}>
 				<Bars distribution={distribution} colors={colors} sumOfValues={sumOfValues}/>
@@ -25,4 +26,4 @@ export const Graphic = ({ data, name, colorLabel, title, graphicType }: any) => 
 	)
 }
 
-Graphic.displayName="Graphic";
+Charts.displayName="Charts";

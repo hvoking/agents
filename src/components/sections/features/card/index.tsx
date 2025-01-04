@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 // App imports
-import { Graphic } from './graphic';
+import { Charts } from './charts';
 import { Arrow } from './arrow';
 
 import './styles.scss';
@@ -29,10 +29,10 @@ export const Card = ({ marker }: any) => {
 		<>
 			<Arrow onClick={onClick}/>
 			{activeCharts && 
-				<div className="chart-card" style={{gridTemplateColumns: currentProvider.length > 1 ? "1fr 1fr" : "1f"}}>
+				<div className="chart-card">
 					{currentProvider.map((item: any) => {
 						return (
-							<Graphic 
+							<Charts 
 								data={
 									item.type === "LineString" ? 
 									linesData : 
@@ -52,6 +52,7 @@ export const Card = ({ marker }: any) => {
 								} 
 								title={item.label}
 								graphicType={item.graphicType}
+								backgroundColor={marker.color}
 							/>
 						)
 					})}

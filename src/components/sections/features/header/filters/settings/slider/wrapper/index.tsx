@@ -1,6 +1,8 @@
 // React imports
 import { useCallback } from 'react';
 
+import { useMarkers } from 'context/agents/markers';
+
 // Third-party imports
 import * as d3 from 'd3';
 
@@ -9,18 +11,10 @@ export const Wrapper = ({
     minBound, maxBound,
     innerWidth, innerHeight, 
     radiusPosition, setRadiusPosition,
-    setCircleRadius,
+    marker,
     setActiveForeground
 }: any) => {
-    const onDragStart = (event: any) => {
-        const x = xScale.invert(event.x);
-
-        const boundedX = 
-            x < minBound ? minBound : 
-            x > maxBound ? maxBound :
-            x;
-        setRadiusPosition(+boundedX);
-    }
+    const { setMarkers } = useMarkers();
 
     const onDrag = (event: any) => {
         const x = xScale.invert(event.x);
@@ -28,8 +22,9 @@ export const Wrapper = ({
             x < minBound ? minBound : 
             x > maxBound ? maxBound :  
             x;
-        setRadiusPosition(+boundedX);
-    }
+
+        setRadiusPosition(boundedX);
+    };
 
     const onDragEnd = (event: any) => {
         const x = xScale.invert(event.x);
@@ -37,12 +32,22 @@ export const Wrapper = ({
             x < minBound ? minBound : 
             x > maxBound ? maxBound :  
             x;
-        setCircleRadius(+boundedX);
-    }
+
+        // Snap to the nearest 0.1 step
+        const roundedX = Math.round(boundedX * 10) / 10;
+
+        // Only update markers if the radius has changed
+        setMarkers((prev: any) =>
+            prev.map((item: any) =>
+                item.id === marker.id && item.radius !== roundedX
+                    ? { ...item, radius: roundedX }
+                    : item
+            )
+        );
+    };
 
     const sliderRef = useCallback((node: any) => {
         const drag = d3.drag()
-            .on('start', onDragStart)
             .on('drag', onDrag)
             .on('end', onDragEnd);
         d3.select(node).call(drag);

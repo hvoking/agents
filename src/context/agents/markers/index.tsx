@@ -24,7 +24,7 @@ export const MarkersProvider = ({children}: any) => {
 
 	const providers = {
 		"streets": [
-			{layer: 'rotterdam_roads', label: 'Roads', type: "LineString", columnName: "road_class", graphicType: "dots"},
+			{layer: 'rotterdam_roads', label: 'Streets', type: "LineString", columnName: "road_class", graphicType: "dots"},
 		],
 		"buildings": [
 			{layer: 'buildings-overture', label: 'Buildings', type: "Polygon", columnName: "subtype", graphicType: "dots"},

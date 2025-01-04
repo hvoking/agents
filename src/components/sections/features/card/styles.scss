@@ -1,14 +1,7 @@
-@import 'variables';
-
 .chart-card {
 	display: grid;
 	grid-gap: 10px;
 	max-height: 200px;
-}
-.chart-wrapper {
-  background-color: $light-bg;
-  padding: 5px;
-  overflow: hidden;
 }
 .chart-title {
 	font-weight: 500;

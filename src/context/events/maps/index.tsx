@@ -33,6 +33,8 @@ export const MapEventsProvider = ({children}: any) => {
 				image: currentImage,
 				name: currentName,
 				provider: currentProvider,
+				radius: 0.5,
+				color: "rgba(223, 246, 255, 1)",
 			};
 
 			setCurrentMarker(newMarker);

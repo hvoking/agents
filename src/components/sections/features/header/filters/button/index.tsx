@@ -10,47 +10,47 @@ export const Button = ({ circleColor, linesColor, setActivateFilters, setHoverAc
 			onMouseEnter={() => setHoverActivate(true)}
 			onMouseLeave={() => setHoverActivate(false)}
 		>
-			<svg viewBox={`0 0 40 40`}>
+			<svg viewBox={`0 0 30 30`}>
 				<g>
 					<line
-						x1={10}
+						x1={5}
+						y1={10}
+						x2={25}
+						y2={10}
+						stroke={linesColor}
+					/>
+					<circle
+						cx={10}
+						cy={10}
+						r={2}
+						fill={circleColor}
+						stroke={linesColor}
+					/>
+					<line
+						x1={5}
 						y1={15}
-						x2={30}
+						x2={25}
 						y2={15}
 						stroke={linesColor}
 					/>
 					<circle
-						cx={15}
+						cx={20}
 						cy={15}
-						r={1.5}
+						r={2}
 						fill={circleColor}
 						stroke={linesColor}
 					/>
 					<line
-						x1={10}
+						x1={5}
 						y1={20}
-						x2={30}
+						x2={25}
 						y2={20}
 						stroke={linesColor}
 					/>
 					<circle
-						cx={25}
+						cx={10}
 						cy={20}
-						r={1.5}
-						fill={circleColor}
-						stroke={linesColor}
-					/>
-					<line
-						x1={10}
-						y1={25}
-						x2={30}
-						y2={25}
-						stroke={linesColor}
-					/>
-					<circle
-						cx={15}
-						cy={25}
-						r={1.5}
+						r={2}
 						fill={circleColor}
 						stroke={linesColor}
 					/>

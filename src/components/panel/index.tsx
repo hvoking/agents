@@ -9,7 +9,7 @@ export const Panel = () => {
         <Logo/>
         <div className="section-wrapper">
           <Section section={"agent"} title={"Add Agent"} />
-          <Section section={"charts"} title={"Charts"} />
+          <Section section={"features"} title={"Features"} />
           <Section section={"basemaps"} title={"Basemaps"} />
         </div>
       </div>
