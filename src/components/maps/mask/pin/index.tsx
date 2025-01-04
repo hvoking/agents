@@ -9,7 +9,7 @@ import { Marker } from 'react-map-gl';
 
 export const Pin = ({ marker }: any) => {
 	const { handleMarkerEvent, onDrag } = useMarkerEvents();
-	const { id, latitude, longitude, image } = marker;
+	const { id, latitude, longitude, image, provider } = marker;
 
 	return (
 		<Marker
@@ -28,6 +28,9 @@ export const Pin = ({ marker }: any) => {
 					alt="agent-avatar" 
 					width="100%"
 				/>
+				<div className="map-marker-provider">
+					{provider}
+				</div>
 			</div>
 	    </Marker>
 	)

@@ -1,6 +1,6 @@
 .agent-header-wrapper {
   display: grid;
-  grid-template-columns: min-content min-content;
+  grid-template-columns: min-content min-content auto min-content;
   white-space: nowrap;
   grid-gap: 10px;
 }

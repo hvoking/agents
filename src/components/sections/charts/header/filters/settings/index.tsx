@@ -1,0 +1,80 @@
+// App imports
+import { Slider } from './slider';
+import { transportValues, contoursTypeValues, minutesDict } from './helpers';
+import './styles.scss';
+
+// Context imports
+import { useMask } from 'context/agents/mask';
+
+export const Settings = ({ marker }: any) => {
+	const { markerGeometryType, setMarkerGeometryType } = useMask();
+
+	const isIsoActive = markerGeometryType[marker.id] === "iso"
+
+	const circleBackgroundColor = !isIsoActive ? "rgba(52, 152, 219, 0.3)" : "rgba(0, 0, 0, 0)"
+	const isoBackgroundColor = isIsoActive ? "rgba(52, 152, 219, 0.3)" : "rgba(0, 0, 0, 0)"
+
+	return (
+		<div className="map-filters-wrapper">
+			<div className="header-selector">
+				<img 
+					src={process.env.PUBLIC_URL + "/static/icons/circle.svg"} 
+					alt="circle-icon"
+					className="settings-icon"
+					style={{backgroundColor: circleBackgroundColor}}
+					onClick={() => setMarkerGeometryType((prev: any) => ({ ...prev, [ marker.id ]: 'circle' }))}
+				/>
+				<img 
+					src={process.env.PUBLIC_URL + "/static/icons/iso.svg"} 
+					alt="iso-icon"
+					className="settings-icon"
+					style={{backgroundColor: isoBackgroundColor}}
+					onClick={() => setMarkerGeometryType((prev: any) => ({ ...prev, [marker.id]: 'iso' }))}
+				/>
+			</div>
+			<div>
+				{!isIsoActive && 
+					<>
+						<div>Set the circle radius</div>
+						<div style={{width: "200px", height: "60px"}}>
+							<Slider/>
+						</div>
+					</>
+				}
+				{ isIsoActive &&
+					<>
+					<div>Routing Profile</div>
+					<div style={{display: "grid", gridTemplateColumns: "1fr 1fr 1fr", justifyItems: "center"}}>
+						{Object.entries(transportValues).map(([key, value]: any) => {
+							return (
+								<img src={value} alt={key}/>
+							)
+						})}
+					</div>
+					<div>Countours Type</div>
+					<div style={{display: "grid", gridTemplateColumns: "1fr 1fr", justifyItems: "center"}}>
+						{Object.entries(contoursTypeValues).map(([key, value]: any) => {
+							return (
+								<img src={value} alt={key}/>
+							)
+						})}
+					</div>
+					
+					<div>
+						Minutes
+					</div>
+					<div style={{display: "grid", gridTemplateColumns: "1fr 1fr", justifyItems: "center"}}>
+						{Object.entries(minutesDict).map(([key, value]: any) => {
+							return (
+								<div key={key}>{key}</div>
+							)
+						})}
+					</div>
+					</>
+				}
+			</div>
+		</div>
+	)
+}
+
+Settings.displayName="Settings";

@@ -3,7 +3,16 @@
   cursor: pointer;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+}
+.map-marker-provider{
+  background-color: rgba(255, 255, 255, 1); 
+  padding: 10px; 
+  padding-top: 5px; 
+  padding-bottom: 5px; 
+  border-radius: 3px; 
+  width: min-content;
+  justify-self: center;
+  font-weight: 600;
 }
 .map-marker:hover {
   transform: scale(1.1);
