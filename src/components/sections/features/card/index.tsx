@@ -30,9 +30,10 @@ export const Card = ({ marker }: any) => {
 			<Arrow onClick={onClick}/>
 			{activeCharts && 
 				<div className="chart-card">
-					{currentProvider.map((item: any) => {
+					{currentProvider.map((item: any, index: number) => {
 						return (
 							<Charts 
+								key={index}
 								data={
 									item.type === "LineString" ? 
 									linesData : 

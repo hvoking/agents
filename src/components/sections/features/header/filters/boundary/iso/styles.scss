@@ -1,0 +1,22 @@
+@import 'variables';
+
+.routing-profile {
+  display: flex; 
+  grid-gap: 5px;
+  justify-content: space-around;
+
+}
+.routing-image-wrapper {
+  border: 2px solid $border-color;
+  border-radius: 5px;
+  width: 40px;
+  display: grid;
+  grid-gap: 10px;
+  justify-items: center;
+  img {
+    height: 15px;    
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+
+}

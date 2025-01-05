@@ -15,14 +15,9 @@ import { useRadiusSizes } from 'context/sizes/radius';
 // Third-party imports
 import * as d3 from 'd3';
 
-export const Slider = ({ marker }: any) => {
+export const Slider = ({ marker, radiusPosition, setRadiusPosition, minBound, maxBound }: any) => {
   const [ activeForeground, setActiveForeground ] = useState(false);
   const { innerWidth, innerHeight } = useRadiusSizes();
-
-  const [ radiusPosition, setRadiusPosition ] = useState(0.5);
-  
-  const minBound = 0.1;
-  const maxBound = 1;
 
   const circleHeight = innerHeight / 6;
   const offset = 20;

@@ -12,6 +12,7 @@ export const Header = ({ marker }: any) => {
 			<div></div>
 			<div style={{display: "flex", gap: "10px"}}>
 				<Filters marker={marker}/>
+				<img src={process.env.PUBLIC_URL + "/static/icons/colors.svg"} alt="colors" height={23}/>
 				<CancelCross marker={marker}/>
 			</div>
 				{/*<div className="agent-location">

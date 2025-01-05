@@ -31,13 +31,10 @@ export const MapEventsProvider = ({children}: any) => {
 				latitude: lat,
 				longitude: lng,
 				image: currentImage,
-				name: currentName,
 				provider: currentProvider,
 				radius: 0.5,
 				color: "rgba(223, 246, 255, 1)",
 				routingProfile: "walking",
-				contoursType: "minutes",
-				contoursMeters: 500,
 				contoursMinutes: 10,
 			};
 
