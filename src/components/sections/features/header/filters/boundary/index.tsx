@@ -1,13 +1,16 @@
 // App imports
 import { Slider } from './slider';
-import { transportValues, contoursTypeValues, minutesDict } from './helpers';
+import { routingProfileValues, contoursTypeValues, minutesDict } from './helpers';
 import './styles.scss';
 
 // Context imports
 import { useMask } from 'context/agents/mask';
+import { useIsochroneApi } from 'context/api/isochrone';
 
-export const Settings = ({ marker }: any) => {
+export const Boundary = ({ marker }: any) => {
 	const { markerGeometryType, setMarkerGeometryType } = useMask();
+
+	const { contoursType, routingProfile, setRoutingProfile } = useIsochroneApi();
 
 	const isIsoActive = markerGeometryType[marker.id] === "iso"
 
@@ -32,7 +35,7 @@ export const Settings = ({ marker }: any) => {
 					onClick={() => setMarkerGeometryType((prev: any) => ({ ...prev, [marker.id]: 'iso' }))}
 				/>
 			</div>
-			<div>
+			<div className="boundary-selector-wrapper">
 				{!isIsoActive && 
 					<>
 						<div>Circle radius</div>
@@ -44,26 +47,25 @@ export const Settings = ({ marker }: any) => {
 				{ isIsoActive &&
 					<>
 					<div>Routing Profile</div>
-					<div style={{display: "grid", gridTemplateColumns: "1fr 1fr 1fr", justifyItems: "center"}}>
-						{Object.entries(transportValues).map(([key, value]: any) => {
+					<div className="routing-profile">
+						{Object.entries(routingProfileValues).map(([key, value]: any) => {
 							return (
 								<img src={value} alt={key}/>
 							)
 						})}
 					</div>
-					<div>Countours Type</div>
-					<div style={{display: "grid", gridTemplateColumns: "1fr 1fr", justifyItems: "center"}}>
+					<div>Contours Type</div>
+					<div className="contours-type">
 						{Object.entries(contoursTypeValues).map(([key, value]: any) => {
 							return (
-								<img src={value} alt={key}/>
+								<img src={value} alt={key} onClick={() => setRoutingProfile(key)}/>
 							)
 						})}
 					</div>
-					
 					<div>
-						Minutes
+						{contoursType}
 					</div>
-					<div style={{width: "100%", height: "60px"}}>
+					<div className="iso-slider">
 						<Slider marker={marker}/>
 					</div>
 					</>
@@ -73,4 +75,4 @@ export const Settings = ({ marker }: any) => {
 	)
 }
 
-Settings.displayName="Settings";
+Boundary.displayName="Boundary";

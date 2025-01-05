@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 // App imports
-import { Settings } from './settings';
+import { Boundary } from './boundary';
 import { Button } from './button';
 
 export const Filters = ({ marker }: any) => {
@@ -20,7 +20,7 @@ export const Filters = ({ marker }: any) => {
 				setActivateFilters={setActivateFilters}
 				setHoverActivate={setHoverActivate}
 			/>
-			{activateFilters && <Settings marker={marker}/>}
+			{activateFilters && <Boundary marker={marker}/>}
 		</>
 	)
 }

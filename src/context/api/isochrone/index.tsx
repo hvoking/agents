@@ -10,17 +10,16 @@ export const useIsochroneApi = () => {
 }
 
 export const IsochroneApiProvider = ({children}: any) => {
-	const [ routingProfile, setRoutingProfile ] = useState("walking");
-	const [ contoursType, setContoursType ] = useState("minutes");
-	const [ contoursMeters, setContoursMeters ] = useState(10);
 
-	const fetchIsochrone = async (longitude: any, latitude: any) => {
+	const fetchIsochrone = async (marker: any) => {
+		const { routingProfile, longitude, latitude, contoursType, contoursMinutes } = marker;
+
 		const tempUrl = `
 			https://api.mapbox.com/isochrone/v1/mapbox/
 			${routingProfile}/
 			${longitude}%2C
 			${latitude}
-			?contours_${contoursType}=${contoursMeters}
+			?contours_${contoursType}=${contoursMinutes}
 			&polygons=true
 			&denoise=1
 			&access_token=${process.env.REACT_APP_MAPBOX_TOKEN}
@@ -34,8 +33,6 @@ export const IsochroneApiProvider = ({children}: any) => {
 	return (
 		<IsochroneApiContext.Provider value={{ 
 			fetchIsochrone,
-			contoursType, setContoursType,
-			contoursMeters, setContoursMeters,
 		}}>
 			{children}
 		</IsochroneApiContext.Provider>

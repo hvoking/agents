@@ -1,4 +1,3 @@
-
 // App imports
 import { getBorderLayer, getEraserLayer, getFillLayer } from './layers';
 

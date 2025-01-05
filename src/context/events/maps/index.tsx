@@ -35,6 +35,10 @@ export const MapEventsProvider = ({children}: any) => {
 				provider: currentProvider,
 				radius: 0.5,
 				color: "rgba(223, 246, 255, 1)",
+				routingProfile: "walking",
+				contoursType: "minutes",
+				contoursMeters: 500,
+				contoursMinutes: 10,
 			};
 
 			setCurrentMarker(newMarker);
@@ -55,9 +59,7 @@ export const MapEventsProvider = ({children}: any) => {
 	}, []);
 
 	return (
-		<MapEventsContext.Provider value={{
-			addAgent
-		}}>
+		<MapEventsContext.Provider value={{ addAgent }}>
 			{children}
 		</MapEventsContext.Provider>
 	)

@@ -14,6 +14,7 @@ import { useMask } from 'context/agents/mask';
 import * as turf from '@turf/turf';
 
 export const Mask = ({ marker }: any) => {
+  
   const { fetchIsochrone } = useIsochroneApi();
   const { markerGeometryType } = useMask();
 
@@ -22,12 +23,12 @@ export const Mask = ({ marker }: any) => {
   useEffect(() => {
     if (!marker) return;
 
-    const fetchBoundary = async ({ longitude, latitude }: any) => {
+    const fetchBoundary = async (marker: any) => {
       if (markerGeometryType[marker.id] === 'iso') {
-        const data = await fetchIsochrone(longitude, latitude);
+        const data = await fetchIsochrone(marker);
         setBoundary(data.features[0]);
       } else {
-        setBoundary(turf.circle([ longitude, latitude ], marker.radius));
+        setBoundary(turf.circle([ marker.longitude, marker.latitude ], marker.radius));
       }
     };
 

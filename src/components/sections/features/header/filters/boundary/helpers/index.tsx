@@ -1,4 +1,4 @@
-export const transportValues: any = {
+export const routingProfileValues: any = {
 	"walking": process.env.PUBLIC_URL + "/static/iso/walking.svg",
 	"cycling": process.env.PUBLIC_URL + "/static/iso/cycling.svg",
 	"driving": process.env.PUBLIC_URL + "/static/iso/driving.svg"
