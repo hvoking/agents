@@ -1,0 +1,15 @@
+.slider-wrapper-wrapper {
+	display: grid; 
+	padding-right: 10px; 
+	padding-left: 10px;
+}
+.slider-wrapper {
+	width: 100%; 
+	height: 30px;
+	cursor: ew-resize;
+}
+.slider-legend-wrapper {
+	display: flex; 
+	justify-content: space-between; 
+	font-size: 0.8em;
+}

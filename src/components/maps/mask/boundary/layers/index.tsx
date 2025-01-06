@@ -6,13 +6,13 @@ export const getEraserLayer = (layerId: any, sourceId: any) => ({
 	minzoom: 14
 });
 
-export const getFillLayer = (layerId: any, sourceId: any) => ({
+export const getFillLayer = (layerId: any, sourceId: any, markerColor: any) => ({
 	id: layerId,
 	type: 'fill',
 	source: sourceId,
 	paint: {
-		"fill-color": "rgba(0, 123, 255, 0.4)",
-		"fill-opacity": 0.2
+		"fill-color": markerColor,
+		"fill-opacity": 0.4
 	}
 });
 

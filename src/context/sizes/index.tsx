@@ -4,6 +4,7 @@ import { DotsSizesProvider } from './dots';
 import { LinesSizesProvider } from './lines';
 import { RadiusSizesProvider } from './radius';
 import { CircleSizesProvider } from './circle';
+import { SliderSizesProvider } from './slider';
 
 export const SizesProvider = ({ children }: any) => {
 	return (
@@ -13,7 +14,9 @@ export const SizesProvider = ({ children }: any) => {
 		<LinesSizesProvider>
 		<CircleSizesProvider>
 		<RadiusSizesProvider>
+		<SliderSizesProvider>
 			{children}
+		</SliderSizesProvider>
 		</RadiusSizesProvider>
 		</CircleSizesProvider>
 		</LinesSizesProvider>

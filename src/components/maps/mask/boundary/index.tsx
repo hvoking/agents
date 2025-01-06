@@ -15,7 +15,7 @@ export const Boundary = ({ marker, boundary }: any) => {
   const eraserId = `boundary-eraser-${markerId}`;
 
   const eraserLayer = getEraserLayer(eraserId, sourceId);
-  const fillLayer = getFillLayer(fillId, sourceId);
+  const fillLayer = getFillLayer(fillId, sourceId, marker.color);
   const borderLayer = getBorderLayer(borderId, sourceId);
 
   const layers: any = [ fillLayer, borderLayer, eraserLayer ]

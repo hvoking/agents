@@ -1,6 +1,7 @@
 // App imports
 import { Location } from './location';
 import { Filters } from './filters';
+import { Colors } from './colors';
 import { CancelCross } from './cross';
 import './styles.scss';
 
@@ -12,7 +13,7 @@ export const Header = ({ marker }: any) => {
 			<div></div>
 			<div style={{display: "flex", gap: "10px"}}>
 				<Filters marker={marker}/>
-				<img src={process.env.PUBLIC_URL + "/static/icons/colors.svg"} alt="colors" height={23}/>
+				<Colors marker={marker}/>
 				<CancelCross marker={marker}/>
 			</div>
 				{/*<div className="agent-location">

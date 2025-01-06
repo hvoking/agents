@@ -27,30 +27,31 @@ export const Card = ({ marker }: any) => {
 
 	return (
 		<>
-			<Arrow onClick={onClick}/>
 			{activeCharts && 
 				<div className="chart-card">
 					{currentProvider.map((item: any, index: number) => {
+						const currentData = 
+							item.type === "LineString" ? 
+							linesData : 
+							item.type === 'Point' ? 
+							pointsData : 
+							item.type === 'Cluster' ? 
+							clusterData :
+							polygonsData;
+
+						const currentColor = 
+							item.type === "LineString" ? 
+							'line-color' : 
+							item.type === 'Point'?
+							'circle-color' :
+							'fill-color'
+
 						return (
 							<Charts 
 								key={index}
-								data={
-									item.type === "LineString" ? 
-									linesData : 
-									item.type === 'Point' ? 
-									pointsData : 
-									item.type === 'Cluster' ? 
-									clusterData :
-									polygonsData
-								} 
+								data={currentData} 
 								name={item.columnName} 
-								colorLabel={
-									item.type === "LineString" ? 
-									'line-color' : 
-									item.type === 'Point'?
-									'circle-color' :
-									'fill-color'
-								} 
+								colorLabel={currentColor} 
 								title={item.label}
 								graphicType={item.graphicType}
 								backgroundColor={marker.color}
@@ -59,6 +60,7 @@ export const Card = ({ marker }: any) => {
 					})}
 				</div>
 			}
+			<Arrow onClick={onClick}/>
 		</>
 	)
 }
