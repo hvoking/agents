@@ -24,16 +24,44 @@ export const MarkersProvider = ({children}: any) => {
 
 	const providers = {
 		"streets": [
-			{layer: 'rotterdam_roads', label: 'Streets', type: "LineString", columnName: "road_class", graphicType: "dots"},
+			{
+				provider: "overture", 
+				layer: 'rotterdam_roads', 
+				label: 'Streets', 
+				type: "LineString", 
+				columnName: "road_class", 
+				graphicType: "dots"
+			},
 		],
 		"buildings": [
-			{layer: 'buildings-overture', label: 'Buildings', type: "Polygon", columnName: "subtype", graphicType: "dots"},
+			{
+				provider: "overture", 
+				layer: 'buildings-overture', 
+				label: 'Buildings', 
+				type: "Polygon", 
+				columnName: "subtype", 
+				graphicType: "dots"
+			},
 		],
 		"foursquare": [
-			{layer: 'points-foursquare', label: 'Points of Interest', type: "Point", columnName: "category", graphicType: "dots"},
+			{
+				provider: "foursquare", 
+				layer: 'points-foursquare', 
+				label: 'Points of Interest', 
+				type: "Point", 
+				columnName: "category", 
+				graphicType: "dots"
+			},
 		],
 		"inside_airbnb": [
-			{layer: 'points-airbnb', label: 'Properties', type: "Point", columnName: "property_type", graphicType: "gauge"},
+			{
+				provider: "inside_airbnb", 
+				layer: 'points-airbnb', 
+				label: 'Properties', 
+				type: "Point", 
+				columnName: "property_type", 
+				graphicType: "gauge"
+			},
 		],
 	}
 

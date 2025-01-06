@@ -47,18 +47,25 @@ export const Card = ({ marker }: any) => {
 							'fill-color'
 
 						return (
-							<Charts 
-								key={index}
-								data={currentData} 
-								name={item.columnName} 
-								colorLabel={currentColor} 
-								title={item.label}
-								graphicType={item.graphicType}
-								backgroundColor={marker.color}
-							/>
+							<>
+								<Charts 
+									key={index}
+									data={currentData} 
+									name={item.columnName} 
+									colorLabel={currentColor} 
+									title={item.label}
+									graphicType={item.graphicType}
+									backgroundColor={marker.color}
+								/>
+								<div className="data-provider">
+									  <div>data provider</div>
+									  <img src={process.env.PUBLIC_URL + `/static/providers/${item.provider}.svg`} alt="provider" height="20px"/>
+								</div>
+							</>
 						)
 					})}
-				</div>
+					
+					</div>
 			}
 			<Arrow onClick={onClick}/>
 		</>
