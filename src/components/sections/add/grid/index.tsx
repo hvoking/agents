@@ -5,7 +5,7 @@ import './styles.scss';
 import { useMarkers } from 'context/agents/markers';
 
 export const Grid = ({ imageUrls }: any) => {
-	const { setAddPin, setCurrentImage, setCurrentProvider, setCurrentName, providers } = useMarkers();
+	const { setAddPin, setCurrentImage, setCurrentProvider, providers } = useMarkers();
 
 	const onClick = (src: any, name: any) => {
 		setAddPin((prev: boolean) => !prev);

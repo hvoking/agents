@@ -7,7 +7,7 @@ import { useMarkerEvents } from 'context/events/marker';
 // Third-party imports
 import { Marker } from 'react-map-gl';
 
-export const Pin = ({ marker }: any) => {
+export const CustomMarker = ({ marker }: any) => {
 	const { handleMarkerEvent, onDrag } = useMarkerEvents();
 	const { id, latitude, longitude, image, provider } = marker;
 
@@ -22,13 +22,13 @@ export const Pin = ({ marker }: any) => {
             onDragStart={() => handleMarkerEvent(id)}
             onDrag={(e: any) => onDrag(e, id)}
 		>
-			<div className="map-marker">
+			<div className="custom-marker">
 				<img 
 					src={image} 
 					alt="agent-avatar" 
-					width="100%"
+					width="40px"
 				/>
-				<div className="map-marker-provider">
+				<div className="marker-provider">
 					{provider}
 				</div>
 			</div>
@@ -36,4 +36,4 @@ export const Pin = ({ marker }: any) => {
 	)
 }
 
-Pin.displayName="Pin";
+CustomMarker.displayName="CustomMarker";

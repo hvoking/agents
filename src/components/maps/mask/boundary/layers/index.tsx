@@ -11,7 +11,7 @@ export const getFillLayer = (layerId: any, sourceId: any) => ({
 	type: 'fill',
 	source: sourceId,
 	paint: {
-		"fill-color": "rgba(0, 123, 255, 0.6)",
+		"fill-color": "rgba(0, 123, 255, 0.4)",
 		"fill-opacity": 0.2
 	}
 });
