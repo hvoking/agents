@@ -1,3 +1,6 @@
+// App imports
+import { getPolygonStyle } from '../styles';
+
 // Context imports
 import { useMask } from 'context/agents/mask';
 
@@ -6,6 +9,7 @@ import { Source, Layer } from 'react-map-gl';
 
 export const Polygons = ({ boundary, layer, index }: any) => {
 	const { getGeoJson, sharedGeoJsonDataMap } = useMask();
+
     const geoJsonData = getGeoJson(boundary, layer, 'Polygon');
 
     const sourceId = `polygons-source-${index}`;
@@ -18,22 +22,7 @@ export const Polygons = ({ boundary, layer, index }: any) => {
 		[sourceId]: geoJsonData.features.map((item: any) => item.properties),
 	};
 
-	const layerStyle: any = {
-	    id: layerId,
-	    type: "fill-extrusion",
-	    source: sourceId,
-	    paint: {
-	        "fill-extrusion-color": ["get", "fill-color"],
-	        'fill-extrusion-height': [
-	            'coalesce',
-	            ['get', 'height'],
-	            10
-	        ],
-	        'fill-extrusion-base': 0,
-	        "fill-extrusion-vertical-gradient": true,
-		    "fill-extrusion-opacity": 0.6,
-	    },
-	};
+	const layerStyle = getPolygonStyle(layerId, sourceId);
 
 	return (
 		<Source 

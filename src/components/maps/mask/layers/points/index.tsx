@@ -1,3 +1,6 @@
+// App imports
+import { getPointStyle } from '../styles';
+
 // Context imports
 import { useMask } from 'context/agents/mask';
 
@@ -6,6 +9,7 @@ import { Source, Layer } from 'react-map-gl';
 
 export const Points = ({ boundary, layer, index }: any) => {
   const { getGeoJson, sharedGeoJsonDataMap } = useMask();
+
   const geoJsonData = getGeoJson(boundary, layer, 'Point');
 
   const sourceId = `points-source-${index}`;
@@ -18,15 +22,7 @@ export const Points = ({ boundary, layer, index }: any) => {
     [sourceId]: geoJsonData.features.map((item: any) => item.properties),
   };
 
-  const layerStyle: any = {
-    id: layerId,
-    type: "circle",
-    source: sourceId,
-    paint: {
-      'circle-radius': 3,
-      'circle-color': ['get', 'circle-color']
-    }
-  };
+  const layerStyle = getPointStyle(layerId, sourceId);
 
   return (
     <Source 

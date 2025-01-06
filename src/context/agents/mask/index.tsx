@@ -37,7 +37,7 @@ export const MaskProvider = ({children}: any) => {
 		const fillProperty = fillProperties[geometryType] || 'fill-color';
 		const featureCollection = toFeatureCollection(features, fillProperty);
 		
-		if (!(geometryType === 'LineString')) {
+		if (geometryType !== 'LineString') {
 			return featureCollection
 		}
 		

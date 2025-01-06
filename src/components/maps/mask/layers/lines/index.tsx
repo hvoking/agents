@@ -1,3 +1,6 @@
+// App imports
+import { getLineStyle } from '../styles';
+
 // Context imports
 import { useMask } from 'context/agents/mask';
 
@@ -6,6 +9,7 @@ import { Source, Layer } from 'react-map-gl';
 
 export const Lines = ({ boundary, layer, index }: any) => {
 	const { getGeoJson, sharedGeoJsonDataMap } = useMask();
+
   const geoJsonData = getGeoJson(boundary, layer, 'LineString');
 
   const sourceId = `lines-source-${index}`;
@@ -18,15 +22,7 @@ export const Lines = ({ boundary, layer, index }: any) => {
 		[sourceId]: geoJsonData.features.map((item: any) => item.properties),
 	};
 
-	const layerStyle: any = {
-    id: layerId,
-    type: "line",
-    source: sourceId,
-    paint: {
-      'line-width': ['get', 'line-width'],
-      'line-color': ['get', 'line-color'],
-    },
-	};
+	const layerStyle = getLineStyle(layerId, sourceId);
 
 	return (
 		<Source 
