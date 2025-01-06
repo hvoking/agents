@@ -2,8 +2,8 @@
 import './styles.scss';
 
 export const Header = ({ isIsoActive, marker, setMarkerGeometryType }: any) => {
-	const circleBackgroundColor = !isIsoActive ? "rgba(52, 152, 219, 0.3)" : "rgba(255, 255, 255, 1)"
-	const isoBackgroundColor = isIsoActive ? "rgba(52, 152, 219, 0.3)" : "rgba(255, 255, 255, 1)"
+	const circleBackgroundColor = !isIsoActive ? "rgba(52, 152, 219, 0.3)" : "rgba(255, 255, 255, 0)"
+	const isoBackgroundColor = isIsoActive ? "rgba(52, 152, 219, 0.3)" : "rgba(255, 255, 255, 0)"
 
 	return (
 		<div className="header-selector">

@@ -30,33 +30,27 @@ export const IsoProperties = ({ routingProfileValues, marker }: any) => {
 			<div className="routing-profile">
 				{Object.entries(routingProfileValues).map(([key, value]: any) => {
 					return (
-						<div className="routing-image-wrapper"
-							style={{
-									backgroundColor: 
-										marker.routingProfile === key ? 
-										"rgba(233, 233, 22, 1)" : 
-										"rgba(236, 240, 241, 0.8)"
-								}}>
+						<div
+							onClick={() => onClick(key)} 
+							className={`routing-image-wrapper ${marker.routingProfile === key ? "active" : ""}`}>
 							<img 
 								key={key}
 								src={value} 
 								alt={key}
-								onClick={() => onClick(key)}
+								
 							/>
 						</div>
 					)
 				})}
 			</div>
-			<div>Minutes</div>
-			<div className="iso-slider">
-				<Slider 
-					marker={marker}
-					radiusPosition={radiusPosition}
-					setRadiusPosition={setRadiusPosition}
-					minBound={minBound}
-					maxBound={maxBound}
-				/>
-			</div>
+			<div className="boundary-subtitle">Minutes</div>
+			<Slider 
+				marker={marker}
+				radiusPosition={radiusPosition}
+				setRadiusPosition={setRadiusPosition}
+				minBound={minBound}
+				maxBound={maxBound}
+			/>
 		</>
 	)
 }

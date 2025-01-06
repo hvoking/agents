@@ -2,21 +2,23 @@
 
 .routing-profile {
   display: flex; 
-  grid-gap: 5px;
   justify-content: space-around;
-
 }
 .routing-image-wrapper {
-  border: 2px solid $border-color;
   border-radius: 5px;
-  width: 40px;
+  width: 55px;
   display: grid;
-  grid-gap: 10px;
   justify-items: center;
+  background-color: $text-dark;
   img {
-    height: 15px;    
-    padding-top: 2px;
-    padding-bottom: 2px;
+    height: 20px;    
+    padding-top: 3px;
+    padding-bottom: 3px;
   }
-
+}
+.routing-image-wrapper.active {
+  background-color: $primary;
+}
+.boundary-subtitle {
+  padding-left: 10px;
 }

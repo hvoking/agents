@@ -8,6 +8,7 @@ import { Foreground } from './foreground';
 import { Handler } from './handler';
 import { Legend } from './legend';
 import { Wrapper } from './wrapper';
+import './styles.scss';
 
 // Context imports
 import { useRadiusSizes } from 'context/sizes/radius';
@@ -20,13 +21,14 @@ export const Slider = ({ marker, radiusPosition, setRadiusPosition, minBound, ma
   const { innerWidth, innerHeight } = useRadiusSizes();
 
   const circleHeight = innerHeight / 6;
-  const offset = 20;
+  const offset = 10;
 
   const xScale: any = d3.scaleLinear()
     .domain([ minBound, maxBound ])
     .range([ offset, innerWidth - offset ]);
 
   return (
+    <div className="iso-slider">
     <SVGWrapper>
       <Background
         xScale={xScale} 
@@ -63,6 +65,7 @@ export const Slider = ({ marker, radiusPosition, setRadiusPosition, minBound, ma
         setActiveForeground={setActiveForeground}
       />
     </SVGWrapper>
+    </div>
   )
 }
 

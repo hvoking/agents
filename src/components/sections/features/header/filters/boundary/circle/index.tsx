@@ -12,16 +12,14 @@ export const CircleProperties = ({ marker }: any) => {
 
 	return (
 		<>
-			<div>Circle radius</div>
-			<div style={{width: "100%", height: "60px"}}>
-				<Slider 
-					marker={marker}
-					radiusPosition={radiusPosition}
-					setRadiusPosition={setRadiusPosition}
-					minBound={minBound}
-					maxBound={maxBound}
-				/>
-			</div>
+			<div className="boundary-subtitle">Circle radius</div>
+			<Slider 
+				marker={marker}
+				radiusPosition={radiusPosition}
+				setRadiusPosition={setRadiusPosition}
+				minBound={minBound}
+				maxBound={maxBound}
+			/>
 		</>
 	)
 }
