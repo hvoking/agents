@@ -14,7 +14,7 @@ export const Charts = ({ data, name, colorLabel, graphicType, backgroundColor }:
 	const sumOfValues = d3.sum(Object.values(distribution));
 
 	return (
-		<div style={{display: "grid", gridTemplateColumns: "1fr 1fr", alignItems: "start", backgroundColor: backgroundColor}}>
+		<div className="chart-wrapper" style={{backgroundColor: backgroundColor}}>
 			<Bars distribution={distribution} colors={colors} sumOfValues={sumOfValues}/>
 			{graphicType === "gauge" && <Gauge distribution={distribution} colors={colors} sumOfValues={sumOfValues}/>}
 			{graphicType === "dots" && <Dots distribution={distribution} colors={colors} sumOfValues={sumOfValues}/>}

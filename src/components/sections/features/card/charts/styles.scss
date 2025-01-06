@@ -1,4 +1,11 @@
+@import 'variables';
+
 .chart-wrapper {
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  align-items: start;
+  border: 1px solid $light-blue;
+  border-radius: 5px;
   padding: 5px;
-  overflow: hidden;
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
 }
