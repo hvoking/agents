@@ -1,3 +1,6 @@
+// React imports
+import { useState } from 'react';
+
 // App imports
 import { Wrapper } from './wrapper';
 import { SVGWrapper } from './svg';
@@ -6,7 +9,6 @@ import { Foreground } from './foreground';
 import './styles.scss';
 
 // Context imports
-import { useSlider } from 'context/slider';
 import { useSliderSizes } from 'context/sizes/slider';
 
 // Third-party imports
@@ -14,11 +16,31 @@ import * as d3 from 'd3';
 
 export const Slider = ({ marker }: any) => {
   const { innerWidth, innerHeight } = useSliderSizes();
-  const { radiusPosition, setRadiusPosition, minBound, maxBound, colorPalette } = useSlider();
+
+  const [ radiusPosition, setRadiusPosition ] = useState(0.5);
+  const [ currentFillColor, setCurrentFillColor ] = useState("rgba(223, 246, 255, 1");
+
+  const minBound = 0;
+  const maxBound = 1;
+
+  const colorPalette = [
+      "rgba(204, 255, 230, 1)",
+      "rgba(255, 229, 204, 1)",
+      "rgba(223, 246, 255, 1)",
+      "rgba(255, 255, 204, 1)",
+      "rgba(255, 204, 203, 1)",
+  ];
+
 
   const xScale: any = d3.scaleLinear()
     .domain([ minBound, maxBound ])
     .range([ 0, innerWidth ]);
+
+  const range = 1 / (colorPalette.length - 1);
+
+  const colorScale = d3.scaleLinear<string>()
+    .domain(d3.range(0, 1 + range, range))
+    .range(colorPalette);
 
   return (
     <div className="slider-wrapper-wrapper">
@@ -41,7 +63,8 @@ export const Slider = ({ marker }: any) => {
             maxBound={maxBound}
             radiusPosition={radiusPosition} 
             height={innerHeight}
-            palette={colorPalette}
+            colorScale={colorScale}
+            currentFillColor={currentFillColor}
           />
           <Wrapper
             xScale={xScale}
@@ -50,6 +73,8 @@ export const Slider = ({ marker }: any) => {
             setRadiusPosition={setRadiusPosition}
             minBound={minBound}
             maxBound={maxBound}
+            colorScale={colorScale}
+            setCurrentFillColor={setCurrentFillColor}
           />
         </SVGWrapper>
       </div>

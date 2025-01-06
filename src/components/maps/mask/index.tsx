@@ -21,8 +21,6 @@ export const Mask = ({ marker }: any) => {
   const [ boundary, setBoundary ] = useState<any>(null);
 
   useEffect(() => {
-    if (!marker) return;
-
     const fetchBoundary = async (marker: any) => {
       if (markerGeometryType[marker.id] === 'iso') {
         const data = await fetchIsochrone(marker);

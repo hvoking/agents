@@ -24,7 +24,7 @@ export const Background = ({ xScale, minBound, maxBound, height, palette }: any)
 				width={xScale(maxBound) - xScale(minBound)}
 				height={height / 2}
 				fill={`url(#${gradientId})`}
-				stroke="rgba(97, 135, 218, 1)"
+				stroke="#ccc"
 			/>
 		</>
 	)

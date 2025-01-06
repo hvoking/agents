@@ -4,18 +4,8 @@ import { useEffect } from 'react';
 // Context imports
 import { useMarkers } from 'context/agents/markers';
 
-// Third-party imports
-import * as d3 from 'd3';
-export const Foreground = ({ marker, xScale, minBound, maxBound, radiusPosition, height, palette }: any) => {
+export const Foreground = ({ marker, xScale, minBound, maxBound, radiusPosition, height, currentFillColor }: any) => {
 	const { setMarkers } = useMarkers();
-
-	const range = 1 / (palette.length - 1);
-
-	const colorScale = d3.scaleLinear<string>()
-        .domain(d3.range(0, 1 + range, range))
-        .range(palette);
-    
-    const currentFillColor = colorScale(radiusPosition / (maxBound - minBound));
 
     useEffect(() => {
     	setMarkers((prev: any) =>
