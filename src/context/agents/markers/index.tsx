@@ -18,7 +18,6 @@ export const MarkersProvider = ({children}: any) => {
 	
 	const [ currentMarker, setCurrentMarker ] = useState<any>(null);
 	const [ currentImage, setCurrentImage ] = useState<any>(null);
-	const [ currentProvider, setCurrentProvider ] = useState<any>(null);
 	const [ currentName, setCurrentName ] = useState<any>(null);
 	const [ activePage, setActivePage ] = useState<any>(null);
 
@@ -36,7 +35,6 @@ export const MarkersProvider = ({children}: any) => {
 			markers, setMarkers,
 			currentMarker, setCurrentMarker,
 			currentImage, setCurrentImage,
-			currentProvider, setCurrentProvider,
 			currentName, setCurrentName,
 			activePage, setActivePage,
 			rejectedMarkers, setRejectedMarkers,

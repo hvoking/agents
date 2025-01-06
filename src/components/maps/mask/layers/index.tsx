@@ -11,7 +11,7 @@ export const Layers = ({ boundary, marker }: any) => {
 
 	if (!boundary) return <></>;
 	
-	const currentProvider = providers.find((item: any) => item.name === marker.provider);
+	const currentProvider = providers.find((item: any) => item.name === marker.name);
 
 	return (	
 		<div>

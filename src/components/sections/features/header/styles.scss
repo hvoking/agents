@@ -7,7 +7,14 @@
 .agent-icon {
   width: 40px;
 }
-.agent-data {
-   font-size: 1.2em;
-   font-weight: 500;
+.header-buttons {
+  display: flex; 
+  gap: 10px;
+}
+.agent-details {
+   display: grid; 
+   overflow: hidden;
+}
+.agent-title {
+  font-weight: 500;
 }

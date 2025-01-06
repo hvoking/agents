@@ -9,7 +9,7 @@ import { Marker } from 'react-map-gl';
 
 export const CustomMarker = ({ marker }: any) => {
 	const { handleMarkerEvent, onDrag } = useMarkerEvents();
-	const { id, latitude, longitude, image, provider } = marker;
+	const { id, latitude, longitude, image, name } = marker;
 
 	return (
 		<Marker
@@ -29,7 +29,7 @@ export const CustomMarker = ({ marker }: any) => {
 					width="40px"
 				/>
 				<div className="marker-provider">
-					{provider}
+					{name}
 				</div>
 			</div>
 	    </Marker>

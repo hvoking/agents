@@ -13,7 +13,7 @@ export const useMapEvents = () => {
 }
 
 export const MapEventsProvider = ({children}: any) => {
-	const { markers, setMarkers, setCurrentMarker, addPin, setAddPin, currentImage, currentProvider } = useMarkers();
+	const { markers, setMarkers, setCurrentMarker, addPin, setAddPin, currentImage, currentName } = useMarkers();
 
 	const getId = (markers: any) => {
 		const lastIndex = markers.length - 1;
@@ -31,7 +31,7 @@ export const MapEventsProvider = ({children}: any) => {
 				latitude: lat,
 				longitude: lng,
 				image: currentImage,
-				provider: currentProvider,
+				name: currentName,
 				radius: 0.5,
 				contoursMinutes: 10,
 				color: "rgba(223, 246, 255, 1)",

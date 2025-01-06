@@ -18,7 +18,6 @@ export const Location = ({ marker }: any) => {
 			const addressStreet = currentAddress[1].long_name;
 			setAddressName(addressStreet + ", " + addressNumber);
 		};
-
 		loadData();
 	}, [ marker ]);
 

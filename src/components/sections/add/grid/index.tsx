@@ -5,12 +5,12 @@ import './styles.scss';
 import { useMarkers } from 'context/agents/markers';
 
 export const Grid = ({ imageUrls }: any) => {
-	const { setAddPin, setCurrentImage, setCurrentProvider, providers } = useMarkers();
+	const { setAddPin, setCurrentImage, setCurrentName, providers } = useMarkers();
 
 	const onClick = (src: any, name: any) => {
 		setAddPin((prev: boolean) => !prev);
 		setCurrentImage(src);
-		setCurrentProvider(name);
+		setCurrentName(name);
 	}
 
 	const baseUrl = process.env.PUBLIC_URL + '/static/agents/';
