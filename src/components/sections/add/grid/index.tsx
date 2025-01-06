@@ -17,7 +17,9 @@ export const Grid = ({ imageUrls }: any) => {
 
 	return (
 		<div className="agent-grid">
-		  {Object.keys(providers).map((name: any) => {
+		  {providers.map((item: any) => {
+		  	const name = item.name;
+		  	
 		  	const url = baseUrl + name + '.svg';
 		  	const processedName = name.replace("_", " ");
 

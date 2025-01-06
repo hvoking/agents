@@ -1,6 +1,9 @@
 // React imports
 import { useState, useEffect, useContext, createContext } from 'react';
 
+// App imports
+import { providers } from './data';
+
 const MarkersContext: React.Context<any> = createContext(null);
 
 export const useMarkers = () => {
@@ -21,49 +24,6 @@ export const MarkersProvider = ({children}: any) => {
 
 	const [ radius, setRadius ] = useState(0.5);
 	const [ addPin, setAddPin ] = useState(false);
-
-	const providers = {
-		"streets": [
-			{
-				provider: "overture", 
-				layer: 'rotterdam_roads', 
-				label: 'Streets', 
-				type: "LineString", 
-				columnName: "road_class", 
-				graphicType: "dots"
-			},
-		],
-		"buildings": [
-			{
-				provider: "overture", 
-				layer: 'buildings-overture', 
-				label: 'Buildings', 
-				type: "Polygon", 
-				columnName: "subtype", 
-				graphicType: "dots"
-			},
-		],
-		"foursquare": [
-			{
-				provider: "foursquare", 
-				layer: 'points-foursquare', 
-				label: 'Points of Interest', 
-				type: "Point", 
-				columnName: "category", 
-				graphicType: "dots"
-			},
-		],
-		"inside_airbnb": [
-			{
-				provider: "inside_airbnb", 
-				layer: 'points-airbnb', 
-				label: 'Properties', 
-				type: "Point", 
-				columnName: "property_type", 
-				graphicType: "gauge"
-			},
-		],
-	}
 
 	useEffect(() => {
 	   setMarkers((prev: any) => 

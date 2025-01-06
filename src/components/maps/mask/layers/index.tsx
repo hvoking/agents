@@ -11,39 +11,32 @@ export const Layers = ({ boundary, marker }: any) => {
 
 	if (!boundary) return <></>;
 	
-	const layers = providers[marker.provider];
+	const currentProvider = providers.find((item: any) => item.name === marker.provider);
 
-	return (
-		<>
-			{layers.map((item: any, index: any) => {
-				return (
-					<div key={index}>
-						{item.type === 'LineString' && 
-							<Lines 
-								boundary={boundary} 
-								layer={item.layer}
-								index={marker.id}
-							/>
-						}
-						{item.type === 'Polygon' && 
-							<Polygons 
-								boundary={boundary} 
-								layer={item.layer}
-								index={marker.id}
-							/>
-						}
-						{item.type === 'Point' && 
-							<Points 
-								boundary={boundary} 
-								layer={item.layer}
-								index={marker.id}
-							/>
-						}
-					</div>
-				)
-			})}
-			
-		</>
+	return (	
+		<div>
+			{currentProvider.type === 'LineString' && 
+				<Lines 
+					boundary={boundary} 
+					layer={currentProvider.layer}
+					index={marker.id}
+				/>
+			}
+			{currentProvider.type === 'Polygon' && 
+				<Polygons 
+					boundary={boundary} 
+					layer={currentProvider.layer}
+					index={marker.id}
+				/>
+			}
+			{currentProvider.type === 'Point' && 
+				<Points 
+					boundary={boundary} 
+					layer={currentProvider.layer}
+					index={marker.id}
+				/>
+			}
+		</div>
 	)
 }
 

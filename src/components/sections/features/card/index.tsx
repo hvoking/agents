@@ -23,49 +23,43 @@ export const Card = ({ marker }: any) => {
 	const pointsData = sharedGeoJsonDataMap.value[`points-source-${marker.id}`];
 	const clusterData = sharedGeoJsonDataMap.value[`cluster-source-${marker.id}`];
 
-	const currentProvider = providers[marker.provider];
+	const currentProvider = providers.find((item: any) => item.name === marker.provider);
+
+	const currentData = 
+		currentProvider.type === "LineString" ? 
+		linesData : 
+		currentProvider.type === 'Point' ? 
+		pointsData : 
+		currentProvider.type === 'Cluster' ? 
+		clusterData :
+		polygonsData;
+
+	const currentColor = 
+		currentProvider.type === "LineString" ? 
+		'line-color' : 
+		currentProvider.type === 'Point'?
+		'circle-color' :
+		'fill-color'
 
 	return (
 		<>
 			{activeCharts && 
 				<div className="chart-card">
-					{currentProvider.map((item: any, index: number) => {
-						const currentData = 
-							item.type === "LineString" ? 
-							linesData : 
-							item.type === 'Point' ? 
-							pointsData : 
-							item.type === 'Cluster' ? 
-							clusterData :
-							polygonsData;
-
-						const currentColor = 
-							item.type === "LineString" ? 
-							'line-color' : 
-							item.type === 'Point'?
-							'circle-color' :
-							'fill-color'
-
-						return (
-							<>
-								<Charts 
-									key={index}
-									data={currentData} 
-									name={item.columnName} 
-									colorLabel={currentColor} 
-									title={item.label}
-									graphicType={item.graphicType}
-									backgroundColor={marker.color}
-								/>
-								<div className="data-provider">
-									  <div>data provider</div>
-									  <img src={process.env.PUBLIC_URL + `/static/providers/${item.provider}.svg`} alt="provider" height="20px"/>
-								</div>
-							</>
-						)
-					})}
-					
-					</div>
+					<>
+						<Charts 
+							data={currentData} 
+							name={currentProvider.columnName} 
+							colorLabel={currentColor} 
+							title={currentProvider.label}
+							graphicType={currentProvider.graphicType}
+							backgroundColor={marker.color}
+						/>
+						<div className="data-provider">
+							  <div>data provider</div>
+							  <img src={process.env.PUBLIC_URL + `/static/providers/${currentProvider.provider}.svg`} alt="provider" height="20px"/>
+						</div>
+					</>
+				</div>
 			}
 			<Arrow onClick={onClick}/>
 		</>
