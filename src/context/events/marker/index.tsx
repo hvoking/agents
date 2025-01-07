@@ -13,12 +13,7 @@ export const useMarkerEvents = () => {
 }
 
 export const MarkerEventsProvider = ({children}: any) => {
-	const { markers, setMarkers, setCurrentMarker, setRejectedMarkers } = useMarkers();
-
-    const handleMarkerEvent = useCallback((id: number) => {
-        const marker = markers.find((item: any) => item.id === id);
-        setCurrentMarker(marker);
-    }, [ markers, setCurrentMarker ]);
+	const { markers, setMarkers, setRejectedMarkers } = useMarkers();
 
     const onDrag = useCallback((event: any, id: number) => {
         const { lat, lng } = event.lngLat;
@@ -35,15 +30,14 @@ export const MarkerEventsProvider = ({children}: any) => {
     const rejectMarker = useCallback(
         (event: any, marker: any) => {
             event.stopPropagation();
-            setCurrentMarker((prev: any) => (prev === marker ? null : prev));
             setRejectedMarkers((prev: any) => [...prev, marker]);
         },
-        [ setCurrentMarker, setRejectedMarkers ]
+        [ setRejectedMarkers ]
     );
 
 	return (
 		<MarkerEventsContext.Provider value={{
-			handleMarkerEvent, onDrag, rejectMarker,
+			onDrag, rejectMarker,
 		}}>
 			{children}
 		</MarkerEventsContext.Provider>

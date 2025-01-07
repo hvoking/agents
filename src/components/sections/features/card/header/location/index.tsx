@@ -21,10 +21,14 @@ export const Location = ({ marker }: any) => {
 		loadData();
 	}, [ marker ]);
 
+	const imagePath = process.env.PUBLIC_URL + "/static/icons/pin.svg";
+
 	return (
-		<div>
-			{addressName}
+		<div className="agent-location">
+			<img src={imagePath} alt="pin" width="10px"/>
+			<div>{addressName}</div>
 		</div>
+		
 
 	)
 }

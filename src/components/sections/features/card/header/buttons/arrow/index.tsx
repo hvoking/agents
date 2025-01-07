@@ -1,3 +1,6 @@
+// App imports
+import './styles.scss';
+
 export const Arrow = ({ setActiveCharts, activeCharts }: any) => {
 	return (
 		<svg 
@@ -8,8 +11,8 @@ export const Arrow = ({ setActiveCharts, activeCharts }: any) => {
 		>
 		  {
 		  	activeCharts ? 
-		  	<polygon points="4,18 16,18 10,8"/> : 
-		  	<polygon points="4,8 16,8 10,18"/>
+		  	<polyline points="17,18 10,8 3,18"/> : 
+		  	<polyline points="3,8 10,18 17,8"/>
 		  }
 		</svg>
 	)

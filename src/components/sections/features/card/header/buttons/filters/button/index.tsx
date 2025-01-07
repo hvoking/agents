@@ -11,14 +11,13 @@ export const Button = ({ activateFilters, setActivateFilters }: any) => {
 				<g className="filter-icon">
 					<line
 						x1={5}
-						y1={10}
+						y1={8.5}
 						x2={25}
-						y2={10}
-						strokeWidth={1.2}
+						y2={8.5}
 					/>
 					<circle
 						cx={10}
-						cy={10}
+						cy={8.5}
 						r={2}
 						fill="rgba(255, 255, 255, 1)"
 					/>
@@ -27,7 +26,6 @@ export const Button = ({ activateFilters, setActivateFilters }: any) => {
 						y1={15}
 						x2={25}
 						y2={15}
-						strokeWidth={1.2}
 					/>
 					<circle
 						cx={20}
@@ -37,14 +35,13 @@ export const Button = ({ activateFilters, setActivateFilters }: any) => {
 					/>
 					<line
 						x1={5}
-						y1={20}
+						y1={21.5}
 						x2={25}
-						y2={20}
-						strokeWidth={1.2}
+						y2={21.5}
 					/>
 					<circle
 						cx={10}
-						cy={20}
+						cy={21.5}
 						r={2}
 						fill="rgba(255, 255, 255, 1)"
 					/>

@@ -14,7 +14,6 @@ import { useMask } from 'context/agents/mask';
 import * as turf from '@turf/turf';
 
 export const Mask = ({ marker }: any) => {
-  
   const { fetchIsochrone } = useIsochroneApi();
   const { markerGeometryType } = useMask();
 

@@ -5,17 +5,17 @@ import { getBorderLayer, getEraserLayer, getFillLayer } from './layers';
 import { Source, Layer } from 'react-map-gl';
 
 export const Boundary = ({ marker, boundary }: any) => {
-  const markerId = marker.id;
-  const sourceId = `boundary-source-${markerId}`;
+  const { id, color } = marker;
+  const sourceId = `boundary-source-${id}`;
 
   if (!boundary) return <></>
 
-  const fillId = `boundary-fill-${markerId}`;
-  const borderId = `boundary-border-${markerId}`;
-  const eraserId = `boundary-eraser-${markerId}`;
+  const fillId = `boundary-fill-${id}`;
+  const borderId = `boundary-border-${id}`;
+  const eraserId = `boundary-eraser-${id}`;
 
   const eraserLayer = getEraserLayer(eraserId, sourceId);
-  const fillLayer = getFillLayer(fillId, sourceId, marker.color);
+  const fillLayer = getFillLayer(fillId, sourceId, color);
   const borderLayer = getBorderLayer(borderId, sourceId);
 
   const layers: any = [ fillLayer, borderLayer, eraserLayer ]

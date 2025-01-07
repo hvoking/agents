@@ -6,9 +6,10 @@
   border-radius: 5px;
   padding-left: 2px;
   padding-right: 2px;
-  fill: rgba(0, 0, 0, 1);
-  stroke: rgba(0, 0, 0, 1);
+  fill: $text-dark;
+  stroke: $text-dark;
   user-select: none;
+  stroke-width: 1.6
 }
 .map-filters-button.active {
   background-color: $light-blue;
@@ -17,8 +18,4 @@
 .map-filters-button:hover {
   background-color: $light-blue;
   fill: rgba(255, 255, 255, 1);
-}
-.dropdown-arrow {
-  fill: $primary;
-  stroke: $primary;
 }
