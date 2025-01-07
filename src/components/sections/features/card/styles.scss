@@ -4,6 +4,7 @@
 	display: grid;
 	grid-gap: 10px;
 	max-height: 200px;
+	overflow: hidden;
 }
 .chart-title {
 	font-weight: 500;
@@ -13,9 +14,9 @@
 .data-provider {
 	display: flex; 
 	gap: 7px; 
-	text-transform: lowercase; 
-	font-size: 0.8em; 
+	font-size: 0.9em; 
 	justify-self: end; 
 	padding-right: 5px;
 	color: $border-color;
+	height: 20px;
 }

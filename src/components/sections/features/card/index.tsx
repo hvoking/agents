@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 // App imports
 import { Charts } from './charts';
-import { Arrow } from './arrow';
+import { Header } from './header';
 
 import './styles.scss';
 
@@ -12,7 +12,7 @@ import { useMask } from 'context/agents/mask';
 import { useMarkers } from 'context/agents/markers';
 
 export const Card = ({ marker }: any) => {
-	const [ activeCharts, setActiveCharts ] = useState(false);
+	const [ activeCharts, setActiveCharts ] = useState(true);	
 	const { sharedGeoJsonDataMap } = useMask();
 	const { providers } = useMarkers();
 
@@ -43,27 +43,25 @@ export const Card = ({ marker }: any) => {
 	const onClick = () => setActiveCharts((prev: boolean) => !prev);
 
 	return (
-		<>
-			{activeCharts && 
-				<div className="chart-card">
-					<Charts 
-						data={currentData} 
-						name={columnName} 
-						colorLabel={currentColor} 
-						graphicType={graphicType}
-						backgroundColor={marker.color}
+		<div key={marker.id} className="agent-card">
+		  	<Header marker={marker} activeCharts={activeCharts} setActiveCharts={setActiveCharts}/>
+			{activeCharts && <div className="chart-card">
+				<Charts 
+					data={currentData} 
+					name={columnName} 
+					colorLabel={currentColor} 
+					graphicType={graphicType}
+					backgroundColor={marker.color}
+				/>
+				<div className="data-provider">
+					<div>data provider</div>
+					<img 
+						src={process.env.PUBLIC_URL + `/static/providers/${provider}.svg`} 
+						alt="provider" 
 					/>
-					<div className="data-provider">
-						  <div>data provider</div>
-						  <img 
-						  	src={process.env.PUBLIC_URL + `/static/providers/${provider}.svg`} 
-						  	alt="provider" 
-						  	height="20px"/>
-					</div>
 				</div>
-			}
-			<Arrow onClick={onClick}/>
-		</>
+			</div>}
+		</div>
 	)
 }
 

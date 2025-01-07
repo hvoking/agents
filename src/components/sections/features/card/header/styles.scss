@@ -9,12 +9,12 @@
 }
 .header-buttons {
   display: flex; 
-  gap: 10px;
+  cursor: pointer;
 }
 .agent-details {
    display: grid; 
    overflow: hidden;
 }
 .agent-title {
-  font-weight: 500;
+  font-weight: 600;
 }

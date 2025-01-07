@@ -7,12 +7,10 @@
   display: grid;
   align-content: start;
   white-space: nowrap;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  border-radius: 0px 8px 8px 0px;
 }
 .section-wrapper {
   display: grid; 
-  align-content: start;
   padding-top: 20px;
   color: $text-light;
   font-size: 16px;

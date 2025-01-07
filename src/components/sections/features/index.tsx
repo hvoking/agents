@@ -1,5 +1,4 @@
 // App imports
-import { Header } from './header';
 import { Card } from './card';
 import './styles.scss';
 
@@ -13,9 +12,8 @@ export const Features = () => {
 
   return (
     <div className="features-wrapper">
-      {markers.map((marker: any, index: number) => (
-        <div key={marker.id} className="agent-card">
-          <Header marker={marker}/>
+      {markers.map((marker: any) => (
+        <div key={marker.id}>
           <Card marker={marker}/>
         </div>
       ))}

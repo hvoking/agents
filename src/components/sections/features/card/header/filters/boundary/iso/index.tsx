@@ -8,7 +8,16 @@ import './styles.scss';
 // Context imports
 import { useMarkers } from 'context/agents/markers'
 
-export const IsoProperties = ({ routingProfileValues, marker }: any) => {
+const baseUrl = process.env.PUBLIC_URL + "/static/iso/";
+
+const routingProfileValues: any = {
+	"walking": baseUrl + "walking.svg",
+	"cycling": baseUrl + "cycling.svg",
+	"driving": baseUrl + "driving.svg"
+}
+
+
+export const IsoProperties = ({ marker }: any) => {
 	const [ radiusPosition, setRadiusPosition ] = useState(10);
 	const { setMarkers } = useMarkers();
 	
@@ -29,13 +38,16 @@ export const IsoProperties = ({ routingProfileValues, marker }: any) => {
 		<>
 			<div className="routing-profile">
 				{Object.entries(routingProfileValues).map(([key, value]: any) => {
+					const isActive = marker.routingProfile === key;
+
 					return (
 						<div
 							onClick={() => onClick(key)} 
-							className={`routing-image-wrapper ${marker.routingProfile === key ? "active" : ""}`}>
+							className={`routing-image-wrapper ${isActive ? "active" : ""}`}
+							>
 							<img 
 								key={key}
-								src={value} 
+								src={isActive ? value.replace(".svg", "-active.svg") : value} 
 								alt={key}
 								
 							/>
@@ -43,6 +55,7 @@ export const IsoProperties = ({ routingProfileValues, marker }: any) => {
 					)
 				})}
 			</div>
+			<div>
 			<div className="boundary-subtitle">Minutes</div>
 			<Slider 
 				marker={marker}
@@ -51,6 +64,7 @@ export const IsoProperties = ({ routingProfileValues, marker }: any) => {
 				minBound={minBound}
 				maxBound={maxBound}
 			/>
+			</div>
 		</>
 	)
 }
