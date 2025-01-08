@@ -42,14 +42,13 @@ export const IsoProperties = ({ marker }: any) => {
 
 					return (
 						<div
+							key={key}
 							onClick={() => onClick(key)} 
 							className={`routing-image-wrapper ${isActive ? "active" : ""}`}
-							>
+						>
 							<img 
-								key={key}
 								src={isActive ? value.replace(".svg", "-active.svg") : value} 
 								alt={key}
-								
 							/>
 						</div>
 					)
