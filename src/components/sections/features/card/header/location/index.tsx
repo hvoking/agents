@@ -25,7 +25,7 @@ export const Location = ({ marker }: any) => {
 
 	return (
 		<div className="agent-location">
-			<img src={imagePath} alt="pin" width="10px"/>
+			<img src={imagePath} alt="pin" height="10px"/>
 			<div>{addressName}</div>
 		</div>
 		

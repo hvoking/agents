@@ -1,0 +1,21 @@
+@import 'variables';
+
+.header-buttons {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 10px;
+}
+.close-btn {
+  font-size: 14px;
+  color: $text-dark;
+}
+.card-filter-wrapper {
+  position: relative;
+  user-select: none;
+}
+.settings-btn {
+  font-size: 18px;
+  color: $text-dark;
+  font-weight: 500;
+}

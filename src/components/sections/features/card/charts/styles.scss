@@ -1,17 +1,5 @@
-@import 'variables';
-
-.chart-card {
-  display: grid;
-  grid-gap: 10px;
-  max-height: 200px;
-  overflow: hidden;
-}
 .chart-wrapper {
   display: grid; 
   grid-template-columns: 1fr 1fr; 
-  align-items: start;
-  border: 1px solid $light-blue;
-  border-radius: 5px;
-  padding: 5px;
-  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+  padding: 10px 15px;
 }

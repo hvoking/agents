@@ -14,14 +14,12 @@ export const Charts = ({ data, name, colorLabel, graphicType, backgroundColor }:
 	const sumOfValues = d3.sum(Object.values(distribution));
 
 	return (
-		<div className="chart-card">
 			<div className="chart-wrapper" style={{backgroundColor: backgroundColor}}>
 				<Bars distribution={distribution} colors={colors} sumOfValues={sumOfValues}/>
 				{graphicType === "gauge" && <Gauge distribution={distribution} colors={colors} sumOfValues={sumOfValues}/>}
 				{graphicType === "dots" && <Dots distribution={distribution} colors={colors} sumOfValues={sumOfValues}/>}
 				{graphicType === "lines" && <Lines distribution={distribution} colors={colors} sumOfValues={sumOfValues}/>}
 			</div>
-		</div>
 	)
 }
 

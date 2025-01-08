@@ -3,25 +3,21 @@ import { Location } from './location';
 import { Buttons } from './buttons';
 import './styles.scss';
 
-// Context imports
-import { useMarkers } from 'context/agents/markers';
-
-export const Header = ({ marker, activeCharts, setActiveCharts }: any) => {
+export const Header = ({ marker, setActiveCharts }: any) => {
 	const { name, image } = marker
-	const { providers } = useMarkers();
 
-	const currentProvider = providers.find((item: any) => item.name === name);
-	const label = currentProvider.label;
+	const activateCharts = () => setActiveCharts((prev: any) => !prev)
 	
 	return (
-		<div className="agent-header-wrapper">
+		<div className="card-header" onClick={activateCharts}>
 			<img className="agent-icon" src={image} alt="agent-icon"/>
-			<div className="agent-details">
-				<div className="agent-title">{label}</div>
-				{/*<Location marker={marker}/>*/}
+			<div style={{display: "grid"}}>
+				<div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+					<div className="agent-title">{name}</div>
+					<Buttons marker={marker}/>			
+				</div>
+				<Location marker={marker}/>
 			</div>
-			<div></div>
-			<Buttons marker={marker} activeCharts={activeCharts} setActiveCharts={setActiveCharts}/>			
 		</div>
 	)
 }

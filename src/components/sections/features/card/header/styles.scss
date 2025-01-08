@@ -1,17 +1,23 @@
-.agent-header-wrapper {
+@import 'variables';
+
+.card-header {
   display: grid;
-  grid-template-columns: min-content min-content auto min-content;
+  grid-template-columns: min-content auto;
+  align-items: center;
   white-space: nowrap;
+  padding: 10px 15px;
+  border-bottom: 1px solid #e0e0e0;
+  background: $card-bg;
   grid-gap: 10px;
-  background: rgba(248, 249, 250, 1);
 }
 .agent-icon {
   width: 40px;
 }
+.agent-title {
+  font-size: 16px;
+  font-weight: bold;
+}
 .header-buttons {
   display: flex; 
   cursor: pointer;
-}
-.agent-title {
-  font-weight: 600;
 }

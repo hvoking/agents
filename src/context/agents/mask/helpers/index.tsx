@@ -48,8 +48,7 @@ export const filterFeatures = (mapFeatures: any[], boundary: any, source: string
 	    	geometryType === 'LineString' ? 
 	    	turf.booleanIntersects(item.geometry, boundary) :
 	    	turf.booleanPointInPolygon(turf.centroid(item.geometry), boundary);
-
-		return isWithin
+			return isWithin
     }
     return false;
   });
