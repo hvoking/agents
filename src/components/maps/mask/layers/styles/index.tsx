@@ -12,7 +12,6 @@ export const getPointStyle = ( layerId: string, sourceId: string ) => {
   return layerStyle
 }
 
-
 export const getPolygonStyle = ( layerId: any, sourceId: any ) => {
   const layerStyle: any = {
       id: layerId,

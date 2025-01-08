@@ -1,14 +1,21 @@
 // App imports
 import { getBorderLayer, getEraserLayer, getFillLayer } from './layers';
 
+// Context imports
+import { useMarkers } from 'context/agents/markers';
+
 // Third party imports
 import { Source, Layer } from 'react-map-gl';
 
 export const Boundary = ({ marker, boundary }: any) => {
+  const { currentMarkerId } = useMarkers();
+
   const { id, color } = marker;
   const sourceId = `boundary-source-${id}`;
 
   if (!boundary) return <></>
+
+  const isCurrentMarker = id === currentMarkerId;
 
   const fillId = `boundary-fill-${id}`;
   const borderId = `boundary-border-${id}`;
@@ -16,7 +23,7 @@ export const Boundary = ({ marker, boundary }: any) => {
 
   const eraserLayer = getEraserLayer(eraserId, sourceId);
   const fillLayer = getFillLayer(fillId, sourceId, color);
-  const borderLayer = getBorderLayer(borderId, sourceId);
+  const borderLayer = getBorderLayer(borderId, sourceId, isCurrentMarker);
 
   const layers: any = [ fillLayer, borderLayer, eraserLayer ]
     

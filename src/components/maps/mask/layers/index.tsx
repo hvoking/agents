@@ -19,21 +19,21 @@ export const Layers = ({ boundary, marker }: any) => {
 				<Lines 
 					boundary={boundary} 
 					layer={currentProvider.layer}
-					index={marker.id}
+					markerId={marker.id}
 				/>
 			}
 			{currentProvider.type === 'Polygon' && 
 				<Polygons 
 					boundary={boundary} 
 					layer={currentProvider.layer}
-					index={marker.id}
+					markerId={marker.id}
 				/>
 			}
 			{currentProvider.type === 'Point' && 
 				<Points 
 					boundary={boundary} 
 					layer={currentProvider.layer}
-					index={marker.id}
+					markerId={marker.id}
 				/>
 			}
 		</div>

@@ -23,19 +23,15 @@ export const BoundaryEventsProvider = ({children}: any) => {
 
 	const isInside = useCallback((point: any) => {
 		const map = mapRef.current;
-
 		if (!map) return null;
-
-		const features = map.queryRenderedFeatures(point, {layers: markerLayers,});
-
-		if (!features.length) return null;
 		
+		const features = map.queryRenderedFeatures(point, { layers: markerLayers });
+		if (!features.length) return null;
+
 		const markerId = features[0].layer.id;
 		const selectedMarker = markers.find((marker: any) => `boundary-fill-${marker.id}` === markerId);
-		if (selectedMarker) setCurrentMarkerId(selectedMarker.id);
-
-		return selectedMarker;
-	}, [ mapRef, markerLayers, markers, setCurrentMarkerId ]);
+		return selectedMarker || null;
+	}, [mapRef, markerLayers, markers]);
 
 	const onDragStart = useCallback((event: any) => {
 		const map = mapRef.current;
@@ -54,26 +50,37 @@ export const BoundaryEventsProvider = ({children}: any) => {
 	}, [ isInside, mapRef ]);
 
 	const onMouseMove = useCallback((event: any) => {
-		if (!isDragging || !currentMarkerId) return;
+		if (isDragging) {
+			const { x, y } = event.point;
+			const offset = { x: x - dragOffset.x, y: y - dragOffset.y};
 
-		const { x, y } = event.point;
-		
-		const offset = { 
-			x: x - dragOffset.x, 
-			y: y - dragOffset.y 
-		}
+	        const updatedCenter = mapRef.current.unproject(offset);
+	        const { lat, lng } = updatedCenter;
 
-		const updatedCenter = mapRef.current.unproject(offset);
+	        setMarkers((prev: any) =>
+	          prev.map((marker: any) =>
+	            marker.id === currentMarkerId
+	              ? { ...marker, latitude: lat, longitude: lng }
+	              : marker
+	          )
+	        );
+	        return;
+	    }
 
-		const { lat, lng } = updatedCenter;
+	    const selectedMarker = isInside(event.point);
 
-		setMarkers((prev: any) => prev.map((marker: any) =>
-			marker.id === currentMarkerId ?
-			{ ...marker, latitude: lat, longitude: lng } : 
-			marker
-		));
+	    if (selectedMarker) {
+	    	if (currentMarkerId !== selectedMarker.id) {
+	    		setCurrentMarkerId(selectedMarker.id);
+	    	}
+	    } 
+	    else {
+	    	if (currentMarkerId) {
+	    		setCurrentMarkerId(null);
+	    	}
+	    }
 
-	}, [ isDragging, dragOffset, mapRef, currentMarkerId, setMarkers ]);
+	},[ isDragging, dragOffset, mapRef, currentMarkerId, setMarkers, isInside, setCurrentMarkerId ]);
 
 	const onDragEnd = useCallback(() => {setIsDragging(false)}, []);
 

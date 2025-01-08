@@ -14,14 +14,16 @@ import { useMarkers } from 'context/agents/markers';
 export const Card = ({ marker }: any) => {
 	const [ activeCharts, setActiveCharts ] = useState(true);	
 	const { sharedGeoJsonDataMap } = useMask();
-	const { providers } = useMarkers();
+	const { providers, setCurrentMarkerId, currentMarkerId } = useMarkers();
 
-	const linesData = sharedGeoJsonDataMap.value[`lines-source-${marker.id}`];
-	const polygonsData = sharedGeoJsonDataMap.value[`polygons-source-${marker.id}`];
-	const pointsData = sharedGeoJsonDataMap.value[`points-source-${marker.id}`];
-	const clusterData = sharedGeoJsonDataMap.value[`cluster-source-${marker.id}`];
+	const { id, name, color } = marker;
 
-	const currentProvider = providers.find((item: any) => item.name === marker.name);
+	const linesData = sharedGeoJsonDataMap.value[`lines-source-${id}`];
+	const polygonsData = sharedGeoJsonDataMap.value[`polygons-source-${id}`];
+	const pointsData = sharedGeoJsonDataMap.value[`points-source-${id}`];
+	const clusterData = sharedGeoJsonDataMap.value[`cluster-source-${id}`];
+
+	const currentProvider = providers.find((item: any) => item.name === name);
 
 	const { type: currentType, columnName, graphicType, provider } = currentProvider;
 
@@ -40,8 +42,15 @@ export const Card = ({ marker }: any) => {
 		isPoint ? 'circle-color' :
 		'fill-color';
 
+	const isCurrentMarker = id === currentMarkerId
+
 	return (
-		<div key={marker.id} className="agent-card">
+		<div 
+			key={id} 
+			className={`agent-card ${isCurrentMarker ? "active" : ""}`}
+			onMouseEnter={() => setCurrentMarkerId(id)}
+			onMouseLeave={() => setCurrentMarkerId(null)}
+		>
 		  	<Header marker={marker} activeCharts={activeCharts} setActiveCharts={setActiveCharts}/>
 			{activeCharts && 
 				<Charts 
@@ -49,7 +58,7 @@ export const Card = ({ marker }: any) => {
 					name={columnName} 
 					colorLabel={currentColor} 
 					graphicType={graphicType}
-					backgroundColor={marker.color}
+					backgroundColor={color}
 				/>
 			}
 			{activeCharts && <Footer provider={provider}/>}

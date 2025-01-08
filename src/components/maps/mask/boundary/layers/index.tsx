@@ -16,7 +16,7 @@ export const getFillLayer = (layerId: any, sourceId: any, markerColor: any) => (
 	}
 });
 
-export const getBorderLayer = (layerId: any, sourceId: any) => ({
+export const getBorderLayer = (layerId: any, sourceId: any, isCurrentMarker: any) => ({
 	id: layerId,
 	type: 'line',
 	source: sourceId,
@@ -29,7 +29,7 @@ export const getBorderLayer = (layerId: any, sourceId: any) => ({
 			14, 3,
 			16, 6,
 		],
-		'line-color': 'rgba(0, 123, 255, 0.6)',
+		'line-color': isCurrentMarker ? "rgba(0, 0, 0, 0.8)" : 'rgba(0, 123, 255, 0.6)',
 		'line-opacity': 0.8,
 		'line-dasharray': [2, 2],
 		'line-blur': 1.5,

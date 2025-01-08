@@ -7,13 +7,13 @@ import { useMask } from 'context/agents/mask';
 // Third-party imports
 import { Source, Layer } from 'react-map-gl';
 
-export const Points = ({ boundary, layer, index }: any) => {
+export const Points = ({ boundary, layer, markerId }: any) => {
   const { getGeoJson, sharedGeoJsonDataMap } = useMask();
 
   const geoJsonData = getGeoJson(boundary, layer, 'Point');
 
-  const sourceId = `points-source-${index}`;
-  const layerId = `points-layer-${index}`;
+  const sourceId = `points-source-${markerId}`;
+  const layerId = `points-layer-${markerId}`;
 
   if (!geoJsonData) return <></>;
 
