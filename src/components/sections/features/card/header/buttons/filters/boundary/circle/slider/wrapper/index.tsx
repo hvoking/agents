@@ -33,10 +33,8 @@ export const Wrapper = ({
             x > maxBound ? maxBound :  
             x;
 
-        // Snap to the nearest 0.1 step
         const roundedX = Math.round(boundedX * 10) / 10;
 
-        // Only update markers if the radius has changed
         setMarkers((prev: any) =>
             prev.map((item: any) =>
                 item.id === marker.id && item.radius !== roundedX
@@ -48,6 +46,7 @@ export const Wrapper = ({
 
     const sliderRef = useCallback((node: any) => {
         const drag = d3.drag()
+            .on('start', onDrag)
             .on('drag', onDrag)
             .on('end', onDragEnd);
         d3.select(node).call(drag);

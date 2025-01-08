@@ -13,7 +13,7 @@ export const useMarkerEvents = () => {
 }
 
 export const MarkerEventsProvider = ({children}: any) => {
-	const { markers, setMarkers, setRejectedMarkers } = useMarkers();
+	const { setMarkers, setRejectedMarkers } = useMarkers();
 
     const onDrag = useCallback((event: any, id: number) => {
         const { lat, lng } = event.lngLat;

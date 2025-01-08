@@ -46,10 +46,11 @@ export const Wrapper = ({
 
     const sliderRef = useCallback((node: any) => {
         const drag = d3.drag()
+            .on('start', onDrag)
             .on('drag', onDrag)
             .on('end', onDragEnd);
         d3.select(node).call(drag);
-    }, [ radiusPosition ]);
+    }, [ radiusPosition, onDrag, onDragEnd ]);
 
     const onMouseOver = () => {
         setActiveForeground(true);

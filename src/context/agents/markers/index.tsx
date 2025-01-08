@@ -16,8 +16,6 @@ export const MarkersProvider = ({children}: any) => {
 	const [ markers, setMarkers ] = useState<any>([]);
 	const [ rejectedMarkers, setRejectedMarkers ] = useState<any>([]);
 	
-	const [ hoveredMarker, setHoveredMarker ] = useState<any>(null);
-
 	const [ currentImage, setCurrentImage ] = useState<any>(null);
 	const [ currentName, setCurrentName ] = useState<any>(null);
 
@@ -42,7 +40,6 @@ export const MarkersProvider = ({children}: any) => {
 			radius, setRadius,
 			addPin, setAddPin,
 			providers,
-			hoveredMarker, setHoveredMarker
 		}}>
 			{children}
 		</MarkersContext.Provider>
