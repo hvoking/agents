@@ -28,13 +28,13 @@ export const BoundaryEventsProvider = ({children}: any) => {
 
 		const features = map.queryRenderedFeatures(point, {layers: markerLayers,});
 
-		if (features.length) {
-			const markerId = features[0].layer.id;
-			const selectedMarker = markers.find((marker: any) => `boundary-fill-${marker.id}` === markerId);
-			if (selectedMarker) setCurrentMarkerId(selectedMarker.id);
-			return selectedMarker;
-		}
-		return null;
+		if (!features.length) return null;
+		
+		const markerId = features[0].layer.id;
+		const selectedMarker = markers.find((marker: any) => `boundary-fill-${marker.id}` === markerId);
+		if (selectedMarker) setCurrentMarkerId(selectedMarker.id);
+
+		return selectedMarker;
 	}, [ mapRef, markerLayers, markers, setCurrentMarkerId ]);
 
 	const onDragStart = useCallback((event: any) => {
@@ -48,23 +48,21 @@ export const BoundaryEventsProvider = ({children}: any) => {
 
 		const { x, y } = event.point;
 		const { latitude, longitude } = selectedMarker;
-		const center = [ longitude, latitude ];
+		const projected = map.project([ longitude, latitude ]);
 
-		const projected = map.project(center);
-
-		const updateX = x - projected.x;
-		const updateY = y - projected.y;
-
-		setDragOffset({ x: updateX, y: updateY });
+		setDragOffset({ x: x - projected.x, y: y - projected.y });
 	}, [ isInside, mapRef ]);
 
 	const onMouseMove = useCallback((event: any) => {
 		if (!isDragging || !currentMarkerId) return;
 
+		const { x, y } = event.point;
+		
 		const offset = { 
-			x: event.point.x - dragOffset.x, 
-			y: event.point.y - dragOffset.y 
+			x: x - dragOffset.x, 
+			y: y - dragOffset.y 
 		}
+
 		const updatedCenter = mapRef.current.unproject(offset);
 
 		const { lat, lng } = updatedCenter;

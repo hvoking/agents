@@ -1,5 +1,5 @@
 // React imports
-import { useState, useCallback, useMemo } from 'react';
+import { useState } from 'react';
 
 // App imports
 import { Tiles } from './tiles';
@@ -17,7 +17,7 @@ import { Map } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 export const MapContainer = () => {
-	const { markers, setMarkers, currentMarker, setCurrentMarker } = useMarkers();
+	const { markers } = useMarkers();
 	const { viewport, mapRef, mapStyle } = useGeo();
 	const { addAgent } = useMapEvents();
 	const { onDragStart, onMouseMove, onDragEnd, isDragging } = useBoundaryEvents();
