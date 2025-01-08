@@ -6,11 +6,7 @@ import * as Locations from './locations';
 
 const GeoContext: React.Context<any> = createContext(null);
 
-export const useGeo = () => {
-	return (
-		useContext(GeoContext)
-	)
-}
+export const useGeo = () => useContext(GeoContext)
 
 export const GeoProvider = ({children}: any) => {
 	const mapRef = useRef<any>();

@@ -6,11 +6,7 @@ import { useMarkers } from 'context/agents/markers';
 
 const MapEventsContext: React.Context<any> = createContext(null);
 
-export const useMapEvents = () => {
-	return (
-		useContext(MapEventsContext)
-	)
-}
+export const useMapEvents = () => useContext(MapEventsContext)
 
 export const MapEventsProvider = ({children}: any) => {
 	const { markers, setMarkers, addPin, setAddPin, currentImage, currentName } = useMarkers();
@@ -42,11 +38,8 @@ export const MapEventsProvider = ({children}: any) => {
 		}
 	};
 
-    // Remove add pin state
 	useEffect(() => {
-		const handleKeyDown = (event: any) => 
-			event.keyCode === 27 && setAddPin(false);
-
+		const handleKeyDown = (event: any) => event.keyCode === 27 && setAddPin(false);
 		window.addEventListener('keydown', handleKeyDown);
 		return () => {
 			window.removeEventListener('keydown', handleKeyDown);

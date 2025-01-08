@@ -2,9 +2,9 @@
 import { useState } from 'react';
 
 // App imports
-import { Charts } from './charts';
 import { Header } from './header';
-
+import { Charts } from './charts';
+import { Footer } from './footer';
 import './styles.scss';
 
 // Context imports
@@ -40,12 +40,10 @@ export const Card = ({ marker }: any) => {
 		isPoint ? 'circle-color' :
 		'fill-color';
 
-	const onClick = () => setActiveCharts((prev: boolean) => !prev);
-
 	return (
 		<div key={marker.id} className="agent-card">
 		  	<Header marker={marker} activeCharts={activeCharts} setActiveCharts={setActiveCharts}/>
-			{activeCharts && <div className="chart-card">
+			{activeCharts && 
 				<Charts 
 					data={currentData} 
 					name={columnName} 
@@ -53,14 +51,8 @@ export const Card = ({ marker }: any) => {
 					graphicType={graphicType}
 					backgroundColor={marker.color}
 				/>
-				<div className="data-provider">
-					<div>data provider</div>
-					<img 
-						src={process.env.PUBLIC_URL + `/static/providers/${provider}.svg`} 
-						alt="provider" 
-					/>
-				</div>
-			</div>}
+			}
+			{activeCharts && <Footer provider={provider}/>}
 		</div>
 	)
 }

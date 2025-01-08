@@ -6,11 +6,7 @@ import { useGeo } from 'context/geo';
 
 const GoogleDetailsApiContext: React.Context<any> = createContext(null)
 
-export const useGoogleDetailsApi = () => {
-	return (
-		useContext(GoogleDetailsApiContext)
-	)
-}
+export const useGoogleDetailsApi = () => useContext(GoogleDetailsApiContext)
 
 export const GoogleDetailsApiProvider = ({children}: any) => {
 	const { placeId, setViewport } = useGeo();
@@ -33,11 +29,10 @@ export const GoogleDetailsApiProvider = ({children}: any) => {
 
 	useEffect(() => {
 		if (googleDetailsData) {
-			const longitude = googleDetailsData.result.geometry.location.lng;
-			const latitude = googleDetailsData.result.geometry.location.lat;
-			setViewport((prev: any) => ({...prev, longitude: longitude, latitude: latitude}));
+			const { lng, lat } = googleDetailsData.result.geometry.location;
+			setViewport((prev: any) => ({...prev, longitude: lng, latitude: lat}));
 		}
-	}, [ googleDetailsData ])
+	}, [ googleDetailsData, setViewport ])
 
 	return (
 		<GoogleDetailsApiContext.Provider value={{ googleDetailsData }}>

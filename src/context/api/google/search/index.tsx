@@ -6,11 +6,7 @@ import { useGeo } from 'context/geo';
 
 const GoogleSearchApiContext: React.Context<any> = createContext(null)
 
-export const useGoogleSearchApi = () => {
-	return (
-		useContext(GoogleSearchApiContext)
-	)
-}
+export const useGoogleSearchApi = () => useContext(GoogleSearchApiContext)
 
 export const GoogleSearchApiProvider = ({children}: any) => {
 	const [ searchText, setSearchText ] = useState('');

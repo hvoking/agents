@@ -1,19 +1,6 @@
-@import 'variables';
-
 .features-wrapper {
   display: grid;
   grid-gap: 10px;
   padding: 10px;
   text-transform: capitalize;
-}
-.agent-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 15px;  
-  background-color: $card-bg;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  position: relative;
-  display: grid;
-  grid-gap: 10px;
-  overflow: hidden;
 }

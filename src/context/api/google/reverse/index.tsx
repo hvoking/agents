@@ -6,11 +6,7 @@ import { useGeo } from 'context/geo';
 
 const ReverseGeocodingApiContext: React.Context<any> = createContext(null)
 
-export const useReverseGeocodingApi = () => {
-	return (
-		useContext(ReverseGeocodingApiContext)
-	)
-}
+export const useReverseGeocodingApi = () => useContext(ReverseGeocodingApiContext)
 
 export const ReverseGeocodingApiProvider = ({children}: any) => {
 	const { viewport } = useGeo();

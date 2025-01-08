@@ -7,11 +7,7 @@ import { useGeo } from 'context/geo';
 
 const SearchEventsContext: React.Context<any> = createContext(null);
 
-export const useSearchEvents = () => {
-	return (
-		useContext(SearchEventsContext)
-	)
-}
+export const useSearchEvents = () => useContext(SearchEventsContext)
 
 export const SearchEventsProvider = ({children}: any) => {
 	const [ suggestionIndex, setSuggestionIndex ] = useState(0);

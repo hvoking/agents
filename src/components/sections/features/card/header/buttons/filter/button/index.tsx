@@ -1,11 +1,11 @@
 // App imports
 import './styles.scss';
 
-export const Button = ({ activateFilters, setActivateFilters }: any) => {
+export const Button = ({ activateFilter, setActivateFilter }: any) => {
 	return (
 		<div 
-			className={`map-filters-button ${activateFilters ? "active" : ""}`} 
-			onClick={() => setActivateFilters((prev: boolean) => !prev)}
+			className={`map-filters-button ${activateFilter ? "active" : ""}`} 
+			onClick={() => setActivateFilter((prev: boolean) => !prev)}
 		>
 			<svg viewBox={`0 0 30 30`}>
 				<g className="filter-icon">

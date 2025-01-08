@@ -21,8 +21,7 @@ export const Header = ({ marker, activeCharts, setActiveCharts }: any) => {
 				{/*<Location marker={marker}/>*/}
 			</div>
 			<div></div>
-			<Buttons marker={marker} activeCharts={activeCharts} setActiveCharts={setActiveCharts}/>
-			
+			<Buttons marker={marker} activeCharts={activeCharts} setActiveCharts={setActiveCharts}/>			
 		</div>
 	)
 }

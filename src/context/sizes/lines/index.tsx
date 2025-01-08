@@ -3,11 +3,7 @@ import { useState, useContext, createContext } from 'react';
 
 const LinesSizesContext: React.Context<any> = createContext(null)
 
-export const useLinesSizes = () => {
-	return (
-		useContext(LinesSizesContext)
-	)
-}
+export const useLinesSizes = () => useContext(LinesSizesContext)
 
 export const LinesSizesProvider = ({children}: any) => {
 	const [ width, setWidth ] = useState<any>(null);

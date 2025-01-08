@@ -3,11 +3,7 @@ import { useState, useContext, createContext } from 'react';
 
 const CircleSizesContext: React.Context<any> = createContext(null)
 
-export const useCircleSizes = () => {
-	return (
-		useContext(CircleSizesContext)
-	)
-}
+export const useCircleSizes = () => useContext(CircleSizesContext)
 
 export const CircleSizesProvider = ({children}: any) => {
 	const [ width, setWidth ] = useState<any>(null);

@@ -14,11 +14,7 @@ import { signal } from '@preact/signals-react';
 
 const MaskContext: React.Context<any> = createContext(null)
 
-export const useMask = () => {
-	return (
-		useContext(MaskContext)
-	)
-}
+export const useMask = () => useContext(MaskContext)
 
 export const MaskProvider = ({children}: any) => {
 	const { mapRef } = useGeo();

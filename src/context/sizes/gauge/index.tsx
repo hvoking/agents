@@ -3,11 +3,7 @@ import { useState, useContext, createContext } from 'react';
 
 const GaugeSizesContext: React.Context<any> = createContext(null)
 
-export const useGaugeSizes = () => {
-	return (
-		useContext(GaugeSizesContext)
-	)
-}
+export const useGaugeSizes = () => useContext(GaugeSizesContext)
 
 export const GaugeSizesProvider = ({children}: any) => {
 	const [ width, setWidth ] = useState<any>(null);

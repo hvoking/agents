@@ -3,11 +3,7 @@ import { useState, useContext, createContext } from 'react';
 
 const RadiusSizesContext: React.Context<any> = createContext(null)
 
-export const useRadiusSizes = () => {
-	return (
-		useContext(RadiusSizesContext)
-	)
-}
+export const useRadiusSizes = () => useContext(RadiusSizesContext)
 
 export const RadiusSizesProvider = ({children}: any) => {
 	const [ width, setWidth ] = useState<any>(null);

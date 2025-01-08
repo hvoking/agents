@@ -3,11 +3,7 @@ import { useContext, createContext } from 'react';
 
 const IsochroneApiContext: React.Context<any> = createContext(null)
 
-export const useIsochroneApi = () => {
-	return (
-		useContext(IsochroneApiContext)
-	)
-}
+export const useIsochroneApi = () => useContext(IsochroneApiContext)
 
 export const IsochroneApiProvider = ({children}: any) => {
 

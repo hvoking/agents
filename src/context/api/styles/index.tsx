@@ -3,11 +3,7 @@ import { useContext, createContext } from 'react';
 
 const StylesApiContext: React.Context<any> = createContext(null)
 
-export const useStylesApi = () => {
-	return (
-		useContext(StylesApiContext)
-	)
-}
+export const useStylesApi = () => useContext(StylesApiContext)
 
 export const StylesApiProvider = ({children}: any) => {
 	const fetchData = async (tableSchema: string, tableName: string) => {

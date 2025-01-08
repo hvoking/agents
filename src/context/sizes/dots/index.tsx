@@ -3,11 +3,7 @@ import { useState, useContext, createContext } from 'react';
 
 const DotsSizesContext: React.Context<any> = createContext(null)
 
-export const useDotsSizes = () => {
-	return (
-		useContext(DotsSizesContext)
-	)
-}
+export const useDotsSizes = () => useContext(DotsSizesContext)
 
 export const DotsSizesProvider = ({children}: any) => {
 	const [ width, setWidth ] = useState<any>(null);

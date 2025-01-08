@@ -3,11 +3,7 @@ import { useState, useContext, createContext } from 'react';
 
 const BarsSizesContext: React.Context<any> = createContext(null)
 
-export const useBarsSizes = () => {
-	return (
-		useContext(BarsSizesContext)
-	)
-}
+export const useBarsSizes = () => useContext(BarsSizesContext)
 
 export const BarsSizesProvider = ({children}: any) => {
 	const [ width, setWidth ] = useState<any>(null);

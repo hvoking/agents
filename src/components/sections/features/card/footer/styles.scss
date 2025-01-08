@@ -1,0 +1,11 @@
+@import 'variables';
+
+.data-provider {
+	display: flex; 
+	gap: 7px; 
+	font-size: 0.9em; 
+	justify-self: end; 
+	padding-right: 5px;
+	color: $border-color;
+	height: 20px;
+}

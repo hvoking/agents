@@ -16,8 +16,8 @@ export const BoundaryEventsProvider = ({children}: any) => {
 	const { markers, setMarkers, currentMarkerId, setCurrentMarkerId } = useMarkers();
 	const { mapRef } = useGeo();
 
-	const markerLayers = useMemo(
-		() => markers.map((marker: any) => `boundary-fill-${marker.id}`),
+	const markerLayers = useMemo(() => 
+		markers.map((marker: any) => `boundary-fill-${marker.id}`),
 		[ markers ]
 	);
 

@@ -6,11 +6,7 @@ import { useMarkers } from 'context/agents/markers';
 
 const MarkerEventsContext: React.Context<any> = createContext(null);
 
-export const useMarkerEvents = () => {
-	return (
-		useContext(MarkerEventsContext)
-	)
-}
+export const useMarkerEvents = () => useContext(MarkerEventsContext)
 
 export const MarkerEventsProvider = ({children}: any) => {
 	const { setMarkers, setRejectedMarkers } = useMarkers();

@@ -1,22 +1,13 @@
 @import 'variables';
 
-.chart-card {
-	display: grid;
-	grid-gap: 10px;
-	max-height: 200px;
-	overflow: hidden;
-}
-.chart-title {
-	font-weight: 500;
-	padding-left: 5px;
-	padding-bottom: 5px;
-}
-.data-provider {
-	display: flex; 
-	gap: 7px; 
-	font-size: 0.9em; 
-	justify-self: end; 
-	padding-right: 5px;
-	color: $border-color;
-	height: 20px;
+.agent-card {
+  border: 1px solid rgba(204, 204, 204, 1);
+  border-radius: 8px;
+  padding: 15px;  
+  background-color: $card-bg;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: grid;
+  grid-gap: 10px;
+  overflow: hidden;
 }

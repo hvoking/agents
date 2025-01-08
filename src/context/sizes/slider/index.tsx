@@ -3,11 +3,7 @@ import { useState, useContext, createContext } from 'react';
 
 const SliderSizesContext: React.Context<any> = createContext(null)
 
-export const useSliderSizes = () => {
-	return (
-		useContext(SliderSizesContext)
-	)
-}
+export const useSliderSizes = () => useContext(SliderSizesContext)
 
 export const SliderSizesProvider = ({children}: any) => {
 	const [ width, setWidth ] = useState<any>(null);
