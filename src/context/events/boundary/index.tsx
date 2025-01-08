@@ -7,40 +7,35 @@ import { useGeo } from 'context/geo';
 
 const BoundaryEventsContext: React.Context<any> = createContext(null);
 
-export const useBoundaryEvents = () => {
-	return (
-		useContext(BoundaryEventsContext)
-	)
-}
+export const useBoundaryEvents = () => useContext(BoundaryEventsContext)
 
 export const BoundaryEventsProvider = ({children}: any) => {
 	const [ isDragging, setIsDragging ] = useState(false);
 	const [ dragOffset, setDragOffset ] = useState({ x: 0, y: 0 });
 
-	const { markers, setMarkers, currentMarker, setCurrentMarker } = useMarkers();
+	const { markers, setMarkers, currentMarkerId, setCurrentMarkerId } = useMarkers();
 	const { mapRef } = useGeo();
 
-	const markerLayers = useMemo(() => 
-		markers.length > 0 && markers.map((marker: any) => `boundary-fill-${marker.id}`),
+	const markerLayers = useMemo(
+		() => markers.map((marker: any) => `boundary-fill-${marker.id}`),
 		[ markers ]
 	);
 
 	const isInside = useCallback((point: any) => {
 		const map = mapRef.current;
 
-		if (!map || !(markers.length > 0)) return null;
+		if (!map) return null;
 
 		const features = map.queryRenderedFeatures(point, {layers: markerLayers,});
 
-		if (features.length > 0) {
+		if (features.length) {
 			const markerId = features[0].layer.id;
 			const selectedMarker = markers.find((marker: any) => `boundary-fill-${marker.id}` === markerId);
-		
-			if (selectedMarker) setCurrentMarker(selectedMarker);
+			if (selectedMarker) setCurrentMarkerId(selectedMarker.id);
 			return selectedMarker;
 		}
 		return null;
-	}, [ mapRef, markerLayers, markers, setCurrentMarker ]);
+	}, [ mapRef, markerLayers, markers, setCurrentMarkerId ]);
 
 	const onDragStart = useCallback((event: any) => {
 		const map = mapRef.current;
@@ -53,30 +48,34 @@ export const BoundaryEventsProvider = ({children}: any) => {
 
 		const { x, y } = event.point;
 		const { latitude, longitude } = selectedMarker;
-		const center = [longitude, latitude];
+		const center = [ longitude, latitude ];
+
 		const projected = map.project(center);
 
-		setDragOffset({ x: x - projected.x, y: y - projected.y });
-	}, [isInside, mapRef]);
+		const updateX = x - projected.x;
+		const updateY = y - projected.y;
+
+		setDragOffset({ x: updateX, y: updateY });
+	}, [ isInside, mapRef ]);
 
 	const onMouseMove = useCallback((event: any) => {
-		if (!isDragging || !currentMarker) return;
-		
-		const updatedX = event.point.x - dragOffset.x;
-		const updatedY = event.point.y - dragOffset.y;
+		if (!isDragging || !currentMarkerId) return;
 
-		const updatedCenter = mapRef.current.unproject({ x: updatedX, y: updatedY });
+		const offset = { 
+			x: event.point.x - dragOffset.x, 
+			y: event.point.y - dragOffset.y 
+		}
+		const updatedCenter = mapRef.current.unproject(offset);
 
 		const { lat, lng } = updatedCenter;
 
-		setMarkers((prevMarkers: any) => prevMarkers.map((marker: any) =>
-			marker.id === currentMarker.id ? 
+		setMarkers((prev: any) => prev.map((marker: any) =>
+			marker.id === currentMarkerId ?
 			{ ...marker, latitude: lat, longitude: lng } : 
 			marker
 		));
 
-		setCurrentMarker((prev: any) => ({ ...prev, latitude: lat, longitude: lng }));
-	}, [ isDragging, dragOffset, mapRef, currentMarker, setMarkers, setCurrentMarker ]);
+	}, [ isDragging, dragOffset, mapRef, currentMarkerId, setMarkers ]);
 
 	const onDragEnd = useCallback(() => {setIsDragging(false)}, []);
 
