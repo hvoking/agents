@@ -10,10 +10,12 @@ const BoundaryEventsContext: React.Context<any> = createContext(null);
 export const useBoundaryEvents = () => useContext(BoundaryEventsContext)
 
 export const BoundaryEventsProvider = ({children}: any) => {
+	const [ optionsCoords, setOptionsCoords ] = useState<any>(null);
+
 	const [ isDragging, setIsDragging ] = useState(false);
 	const [ dragOffset, setDragOffset ] = useState({ x: 0, y: 0 });
 
-	const { markers, setMarkers, currentMarkerId, setCurrentMarkerId } = useMarkers();
+	const { markers, setMarkers, currentMarker, setCurrentMarker } = useMarkers();
 	const { mapRef } = useGeo();
 
 	const markerLayers = useMemo(() => 
@@ -33,7 +35,7 @@ export const BoundaryEventsProvider = ({children}: any) => {
 		return selectedMarker || null;
 	}, [mapRef, markerLayers, markers]);
 
-	const onDragStart = useCallback((event: any) => {
+	const onMouseDown = useCallback((event: any) => {
 		const map = mapRef.current;
 		if (!map) return;
 
@@ -49,6 +51,18 @@ export const BoundaryEventsProvider = ({children}: any) => {
 		setDragOffset({ x: x - projected.x, y: y - projected.y });
 	}, [ isInside, mapRef ]);
 
+	const handleRightClick = useCallback((event: any) => {
+		event.preventDefault();
+
+		const map = mapRef.current;
+		if (!map) return;
+
+		const selectedMarker = isInside(event.point);
+		if (!selectedMarker) return;
+		
+		setOptionsCoords((prev: any) => prev === null ? event.lngLat : null);
+	}, [ isInside, mapRef ]);
+
 	const onMouseMove = useCallback((event: any) => {
 		if (isDragging) {
 			const { x, y } = event.point;
@@ -59,7 +73,7 @@ export const BoundaryEventsProvider = ({children}: any) => {
 
 	        setMarkers((prev: any) =>
 	          prev.map((marker: any) =>
-	            marker.id === currentMarkerId
+	            marker.id === currentMarker?.id
 	              ? { ...marker, latitude: lat, longitude: lng }
 	              : marker
 	          )
@@ -70,22 +84,30 @@ export const BoundaryEventsProvider = ({children}: any) => {
 	    const selectedMarker = isInside(event.point);
 
 	    if (selectedMarker) {
-	    	if (currentMarkerId !== selectedMarker.id) {
-	    		setCurrentMarkerId(selectedMarker.id);
+	    	if (currentMarker?.id !== selectedMarker.id) {
+	    		setCurrentMarker(selectedMarker);
 	    	}
 	    } 
 	    else {
-	    	if (currentMarkerId) {
-	    		setCurrentMarkerId(null);
+	    	if (currentMarker?.id) {
+	    		setCurrentMarker(null);
 	    	}
 	    }
 
-	},[ isDragging, dragOffset, mapRef, currentMarkerId, setMarkers, isInside, setCurrentMarkerId ]);
+	},[ isDragging, dragOffset, mapRef, currentMarker, isInside ]);
 
-	const onDragEnd = useCallback(() => {setIsDragging(false)}, []);
+	const onMouseUp = useCallback(() => {setIsDragging(false)}, []);
 
 	return (
-		<BoundaryEventsContext.Provider value={{ onDragStart, onMouseMove, onDragEnd, isDragging }}>
+		<BoundaryEventsContext.Provider value={{ 
+			onMouseDown, 
+			onMouseMove, 
+			onMouseUp, 
+			isDragging,
+			handleRightClick,
+			optionsCoords,
+
+		}}>
 			{children}
 		</BoundaryEventsContext.Provider>
 	)

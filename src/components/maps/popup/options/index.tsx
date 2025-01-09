@@ -10,29 +10,34 @@ import './styles.scss';
 
 // Context imports
 import { useMask } from 'context/agents/mask';
+import { useMarkers } from 'context/agents/markers';
 
-export const Boundary = ({ marker }: any) => {
+export const Options = () => {
 	const { markerGeometryType, setMarkerGeometryType } = useMask();
+	const { markers, currentMarker } = useMarkers();
+
 	const [ activeColors, setActiveColors ] = useState(false);
 
-	const isIsoActive = markerGeometryType[marker.id] === "iso"
+	if (!currentMarker) return <></>;
 
+	const isIsoActive = markerGeometryType[currentMarker.id] === "iso";
+	
 	return (
 		<div className="map-filters-wrapper">
 			<Header 
-				marker={marker} 
+				marker={currentMarker} 
 				setMarkerGeometryType={setMarkerGeometryType}
 				setActiveColors={setActiveColors}
 				isIsoActive={isIsoActive}
 			/>
 			<div className="boundary-selector-wrapper">
-				{!activeColors && !isIsoActive && <CircleProperties marker={marker}/>}
-				{!activeColors && isIsoActive && <IsoProperties marker={marker}/>}
-				{activeColors && <Colors marker={marker}/>}
+				{!activeColors && !isIsoActive && <CircleProperties marker={currentMarker}/>}
+				{!activeColors && isIsoActive && <IsoProperties marker={currentMarker}/>}
+				{activeColors && <Colors marker={currentMarker}/>}
 
 			</div>
 		</div>
 	)
 }
 
-Boundary.displayName="Boundary";
+Options.displayName="Options";

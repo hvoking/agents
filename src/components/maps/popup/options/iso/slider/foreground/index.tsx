@@ -7,11 +7,7 @@ export const Foreground = ({ activeForeground, xScale, minBound, radiusPosition,
 			ry={circleRadius / 2}
 			width={xScale(radiusPosition) - xScale(minBound)}
 			height={circleRadius}
-			fill={
-				activeForeground ?
-				"rgba(66, 135, 245, 1)" :
-				"rgba(66, 135, 245, 0.8)"
-			}
+			fill={"rgba(52, 152, 219, 1)"}
 		/>
 	)
 }

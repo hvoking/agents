@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Tiles } from './tiles';
 import { Mask } from './mask';
 import { Wrapper } from './wrapper';
+import { CustomPopup } from './popup';
 
 // Context imports
 import { useGeo } from 'context/geo';
@@ -20,9 +21,10 @@ export const MapContainer = () => {
 	const { markers } = useMarkers();
 	const { viewport, mapRef, mapStyle } = useGeo();
 	const { addAgent } = useMapEvents();
-	const { onDragStart, onMouseMove, onDragEnd, isDragging } = useBoundaryEvents();
+	const { onMouseDown, onMouseMove, onMouseUp, isDragging, handleRightClick, optionsCoords } = useBoundaryEvents();
 	
 	const [ isMapLoaded, setIsMapLoaded ] = useState(false);
+	
 	return (
 		<Wrapper> 
 		  <Map
@@ -32,17 +34,21 @@ export const MapContainer = () => {
 				mapStyle={mapStyle}
 				onClick={addAgent}
 				onLoad={() => setIsMapLoaded(true)}
-		        onMouseDown={onDragStart}
+		        onMouseDown={onMouseDown}
 		        onMouseMove={onMouseMove}
-		        onMouseUp={onDragEnd}
+		        onMouseUp={onMouseUp}
 		        dragPan={!isDragging}
+		        onContextMenu={handleRightClick}
 			>
 				{isMapLoaded && 
 					<>
 						<Tiles/>
 						{markers.length > 0 && 
-							markers.map((marker: any) => <Mask key={marker.id} marker={marker}/>)
+							markers.map((marker: any) => 
+								<Mask key={marker.id} marker={marker}/>
+							)
 						}
+						{optionsCoords && <CustomPopup coords={optionsCoords}/>}
 					</>
 				}
 			</Map>

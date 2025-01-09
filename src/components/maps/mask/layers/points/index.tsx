@@ -1,5 +1,5 @@
 // App imports
-import { getPointStyle } from '../styles';
+import { getPointStyle } from '../styles/point';
 
 // Context imports
 import { useMask } from 'context/agents/mask';

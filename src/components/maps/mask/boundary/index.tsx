@@ -1,5 +1,7 @@
 // App imports
-import { getBorderLayer, getEraserLayer, getFillLayer } from './layers';
+import { getBorderLayer } from './border';
+import { getEraserLayer } from './eraser';
+import { getFillLayer } from './fill';
 
 // Context imports
 import { useMarkers } from 'context/agents/markers';
@@ -23,9 +25,9 @@ export const Boundary = ({ marker, boundary }: any) => {
 
   const eraserLayer = getEraserLayer(eraserId, sourceId);
   const fillLayer = getFillLayer(fillId, sourceId, color);
-  const borderLayer = getBorderLayer(borderId, sourceId, isCurrentMarker);
+  const borderLayer = getBorderLayer(borderId, sourceId, color);
 
-  const layers: any = [ fillLayer, borderLayer, eraserLayer ]
+  const layers: any = [ borderLayer, eraserLayer, fillLayer ]
     
     return (
       <Source 

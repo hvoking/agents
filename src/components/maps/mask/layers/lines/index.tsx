@@ -1,5 +1,5 @@
 // App imports
-import { getLineStyle } from '../styles';
+import { getLineStyle } from '../styles/line';
 
 // Context imports
 import { useMask } from 'context/agents/mask';

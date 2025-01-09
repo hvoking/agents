@@ -3,11 +3,10 @@
 .header-buttons {
   display: flex;
   align-items: center;
-  cursor: pointer;
-  gap: 10px;
+  gap: 7px;
 }
 .close-btn {
-  font-size: 14px;
+  font-size: 15px;
   color: $text-dark;
 }
 .card-filter-wrapper {

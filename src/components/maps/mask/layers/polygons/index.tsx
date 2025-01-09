@@ -1,5 +1,5 @@
 // App imports
-import { getPolygonStyle } from '../styles';
+import { getPolygonStyle } from '../styles/polygon';
 
 // Context imports
 import { useMask } from 'context/agents/mask';

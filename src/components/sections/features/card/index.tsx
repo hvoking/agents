@@ -12,9 +12,10 @@ import { useMask } from 'context/agents/mask';
 import { useMarkers } from 'context/agents/markers';
 
 export const Card = ({ marker }: any) => {
-	const [ activeCharts, setActiveCharts ] = useState(true);	
+	const [ activeCharts, setActiveCharts ] = useState(true);
+	
 	const { sharedGeoJsonDataMap } = useMask();
-	const { providers, setCurrentMarkerId } = useMarkers();
+	const { providers } = useMarkers();
 
 	const { id, name, color } = marker;
 
@@ -43,12 +44,7 @@ export const Card = ({ marker }: any) => {
 		'fill-color';
 
 	return (
-		<div 
-			key={id} 
-			className={"agent-card"}
-			onMouseEnter={() => setCurrentMarkerId(id)}
-			onMouseLeave={() => setCurrentMarkerId(null)}
-		>
+		<div key={id} className="agent-card">
 		  	<Header marker={marker} activeCharts={activeCharts} setActiveCharts={setActiveCharts}/>
 			{activeCharts && 
 				<Charts 

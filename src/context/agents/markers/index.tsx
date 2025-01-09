@@ -6,15 +6,11 @@ import { providers } from './data';
 
 const MarkersContext: React.Context<any> = createContext(null);
 
-export const useMarkers = () => {
-	return (
-		useContext(MarkersContext)
-	)
-}
+export const useMarkers = () => useContext(MarkersContext)
 
 export const MarkersProvider = ({children}: any) => {
 	const [ markers, setMarkers ] = useState<any>([]);
-	const [ currentMarkerId, setCurrentMarkerId ] = useState<any>(null);
+	const [ currentMarker, setCurrentMarker ] = useState<any>(null);
 	const [ rejectedMarkers, setRejectedMarkers ] = useState<any>([]);
 	
 	const [ currentImage, setCurrentImage ] = useState<any>(null);
@@ -34,7 +30,7 @@ export const MarkersProvider = ({children}: any) => {
 	return (
 		<MarkersContext.Provider value={{
 			markers, setMarkers,
-			currentMarkerId, setCurrentMarkerId,
+			currentMarker, setCurrentMarker,
 			currentImage, setCurrentImage,
 			currentName, setCurrentName,
 			activePage, setActivePage,
