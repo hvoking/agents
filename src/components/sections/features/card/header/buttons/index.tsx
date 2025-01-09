@@ -8,7 +8,7 @@ import { useMarkerEvents } from 'context/events/marker';
 export const Buttons = ({ marker, activeCharts, setActiveCharts }: any) => {
 	const { rejectMarker } = useMarkerEvents();
 	
-	const deleteAgent = (e: any) => rejectMarker(e, marker);
+	const deleteAgent = (e: any) => rejectMarker(e, marker.id);
 	
 	return (
 		<div className="header-buttons">

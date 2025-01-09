@@ -16,7 +16,7 @@ import { useRadiusSizes } from 'context/sizes/radius';
 // Third-party imports
 import * as d3 from 'd3';
 
-export const Slider = ({ marker, radiusPosition, setRadiusPosition, minBound, maxBound }: any) => {
+export const Slider = ({ markerId, radiusPosition, setRadiusPosition, minBound, maxBound }: any) => {
   const [ activeForeground, setActiveForeground ] = useState(false);
   const { innerWidth, innerHeight } = useRadiusSizes();
 
@@ -59,10 +59,10 @@ export const Slider = ({ marker, radiusPosition, setRadiusPosition, minBound, ma
         innerWidth={innerWidth}
         innerHeight={innerHeight}
         setRadiusPosition={setRadiusPosition}
-        marker={marker}
         minBound={minBound}
         maxBound={maxBound}
         setActiveForeground={setActiveForeground}
+        markerId={markerId}
       />
     </SVGWrapper>
     </div>

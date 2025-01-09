@@ -1,5 +1,5 @@
 // React imports
-import { useState, useCallback, useMemo, useContext, createContext } from 'react';
+import { useState, useCallback, useContext, createContext } from 'react';
 
 // Context imports
 import { useMarkers } from 'context/agents/markers';
@@ -15,25 +15,23 @@ export const BoundaryEventsProvider = ({children}: any) => {
 	const [ isDragging, setIsDragging ] = useState(false);
 	const [ dragOffset, setDragOffset ] = useState({ x: 0, y: 0 });
 
-	const { markers, setMarkers, currentMarker, setCurrentMarker } = useMarkers();
+	const { markers, setMarkers, currentMarkerId, setCurrentMarkerId } = useMarkers();
 	const { mapRef } = useGeo();
-
-	const markerLayers = useMemo(() => 
-		markers.map((marker: any) => `boundary-fill-${marker.id}`),
-		[ markers ]
-	);
 
 	const isInside = useCallback((point: any) => {
 		const map = mapRef.current;
 		if (!map) return null;
+
+		const markerLayers = Object.keys(markers).map((id: any) => `boundary-fill-${id}`);
 		
 		const features = map.queryRenderedFeatures(point, { layers: markerLayers });
 		if (!features.length) return null;
 
-		const markerId = features[0].layer.id;
-		const selectedMarker = markers.find((marker: any) => `boundary-fill-${marker.id}` === markerId);
-		return selectedMarker || null;
-	}, [mapRef, markerLayers, markers]);
+		const markerId = features[0].layer.id.replace("boundary-fill-", "");
+
+		return markers[markerId] || null;
+
+	}, [ mapRef, markers ]);
 
 	const onMouseDown = useCallback((event: any) => {
 		const map = mapRef.current;
@@ -71,30 +69,31 @@ export const BoundaryEventsProvider = ({children}: any) => {
 	        const updatedCenter = mapRef.current.unproject(offset);
 	        const { lat, lng } = updatedCenter;
 
-	        setMarkers((prev: any) =>
-	          prev.map((marker: any) =>
-	            marker.id === currentMarker?.id
-	              ? { ...marker, latitude: lat, longitude: lng }
-	              : marker
-	          )
-	        );
+	        setMarkers((prev: any) => ({
+	            ...prev,
+	            [currentMarkerId]: {
+	                ...prev[currentMarkerId],
+	                latitude: lat,
+	                longitude: lng,
+	            },
+	        }));
 	        return;
 	    }
 
 	    const selectedMarker = isInside(event.point);
 
 	    if (selectedMarker) {
-	    	if (currentMarker?.id !== selectedMarker.id) {
-	    		setCurrentMarker(selectedMarker);
+	    	if (currentMarkerId !== selectedMarker.id) {
+	    		setCurrentMarkerId(selectedMarker.id);
 	    	}
 	    } 
 	    else {
-	    	if (currentMarker?.id) {
-	    		setCurrentMarker(null);
+	    	if (currentMarkerId) {
+	    		setCurrentMarkerId(null);
 	    	}
 	    }
 
-	},[ isDragging, dragOffset, mapRef, currentMarker, isInside ]);
+	},[ isDragging, dragOffset, mapRef, currentMarkerId, isInside ]);
 
 	const onMouseUp = useCallback(() => {setIsDragging(false)}, []);
 

@@ -11,7 +11,7 @@ export const Wrapper = ({
     minBound, maxBound,
     innerWidth, innerHeight, 
     radiusPosition, setRadiusPosition,
-    marker,
+    markerId,
     setActiveForeground
 }: any) => {
     const { setMarkers } = useMarkers();
@@ -35,13 +35,18 @@ export const Wrapper = ({
 
         const roundedX = Math.round(boundedX * 10) / 10;
 
-        setMarkers((prev: any) =>
-            prev.map((item: any) =>
-                item.id === marker.id && item.radius !== roundedX
-                    ? { ...item, radius: roundedX }
-                    : item
-            )
-        );
+        setMarkers((prev: any) => {
+            if (prev[markerId]?.radius !== roundedX) {
+                return {
+                    ...prev,
+                    [markerId]: {
+                        ...prev[markerId],
+                        radius: roundedX,
+                    },
+                };
+            }
+            return prev; // Return the unchanged state if no update is needed
+        });
     };
 
     const sliderRef = useCallback((node: any) => {

@@ -15,9 +15,7 @@ export const CustomPopup: any = ({ coords }: any) => {
       offset={20}
       closeButton={false}
     >
-      <div className="popup-item">
-        <Options/>
-      </div>
+      <Options/>
     </Popup>
   );
 }

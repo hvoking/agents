@@ -4,7 +4,7 @@ import { useState } from 'react';
 // App imports
 import { Slider } from './slider';
 
-export const CircleProperties = ({ marker }: any) => {
+export const CircleProperties = ({ markerId }: any) => {
 	const [ radiusPosition, setRadiusPosition ] = useState(0.5);
 	
 	const minBound = 0.1;
@@ -14,11 +14,11 @@ export const CircleProperties = ({ marker }: any) => {
 		<>
 			<div className="boundary-subtitle">Circle radius</div>
 			<Slider 
-				marker={marker}
 				radiusPosition={radiusPosition}
 				setRadiusPosition={setRadiusPosition}
 				minBound={minBound}
 				maxBound={maxBound}
+				markerId={markerId}
 			/>
 		</>
 	)

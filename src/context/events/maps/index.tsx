@@ -12,11 +12,10 @@ export const MapEventsProvider = ({children}: any) => {
 	const { markers, setMarkers, addPin, setAddPin, currentImage, currentName } = useMarkers();
 
 	const getId = (markers: any) => {
-		const lastIndex = markers.length - 1;
-		const lastMarker = markers[lastIndex];
-		const currentId = markers.length > 0 ? lastMarker.id + 1 : 1;
-		return currentId
-	}
+	    const ids = Object.keys(markers).map(Number);
+	    const maxId = ids.length ? Math.max(...ids) : 0;
+	    return maxId + 1;
+	};
 
     const addAgent = (event: any) => {
     	if (addPin === true) {
@@ -33,7 +32,11 @@ export const MapEventsProvider = ({children}: any) => {
 				color: "rgba(223, 246, 255, 1)",
 				routingProfile: "walking",
 			};
-			setMarkers((prev: any) => [...prev, newMarker]);
+			
+			setMarkers((prev: any) => ({
+			    ...prev,
+			    [newMarker.id]: newMarker,
+			}));
 			setAddPin(false);
 		}
 	};

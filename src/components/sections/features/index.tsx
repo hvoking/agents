@@ -8,13 +8,13 @@ import { useMarkers } from 'context/agents/markers';
 export const Features = () => {
   const { markers } = useMarkers();
 
-  if (!(markers.length > 0)) return <></>;
+  if (!(Object.keys(markers).length)) return <></>;
 
   return (
     <div className="features-wrapper">
-      {markers.map((marker: any) => (
-        <div key={marker.id}>
-          <Card marker={marker}/>
+      {Object.entries(markers).map(([key, value]: any) => (
+        <div key={key}>
+          <Card marker={value}/>
         </div>
       ))}
     </div>

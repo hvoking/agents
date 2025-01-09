@@ -1,7 +1,7 @@
 // App imports
 import './styles.scss';
 
-export const Header = ({ isIsoActive, marker, setMarkerGeometryType, setActiveColors }: any) => {
+export const Header = ({ isIsoActive, markerId, setMarkerGeometryType, setActiveColors }: any) => {
 	const circleBackgroundColor = !isIsoActive ? "rgba(52, 152, 219, 0.3)" : "rgba(255, 255, 255, 0)";
 	const isoBackgroundColor = isIsoActive ? "rgba(52, 152, 219, 0.3)" : "rgba(255, 255, 255, 0)";
 
@@ -12,14 +12,14 @@ export const Header = ({ isIsoActive, marker, setMarkerGeometryType, setActiveCo
 				alt="circle-icon"
 				className="settings-icon"
 				style={{backgroundColor: circleBackgroundColor}}
-				onClick={() => setMarkerGeometryType((prev: any) => ({ ...prev, [ marker.id ]: 'circle' }))}
+				onClick={() => setMarkerGeometryType((prev: any) => ({ ...prev, [ markerId ]: 'circle' }))}
 			/>
 			<img 
 				src={process.env.PUBLIC_URL + "/static/icons/iso.svg"} 
 				alt="iso-icon"
 				className="settings-icon"
 				style={{backgroundColor: isoBackgroundColor}}
-				onClick={() => setMarkerGeometryType((prev: any) => ({ ...prev, [marker.id]: 'iso' }))}
+				onClick={() => setMarkerGeometryType((prev: any) => ({ ...prev, [markerId]: 'iso' }))}
 			/>
 			<img 
 				src={process.env.PUBLIC_URL + "/static/icons/colors.svg"} 

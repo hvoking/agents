@@ -4,17 +4,20 @@ import { useEffect } from 'react';
 // Context imports
 import { useMarkers } from 'context/agents/markers';
 
-export const Foreground = ({ marker, xScale, minBound, maxBound, radiusPosition, height, currentFillColor }: any) => {
-	const { setMarkers } = useMarkers();
+export const Foreground = ({ markerId, xScale, minBound, maxBound, radiusPosition, height, currentFillColor }: any) => {
+	const { markers, setMarkers } = useMarkers();
 
     useEffect(() => {
-    	setMarkers((prev: any) =>
-            prev.map((item: any) =>
-                item.id === marker.id
-                    ? { ...item, color: currentFillColor }
-                    : item
-            )
-        );
+    	const updateColors = () => {
+    		setMarkers((prev: any) => ({
+    		    ...prev,
+    		    [markerId]: {
+    		        ...prev[markerId],
+    		        color: currentFillColor,
+    		    },
+    		}));	
+    	}
+    	Object.keys(markers).length && updateColors();
     }, [ currentFillColor ])
 
 	return (

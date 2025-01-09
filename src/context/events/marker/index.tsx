@@ -14,21 +14,25 @@ export const MarkerEventsProvider = ({children}: any) => {
     const onDrag = useCallback((event: any, id: number) => {
         const { lat, lng } = event.lngLat;
 
-        setMarkers((prev: any) =>
-            prev.map((item: any) =>
-                item.id === id
-                    ? { ...item, latitude: lat, longitude: lng }
-                    : item
-            )
-        );
+        setMarkers((prev: any) => ({
+            ...prev,
+            [id]: {
+                ...prev[id],
+                latitude: lat,
+                longitude: lng,
+            },
+        }));
     }, [ setMarkers ]);
 
     const rejectMarker = useCallback(
-        (event: any, marker: any) => {
+        (event: any, markerId: any) => {
             event.stopPropagation();
-            setRejectedMarkers((prev: any) => [...prev, marker]);
+            setMarkers((prev: any) => {
+                const { [markerId]: _, ...rest } = prev;
+                return rest;
+            });
         },
-        [ setRejectedMarkers ]
+        [ setMarkers ]
     );
 
 	return (

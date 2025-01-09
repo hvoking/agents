@@ -11,6 +11,7 @@ export const Wrapper = ({
     minBound, maxBound,
     innerWidth, innerHeight, 
     radiusPosition, setRadiusPosition,
+    markerId,
     setActiveForeground
 }: any) => {
     const { setMarkers } = useMarkers();
@@ -35,13 +36,13 @@ export const Wrapper = ({
 
         const roundedX = Math.round(boundedX);
 
-        setMarkers((prev: any) =>
-                prev.map((item: any) => 
-                item.id === marker.id ? 
-                { ...item, contoursMinutes: roundedX } : 
-                item
-            )
-        );
+        setMarkers((prev: any) => ({
+            ...prev,
+            [markerId]: {
+                ...prev[markerId],
+                contoursMinutes: roundedX,
+            },
+        }));
     };
 
     const sliderRef = useCallback((node: any) => {

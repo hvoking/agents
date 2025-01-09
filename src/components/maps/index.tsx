@@ -43,9 +43,9 @@ export const MapContainer = () => {
 				{isMapLoaded && 
 					<>
 						<Tiles/>
-						{markers.length > 0 && 
-							markers.map((marker: any) => 
-								<Mask key={marker.id} marker={marker}/>
+						{Object.keys(markers).length > 0 && 
+							Object.entries(markers).map(([ key, value ]: any) => 
+								<Mask key={key} marker={value}/>
 							)
 						}
 						{optionsCoords && <CustomPopup coords={optionsCoords}/>}

@@ -14,27 +14,30 @@ import { useMarkers } from 'context/agents/markers';
 
 export const Options = () => {
 	const { markerGeometryType, setMarkerGeometryType } = useMask();
-	const { markers, currentMarker } = useMarkers();
+
+	const { currentMarkerId } = useMarkers();
 
 	const [ activeColors, setActiveColors ] = useState(false);
 
-	if (!currentMarker) return <></>;
+	if (!currentMarkerId) return <></>;
 
-	const isIsoActive = markerGeometryType[currentMarker.id] === "iso";
-	
+	const isIsoActive = markerGeometryType[currentMarkerId] === "iso";
+
 	return (
-		<div className="map-filters-wrapper">
-			<Header 
-				marker={currentMarker} 
-				setMarkerGeometryType={setMarkerGeometryType}
-				setActiveColors={setActiveColors}
-				isIsoActive={isIsoActive}
-			/>
-			<div className="boundary-selector-wrapper">
-				{!activeColors && !isIsoActive && <CircleProperties marker={currentMarker}/>}
-				{!activeColors && isIsoActive && <IsoProperties marker={currentMarker}/>}
-				{activeColors && <Colors marker={currentMarker}/>}
+		<div className="popup-item">
+			<div className="map-filters-wrapper">
+				<Header 
+					markerId={currentMarkerId} 
+					setMarkerGeometryType={setMarkerGeometryType}
+					setActiveColors={setActiveColors}
+					isIsoActive={isIsoActive}
+				/>
+				<div className="boundary-selector-wrapper">
+					{!activeColors && !isIsoActive && <CircleProperties markerId={currentMarkerId}/>}
+					{!activeColors && isIsoActive && <IsoProperties markerId={currentMarkerId}/>}
+					{activeColors && <Colors markerId={currentMarkerId}/>}
 
+				</div>
 			</div>
 		</div>
 	)

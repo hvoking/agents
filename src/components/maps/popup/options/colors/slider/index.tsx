@@ -14,7 +14,7 @@ import { useSliderSizes } from 'context/sizes/slider';
 // Third-party imports
 import * as d3 from 'd3';
 
-export const Slider = ({ marker }: any) => {
+export const Slider = ({ markerId }: any) => {
   const { innerWidth, innerHeight } = useSliderSizes();
 
   const [ radiusPosition, setRadiusPosition ] = useState(0.5);
@@ -57,7 +57,7 @@ export const Slider = ({ marker }: any) => {
             palette={colorPalette}
           />
           <Foreground
-            marker={marker}
+            markerId={markerId}
             xScale={xScale} 
             minBound={minBound}
             maxBound={maxBound}
