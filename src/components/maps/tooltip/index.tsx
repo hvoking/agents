@@ -8,30 +8,24 @@ import { Options } from './options';
 import './styles.scss';
 
 // Context imports
-import { useMask } from 'context/agents/mask';
 import { useMarkers } from 'context/agents/markers';
 
 export const Tooltip = () => {
   const { currentMarkerId } = useMarkers();
-  const { markerGeometryType, setMarkerGeometryType } = useMask();
-  const [ activeColors, setActiveColors ] = useState(false);
+  const [ activeFeature, setActiveFeature ] = useState<any>(null);
 
   if (!currentMarkerId) return <></>;
-
-  const isIsoActive = markerGeometryType[currentMarkerId] === "iso";
 
   return (
       <div className="popup-item" onClick={(e: any) => e.stopPropagation()}>
         <Header 
           markerId={currentMarkerId} 
-          setMarkerGeometryType={setMarkerGeometryType}
-          setActiveColors={setActiveColors}
-          isIsoActive={isIsoActive}
+          activeFeature={activeFeature}
+          setActiveFeature={setActiveFeature}
         />
         <Options 
           markerId={currentMarkerId} 
-          activeColors={activeColors} 
-          isIsoActive={isIsoActive}
+          activeFeature={activeFeature} 
         />
       </div>
   );

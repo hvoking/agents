@@ -4,7 +4,13 @@ export const getLineStyle = ( layerId: any, sourceId: any ) => {
       type: "line",
       source: sourceId,
       paint: {
-        'line-width': ['get', 'line-width'],
+        'line-width': [
+          'interpolate',
+          ['linear'],
+          ['zoom'],
+          5, ['*', ['get', 'line-width'], 0.1],
+          15, ['*', ['get', 'line-width'], 2]
+        ],
         'line-color': ['get', 'line-color'],
       },
     };

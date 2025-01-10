@@ -31,6 +31,7 @@ export const MapEventsProvider = ({children}: any) => {
 				contoursMinutes: 10,
 				color: "rgba(223, 246, 255, 1)",
 				routingProfile: "walking",
+				geometryType: "circle",
 			};
 			
 			setMarkers((prev: any) => ({

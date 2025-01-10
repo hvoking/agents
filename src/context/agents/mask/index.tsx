@@ -19,8 +19,6 @@ export const useMask = () => useContext(MaskContext)
 export const MaskProvider = ({children}: any) => {
 	const { mapRef } = useGeo();
 	const { radius } = useMarkers();
-	
-	const [ markerGeometryType, setMarkerGeometryType ] = useState({});
 
 	const mapFeatures = signal<any[]>([]);
 	const sharedGeoJsonDataMap = signal({});
@@ -65,11 +63,7 @@ export const MaskProvider = ({children}: any) => {
 	};
 
 	return (
-		<MaskContext.Provider value={{ 
-			getGeoJson, 
-			sharedGeoJsonDataMap,
-			markerGeometryType, setMarkerGeometryType 
-		}}>
+		<MaskContext.Provider value={{ getGeoJson, sharedGeoJsonDataMap }}>
 			{children}
 		</MaskContext.Provider>
 	)
