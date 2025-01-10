@@ -2,4 +2,8 @@
 
 .popup-item {
   position: absolute;
+  transform: translate(-50%, 10px);
+  display: grid;
+  justify-items: center;
+  gap: 10px;
 }

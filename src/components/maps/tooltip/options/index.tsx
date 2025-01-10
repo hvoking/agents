@@ -5,7 +5,7 @@ import { Colors } from './colors';
 export const Options = ({ markerId, activeFeature }: any) => {
 	return (
 		<div className="boundary-selector-wrapper">
-		  {activeFeature === "boundary" && <Boundary markerId={markerId}/>}
+		  {!(activeFeature === "colors")  && <Boundary markerId={markerId} activeFeature={activeFeature}/>}
 		  {activeFeature === "colors" && <Colors markerId={markerId}/>}
 		</div>
 	)

@@ -1,4 +1,4 @@
-export const getPointStyle = ( layerId: string, sourceId: string ) => {
+export const getPointsStyle = ( layerId: string, sourceId: string ) => {
   const layerStyle: any = {
       id: layerId,
       type: "circle",

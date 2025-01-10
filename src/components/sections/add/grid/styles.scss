@@ -8,8 +8,8 @@
   text-transform: capitalize;
 }
 .agent-grid-card {
-  background: $grid-bg;
-  border: 1px solid rgba(189, 195, 199, 1);
+  background: $card-bg;
+  border: 1px solid $border-color;
   border-radius: 8px;
   padding: 15px;
   text-align: center;
@@ -30,7 +30,7 @@
   span {
     font-size: 0.9em;
     font-weight: bold;
-    color: rgba(52, 73, 94, 1);
+    color: $text-dark;
   }
 
   &:hover {

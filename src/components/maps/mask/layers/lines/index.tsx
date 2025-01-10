@@ -1,5 +1,5 @@
 // App imports
-import { getLineStyle } from '../styles/line';
+import { getLinesStyle } from '../../styles/lines';
 
 // Context imports
 import { useMask } from 'context/agents/mask';
@@ -22,7 +22,7 @@ export const Lines = ({ boundary, layer, markerId }: any) => {
 		[sourceId]: geoJsonData.features.map((item: any) => item.properties),
 	};
 
-	const layerStyle = getLineStyle(layerId, sourceId);
+	const layerStyle = getLinesStyle(layerId, sourceId);
 
 	return (
 		<Source 

@@ -1,4 +1,4 @@
-export const getPolygonStyle = ( layerId: any, sourceId: any ) => {
+export const getPolygonsStyle = ( layerId: any, sourceId: any ) => {
   const layerStyle: any = {
       id: layerId,
       type: "fill-extrusion",

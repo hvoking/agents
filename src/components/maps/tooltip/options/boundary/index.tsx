@@ -5,14 +5,11 @@ import { IsoProperties } from './iso';
 // Context imports
 import { useMarkers } from 'context/agents/markers';
 
-export const Boundary = ({ markerId }: any) => {
-	const { markers } = useMarkers();
-	const { geometryType } = markers[markerId]
-
+export const Boundary = ({ markerId, activeFeature }: any) => {
 	return (
 		<>
-			{geometryType === "circle" && <CircleProperties markerId={markerId}/>}
-			{geometryType === "iso" && <IsoProperties markerId={markerId}/>}
+			{activeFeature === "circle" && <CircleProperties markerId={markerId}/>}
+			{activeFeature === "iso" && <IsoProperties markerId={markerId}/>}
 		</>
 	)
 }

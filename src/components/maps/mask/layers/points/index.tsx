@@ -1,5 +1,5 @@
 // App imports
-import { getPointStyle } from '../styles/point';
+import { getPointsStyle } from '../../styles/points';
 
 // Context imports
 import { useMask } from 'context/agents/mask';
@@ -22,7 +22,7 @@ export const Points = ({ boundary, layer, markerId }: any) => {
     [sourceId]: geoJsonData.features.map((item: any) => item.properties),
   };
 
-  const layerStyle = getPointStyle(layerId, sourceId);
+  const layerStyle = getPointsStyle(layerId, sourceId);
 
   return (
     <Source 

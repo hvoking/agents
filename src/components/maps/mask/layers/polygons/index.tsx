@@ -1,5 +1,5 @@
 // App imports
-import { getPolygonStyle } from '../styles/polygon';
+import { getPolygonsStyle } from '../../styles/polygons';
 
 // Context imports
 import { useMask } from 'context/agents/mask';
@@ -22,7 +22,7 @@ export const Polygons = ({ boundary, layer, markerId }: any) => {
 		[sourceId]: geoJsonData.features.map((item: any) => item.properties),
 	};
 
-	const layerStyle = getPolygonStyle(layerId, sourceId);
+	const layerStyle = getPolygonsStyle(layerId, sourceId);
 
 	return (
 		<Source 
