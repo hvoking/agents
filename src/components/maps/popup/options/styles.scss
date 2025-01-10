@@ -1,22 +1,9 @@
 @import 'variables';
 
-.map-filters-wrapper {
-  min-width: 220px;
-  background-color: rgba(255, 255, 255, 1);
-  border-radius: 5px;
-  border: 1px solid $border-color;
-}
-.boundary-selector-wrapper {
-  padding-top: 10px;
-  display: grid;
-  grid-gap: 10px;
-}
 .popup-item {
   position: absolute;
-  background-color: rgba(255, 255, 255, 1);
   border-radius: 8px ;
-  width: 100%;
-  height: min-content;
-  margin: 0;
-  padding: 0;
+  width: 220px;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid $border-color;
 }

@@ -3,20 +3,21 @@ import { Options } from './options';
 import './styles.scss';
 
 // Third-party imports
-import { Popup } from 'react-map-gl';
+import { Marker } from 'react-map-gl';
 
 export const CustomPopup: any = ({ coords }: any) => {
+  if (!coords) return <></>;
+  
   const { lng, lat } = coords;
 
   return (
-    <Popup
+    <Marker
       longitude={lng}
       latitude={lat}
-      offset={20}
-      closeButton={false}
+      draggable={true}
     >
       <Options/>
-    </Popup>
+    </Marker>
   );
 }
 

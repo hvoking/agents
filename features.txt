@@ -1,0 +1,159 @@
+inmediately compare locations with the same data
+
+
+isochrone to show that it can change its knwoledge base
+compare two different locations
+
+title from where the data is comming
+
+posibility to change from gauge to bars
+posibility to add layers
+to delete layers
+
+just a checkbox
+
+since my harvard cs50 course about Artificial Intelligence with the amazing teacher Brian Yu, i have the idea of creating an agents
+
+that is, a representation of a human in some kind of environment
+
+for closing this 2024, i decided to merge my knowledge adquired during this year to create this tool
+
+
+
+Agents are going to be everywhere in 2025,
+but they’re still too hard to use.
+
+The agentic movement has already begun, with companies like Anthropic leading the way.
+
+This is not a new concept, but advances in AI are set to transform how we create and use software.
+
+Instead of a monolithic data approach, agents propose a more granular way, connecting data with models to perform tasks for us.
+
+I’m building a prototype for agents acting on a map, where geolocation is a key factor for gathering information, enabling smarter urban planning and real estate development.
+
+These agents, with their own knowledge bases, can analyze geospatial data, collaborate, adapt to objectives, and immediately compare data.
+
+Open Data Movement
+
+Powered by data from platforms like Airbnb, Foursquare, and Overture.
+
+This is just the beginning. The goal? To use agents for smarter decision-making. Stay tuned.
+
+do you like the characters,
+
+next steps 
+	add 3d characters
+
+technical side
+	the tools used to build this are simple react, mapbox
+
+opendata movement
+	using data from 3 open data sources
+		overture
+		foursquare
+		inside airbnb
+
+experimenting with signals in react
+
+agents are going to be anywhere in 2025, 
+but still is to hard to use
+
+the agentic movement has already started
+and major players like antrophic are preparing the terrain for this
+
+the agent is not a new concept, but in the current state of AI, 
+there is going to be an important switch in the way we create and use software
+
+untill now is been a monolitic aproach to data
+and agents propose to descrontruct the monolitic aproach to data
+for a more granular one
+
+im working on a interface for this agents acting on a map
+giving access for all people for all ages to this agents to help in our daily task
+
+is just a first prototype
+where the characters represent agents, they have a knowledge base and can save data
+
+do you think this approach makes sense?
+
+
+knowledge-based urban agent operating on a map. 
+which role is to analyze geospatial data and provide insights based on knowledge base, geographic position, and objectives. 
+
+connected to an AI model that allows you to make inferences, process patterns, and interact with the environment.
+
+initial resources are limited, but can gather information, 
+collaborate with other agents, and refine knowledge over time. 
+
+You have access to distinct geographic boundaries and data sources, such as Airbnb, Overture, and Foursquare, 
+and you use these to perform tasks and visualize data in forms like arcs, clusters, isochrones, or circles.
+
+tasks include identifying areas with growth potential, 
+selecting optimal properties for development, 
+generating performance reports for specific zones, 
+and integrating data from various sources. 
+
+adapt behavior based on different objectives and perspectives, 
+communicating with other agents to share insights.
+
+You also respond to prompts, such as identifying the best available lots for development or comparing regions based on performance metrics. Your geolocation capability allows you to anchor your analyses to spatial data, and you can dynamically interact with the map environment to update your knowledge in real time.
+
+Through your role, you enable industries like urban planning and real estate to optimize decisions by providing actionable geospatial intelligence.
+
+
+
+agents are going to be everywhere in 2025
+
+but they’re still too hard to use. 
+
+The agentic movement has already begun, with companies like Anthropic leading the way.
+
+This is not a new concept, but advances in AI are set to transform how we create and use software. 
+
+Instead of a monolithic data approach, agents propose a more granular way, connecting data with models allowing to perform task for us.
+
+I’m building a prototype for agents acting on a map, the geolocation is a very important factor to gather information, for smarter urban planning, and real estate development. 
+
+These agents, with their own knowledge bases, can analyze geospatial data, collaborate, and adapt to objectives. 
+
+Open Data movement
+
+based on data from platforms like Airbnb, Foursquare, and Overture.
+
+
+Modular Approach:
+reusable and maintainable
+
+the circle and the isochrone should be the same "boundary" component
+the boundary data should come from the parent component
+
+the data from the layers components should come one level up
+
+a new take to geospatial visualization
+merging the agentic movement with the opendata movement
+
+a take a granulirazed approach instead of a monolitic
+
+"modern GIS should be: fast, intuitive, and easy to share
+
+this ai agents are not to going to war againts the new technologies or something like that
+au contrarie, is for helping in your every day task, to make information accessible to everyone
+
+
+
+no puedo invertir todo en uno
+tiene que ser distribuido
+
+postar todos los dias a la misma hora
+
+a las 7 de la noche
+
+mostrar el cambio de color
+
+mostrar el cambio de geometria
+
+mostrar a un agente actuando solo
+
+mostrar a mas de un agente
+
+mostrar el comportamiento autonomo

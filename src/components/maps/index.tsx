@@ -21,9 +21,14 @@ export const MapContainer = () => {
 	const { markers } = useMarkers();
 	const { viewport, mapRef, mapStyle } = useGeo();
 	const { addAgent } = useMapEvents();
-	const { onMouseDown, onMouseMove, onMouseUp, isDragging, handleRightClick, optionsCoords } = useBoundaryEvents();
+	const { onContextMenu, optionsCoords, setOptionsCoords } = useBoundaryEvents();
 	
 	const [ isMapLoaded, setIsMapLoaded ] = useState(false);
+
+	const handleClick = (e: any) => {
+		setOptionsCoords(null);
+		addAgent(e);
+	}
 	
 	return (
 		<Wrapper> 
@@ -32,23 +37,17 @@ export const MapContainer = () => {
 				initialViewState={viewport}
 				mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
 				mapStyle={mapStyle}
-				onClick={addAgent}
+				onClick={handleClick}
 				onLoad={() => setIsMapLoaded(true)}
-		        onMouseDown={onMouseDown}
-		        onMouseMove={onMouseMove}
-		        onMouseUp={onMouseUp}
-		        dragPan={!isDragging}
-		        onContextMenu={handleRightClick}
+		        onContextMenu={onContextMenu}
 			>
 				{isMapLoaded && 
 					<>
 						<Tiles/>
-						{Object.keys(markers).length > 0 && 
-							Object.entries(markers).map(([ key, value ]: any) => 
-								<Mask key={key} marker={value}/>
-							)
-						}
-						{optionsCoords && <CustomPopup coords={optionsCoords}/>}
+						{Object.entries(markers).map(([ key, value ]: any) => 
+							<Mask key={key} marker={value}/>
+						)}
+						<CustomPopup coords={optionsCoords}/>
 					</>
 				}
 			</Map>

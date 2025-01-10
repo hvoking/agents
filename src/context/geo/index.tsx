@@ -10,12 +10,14 @@ export const useGeo = () => useContext(GeoContext)
 
 export const GeoProvider = ({children}: any) => {
 	const mapRef = useRef<any>();
+
 	const [ placeId, setPlaceId ] = useState<any>(null);
 	const [ viewport, setViewport ] = useState(Locations.rotterdam);
 	const [ mapStyle, setMapStyle ] = useState("mapbox://styles/hvoking/cm16kxow500ez01pc3psqc4pv");
 
 	useEffect(() => {
 		const { longitude, latitude } = viewport;
+
 		mapRef.current?.flyTo({
 			center: [ longitude, latitude ],
 			duration: 2000, 

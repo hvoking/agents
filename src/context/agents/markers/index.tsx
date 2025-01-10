@@ -10,9 +10,7 @@ export const useMarkers = () => useContext(MarkersContext)
 
 export const MarkersProvider = ({children}: any) => {
 	const [ markers, setMarkers ] = useState<any>({});
-
 	const [ currentMarkerId, setCurrentMarkerId ] = useState<any>(null);
-	
 	const [ currentImage, setCurrentImage ] = useState<any>(null);
 	const [ currentName, setCurrentName ] = useState<any>(null);
 
