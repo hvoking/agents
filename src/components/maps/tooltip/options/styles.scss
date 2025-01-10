@@ -1,0 +1,14 @@
+@import 'variables';
+
+.options-wrapper {
+	display: grid;
+	background-color: $card-bg;
+	width: 220px;
+	height: 220px;
+	border: 1px solid $border-color;
+	border-radius: 8px;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+}
+.options-subtitle {
+	padding-left: 10px;
+}

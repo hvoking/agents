@@ -9,13 +9,12 @@ const routingProfileValues: any = {
 	"driving": baseUrl + "driving.svg"
 }
 
-export const Icons = ({ markerId }: any) => {
+export const Mobility = ({ markerId }: any) => {
 	const { markers, setMarkers } = useMarkers();
 
 	if (!(Object.keys(markers).length)) return <></>
 
 	const currentMarker = markerId && markers[markerId];
-
 
 	const onClick = (profile: any) => {
 		setMarkers((prev: any) => ({
@@ -31,7 +30,6 @@ export const Icons = ({ markerId }: any) => {
 		<div className="routing-profile">
 			{Object.entries(routingProfileValues).map(([key, value]: any) => {
 				const isActive = currentMarker && currentMarker.routingProfile === key;
-
 				return (
 					<div
 						key={key}
@@ -49,4 +47,4 @@ export const Icons = ({ markerId }: any) => {
 	)
 }
 
-Icons.displayName="Icons";
+Mobility.displayName="Mobility";
