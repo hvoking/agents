@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Tiles } from './tiles';
 import { Mask } from './mask';
 import { Wrapper } from './wrapper';
-import { CustomPopup } from './popup';
+import { Tooltip } from './tooltip';
 
 // Context imports
 import { useGeo } from 'context/geo';
@@ -14,7 +14,7 @@ import { useBoundaryEvents } from 'context/events/boundary';
 import { useMarkers } from 'context/agents/markers';
 
 // Third-party imports
-import { Map } from 'react-map-gl';
+import { Map, Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 export const MapContainer = () => {
@@ -47,7 +47,13 @@ export const MapContainer = () => {
 						{Object.entries(markers).map(([ key, value ]: any) => 
 							<Mask key={key} marker={value}/>
 						)}
-						<CustomPopup coords={optionsCoords}/>
+						{optionsCoords && <Marker
+						  longitude={optionsCoords.lng}
+						  latitude={optionsCoords.lat}
+						  draggable={true}
+						>
+							<Tooltip/>
+						</Marker>}
 					</>
 				}
 			</Map>
