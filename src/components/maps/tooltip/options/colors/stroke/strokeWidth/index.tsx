@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 
 // App imports
 import { Slider } from './slider';
-import './styles.scss';
 
 // Context imports
 import { useMarkers } from 'context/agents/markers';
@@ -33,7 +32,7 @@ export const StrokeWidth = ({ markerId }: any) => {
 	}, [ restPosition ])
 
 	return (
-		<div className="options-boundary-circle">
+		<div>
 			<div className="options-subtitle">Stroke Width</div>
 			<Slider 
 				handlerPosition={handlerPosition}

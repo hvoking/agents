@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 
 // App imports
 import { Slider } from './slider';
-import './styles.scss';
 
 // Context imports
 import { useMarkers } from 'context/agents/markers';
@@ -11,8 +10,8 @@ import { useMarkers } from 'context/agents/markers';
 export const StrokeOpacity = ({ markerId }: any) => {
 	const { setMarkers } = useMarkers();
 
-	const [ handlerPosition, setHandlerPosition ] = useState(1);
-	const [ restPosition, setRestPosition ] = useState(1);
+	const [ handlerPosition, setHandlerPosition ] = useState(0.9);
+	const [ restPosition, setRestPosition ] = useState(0.9);
 	
 	const minBound = 0;
 	const maxBound = 1;
@@ -33,7 +32,7 @@ export const StrokeOpacity = ({ markerId }: any) => {
 	}, [ restPosition ])
 
 	return (
-		<div className="options-boundary-circle">
+		<div>
 			<div className="options-subtitle">Stroke Opacity</div>
 			<Slider 
 				handlerPosition={handlerPosition}
