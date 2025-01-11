@@ -22,23 +22,18 @@ export const Wrapper = ({ innerWidth, innerHeight, colorScale, setCurrentFillCol
             {Array.from({ length: numOptions }, (_, index) => {
                 const row = Math.floor(index / cols);
                 const col = index % cols;
-                const x = col * rectWidth;
-                const y = row * rectHeight;
+                const x = col * rectWidth + rectWidth / 2;
+                const y = row * rectHeight + rectHeight / 2;
 
                 return (
-                    <rect
+                    <circle
                         key={index}
-                        x={x}
-                        y={y}
-                        width={rectWidth}
-                        height={rectHeight}
+                        cx={x}
+                        cy={y}
+                        r={rectWidth/3}
                         fill={selectedIndex === index ? 'black' : colorScale(index / (numOptions - 1))}
-                        stroke="white"
                         onClick={() => onRectangleClick(index)}
-                        style={{
-                            cursor: 'pointer',
-                            transition: 'fill 0.2s',
-                        }}
+                        className="color-circle"
                         onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
                         onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
                     />

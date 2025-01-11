@@ -4,7 +4,6 @@ import { useState } from 'react';
 // App imports
 import { Header } from './header';
 import { Options } from './options';
-
 import './styles.scss';
 
 // Context imports
@@ -17,7 +16,10 @@ export const Tooltip = () => {
   if (!currentMarkerId) return <></>;
 
   return (
-      <div className="popup-item" onClick={(e: any) => e.stopPropagation()}>
+      <div 
+        className="popup-item" 
+        onClick={(e: any) => e.stopPropagation()}
+      >
         <Header 
           markerId={currentMarkerId} 
           activeFeature={activeFeature}

@@ -1,0 +1,7 @@
+@import 'variables';
+
+.color-circle {
+	stroke: $border-color;
+	cursor: pointer;
+	transition: fill 0.2s;
+}

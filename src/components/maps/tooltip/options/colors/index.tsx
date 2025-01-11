@@ -1,18 +1,21 @@
 // React imports
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // App imports
 import { SVGWrapper } from './svg';
 import { Wrapper } from './wrapper';
+import './styles.scss';
 
 // Context imports
 import { useSliderSizes } from 'context/sizes/slider';
+import { useMarkers } from 'context/agents/markers';
 
 // Third-party imports
 import * as d3 from 'd3';
 
 export const Colors = ({ markerId }: any) => {
   const { innerWidth, innerHeight } = useSliderSizes();
+  const { setMarkers } = useMarkers();
 
   const [ currentFillColor, setCurrentFillColor ] = useState("rgba(223, 246, 255, 1");
 
@@ -29,6 +32,17 @@ export const Colors = ({ markerId }: any) => {
   const colorScale = d3.scaleLinear<string>()
     .domain(d3.range(0, 1 + range, range))
     .range(colorPalette);
+
+
+  useEffect(() => {
+    setMarkers((prev: any) => ({
+        ...prev,
+        [markerId]: {
+            ...prev[markerId],
+            color: currentFillColor,
+        },
+    }));
+  }, [ currentFillColor ])
 
   return (
     <SVGWrapper>
