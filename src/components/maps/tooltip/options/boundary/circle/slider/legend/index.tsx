@@ -1,3 +1,6 @@
+// App imports
+import './styles.scss';
+
 export const Legend = ({ xScale, circleRadius, currentPosition }: any) => {
 	const legendWidth = 16;
 	
@@ -12,23 +15,19 @@ export const Legend = ({ xScale, circleRadius, currentPosition }: any) => {
 				fill="rgba(126, 126, 132, 1)"
 			/>
 			<rect
+				className="legend-rect"
 				x={xScale(currentPosition) - legendWidth}
 				y={circleRadius * 3}
 				rx={2}
 				ry={2}
 				width={legendWidth * 2}
 				height={circleRadius * 3}
-				fill="rgba(23, 23, 32, 1)"
-				strokeWidth={2}
-				stroke="rgba(126, 126, 132, 1)"
 			>
 			</rect>
 			<text 
 				x={xScale(currentPosition)} 
 				y={circleRadius * 5} 
-				fill="rgba(255, 255, 255, 1)" 
-				textAnchor="middle"
-				fontSize="0.8em"
+				className="legend-text"
 			>
 				{Math.round(currentPosition * 10) / 10}
 			</text>

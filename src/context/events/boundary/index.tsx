@@ -1,5 +1,5 @@
 // React imports
-import { useState, useRef, useCallback, useMemo, useContext, createContext } from 'react';
+import { useState, useMemo, useContext, createContext } from 'react';
 
 // Context imports
 import { useMarkers } from 'context/agents/markers';
@@ -27,7 +27,7 @@ export const BoundaryEventsProvider = ({children}: any) => {
 
 		const markerId = features[0].layer.id.replace("boundary-fill-", "");
 		setCurrentMarkerId(markerId);
-		return markers[markerId] || null;
+		return markerId || null;
 	}
 
 	const onContextMenu = (event: any) => {
@@ -36,15 +36,15 @@ export const BoundaryEventsProvider = ({children}: any) => {
 	    if (map.isMoving() || map.isZooming() || map.isRotating()) {
 	      return;
 	    }
-		const selectedMarker = isInside(event.point);
-		!selectedMarker ? setOptionsCoords(null) : setOptionsCoords(event.lngLat);
+		const markerId = isInside(event.point);
+		!markerId ? setOptionsCoords(null) : setOptionsCoords(event.lngLat);
 	}
 
 	return (
 		<BoundaryEventsContext.Provider value={{ 
 			onContextMenu, 
 			optionsCoords,
-			setOptionsCoords
+			setOptionsCoords,
 		}}>
 			{children}
 		</BoundaryEventsContext.Provider>

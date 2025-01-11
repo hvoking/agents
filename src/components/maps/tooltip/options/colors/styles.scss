@@ -1,5 +1,9 @@
 @import 'variables';
 
+.options-colors {
+	width: 160px;
+	height: 160px;
+}
 .color-circle {
 	stroke: $border-color;
 	cursor: pointer;

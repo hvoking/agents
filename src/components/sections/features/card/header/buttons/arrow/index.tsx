@@ -11,8 +11,8 @@ export const Arrow = ({ activeCharts, setActiveCharts }: any) => {
 		>
 		  {
 		  	activeCharts ? 
-		  	<polyline points="1,12 7,3 13,12"/> : 
-		  	<polyline points="1,3 7,12 13,3"/>
+		  	<polyline points="1,12 7,4 13,12"/> : 
+		  	<polyline points="1,4 7,12 13,4"/>
 		  }
 		</svg>
 	)

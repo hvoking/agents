@@ -1,12 +1,19 @@
 // React imports
 import { useState } from 'react';
 
-export const Wrapper = ({ innerWidth, innerHeight, colorScale, setCurrentFillColor }: any) => {
+// Context imports
+import { useMarkers } from 'context/agents/markers';
+
+export const Wrapper = ({ markerId, innerWidth, innerHeight, colorScale }: any) => {
+    const { setMarkers } = useMarkers();
+
     const [selectedIndex, setSelectedIndex] = useState<any>(null);
 
     const numOptions = 16;
+    
     const rows = 4;
     const cols = 4;
+
     const rectWidth = innerWidth / cols;
     const rectHeight = innerHeight / rows;
 
@@ -14,7 +21,13 @@ export const Wrapper = ({ innerWidth, innerHeight, colorScale, setCurrentFillCol
         setSelectedIndex(index);
         const colorValue = index / (numOptions - 1); // Normalize index to [0, 1]
         const fillColor = colorScale(colorValue);
-        setCurrentFillColor(fillColor);
+        setMarkers((prev: any) => ({
+            ...prev,
+            [markerId]: {
+                ...prev[markerId],
+                color: fillColor,
+            },
+        }));
     };
 
     return (
@@ -30,7 +43,7 @@ export const Wrapper = ({ innerWidth, innerHeight, colorScale, setCurrentFillCol
                         key={index}
                         cx={x}
                         cy={y}
-                        r={rectWidth/3}
+                        r={rectWidth / 3}
                         fill={selectedIndex === index ? 'black' : colorScale(index / (numOptions - 1))}
                         onClick={() => onRectangleClick(index)}
                         className="color-circle"

@@ -1,0 +1,11 @@
+@import 'variables';
+
+.legend-rect {
+	fill: $card-bg;
+	stroke: $border-color;
+}
+.legend-text {
+	fill: $text-dark; 
+	text-anchor: middle;
+	font-size: 16px;
+}

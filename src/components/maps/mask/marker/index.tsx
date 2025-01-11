@@ -23,8 +23,8 @@ export const CustomMarker = ({ marker }: any) => {
 			<div className="custom-marker">
 				<img 
 					src={image} 
-					alt="agent-avatar" 
-					width="40px"
+					alt="agent-avatar"
+					className="agent-avatar"
 				/>
 				<div className="marker-provider">
 					{name}
