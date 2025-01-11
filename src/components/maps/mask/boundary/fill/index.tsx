@@ -1,9 +1,9 @@
-export const getFillLayer = (layerId: any, sourceId: any, color: any) => ({
+export const getFillLayer = (layerId: any, sourceId: any, fillColor: any, fillOpacity: any) => ({
 	id: layerId,
 	type: 'fill',
 	source: sourceId,
 	paint: {
-		"fill-color": color,
-		"fill-opacity": 0.4
+		"fill-color": fillColor,
+		"fill-opacity": fillOpacity
 	}
 });

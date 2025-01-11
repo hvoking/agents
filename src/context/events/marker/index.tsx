@@ -11,7 +11,7 @@ export const useMarkerEvents = () => useContext(MarkerEventsContext)
 export const MarkerEventsProvider = ({children}: any) => {
 	const { setMarkers } = useMarkers();
 
-    const onDrag = useCallback((event: any, markerId: number) => {
+    const onDrag = (event: any, markerId: number) => {
         const { lat, lng } = event.lngLat;
 
         setMarkers((prev: any) => ({
@@ -22,7 +22,7 @@ export const MarkerEventsProvider = ({children}: any) => {
                 longitude: lng,
             },
         }));
-    }, [ setMarkers ]);
+    }
 
     const rejectMarker = (event: any, markerId: any) => {
         event.stopPropagation();

@@ -18,10 +18,10 @@ import * as d3 from 'd3';
 
 export const Slider = ({ markerId }: any) => {
   const [ radiusPosition, setRadiusPosition ] = useState(10);
+
   const minBound = 5;
   const maxBound = 15;
 
-  const [ activeForeground, setActiveForeground ] = useState(false);
   const { innerWidth, innerHeight } = useRadiusSizes();
 
   const circleHeight = innerHeight / 6;
@@ -45,10 +45,8 @@ export const Slider = ({ markerId }: any) => {
         minBound={minBound}
         radiusPosition={radiusPosition} 
         circleRadius={circleHeight}
-        activeForeground={activeForeground}
       />
       <Handler
-        activeForeground={activeForeground}
         cx={xScale(radiusPosition)} 
         cy={circleHeight} 
         r={circleHeight}
@@ -66,7 +64,6 @@ export const Slider = ({ markerId }: any) => {
         markerId={markerId}
         minBound={minBound}
         maxBound={maxBound}
-        setActiveForeground={setActiveForeground}
       />
     </SVGWrapper>
     </div>

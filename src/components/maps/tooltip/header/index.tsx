@@ -9,7 +9,8 @@ export const Header = ({ markerId, activeFeature, setActiveFeature }: any) => {
 
 	const circleBackgroundColor = activeFeature === "circle" ? "rgba(52, 152, 219, 0.3)" : "rgba(255, 255, 255, 0)";
 	const isoBackgroundColor = activeFeature === "iso"  ? "rgba(52, 152, 219, 0.3)" : "rgba(255, 255, 255, 0)";
-	const colorBackgroundColor = activeFeature === "colors" ? "rgba(52, 152, 219, 0.3)" : "rgba(255, 255, 255, 0)";
+	const strokeBackgroundColor = activeFeature === "stroke" ? "rgba(52, 152, 219, 0.3)" : "rgba(255, 255, 255, 0)";
+	const fillBackgroundColor = activeFeature === "fill" ? "rgba(52, 152, 219, 0.3)" : "rgba(255, 255, 255, 0)";
 
 	const updateBoundaryType = (boundaryType: any) => {
 		setActiveFeature(boundaryType)
@@ -41,13 +42,20 @@ export const Header = ({ markerId, activeFeature, setActiveFeature }: any) => {
 					onClick={() => updateBoundaryType("iso")}
 				/>
 			</section>
-			<section>
+			<section className="colors-selectors">
 				<img 
-					src={process.env.PUBLIC_URL + "/static/icons/colors.svg"} 
-					alt="colors" 
+					src={process.env.PUBLIC_URL + "/static/icons/fill.svg"} 
+					alt="fill" 
 					className="settings-icon"
-					style={{backgroundColor: colorBackgroundColor}}
-					onClick={() => setActiveFeature("colors")}
+					style={{backgroundColor: fillBackgroundColor}}
+					onClick={() => setActiveFeature("fill")}
+				/>
+				<img 
+					src={process.env.PUBLIC_URL + "/static/icons/stroke.svg"} 
+					alt="stroke" 
+					className="settings-icon"
+					style={{backgroundColor: strokeBackgroundColor}}
+					onClick={() => setActiveFeature("stroke")}
 				/>
 			</section>
 		</div>

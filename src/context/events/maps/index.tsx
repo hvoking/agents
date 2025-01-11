@@ -29,7 +29,11 @@ export const MapEventsProvider = ({children}: any) => {
 				name: currentName,
 				radius: 0.5,
 				contoursMinutes: 10,
-				color: "rgba(223, 246, 255, 1)",
+				fillColor: "rgb(223, 246, 255)",
+				fillOpacity: 0.2,
+				strokeWidth: 0.2,
+				stroke: "rgb(0, 0, 0)",
+				strokeOpacity: 0.8,
 				routingProfile: "walking",
 				geometryType: "circle",
 			};

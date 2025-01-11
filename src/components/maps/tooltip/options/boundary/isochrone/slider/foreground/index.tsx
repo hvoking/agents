@@ -1,4 +1,4 @@
-export const Foreground = ({ activeForeground, xScale, minBound, radiusPosition, circleRadius }: any) => {
+export const Foreground = ({ xScale, minBound, radiusPosition, circleRadius }: any) => {
 	return (
 		<rect
 			x={xScale(minBound)}

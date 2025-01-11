@@ -1,18 +1,18 @@
 // React imports
 import { useCallback } from 'react';
 
+// Context imports
 import { useMarkers } from 'context/agents/markers';
 
 // Third-party imports
 import * as d3 from 'd3';
 
 export const Wrapper = ({ 
-    marker, xScale, 
+    xScale, 
     minBound, maxBound,
     innerWidth, innerHeight, 
     radiusPosition, setRadiusPosition,
     markerId,
-    setActiveForeground
 }: any) => {
     const { setMarkers } = useMarkers();
 
@@ -53,21 +53,12 @@ export const Wrapper = ({
         d3.select(node).call(drag);
     }, [ radiusPosition, onDrag, onDragEnd ]);
 
-    const onMouseOver = () => {
-        setActiveForeground(true);
-    }
-    const onMouseLeave = () => {
-        setActiveForeground(false);
-    }
-
 	return (
         <rect
             ref={sliderRef}
             width={innerWidth}
             height={innerHeight}
             fill="transparent"
-            onMouseOver={onMouseOver}
-            onMouseLeave={onMouseLeave}
         />
 	)
 }

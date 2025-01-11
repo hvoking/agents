@@ -1,5 +1,5 @@
 // App imports
-import { getBorderLayer } from './border';
+import { getStrokeLayer } from './stroke';
 import { getEraserLayer } from './eraser';
 import { getFillLayer } from './fill';
 
@@ -12,7 +12,8 @@ import { Source, Layer } from 'react-map-gl';
 export const Boundary = ({ marker, boundary }: any) => {
   const { currentMarkerId } = useMarkers();
 
-  const { id, color } = marker;
+  const { id, stroke, strokeWidth, strokeOpacity, fillColor, fillOpacity } = marker;
+  
   const sourceId = `boundary-source-${id}`;
 
   if (!boundary) return <></>
@@ -20,12 +21,12 @@ export const Boundary = ({ marker, boundary }: any) => {
   const isCurrentMarker = id === currentMarkerId;
 
   const fillId = `boundary-fill-${id}`;
-  const borderId = `boundary-border-${id}`;
+  const borderId = `boundary-stroke-${id}`;
   const eraserId = `boundary-eraser-${id}`;
 
   const eraserLayer = getEraserLayer(eraserId, sourceId);
-  const fillLayer = getFillLayer(fillId, sourceId, color);
-  const borderLayer = getBorderLayer(borderId, sourceId, color);
+  const fillLayer = getFillLayer(fillId, sourceId, fillColor, fillOpacity);
+  const borderLayer = getStrokeLayer(borderId, sourceId, stroke, strokeOpacity, strokeWidth);
 
   const layers: any = [ borderLayer, eraserLayer, fillLayer ]
     
@@ -36,7 +37,12 @@ export const Boundary = ({ marker, boundary }: any) => {
         type="geojson" 
         data={boundary}
       >
-        {layers.map((currentLayer: any) => <Layer key={currentLayer.id} {...currentLayer}/>)}
+        {layers.map((currentLayer: any) => 
+          <Layer 
+            key={currentLayer.id} 
+            {...currentLayer}
+          />)
+      }
       </Source>
     )
 }
