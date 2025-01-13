@@ -14,6 +14,7 @@ export const BoundaryEventsProvider = ({children}: any) => {
 	const { markers, setCurrentMarkerId } = useMarkers();
 
 	const [ optionsCoords, setOptionsCoords ] = useState<any>(null);
+	const [ messageCoords, setMessageCoords ] = useState<any>(null);
 
 	const markerLayers = useMemo(() => 
 		Object.keys(markers).map((id) => `boundary-fill-${id}`), [markers]);
@@ -36,15 +37,31 @@ export const BoundaryEventsProvider = ({children}: any) => {
 	    if (map.isMoving() || map.isZooming() || map.isRotating()) {
 	      return;
 	    }
+	    setMessageCoords(null);
 		const markerId = isInside(event.point);
 		!markerId ? setOptionsCoords(null) : setOptionsCoords(event.lngLat);
+	}
+
+	const addChatbot = (event: any) => {
+		const map = mapRef.current.getMap();
+	    if (map.isMoving() || map.isZooming() || map.isRotating()) {
+	      return;
+	    }
+		const markerId = isInside(event.point);
+		if (!messageCoords) {
+			!markerId ? setMessageCoords(null) : setMessageCoords(event.lngLat);
+		}
+		else {
+			setMessageCoords(null);
+		}
 	}
 
 	return (
 		<BoundaryEventsContext.Provider value={{ 
 			onContextMenu, 
-			optionsCoords,
-			setOptionsCoords,
+			optionsCoords, setOptionsCoords,
+			messageCoords, setMessageCoords,
+			addChatbot
 		}}>
 			{children}
 		</BoundaryEventsContext.Provider>

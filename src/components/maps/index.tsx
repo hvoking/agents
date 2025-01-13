@@ -6,6 +6,7 @@ import { Tiles } from './tiles';
 import { Mask } from './mask';
 import { Wrapper } from './wrapper';
 import { Tooltip } from './tooltip';
+import { Message } from './message';
 
 // Context imports
 import { useGeo } from 'context/geo';
@@ -18,16 +19,17 @@ import { Map } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 export const MapContainer = () => {
-	const { markers } = useMarkers();
+	const { addPin, markers } = useMarkers();
 	const { viewport, mapRef, mapStyle } = useGeo();
 	const { addAgent } = useMapEvents();
-	const { onContextMenu, optionsCoords, setOptionsCoords } = useBoundaryEvents();
+	const { onContextMenu, optionsCoords, setOptionsCoords, messageCoords, addChatbot } = useBoundaryEvents();
 	
 	const [ isMapLoaded, setIsMapLoaded ] = useState(false);
 
-	const handleClick = (e: any) => {
+	const handleClick = (event: any) => {
+		addChatbot(event)
 		setOptionsCoords(null);
-		addAgent(e);
+		addAgent(event);
 	}
 	
 	return (
@@ -48,6 +50,7 @@ export const MapContainer = () => {
 							<Mask key={key} marker={value}/>
 						)}
 						{optionsCoords && <Tooltip optionsCoords={optionsCoords}/>}
+						{messageCoords && <Message coords={messageCoords}/>}
 					</>
 				}
 			</Map>

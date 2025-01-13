@@ -1,12 +1,12 @@
 // App imports
-import { SearchEventsProvider } from './search';
+import { MessageEventsProvider } from './message';
 import { MarkerEventsProvider } from './marker';
 import { MapEventsProvider } from './maps';
 import { BoundaryEventsProvider } from './boundary';
 
 export const EventsProvider = ({ children }: any) => {
 	return (
-		<SearchEventsProvider>
+		<MessageEventsProvider>
 		<MarkerEventsProvider>
 		<MapEventsProvider>
 		<BoundaryEventsProvider>
@@ -14,7 +14,7 @@ export const EventsProvider = ({ children }: any) => {
 		</BoundaryEventsProvider>
 		</MapEventsProvider>
 		</MarkerEventsProvider>
-		</SearchEventsProvider>
+		</MessageEventsProvider>
 	)
 }
 
