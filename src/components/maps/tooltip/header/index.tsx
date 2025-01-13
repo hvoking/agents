@@ -1,7 +1,6 @@
 // App imports
 import { Boundary } from './boundary';
-import { Colors } from './colors'
-import { Search } from './search'
+import { Colors } from './colors';
 import './styles.scss';
 
 export const Header = ({ markerId, activeFeature, setActiveFeature }: any) => {
@@ -16,7 +15,6 @@ export const Header = ({ markerId, activeFeature, setActiveFeature }: any) => {
 				activeFeature={activeFeature}
 				setActiveFeature={setActiveFeature}
 			/>
-			<Search/>
 		</div>
 	)
 }

@@ -1,20 +1,24 @@
 // React imports
-import { useState, useContext, createContext } from 'react';
+import { useState, useRef } from 'react';
+
+// App imports
+import { Suggestions } from './suggestions';
+import { SearchIcon } from './icon';
+import { Cross } from './cross';
+import './styles.scss';
 
 // Context imports
-import { useGoogleSearchApi } from 'context/api/google/search';
 import { useGeo } from 'context/geo';
+import { useGoogleSearchApi } from 'context/api/google/search';
 
-const SearchEventsContext: React.Context<any> = createContext(null);
+export const Search = () => {
+	const inputRef = useRef<any>(null);
 
-export const useSearchEvents = () => useContext(SearchEventsContext)
-
-export const SearchEventsProvider = ({children}: any) => {
 	const [ suggestionIndex, setSuggestionIndex ] = useState(0);
 	const [ suggestionsActive, setSuggestionsActive ]= useState(false);
 	
 	const { setPlaceId } = useGeo();
-	const { googleSearchData, setSearchText } = useGoogleSearchApi();
+	const { googleSearchData, searchText, setSearchText } = useGoogleSearchApi();
 
 	const suggestions = googleSearchData && googleSearchData.predictions.reduce((total: any, item: any) => {
 		const placeName = item.description.toLowerCase()
@@ -89,18 +93,31 @@ export const SearchEventsProvider = ({children}: any) => {
 	};
 
 	return (
-		<SearchEventsContext.Provider value={{
-			handleClick, handleChange, handleKeyDown, 
-			cleanSuggestions,
-			getCurrentPrediction,
-			suggestionIndex,
-			setSuggestionIndex,
-			suggestions,
-			suggestionsActive
-		}}>
-			{children}
-		</SearchEventsContext.Provider>
+		<div className="search-wrapper">
+			<div className="search-background">
+				<SearchIcon/>
+				<input 
+					ref={inputRef}
+					className="search-input"
+					type="text" 
+					placeholder="Find a place"
+					value={searchText}
+					onChange={handleChange}
+					onKeyDown={handleKeyDown}
+					spellCheck={false}
+				/>
+				<Cross cleanSuggestions={cleanSuggestions}/>
+				{suggestionsActive && suggestions &&
+					<Suggestions 
+						suggestions={suggestions}
+						suggestionIndex={suggestionIndex} 
+						setSuggestionIndex={setSuggestionIndex} 
+						handleClick={handleClick}
+					/>
+				}
+			</div>
+		</div>
 	)
 }
 
-SearchEventsContext.displayName = "SearchEventsContext";
+Search.displayName="Search";

@@ -1,12 +1,7 @@
 // App imports
 import './styles.scss';
 
-// Context imports
-import { useSearchEvents } from 'context/events/search';
-
-export const Cross = () => {
-	const { cleanSuggestions } = useSearchEvents();
-	
+export const Cross = ({ cleanSuggestions }: any) => {
 	return (
 		<div className="search-cross">
 		    <svg viewBox="0 0 15 15" onClick={cleanSuggestions}>

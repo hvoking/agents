@@ -9,13 +9,19 @@ import './styles.scss';
 // Context imports
 import { useMarkers } from 'context/agents/markers';
 
-export const Tooltip = () => {
+// Third-party imports
+import { Marker } from 'react-map-gl';
+
+export const Tooltip = ({ optionsCoords }: any) => {
   const { currentMarkerId } = useMarkers();
   const [ activeFeature, setActiveFeature ] = useState<any>(null);
+
+  const { lng, lat } = optionsCoords;
 
   if (!currentMarkerId) return <></>;
 
   return (
+    <Marker longitude={lng} latitude={lat} draggable={true}>
       <div 
         className="popup-item" 
         onClick={(e: any) => e.stopPropagation()}
@@ -30,6 +36,7 @@ export const Tooltip = () => {
           activeFeature={activeFeature} 
         />
       </div>
+    </Marker>
   );
 }
 

@@ -14,7 +14,7 @@ import { useBoundaryEvents } from 'context/events/boundary';
 import { useMarkers } from 'context/agents/markers';
 
 // Third-party imports
-import { Map, Marker } from 'react-map-gl';
+import { Map } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 export const MapContainer = () => {
@@ -47,13 +47,7 @@ export const MapContainer = () => {
 						{Object.entries(markers).map(([ key, value ]: any) => 
 							<Mask key={key} marker={value}/>
 						)}
-						{optionsCoords && <Marker
-						  longitude={optionsCoords.lng}
-						  latitude={optionsCoords.lat}
-						  draggable={true}
-						>
-							<Tooltip/>
-						</Marker>}
+						{optionsCoords && <Tooltip optionsCoords={optionsCoords}/>}
 					</>
 				}
 			</Map>

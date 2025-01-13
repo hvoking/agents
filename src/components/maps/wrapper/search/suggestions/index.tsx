@@ -1,14 +1,7 @@
 // App imports
 import './styles.scss';
 
-// Context imports
-import { useSearchEvents } from 'context/events/search';
-
-export const Suggestions = () => {
-	const { handleClick, suggestionIndex, setSuggestionIndex, suggestions, suggestionsActive } = useSearchEvents();
-
-	if (!(suggestionsActive && suggestions)) return <></>
-
+export const Suggestions = ({ suggestions, suggestionIndex,	setSuggestionIndex, handleClick }: any) => {
 	return (
 		<ul className="search-suggestions">
 			{
@@ -16,14 +9,13 @@ export const Suggestions = () => {
 					return (
 						<li 
 							key={index} 
-							className="suggestions-item"
-							onClick={(e: any) => handleClick(e, suggestion)} 
+							onClick={(e: any) => handleClick(e, suggestion)}
 							onMouseEnter={() => setSuggestionIndex(index)}
 							onMouseLeave={() => setSuggestionIndex(null)}
 							style={{
 								borderRadius: "5px",
 								backgroundColor: index === suggestionIndex ? 
-								"rgba(235, 235, 235, 1)" : 
+								"rgba(223, 223, 223, 1)" : 
 								"rgba(255, 255, 255, 1)"
 							}}
 						>
