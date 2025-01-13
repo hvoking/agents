@@ -19,20 +19,20 @@ export const Charts = ({ data, name, colorLabel, graphicType, backgroundColor }:
 	const { distribution, colors } = useMemo(() => processData(data, name, colorLabel), [data, name, colorLabel]);
 	const sumOfValues = d3.sum(Object.values(distribution));
 
-	const [ distributionData, setDistributionData ] = useState<any>(null);
+	// const [ distributionData, setDistributionData ] = useState<any>(null);
 
-	const { fetchBedrock } = useBedrockApi();
+	// const { fetchBedrock } = useBedrockApi();
 
-	useEffect(() => {
-        const fetchBedrockModel = async () => {
-            const modelResponse = await fetchBedrock("what is the data classification?", distribution);
-            setDistributionData(modelResponse);
-        };
+	// useEffect(() => {
+    //     const fetchBedrockModel = async () => {
+    //         const modelResponse = await fetchBedrock("what is the data classification?", distribution);
+    //         setDistributionData(modelResponse);
+    //     };
 
-        if (distribution) {
-            fetchBedrockModel();
-        }
-    }, [distribution, fetchBedrock]);
+    //     if (distribution) {
+    //         fetchBedrockModel();
+    //     }
+    // }, [distribution, fetchBedrock]);
 
 	return (
 			<div className="chart-wrapper" style={{backgroundColor: backgroundColor}}>
