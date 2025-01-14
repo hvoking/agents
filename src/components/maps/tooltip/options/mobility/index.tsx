@@ -30,22 +30,25 @@ export const Mobility = ({ markerId }: any) => {
 	}
 
 	return (
-		<div className="routing-profile">
-			{Object.entries(routingProfileValues).map(([key, value]: any) => {
-				const isActive = currentMarker && currentMarker.routingProfile === key;
-				return (
-					<div
-						key={key}
-						onClick={() => onClick(key)} 
-						className={`routing-image-wrapper ${isActive ? "active" : ""}`}
-					>
-						<img 
-							src={isActive ? value.replace(".svg", "-active.svg") : value} 
-							alt={key}
-						/>
-					</div>
-				)
-			})}
+	  	<div>
+			<div className="routing-profile">
+				{Object.entries(routingProfileValues).map(([key, value]: any) => {
+					const isActive = currentMarker && currentMarker.routingProfile === key;
+					return (
+						<div
+							key={key}
+							onClick={() => onClick(key)} 
+							className={`routing-image-wrapper ${isActive ? "active" : ""}`}
+						>
+							<img 
+								src={isActive ? value.replace(".svg", "-active.svg") : value} 
+								alt={key}
+							/>
+						</div>
+					)
+				})}
+			</div>
+			<div className="options-title">Mobility Type</div>
 		</div>
 	)
 }

@@ -7,6 +7,7 @@ export const Markers = ({ xScale, cx, cy, r, minBound, maxBound }: any) => {
                 const markerCenter = xScale(minBound + item);
                 return (
                     <circle 
+                        key={item}
                         className="slider-markers"
                         cx={markerCenter} 
                         cy={cy} 

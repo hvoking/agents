@@ -22,10 +22,7 @@ export const Tooltip = ({ optionsCoords }: any) => {
 
   return (
     <Marker longitude={lng} latitude={lat} draggable={true}>
-      <div 
-        className="popup-item" 
-        onClick={(e: any) => e.stopPropagation()}
-      >
+      <div className="popup-item" onClick={(e: any) => e.stopPropagation()}>
         <Header 
           markerId={currentMarkerId} 
           activeFeature={activeFeature}

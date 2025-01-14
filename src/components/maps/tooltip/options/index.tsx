@@ -20,10 +20,7 @@ export const Options = ({ markerId, activeFeature, colorPalette }: any) => {
   			}
   			{activeFeature === "iso" && 
 	  			<>
-	  				<div>
-	  					<div className="options-title">Mobility Type</div>
-	  					<Mobility markerId={markerId}/>
-	  				</div>
+	  				<Mobility markerId={markerId}/>
 	  				<Slider 
 	  					markerId={markerId} 
 	  					minBound={5} 
