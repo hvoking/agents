@@ -20,19 +20,22 @@ export const MarkersProvider = ({children}: any) => {
 	const [ addPin, setAddPin ] = useState(false);
 
 	const updateMarkers = (markerId: string, property: string, value: number) => {
-	    setMarkers((prev: any) => {
-	        if (prev[markerId]?.[property] !== value) {
-	            return {
-	                ...prev,
-	                [markerId]: {
-	                    ...prev[markerId],
-	                    [property]: value,
-	                },
-	            };
-	        }
-	        return prev;
-	    });
+	    setMarkers((prev: any) => ({
+	        ...prev,
+	        [markerId]: {
+	            ...prev[markerId],
+	            [property]: value,
+	        },
+	    }));
 	};
+
+	const colorPalette = [
+	    "rgb(204, 255, 230)",
+	    "rgb(255, 229, 204)",
+	    "rgb(223, 246, 255)",
+	    "rgb(255, 255, 204)",
+	    "rgb(255, 204, 203)",
+	];
 
 	return (
 		<MarkersContext.Provider value={{
@@ -44,7 +47,7 @@ export const MarkersProvider = ({children}: any) => {
 			activePage, setActivePage,
 			radius, setRadius,
 			addPin, setAddPin,
-			providers,
+			providers, colorPalette,
 		}}>
 			{children}
 		</MarkersContext.Provider>

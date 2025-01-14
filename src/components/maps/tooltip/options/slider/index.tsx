@@ -17,7 +17,7 @@ import { useRadiusSizes } from 'context/sizes/radius';
 // Third-party imports
 import * as d3 from 'd3';
 
-export const Slider = ({ markerId, minBound, maxBound, markerProperty, title }: any) => {
+export const Slider = ({ markerId, minBound, maxBound, markerProperty }: any) => {
   const middle = maxBound - ((maxBound - minBound) / 2);
 
   const [ handlerPosition, setHandlerPosition ] = useState(middle);
@@ -33,39 +33,41 @@ export const Slider = ({ markerId, minBound, maxBound, markerProperty, title }: 
     .range([ offset, innerWidth - offset ]);
 
   return (
-    <div className="circle-slider">
+    <div className="slider-wrapper">
       <SVGWrapper>
         <Background
           xScale={xScale} 
           minBound={minBound} 
           maxBound={maxBound} 
           circleHeight={circleHeight}
+          innerHeight={innerHeight}
         />
         <Foreground
           xScale={xScale} 
           minBound={minBound}
           handlerPosition={handlerPosition} 
-          circleRadius={circleHeight}
+          circleHeight={circleHeight}
+          innerHeight={innerHeight}
           activeForeground={activeForeground}
         />
         <Markers
           xScale={xScale} 
-          cy={circleHeight} 
-          r={4}
+          cy={innerHeight / 2} 
+          r={circleHeight / 2}
           minBound={minBound}
           maxBound={maxBound}
         />
         <Handler
           cx={xScale(handlerPosition)} 
-          cy={circleHeight} 
+          cy={innerHeight / 2} 
           r={circleHeight}
         />
-        <Legend 
-          circleRadius={circleHeight} 
+     {/*   <Legend 
+          circleHeight={circleHeight} 
           currentPosition={handlerPosition}
           innerWidth={innerWidth}
           title={title}
-        />
+        />*/}
         <Wrapper
           handlerPosition={handlerPosition}
           xScale={xScale}

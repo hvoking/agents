@@ -4,8 +4,8 @@ import { useState } from 'react';
 // Context imports
 import { useMarkers } from 'context/agents/markers';
 
-export const Wrapper = ({ markerId, innerWidth, innerHeight, colorScale }: any) => {
-    const { setMarkers } = useMarkers();
+export const Wrapper = ({ markerId, innerWidth, innerHeight, colorScale, markerProperty }: any) => {
+    const { updateMarkers } = useMarkers();
 
     const [selectedIndex, setSelectedIndex] = useState<any>(null);
 
@@ -20,15 +20,9 @@ export const Wrapper = ({ markerId, innerWidth, innerHeight, colorScale }: any) 
     const onRectangleClick = (index: number) => {
         setSelectedIndex(index);
         const colorValue = index / (numOptions - 1); // Normalize index to [0, 1]
-        const strokeColor = colorScale(colorValue);
+        const fillColor = colorScale(colorValue);
         
-        setMarkers((prev: any) => ({
-            ...prev,
-            [markerId]: {
-                ...prev[markerId],
-                stroke: strokeColor,
-            },
-        }));
+        updateMarkers(markerId, markerProperty, fillColor)
     };
 
     return (

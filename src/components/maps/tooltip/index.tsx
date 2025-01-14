@@ -13,7 +13,7 @@ import { useMarkers } from 'context/agents/markers';
 import { Marker } from 'react-map-gl';
 
 export const Tooltip = ({ optionsCoords }: any) => {
-  const { currentMarkerId } = useMarkers();
+  const { currentMarkerId, colorPalette } = useMarkers();
   const [ activeFeature, setActiveFeature ] = useState<any>(null);
 
   const { lng, lat } = optionsCoords;
@@ -34,6 +34,7 @@ export const Tooltip = ({ optionsCoords }: any) => {
         <Options 
           markerId={currentMarkerId} 
           activeFeature={activeFeature} 
+          colorPalette={colorPalette}
         />
       </div>
     </Marker>

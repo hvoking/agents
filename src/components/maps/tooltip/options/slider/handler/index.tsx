@@ -6,7 +6,7 @@ export const Handler = ({ cx, cy, r }: any) => {
         <circle 
             className="slider-handler" 
             cx={cx} 
-            cy={r} 
+            cy={cy} 
             r={r - 1}
         />
     )

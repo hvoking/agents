@@ -1,9 +1,7 @@
-// React imports
-import { useState } from 'react';
-
 // App imports
 import { SVGWrapper } from './svg';
 import { Wrapper } from './wrapper';
+import './styles.scss';
 
 // Context imports
 import { useSliderSizes } from 'context/sizes/slider';
@@ -11,16 +9,8 @@ import { useSliderSizes } from 'context/sizes/slider';
 // Third-party imports
 import * as d3 from 'd3';
 
-export const Color = ({ markerId }: any) => {
+export const Color = ({ markerId, colorPalette, markerProperty }: any) => {
 	const { innerWidth, innerHeight } = useSliderSizes();
-
-	const colorPalette = [
-	    "rgb(0, 255, 0)",
-	    "rgb(0, 0, 255)",
-	    "rgb(255, 0, 0)",
-	    "rgb(0, 0, 0)",
-	    "rgb(126, 126, 132)",
-	];
 
 	const range = 1 / (colorPalette.length - 1);
 
@@ -29,15 +19,16 @@ export const Color = ({ markerId }: any) => {
 	  .range(colorPalette);
 
 	return (
-		<div className="options-colors">
-		  <SVGWrapper>
-		    <Wrapper
-		      markerId={markerId}
-		      innerWidth={innerWidth}
-		      innerHeight={innerHeight}
-		      colorScale={colorScale}
-		    />
-		  </SVGWrapper>
+		<div className="colors-wrapper">
+			<SVGWrapper>
+				<Wrapper
+					markerId={markerId}
+					innerWidth={innerWidth}
+					innerHeight={innerHeight}
+					colorScale={colorScale}
+					markerProperty={markerProperty}
+				/>
+			</SVGWrapper>
 		</div>
 	)
 }
