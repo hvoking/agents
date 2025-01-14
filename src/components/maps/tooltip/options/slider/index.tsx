@@ -17,16 +17,15 @@ import { useRadiusSizes } from 'context/sizes/radius';
 // Third-party imports
 import * as d3 from 'd3';
 
-export const Slider = ({ markerId, minBound, maxBound, markerProperty }: any) => {
-  const { innerWidth, innerHeight } = useRadiusSizes();
-
-  const middle = (maxBound - minBound) / 2;
+export const Slider = ({ markerId, minBound, maxBound, markerProperty, title }: any) => {
+  const middle = maxBound - ((maxBound - minBound) / 2);
 
   const [ handlerPosition, setHandlerPosition ] = useState(middle);
-
   const [ activeForeground, setActiveForeground ] = useState(false);
+
+  const { innerWidth, innerHeight } = useRadiusSizes();
   
-  const circleHeight = innerHeight / 6;
+  const circleHeight = 10;
   const offset = 10;
 
   const xScale: any = d3.scaleLinear()
@@ -40,7 +39,7 @@ export const Slider = ({ markerId, minBound, maxBound, markerProperty }: any) =>
           xScale={xScale} 
           minBound={minBound} 
           maxBound={maxBound} 
-          circleRadius={circleHeight}
+          circleHeight={circleHeight}
         />
         <Foreground
           xScale={xScale} 
@@ -53,6 +52,8 @@ export const Slider = ({ markerId, minBound, maxBound, markerProperty }: any) =>
           xScale={xScale} 
           cy={circleHeight} 
           r={4}
+          minBound={minBound}
+          maxBound={maxBound}
         />
         <Handler
           cx={xScale(handlerPosition)} 
@@ -63,6 +64,7 @@ export const Slider = ({ markerId, minBound, maxBound, markerProperty }: any) =>
           circleRadius={circleHeight} 
           currentPosition={handlerPosition}
           innerWidth={innerWidth}
+          title={title}
         />
         <Wrapper
           handlerPosition={handlerPosition}

@@ -1,16 +1,16 @@
 // App imports
 import './styles.scss';
 
-export const Background = ({ xScale, minBound, maxBound, circleRadius }: any) => {
+export const Background = ({ xScale, minBound, maxBound, circleHeight }: any) => {
 	return (
 		<rect
 			className="slider-background"
 			x={xScale(minBound)}
-			y={circleRadius / 2}
-			rx={circleRadius / 2}
-			ry={circleRadius / 2}
+			y={circleHeight / 2}
+			rx={circleHeight / 2}
+			ry={circleHeight / 2}
 			width={xScale(maxBound) - xScale(minBound)}
-			height={circleRadius}
+			height={circleHeight}
 		/>
 	)
 }

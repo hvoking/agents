@@ -22,7 +22,8 @@ export const Wrapper = ({
             x < minBound ? minBound : 
             x > maxBound ? maxBound :  
             x;
-        setHandlerPosition(boundedX);
+        const roundedX = maxBound <= 1 ? Math.round(boundedX * 10) / 10 : Math.round(boundedX);
+        setHandlerPosition(roundedX);
     };
 
     const onDragEnd = (event: any) => {
@@ -32,7 +33,7 @@ export const Wrapper = ({
             x > maxBound ? maxBound :  
             x;
 
-        const roundedX = Math.round(boundedX * 10) / 10;
+        const roundedX = maxBound <= 1 ? Math.round(boundedX * 10) / 10 : Math.round(boundedX);
         updateMarkers(markerId, markerProperty, roundedX);
     };
 

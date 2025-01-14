@@ -1,13 +1,24 @@
 // App imports
-import { Opacity } from './opacity';
+import { Slider } from '../../slider';
 import { Color } from './color';
-import { Thickness } from './thickness';
 
 export const Stroke = ({ markerId }: any) => {
 	return (
 		<div>
-			<Thickness markerId={markerId} minBound={0} maxBound={10} markerProperty={'strokeWidth'}/>
-			<Opacity markerId={markerId} minBound={0} maxBound={1} markerProperty={'strokeOpacity'}/>
+			<Slider 
+				markerId={markerId} 
+				minBound={0} 
+				maxBound={10} 
+				markerProperty={'strokeWidth'} 
+				title="thickness"
+			/>
+			<Slider 
+				markerId={markerId} 
+				minBound={0} 
+				maxBound={1} 
+				markerProperty={'strokeOpacity'} 
+				title="opacity"
+			/>
 			<Color markerId={markerId}/>
 		</div>
 	)

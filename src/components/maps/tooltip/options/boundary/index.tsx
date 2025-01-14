@@ -1,6 +1,6 @@
 // App imports
-import { Circle } from './circle';
-import { Isochrone } from './isochrone';
+import { Slider } from '../slider';
+import { Mobility } from './mobility';
 import './styles.scss';
 
 export const Boundary = ({ markerId, activeFeature }: any) => {
@@ -8,7 +8,7 @@ export const Boundary = ({ markerId, activeFeature }: any) => {
 		<div className="boundary-selector">
 			{activeFeature === "circle" && 
 				<div className="options-boundary-circle">
-					<Circle 
+					<Slider 
 						markerId={markerId} 
 						markerProperty='radius'
 						minBound={0.1} 
@@ -18,13 +18,17 @@ export const Boundary = ({ markerId, activeFeature }: any) => {
 				</div>
 			}
 			{activeFeature === "iso" && 
-				<Isochrone 
-					markerId={markerId} 
-					markerProperty='contoursMinutes'
-					minBound={5} 
-					maxBound={15}
-					title='minutes'
-				/>
+				<div>
+					<h2 className="options-subtitle">Mobility Type</h2>
+					<Mobility markerId={markerId}/>
+					<Slider 
+						markerId={markerId} 
+						minBound={5} 
+						maxBound={15} 
+						markerProperty={"contoursMinutes"} 
+						title={'minutes'}
+					/>
+				</div>
 			}
 		</div>
 	)
