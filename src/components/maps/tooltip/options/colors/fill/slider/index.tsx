@@ -1,5 +1,5 @@
 // React imports
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // App imports
 import { SVGWrapper } from './svg';
@@ -8,22 +8,25 @@ import { Foreground } from './foreground';
 import { Handler } from './handler';
 import { Legend } from './legend';
 import { Wrapper } from './wrapper';
+import { Markers } from './markers';
 import './styles.scss';
 
 // Context imports
 import { useRadiusSizes } from 'context/sizes/radius';
 
+
 // Third-party imports
 import * as d3 from 'd3';
 
-export const Slider = ({ markerId }: any) => {
-  const [ radiusPosition, setRadiusPosition ] = useState(10);
-
-  const minBound = 5;
-  const maxBound = 15;
-
+export const Slider = ({ markerId, minBound, maxBound }: any) => {
   const { innerWidth, innerHeight } = useRadiusSizes();
 
+  const middle = (maxBound - minBound) / 2;
+
+  const [ handlerPosition, setHandlerPosition ] = useState(middle);
+
+  const [ activeForeground, setActiveForeground ] = useState(false);
+  
   const circleHeight = innerHeight / 6;
   const offset = 10;
 
@@ -32,7 +35,7 @@ export const Slider = ({ markerId }: any) => {
     .range([ offset, innerWidth - offset ]);
 
   return (
-    <div className="iso-slider">
+    <div className="circle-slider">
     <SVGWrapper>
       <Background
         xScale={xScale} 
@@ -43,27 +46,35 @@ export const Slider = ({ markerId }: any) => {
       <Foreground
         xScale={xScale} 
         minBound={minBound}
-        radiusPosition={radiusPosition} 
+        handlerPosition={handlerPosition} 
         circleRadius={circleHeight}
+        activeForeground={activeForeground}
+      />
+      <Markers
+        xScale={xScale} 
+        cy={circleHeight} 
+        r={4}
       />
       <Handler
-        cx={xScale(radiusPosition)} 
+        cx={xScale(handlerPosition)} 
         cy={circleHeight} 
         r={circleHeight}
       />
       <Legend 
         circleRadius={circleHeight} 
-        currentPosition={radiusPosition}
+        currentPosition={handlerPosition}
         innerWidth={innerWidth}
       />
       <Wrapper
+        handlerPosition={handlerPosition}
         xScale={xScale}
         innerWidth={innerWidth}
         innerHeight={innerHeight}
-        setRadiusPosition={setRadiusPosition}
-        markerId={markerId}
+        setHandlerPosition={setHandlerPosition}
         minBound={minBound}
         maxBound={maxBound}
+        setActiveForeground={setActiveForeground}
+        markerId={markerId}
       />
     </SVGWrapper>
     </div>

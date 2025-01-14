@@ -8,8 +8,8 @@ export const Options = ({ markerId, activeFeature }: any) => {
 	
 	return (
 		<div className="options-wrapper">
-		  {(activeFeature === "circle" || activeFeature === "iso")  && <Boundary markerId={markerId} activeFeature={activeFeature}/>}
-		  {(activeFeature === "fill" || activeFeature === "stroke") && <Colors markerId={markerId} activeFeature={activeFeature}/>}
+		  <Boundary markerId={markerId} activeFeature={activeFeature}/>
+		  <Colors markerId={markerId} activeFeature={activeFeature}/>
 		</div>
 	)
 }

@@ -11,8 +11,10 @@ export const Wrapper = ({
     xScale, 
     minBound, maxBound,
     innerWidth, innerHeight, 
-    radiusPosition, setRadiusPosition,
+    handlerPosition, setHandlerPosition,
+    setRestPosition,
     markerId,
+    setActiveForeground
 }: any) => {
     const { updateMarkers } = useMarkers();
 
@@ -23,8 +25,7 @@ export const Wrapper = ({
             x > maxBound ? maxBound :  
             x;
 
-        const roundedX = Math.round(boundedX);
-        setRadiusPosition(roundedX);
+        setHandlerPosition(Math.round(boundedX));
     };
 
     const onDragEnd = (event: any) => {
@@ -35,7 +36,7 @@ export const Wrapper = ({
             x;
 
         const roundedX = Math.round(boundedX);
-        updateMarkers(markerId, "contoursMinutes", roundedX)
+        updateMarkers(markerId, 'strokeWidth', roundedX);
     };
 
     const sliderRef = useCallback((node: any) => {
@@ -44,7 +45,14 @@ export const Wrapper = ({
             .on('drag', onDrag)
             .on('end', onDragEnd);
         d3.select(node).call(drag);
-    }, [ onDrag, onDragEnd ]);
+    }, []);
+
+    const onMouseOver = () => {
+        setActiveForeground(true);
+    }
+    const onMouseLeave = () => {
+        setActiveForeground(false);
+    }
 
 	return (
         <rect
@@ -52,6 +60,8 @@ export const Wrapper = ({
             width={innerWidth}
             height={innerHeight}
             fill="transparent"
+            onMouseOver={onMouseOver}
+            onMouseLeave={onMouseLeave}
         />
 	)
 }

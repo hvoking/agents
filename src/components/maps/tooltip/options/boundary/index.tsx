@@ -9,7 +9,11 @@ import { useMarkers } from 'context/agents/markers';
 export const Boundary = ({ markerId, activeFeature }: any) => {
 	return (
 		<div className="boundary-selector">
-			{activeFeature === "circle" && <Circle markerId={markerId}/>}
+			{activeFeature === "circle" && 
+				<div className="options-boundary-circle">
+					<Circle markerId={markerId}/>
+				</div>
+			}
 			{activeFeature === "iso" && <Isochrone markerId={markerId}/>}
 		</div>
 	)

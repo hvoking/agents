@@ -1,3 +1,6 @@
+// App imports
+import './styles.scss';
+
 export const Legend = ({ circleRadius, currentPosition, innerWidth }: any) => {
 	return (
 		<>	
@@ -7,7 +10,7 @@ export const Legend = ({ circleRadius, currentPosition, innerWidth }: any) => {
 				className="legend-text"
 				style={{textAnchor:"start", alignmentBaseline: "middle"}}
 			>
-				Radius
+				Opacity
 			</text>
 			<text 
 				x={innerWidth} 

@@ -1,6 +1,3 @@
-// React imports
-import { useState, useEffect, useMemo } from 'react';
-
 // App imports
 import { Gauge } from './gauge';
 import { Dots } from './dots';
@@ -9,30 +6,13 @@ import { Bars } from './bars';
 import { processData } from './data';
 import './styles.scss';
 
-// Context imports
-import { useBedrockApi } from 'context/api/bedrock';
-
 // Third-party imports
 import * as d3 from 'd3';
 
 export const Charts = ({ data, name, colorLabel, graphicType, backgroundColor }: any) => {
-	const { distribution, colors } = useMemo(() => processData(data, name, colorLabel), [data, name, colorLabel]);
+
+	const { distribution, colors } = processData(data, name, colorLabel);
 	const sumOfValues = d3.sum(Object.values(distribution));
-
-	// const [ distributionData, setDistributionData ] = useState<any>(null);
-
-	// const { fetchBedrock } = useBedrockApi();
-
-	// useEffect(() => {
-    //     const fetchBedrockModel = async () => {
-    //         const modelResponse = await fetchBedrock("what is the data classification?", distribution);
-    //         setDistributionData(modelResponse);
-    //     };
-
-    //     if (distribution) {
-    //         fetchBedrockModel();
-    //     }
-    // }, [distribution, fetchBedrock]);
 
 	return (
 			<div className="chart-wrapper" style={{backgroundColor: backgroundColor}}>

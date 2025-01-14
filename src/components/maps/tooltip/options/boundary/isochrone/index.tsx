@@ -8,7 +8,6 @@ export const Isochrone = ({ markerId }: any) => {
 		<>
 			<h2 className="options-subtitle">Mobility Type</h2>
 			<Mobility markerId={markerId}/>
-			<h2 className="options-subtitle">Minutes</h2>
 			<Slider markerId={markerId}/>
 		</>
 	)

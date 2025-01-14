@@ -1,50 +1,79 @@
 // React imports
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 // App imports
-import { Slider } from './slider';
+import { SVGWrapper } from './svg';
+import { Background } from './background';
+import { Foreground } from './foreground';
+import { Handler } from './handler';
+import { Legend } from './legend';
+import { Wrapper } from './wrapper';
 import './styles.scss';
 
 // Context imports
-import { useMarkers } from 'context/agents/markers';
+import { useRadiusSizes } from 'context/sizes/radius';
+
+// Third-party imports
+import * as d3 from 'd3';
 
 export const Circle = ({ markerId }: any) => {
-	const { setMarkers } = useMarkers();
+  const minBound = 0.1;
+  const maxBound = 1;
+  const middle = (maxBound - minBound) / 2;
+  
+  const [ handlerPosition, setHandlerPosition ] = useState(middle);
 
-	const [ handlerPosition, setHandlerPosition ] = useState(0.5);
-	const [ restPosition, setRestPosition ] = useState(0.5);
-	
-	const minBound = 0.1;
-	const maxBound = 1;
+  const [ activeForeground, setActiveForeground ] = useState(false);
+  const { innerWidth, innerHeight } = useRadiusSizes();
 
-	useEffect(() => {
-		setMarkers((prev: any) => {
-		    if (prev[markerId]?.radius !== restPosition) {
-		        return {
-		            ...prev,
-		            [markerId]: {
-		                ...prev[markerId],
-		                radius: restPosition,
-		            },
-		        };
-		    }
-		    return prev;
-		});
-	}, [ restPosition ])
+  const circleHeight = innerHeight / 6;
+  const offset = 10;
 
-	return (
-		<div className="options-boundary-circle">
-			<div className="options-subtitle">Circle Radius</div>
-			<Slider 
-				handlerPosition={handlerPosition}
-				setHandlerPosition={setHandlerPosition}
-				setRestPosition={setRestPosition}
-				minBound={minBound}
-				maxBound={maxBound}
-				markerId={markerId}
-			/>
-		</div>
-	)
+  const xScale: any = d3.scaleLinear()
+    .domain([ minBound, maxBound ])
+    .range([ offset, innerWidth - offset ]);
+
+  return (
+    <div className="circle-slider">
+    <SVGWrapper>
+      <Background
+        xScale={xScale} 
+        minBound={minBound} 
+        maxBound={maxBound} 
+        circleRadius={circleHeight}
+      />
+      <Foreground
+        xScale={xScale} 
+        minBound={minBound}
+        handlerPosition={handlerPosition} 
+        circleRadius={circleHeight}
+        activeForeground={activeForeground}
+      />
+      <Handler
+        activeForeground={activeForeground}
+        cx={xScale(handlerPosition)} 
+        cy={circleHeight} 
+        r={circleHeight}
+      />
+      <Legend 
+        circleRadius={circleHeight} 
+        currentPosition={handlerPosition}
+        innerWidth={innerWidth}
+      />
+      <Wrapper
+        handlerPosition={handlerPosition}
+        xScale={xScale}
+        innerWidth={innerWidth}
+        innerHeight={innerHeight}
+        setHandlerPosition={setHandlerPosition}
+        minBound={minBound}
+        maxBound={maxBound}
+        setActiveForeground={setActiveForeground}
+        markerId={markerId}
+      />
+    </SVGWrapper>
+    </div>
+  )
 }
 
 Circle.displayName="Circle";

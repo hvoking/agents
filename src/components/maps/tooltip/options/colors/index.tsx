@@ -1,23 +1,14 @@
 // App imports
-import { StrokeOpacity } from './stroke/strokeOpacity';
-import { StrokeColor } from './stroke/strokeColor';
-import { StrokeWidth } from './stroke/strokeWidth';
-import { FillOpacity } from './fill/fillOpacity';
-import { FillColor } from './fill/fillColor';
+import { Fill } from './fill';
+import { Stroke } from './stroke';
+
 import './styles.scss';
 
 export const Colors = ({ markerId, activeFeature }: any) => {
   return (
     <div>
-      {activeFeature === "fill" && <div>
-        <FillOpacity markerId={markerId}/>
-        <FillColor markerId={markerId}/>
-      </div>}
-      {activeFeature === "stroke" && <div>
-        <StrokeOpacity markerId={markerId}/>
-        <StrokeWidth markerId={markerId}/>
-        <StrokeColor markerId={markerId}/>
-      </div>}
+      {activeFeature === "fill" && <Fill markerId={markerId}/>}
+      {activeFeature === "stroke" && <Stroke markerId={markerId}/>}
 
     </div>
   )

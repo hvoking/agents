@@ -19,9 +19,25 @@ export const MarkersProvider = ({children}: any) => {
 	const [ radius, setRadius ] = useState(0.5);
 	const [ addPin, setAddPin ] = useState(false);
 
+	const updateMarkers = (markerId: string, property: string, value: number) => {
+	    setMarkers((prev: any) => {
+	        if (prev[markerId]?.[property] !== value) {
+	            return {
+	                ...prev,
+	                [markerId]: {
+	                    ...prev[markerId],
+	                    [property]: value,
+	                },
+	            };
+	        }
+	        return prev;
+	    });
+	};
+
 	return (
 		<MarkersContext.Provider value={{
 			markers, setMarkers,
+			updateMarkers,
 			currentMarkerId, setCurrentMarkerId,
 			currentImage, setCurrentImage,
 			currentName, setCurrentName,

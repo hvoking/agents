@@ -1,0 +1,17 @@
+.chat-history {
+  flex: 1;
+  padding: 10px;
+  background-color: #f9f9f9;
+  overflow-y: auto;
+  max-height: 400px;
+}
+.chat-message.assistant {
+  background-color: #e1f5fe;
+  align-self: flex-start;
+}
+.chat-message.user {
+  background-color: #d1ffd1;
+  align-self: flex-end;
+  text-align: right;
+}
+
