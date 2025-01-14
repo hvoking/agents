@@ -1,9 +1,6 @@
-@import 'variables';
-
 .popup-item {
   position: absolute;
   transform: translate(-50%, 10px);
   display: grid;
-  justify-items: center;
   grid-gap: 2px;
 }

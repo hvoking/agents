@@ -1,16 +1,18 @@
-// App imports
-import './styles.scss';
+export const Foreground = ({ innerHeight, xScale, minBound, handlerPosition, circleHeight }: any) => {
+	const height = circleHeight / 2;
 
-export const Foreground = ({ innerHeight, activeForeground, xScale, minBound, handlerPosition, circleHeight }: any) => {
+	const rectY = innerHeight / 2 - height / 2;
+	const borderRadius = height / 2;
+
 	return (
 		<rect
 			className="slider-foreground"
 			x={xScale(minBound)}
-			y={innerHeight / 2 - circleHeight / 2}
-			rx={circleHeight / 2}
-			ry={circleHeight / 2}
+			y={rectY}
+			rx={borderRadius}
+			ry={borderRadius}
 			width={xScale(handlerPosition) - xScale(minBound)}
-			height={circleHeight}
+			height={height}
 		/>
 	)
 }

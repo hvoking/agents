@@ -9,10 +9,10 @@ export const Wrapper = ({ markerId, innerWidth, innerHeight, colorScale, markerP
 
     const [selectedIndex, setSelectedIndex] = useState<any>(null);
 
-    const numOptions = 16;
-    
-    const rows = 4;
+    const numOptions = 8;
+
     const cols = 4;
+    const rows = 2;
 
     const rectWidth = innerWidth / cols;
     const rectHeight = innerHeight / rows;

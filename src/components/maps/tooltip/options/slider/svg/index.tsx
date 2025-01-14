@@ -15,7 +15,7 @@ export const SVGWrapper = ({ children }: any) => {
 	  }, []);
 	return (
 		<div ref={parentRef} style={{width: "100%", height: "100%"}}>
-			{width && <svg viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none">
+			{width && <svg viewBox={`0 0 ${width} ${height}`}>
 				<g transform={`translate(${margin.left}, ${margin.top})`}>
 				{Children.map(children, (child, index) => {
 		            return cloneElement(child, {width: "100%"});

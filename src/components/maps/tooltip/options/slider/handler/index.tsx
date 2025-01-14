@@ -1,6 +1,3 @@
-// App imports
-import './styles.scss';
-
 export const Handler = ({ cx, cy, r }: any) => {
     return (
         <circle 

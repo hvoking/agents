@@ -1,6 +1,6 @@
 // App imports
 import { Slider } from './slider';
-import { Mobility } from './boundary/mobility';
+import { Mobility } from './mobility';
 import { Color } from './color';
 import './styles.scss';
 
@@ -13,14 +13,15 @@ export const Options = ({ markerId, activeFeature, colorPalette }: any) => {
   				<Slider 
   					markerId={markerId} 
   					markerProperty='radius'
-  					minBound={0.1} 
+  					minBound={0} 
   					maxBound={1}
+  					title={"Radius"}
   				/>
   			}
   			{activeFeature === "iso" && 
 	  			<>
 	  				<div>
-	  					<h2 className="options-subtitle">Mobility Type</h2>
+	  					<div className="options-title">Mobility Type</div>
 	  					<Mobility markerId={markerId}/>
 	  				</div>
 	  				<Slider 
@@ -28,6 +29,7 @@ export const Options = ({ markerId, activeFeature, colorPalette }: any) => {
 	  					minBound={5} 
 	  					maxBound={15} 
 	  					markerProperty={"contoursMinutes"} 
+	  					title={"Minutes"}
 	  				/>
 	  			</>
 	  		}
@@ -38,6 +40,7 @@ export const Options = ({ markerId, activeFeature, colorPalette }: any) => {
 						minBound={0} 
 						maxBound={1} 
 						markerProperty={'fillOpacity'}
+						title={"Opacity"}
 					/>
 					<Color 
 						markerId={markerId} 
@@ -53,12 +56,14 @@ export const Options = ({ markerId, activeFeature, colorPalette }: any) => {
 						minBound={0} 
 						maxBound={10} 
 						markerProperty={'strokeWidth'} 
+						title={"Thickness"}
 					/>
 					<Slider 
 						markerId={markerId} 
 						minBound={0} 
 						maxBound={1} 
 						markerProperty={'strokeOpacity'} 
+						title={"Opacity"}
 					/>
 					<Color 
 						markerId={markerId} 
