@@ -1,5 +1,5 @@
 // React imports
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 // App imports
 import { SVGWrapper } from './svg';
@@ -16,15 +16,11 @@ import { useRadiusSizes } from 'context/sizes/radius';
 // Third-party imports
 import * as d3 from 'd3';
 
-export const Opacity = ({ markerId }: any) => {
-  const minBound = 0;
-  const maxBound = 1;
-
+export const Opacity = ({ markerId, minBound, maxBound, markerProperty }: any) => {
   const middle = (maxBound - minBound) / 2
-
   const [ handlerPosition, setHandlerPosition ] = useState(middle);
-
   const [ activeForeground, setActiveForeground ] = useState(false);
+
   const { innerWidth, innerHeight } = useRadiusSizes();
 
   const circleHeight = innerHeight / 6;
@@ -71,6 +67,7 @@ export const Opacity = ({ markerId }: any) => {
         maxBound={maxBound}
         setActiveForeground={setActiveForeground}
         markerId={markerId}
+        markerProperty={markerProperty}
       />
     </SVGWrapper>
     </div>

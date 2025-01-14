@@ -1,17 +1,17 @@
 // React imports
 import { useCallback } from 'react';
 
+// Context imports
 import { useMarkers } from 'context/agents/markers';
 
 // Third-party imports
 import * as d3 from 'd3';
 
 export const Wrapper = ({ 
-    xScale, 
-    minBound, maxBound,
+    markerId, markerProperty,
+    xScale, minBound, maxBound,
     innerWidth, innerHeight, 
     handlerPosition, setHandlerPosition,
-    markerId,
     setActiveForeground
 }: any) => {
     const { updateMarkers } = useMarkers();
@@ -22,7 +22,6 @@ export const Wrapper = ({
             x < minBound ? minBound : 
             x > maxBound ? maxBound :  
             x;
-
         setHandlerPosition(boundedX);
     };
 
@@ -34,8 +33,7 @@ export const Wrapper = ({
             x;
 
         const roundedX = Math.round(boundedX * 10) / 10;
-        updateMarkers(markerId, 'strokeOpacity', roundedX);
-        
+        updateMarkers(markerId, markerProperty, roundedX);
     };
 
     const sliderRef = useCallback((node: any) => {

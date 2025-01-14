@@ -1,5 +1,5 @@
 // React imports
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 // App imports
 import { SVGWrapper } from './svg';
@@ -10,18 +10,15 @@ import { Legend } from './legend';
 import { Wrapper } from './wrapper';
 
 // Context imports
-import { useMarkers } from 'context/agents/markers';
 import { useRadiusSizes } from 'context/sizes/radius';
 
 // Third-party imports
 import * as d3 from 'd3';
 
-export const Thickness = ({ markerId }: any) => {
-  const minBound = 0;
-  const maxBound = 10;
+export const Thickness = ({ markerId, minBound, maxBound, markerProperty }: any) => {
   const middle = (maxBound - minBound) / 2
 
-  const [ handlerPosition, setHandlerPosition ] = useState(1);
+  const [ handlerPosition, setHandlerPosition ] = useState(middle);
 
   const [ activeForeground, setActiveForeground ] = useState(false);
   const { innerWidth, innerHeight } = useRadiusSizes();
@@ -69,6 +66,7 @@ export const Thickness = ({ markerId }: any) => {
           maxBound={maxBound}
           setActiveForeground={setActiveForeground}
           markerId={markerId}
+          markerProperty={markerProperty}
         />
       </SVGWrapper>
   )
