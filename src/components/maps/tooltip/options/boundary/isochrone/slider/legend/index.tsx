@@ -1,4 +1,4 @@
-export const Legend = ({ circleRadius, currentPosition, innerWidth }: any) => {
+export const Legend = ({ circleRadius, currentPosition, innerWidth, title }: any) => {
 	return (
 		<>	
 			<text 
@@ -7,7 +7,7 @@ export const Legend = ({ circleRadius, currentPosition, innerWidth }: any) => {
 				className="legend-text"
 				style={{textAnchor:"start", alignmentBaseline: "middle"}}
 			>
-				Radius
+				{title}
 			</text>
 			<text 
 				x={innerWidth} 

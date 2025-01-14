@@ -1,6 +1,3 @@
-// React imports
-import { useState } from 'react';
-
 // App imports
 import { SVGWrapper } from './svg';
 import { Wrapper } from './wrapper';
@@ -13,8 +10,6 @@ import { useSliderSizes } from 'context/sizes/slider';
 import * as d3 from 'd3';
 
 export const Color = ({ markerId }: any) => {
-	const [ currentOpacity, setCurrentOpacity ] = useState(0.2);
-
 	const { innerWidth, innerHeight } = useSliderSizes();
 
 	const colorPalette = [

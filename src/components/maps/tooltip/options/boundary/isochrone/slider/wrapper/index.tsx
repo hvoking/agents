@@ -8,11 +8,10 @@ import { useMarkers } from 'context/agents/markers';
 import * as d3 from 'd3';
 
 export const Wrapper = ({ 
-    xScale, 
-    minBound, maxBound,
+    markerId, markerProperty,
+    xScale, minBound, maxBound,
     innerWidth, innerHeight, 
     radiusPosition, setRadiusPosition,
-    markerId,
 }: any) => {
     const { updateMarkers } = useMarkers();
 
@@ -35,7 +34,7 @@ export const Wrapper = ({
             x;
 
         const roundedX = Math.round(boundedX);
-        updateMarkers(markerId, "contoursMinutes", roundedX)
+        updateMarkers(markerId, markerProperty, roundedX)
     };
 
     const sliderRef = useCallback((node: any) => {
@@ -44,7 +43,7 @@ export const Wrapper = ({
             .on('drag', onDrag)
             .on('end', onDragEnd);
         d3.select(node).call(drag);
-    }, [ onDrag, onDragEnd ]);
+    }, []);
 
 	return (
         <rect

@@ -11,7 +11,7 @@ export const Wrapper = ({
     minBound, maxBound,
     innerWidth, innerHeight, 
     handlerPosition, setHandlerPosition,
-    markerId,
+    markerId, markerProperty,
     setActiveForeground
 }: any) => {
     const { updateMarkers } = useMarkers();
@@ -34,7 +34,7 @@ export const Wrapper = ({
             x;
 
         const roundedX = Math.round(boundedX * 10) / 10;
-        updateMarkers(markerId, 'radius', roundedX);
+        updateMarkers(markerId, markerProperty, roundedX);
         
     };
 

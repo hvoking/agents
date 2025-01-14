@@ -1,7 +1,7 @@
 // App imports
 import './styles.scss';
 
-export const Legend = ({ circleRadius, currentPosition, innerWidth }: any) => {
+export const Legend = ({ circleRadius, currentPosition, innerWidth, title }: any) => {
 	return (
 		<>	
 			<text 
@@ -10,7 +10,7 @@ export const Legend = ({ circleRadius, currentPosition, innerWidth }: any) => {
 				className="legend-text"
 				style={{textAnchor:"start", alignmentBaseline: "middle"}}
 			>
-				Minutes
+				{title}
 			</text>
 			<text 
 				x={innerWidth} 

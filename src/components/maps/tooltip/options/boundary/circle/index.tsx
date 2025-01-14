@@ -16,11 +16,8 @@ import { useRadiusSizes } from 'context/sizes/radius';
 // Third-party imports
 import * as d3 from 'd3';
 
-export const Circle = ({ markerId }: any) => {
-  const minBound = 0.1;
-  const maxBound = 1;
-  const middle = (maxBound - minBound) / 2;
-  
+export const Circle = ({ markerId, markerProperty, minBound, maxBound, title }: any) => {
+  const middle = maxBound - ((maxBound - minBound) / 2);
   const [ handlerPosition, setHandlerPosition ] = useState(middle);
 
   const [ activeForeground, setActiveForeground ] = useState(false);
@@ -59,6 +56,7 @@ export const Circle = ({ markerId }: any) => {
         circleRadius={circleHeight} 
         currentPosition={handlerPosition}
         innerWidth={innerWidth}
+        title={title}
       />
       <Wrapper
         handlerPosition={handlerPosition}
@@ -70,6 +68,7 @@ export const Circle = ({ markerId }: any) => {
         maxBound={maxBound}
         setActiveForeground={setActiveForeground}
         markerId={markerId}
+        markerProperty={markerProperty}
       />
     </SVGWrapper>
     </div>

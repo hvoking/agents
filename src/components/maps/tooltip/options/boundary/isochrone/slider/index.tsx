@@ -16,11 +16,9 @@ import { useRadiusSizes } from 'context/sizes/radius';
 // Third-party imports
 import * as d3 from 'd3';
 
-export const Slider = ({ markerId }: any) => {
-  const [ radiusPosition, setRadiusPosition ] = useState(10);
-
-  const minBound = 5;
-  const maxBound = 15;
+export const Slider = ({ markerId, minBound, maxBound, markerProperty, title }: any) => {
+  const middle = maxBound - ((maxBound - minBound) / 2);
+  const [ radiusPosition, setRadiusPosition ] = useState(middle);
 
   const { innerWidth, innerHeight } = useRadiusSizes();
 
@@ -55,6 +53,7 @@ export const Slider = ({ markerId }: any) => {
         circleRadius={circleHeight} 
         currentPosition={radiusPosition}
         innerWidth={innerWidth}
+        title={title}
       />
       <Wrapper
         xScale={xScale}
@@ -64,6 +63,7 @@ export const Slider = ({ markerId }: any) => {
         markerId={markerId}
         minBound={minBound}
         maxBound={maxBound}
+        markerProperty={markerProperty}
       />
     </SVGWrapper>
     </div>
