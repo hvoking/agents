@@ -3,7 +3,7 @@
 .agent-card {
   border: 1px solid $border-color;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: $box-shadow;
   font-family: 'Arial', sans-serif;
   background: $card-bg;
 }

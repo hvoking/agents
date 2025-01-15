@@ -1,0 +1,67 @@
+@import 'variables';
+
+.chat-interface {
+  width: 100%;
+  margin: 20px auto;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  box-shadow: $box-shadow;
+}
+.chat-header {
+  background-color: $primary;
+  color: $text-light;
+  text-align: center;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.chat-message {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 80%;
+}
+.chat-input-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: white;
+  border-top: 1px solid #ddd;
+}
+.chat-input {
+  flex: 1;
+  height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px;
+  resize: none;
+  font-size: 16px;
+}
+
+.chat-send-button {
+  margin-left: 10px;
+  padding: 8px 12px;
+  background-color: $primary;
+  color: $text-light;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.chat-send-button:hover {
+  background-color: #0056b3;
+}
+
+.mapboxgl-popup-content {
+  padding: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+.mapboxgl-popup-tip {
+  display: none !important;
+}

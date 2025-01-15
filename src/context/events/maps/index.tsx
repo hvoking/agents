@@ -29,7 +29,7 @@ export const MapEventsProvider = ({children}: any) => {
 				name: currentName,
 				radius: 0.5,
 				contoursMinutes: 10,
-				fillColor: "rgb(223, 246, 255)",
+				fillColor: "rgb(166, 204, 245)",
 				fillOpacity: 0.2,
 				stroke: "rgb(0, 0, 0)",
 				strokeWidth: 2,

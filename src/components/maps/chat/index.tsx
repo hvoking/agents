@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 // App imports
 import { Response } from './response';
+import { summarizeDataset } from './summarize';
 import './styles.scss';
 
 // Context imports
@@ -14,7 +15,7 @@ import { useMask } from 'context/agents/mask';
 // Third-party imports
 import { Popup } from 'react-map-gl';
 
-export const Message = ({ coords }: any) => {
+export const Chat = ({ coords }: any) => {
 	const { lng, lat } = coords;
 
     // Context hooks
@@ -63,8 +64,9 @@ export const Message = ({ coords }: any) => {
 	    			'polygons-source-';
 
 				const data = sharedGeoJsonDataMap.value[sourcePrefix + currentMarkerId];
+				const summary = summarizeDataset(data);
 
-				if (data) {
+				if (summary) {
 	                setResponseData((prev: any) => ({
 	                    ...prev,
 	                    [currentMarkerId]: [
@@ -72,7 +74,7 @@ export const Message = ({ coords }: any) => {
 	                        { sender: 'user', message: currentText },
 	                    ],
 	                }));
-	                setRequestData(data);
+	                setRequestData(summary);
 	            }
 			}
 		}
@@ -81,7 +83,7 @@ export const Message = ({ coords }: any) => {
 	return (
 		<Popup longitude={lng} latitude={lat} closeButton={false}>
 			<div className="chat-interface">
-				<div className="chat-header">Assistant Chat</div>
+				<div className="chat-header">Agent Chat</div>
 				<Response 
 					responseData={responseData} 
 					markerId={currentMarkerId || ''} 
@@ -104,4 +106,4 @@ export const Message = ({ coords }: any) => {
 	)
 }
 
-Message.displayName="Message";
+Chat.displayName="Chat";

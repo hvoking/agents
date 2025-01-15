@@ -17,7 +17,9 @@ export const Card = ({ marker }: any) => {
 	const { sharedGeoJsonDataMap } = useMask();
 	const { providers } = useMarkers();
 
-	const { id, name, fillColor } = marker;
+	const { id, name, fillColor, fillOpacity } = marker;
+
+	const markerColor = fillColor.replace("b", "ba").replace(")", `, ${fillOpacity})`)
 
 	const linesData = sharedGeoJsonDataMap.value[`lines-source-${id}`];
 	const polygonsData = sharedGeoJsonDataMap.value[`polygons-source-${id}`];
@@ -52,7 +54,7 @@ export const Card = ({ marker }: any) => {
 					name={columnName} 
 					colorLabel={currentColor} 
 					graphicType={graphicType}
-					backgroundColor={fillColor}
+					backgroundColor={markerColor}
 				/>
 			}
 			{activeCharts && <Footer provider={provider}/>}

@@ -6,7 +6,7 @@ import { Tiles } from './tiles';
 import { Mask } from './mask';
 import { Wrapper } from './wrapper';
 import { Tooltip } from './tooltip';
-import { Message } from './message';
+import { Chat } from './chat';
 
 // Context imports
 import { useGeo } from 'context/geo';
@@ -50,7 +50,7 @@ export const MapContainer = () => {
 							<Mask key={key} marker={value}/>
 						)}
 						{optionsCoords && <Tooltip optionsCoords={optionsCoords}/>}
-						{messageCoords && <Message coords={messageCoords}/>}
+						{messageCoords && <Chat coords={messageCoords}/>}
 					</>
 				}
 			</Map>
