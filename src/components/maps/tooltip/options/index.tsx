@@ -4,8 +4,10 @@ import { Mobility } from './mobility';
 import { Color } from './color';
 import './styles.scss';
 
-export const Options = ({ markerId, activeFeature, colorPalette }: any) => {
+export const Options = ({ markerId, activeFeature, colorPalette, currentMarker }: any) => {
 	if (!activeFeature) return <></>;
+
+	const { radius, contoursMinutes, fillOpacity, strokeWidth, strokeOpacity } = currentMarker;
 	
 	return (
 		<div className="options-wrapper">
@@ -16,6 +18,7 @@ export const Options = ({ markerId, activeFeature, colorPalette }: any) => {
   					minBound={0} 
   					maxBound={1}
   					title={"Radius"}
+  					initialState={radius}
   				/>
   			}
   			{activeFeature === "iso" && 
@@ -27,6 +30,7 @@ export const Options = ({ markerId, activeFeature, colorPalette }: any) => {
 	  					maxBound={15} 
 	  					markerProperty={"contoursMinutes"} 
 	  					title={"Minutes"}
+	  					initialState={contoursMinutes}
 	  				/>
 	  			</>
 	  		}
@@ -38,6 +42,7 @@ export const Options = ({ markerId, activeFeature, colorPalette }: any) => {
 						maxBound={1} 
 						markerProperty={'fillOpacity'}
 						title={"Opacity"}
+						initialState={fillOpacity}
 					/>
 					<Color 
 						markerId={markerId} 
@@ -54,6 +59,7 @@ export const Options = ({ markerId, activeFeature, colorPalette }: any) => {
 						maxBound={10} 
 						markerProperty={'strokeWidth'} 
 						title={"Thickness"}
+						initialState={strokeWidth}
 					/>
 					<Slider 
 						markerId={markerId} 
@@ -61,6 +67,7 @@ export const Options = ({ markerId, activeFeature, colorPalette }: any) => {
 						maxBound={1} 
 						markerProperty={'strokeOpacity'} 
 						title={"Opacity"}
+						initialState={strokeOpacity}
 					/>
 					<Color 
 						markerId={markerId} 

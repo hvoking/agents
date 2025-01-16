@@ -1,12 +1,12 @@
 // App imports
-import { MessageEventsProvider } from './message';
+import { ChatEventsProvider } from './chat';
 import { MarkerEventsProvider } from './marker';
 import { MapEventsProvider } from './maps';
 import { BoundaryEventsProvider } from './boundary';
 
 export const EventsProvider = ({ children }: any) => {
 	return (
-		<MessageEventsProvider>
+		<ChatEventsProvider>
 		<MarkerEventsProvider>
 		<MapEventsProvider>
 		<BoundaryEventsProvider>
@@ -14,7 +14,7 @@ export const EventsProvider = ({ children }: any) => {
 		</BoundaryEventsProvider>
 		</MapEventsProvider>
 		</MarkerEventsProvider>
-		</MessageEventsProvider>
+		</ChatEventsProvider>
 	)
 }
 

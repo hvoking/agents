@@ -1,11 +1,11 @@
 // React imports
 import { useState, useContext, createContext } from 'react';
 
-const MessageEventsContext: React.Context<any> = createContext(null);
+const ChatEventsContext: React.Context<any> = createContext(null);
 
-export const useMessageEvents = () => useContext(MessageEventsContext)
+export const useChatEvents = () => useContext(ChatEventsContext)
 
-export const MessageEventsProvider = ({children}: any) => {
+export const ChatEventsProvider = ({children}: any) => {
 	const [ searchText, setSearchText ] = useState<any>(null);
 	
 	const handleChange = (e: any) => {
@@ -25,12 +25,12 @@ export const MessageEventsProvider = ({children}: any) => {
 	};
 
 	return (
-		<MessageEventsContext.Provider value={{
+		<ChatEventsContext.Provider value={{
 			searchText, handleChange, cleanSuggestions, onKeyDown,
 		}}>
 			{children}
-		</MessageEventsContext.Provider>
+		</ChatEventsContext.Provider>
 	)
 }
 
-MessageEventsContext.displayName = "MessageEventsContext";
+ChatEventsContext.displayName = "ChatEventsContext";
