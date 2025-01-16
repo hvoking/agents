@@ -41,7 +41,7 @@ export const Chat = ({ coords }: any) => {
 			const modelResponse = await fetchBedrock(requestText, requestData);
 			
 			const documentValues = modelResponse
-			  .filter((item: any) => item.content && item.content.document) // Ensure the keys exist
+			  .filter((item: any) => item.content && item.content.document)
 			  .map((item: any) => item.content.document);
 			updateResponse("assistant", documentValues);
 		};
@@ -49,17 +49,27 @@ export const Chat = ({ coords }: any) => {
 		if (requestData && currentMarkerId) fetchBedrockModel();
 	}, [ requestText, requestData ]);
 
+	const currentMarker = currentMarkerId ? markers[currentMarkerId] : null;
+
 	return (
-		<Popup longitude={lng} latitude={lat} closeButton={false}>
+		<Popup 
+			longitude={lng} 
+			latitude={lat} 
+			closeButton={false}
+			anchor="top-left"
+		>
 			<div className="chat-interface">
-				<div className="chat-header">Agent Chat</div>
-				<Response responseData={responseData} markerId={currentMarkerId || ''}/>
+				<div className="chat-header">Ask Agent</div>
+				<Response 
+					responseData={responseData} 
+					markerId={currentMarkerId || ''}
+				/>
 				<Container
-					setRequestData={setRequestData}
 					markerId={currentMarkerId}
-					updateResponse={updateResponse}
+					currentMarker={currentMarker}
 					providers={providers}
-					markers={markers}
+					setRequestData={setRequestData}
+					updateResponse={updateResponse}
 					setRequestText={setRequestText}
 				/>
 			</div>

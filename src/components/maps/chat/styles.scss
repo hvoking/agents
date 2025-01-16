@@ -8,7 +8,6 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  font-family: Arial, sans-serif;
   box-shadow: $box-shadow;
 }
 .chat-header {
@@ -18,12 +17,6 @@
   padding: 10px;
   font-size: 16px;
   font-weight: bold;
-}
-.chat-message {
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 8px;
-  max-width: 80%;
 }
 .mapboxgl-popup-content {
   padding: 0 !important;

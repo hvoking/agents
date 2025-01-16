@@ -14,7 +14,7 @@ export const Header = ({ marker, activeCharts, setActiveCharts }: any) => {
 					<div className="agent-title">{name}</div>
 					<Buttons marker={marker} activeCharts={activeCharts} setActiveCharts={setActiveCharts}/>			
 				</div>
-				{/*<Location marker={marker}/>*/}
+				<Location marker={marker}/>
 			</div>
 		</div>
 	)

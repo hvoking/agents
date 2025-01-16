@@ -5,6 +5,7 @@ import './styles.scss';
 // Context imports
 import { useChatEvents } from 'context/events/chat';
 import { useMask } from 'context/agents/mask';
+import { useReverseGeocodingApi } from 'context/api/google/reverse';
 
 const prefix: any = {
 	"LineString": "lines-source-",
@@ -17,16 +18,15 @@ const color: any = {
 	"Polygon": 'fill-color',
 }
 
-export const Container = ({ setRequestData, markerId, updateResponse, providers, markers, setRequestText }: any) => {
+export const Container = ({ markerId, currentMarker, providers, setRequestData, updateResponse, setRequestText }: any) => {
 	const { searchText, handleChange, onKeyDown, cleanSuggestions } = useChatEvents();
 	const { sharedGeoJsonDataMap } = useMask();
+	const { currentAddress } = useReverseGeocodingApi();
 
     const sendRequest = (currentText: any) => {
     	setRequestText(currentText);
     	updateResponse("user", currentText)
     	cleanSuggestions();
-
-    	const currentMarker = markerId ? markers[markerId] : null;
 
     	if (currentMarker || currentMarker.length > 0) {
     		const { name } = currentMarker;
@@ -43,7 +43,8 @@ export const Container = ({ setRequestData, markerId, updateResponse, providers,
 				const geoInfo = {
 					"geobot_info": currentMarker, 
 					"data_provider_info": currentProvider, 
-					"current_layer_data": processedData
+					"current_layer_data": processedData,
+					"location_info": currentAddress,
 				}
 				processedData && setRequestData(geoInfo)
 			}
