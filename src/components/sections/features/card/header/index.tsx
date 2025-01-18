@@ -1,5 +1,5 @@
 // App imports
-import { Location } from './location';
+// import { Location } from './location';
 import { Buttons } from './buttons';
 import './styles.scss';
 
@@ -9,12 +9,12 @@ export const Header = ({ marker, activeCharts, setActiveCharts }: any) => {
 	return (
 		<div className="card-header">
 			<img className="agent-icon" src={image} alt="agent-icon"/>
-			<div style={{display: "grid"}}>
+			<div>
 				<div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
 					<div className="agent-title">{name}</div>
 					<Buttons marker={marker} activeCharts={activeCharts} setActiveCharts={setActiveCharts}/>			
 				</div>
-				<Location marker={marker}/>
+				{/*<Location marker={marker}/>*/}
 			</div>
 		</div>
 	)

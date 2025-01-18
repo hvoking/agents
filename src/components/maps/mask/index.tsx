@@ -17,7 +17,8 @@ export const Mask = ({ marker }: any) => {
 
   const [ boundary, setBoundary ] = useState<any>(null);
 
-  const { id, latitude, longitude, radius, geometryType } = marker; 
+  const { id, center, radius, geometryType } = marker; 
+  const { lng, lat } = center;
 
   useEffect(() => {
     const fetchBoundary = async (marker: any) => {
@@ -26,7 +27,7 @@ export const Mask = ({ marker }: any) => {
         const data = await fetchIsochrone(marker);
         setBoundary(data.features[0]);
       } else {
-        setBoundary(turf.circle([ longitude, latitude ], radius));
+        setBoundary(turf.circle([ lng, lat ], radius, { steps: 32}));
       }
     };
 

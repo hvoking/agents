@@ -2,23 +2,23 @@
 import './styles.scss';
 
 // Context imports
-import { useMarkerEvents } from 'context/events/marker';
+import { useMarkers } from 'context/agents/markers';
 
 // Third-party imports
 import { Marker } from 'react-map-gl';
 
 export const CustomMarker = ({ marker }: any) => {
-	const { onDrag } = useMarkerEvents();
-	const { id, latitude, longitude, image, name } = marker;
+	const { updateMarkers } = useMarkers();
+	const { id, center, image, name } = marker;
 
 	return (
 		<Marker
 			key={id}
-			longitude={longitude}
-			latitude={latitude}
+			longitude={center.lng}
+			latitude={center.lat}
 			anchor="bottom"
 			draggable
-            onDrag={(e: any) => onDrag(e, id)}
+            onDrag={(e: any) => updateMarkers(id, "center", e.lngLat)}
 		>
 			<div className="custom-marker">
 				<img 

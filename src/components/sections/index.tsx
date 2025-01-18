@@ -9,17 +9,14 @@ import { useMarkers } from 'context/agents/markers';
 
 export const Sections = () => {
 	const { activePage } = useMarkers();
+	if (!activePage) return null;
 
 	return (
-		<>
-			{activePage && 
-				<div className="topics">
-					{activePage === "agent" && <Add/>}
-					{activePage === "features" && <Features/>}
-					{activePage === "basemaps" && <Basemaps/>}
-				</div>
-			}
-		</>
+		<div className="topics">
+			{activePage === "agent" && <Add/>}
+			{activePage === "features" && <Features/>}
+			{activePage === "basemaps" && <Basemaps/>}
+		</div>
 	)
 }
 

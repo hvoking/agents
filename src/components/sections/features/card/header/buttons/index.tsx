@@ -3,10 +3,10 @@ import { Arrow } from './arrow';
 import './styles.scss';
 
 // Context imports
-import { useMarkerEvents } from 'context/events/marker';
+import { useMarkers } from 'context/agents/markers';
 
 export const Buttons = ({ marker, activeCharts, setActiveCharts }: any) => {
-	const { rejectMarker } = useMarkerEvents();
+	const { rejectMarker } = useMarkers();
 	
 	const deleteAgent = (e: any) => rejectMarker(e, marker.id);
 	

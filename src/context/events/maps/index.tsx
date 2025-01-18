@@ -19,17 +19,14 @@ export const MapEventsProvider = ({children}: any) => {
 
     const addAgent = (event: any) => {
     	if (addPin === true) {
-    		const { lng, lat } = event.lngLat;
-			
 			const newMarker = {
 				id: getId(markers),
-				latitude: lat,
-				longitude: lng,
+				center: event.lngLat,
 				image: currentImage,
 				name: currentName,
 				radius: 0.5,
 				contoursMinutes: 10,
-				fillColor: "rgba(88, 214, 141, 0.6)",
+				fillColor: "rgba(166, 204, 245, 0.8)",
 				fillOpacity: 0.1,
 				stroke: "rgba(166, 204, 245, 1)",
 				strokeWidth: 4,
@@ -37,11 +34,7 @@ export const MapEventsProvider = ({children}: any) => {
 				routingProfile: "walking",
 				geometryType: "circle",
 			};
-			
-			setMarkers((prev: any) => ({
-			    ...prev,
-			    [newMarker.id]: newMarker,
-			}));
+			setMarkers((prev: any) => ({ ...prev, [newMarker.id]: newMarker }));
 			setAddPin(false);
 		}
 	};

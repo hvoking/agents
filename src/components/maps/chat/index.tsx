@@ -56,7 +56,7 @@ export const Chat = ({ coords }: any) => {
 			longitude={lng} 
 			latitude={lat} 
 			closeButton={false}
-			anchor="top-left"
+			anchor="top"
 		>
 			<div className="chat-interface">
 				<div className="chat-header">Ask Agent</div>

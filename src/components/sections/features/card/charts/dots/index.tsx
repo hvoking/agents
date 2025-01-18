@@ -39,8 +39,27 @@ export const Dots = ({ distribution, colors, sumOfValues }: any) => {
             });
         });
 
+        // Ensure the last row and column are filled
+        if (currentRow < numOfRows || currentCol < numOfColumns) {
+            const lastItem = Object.entries(distribution).slice(-1)[0];
+            const lastColor = colors[lastItem[0]];
+
+            while (currentRow < numOfRows) {
+                const cx = currentCol * dotWidth + dotWidth / 2;
+                const cy = currentRow * dotHeight + dotHeight / 2;
+
+                positions.push({ cx, cy, color: lastColor });
+
+                currentCol++;
+                if (currentCol >= numOfColumns) {
+                    currentCol = 0;
+                    currentRow++;
+                }
+            }
+        }
+
         return positions;
-    }, [ distribution, colors, sumOfValues, dotWidth, dotHeight, numOfColumns ]);
+    }, [distribution, colors, sumOfValues, dotWidth, dotHeight, numOfColumns, numOfRows]);
 
 	return (
 		<SVGWrapper>

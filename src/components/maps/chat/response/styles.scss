@@ -5,6 +5,7 @@
   padding: 10px;
   background-color: $text-light;
   overflow-y: auto;
+  overflow-x: hidden;
   max-height: 200px;
 }
 .chat-message {

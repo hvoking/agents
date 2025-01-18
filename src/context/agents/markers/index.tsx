@@ -40,6 +40,14 @@ export const MarkersProvider = ({children}: any) => {
 	    "rgba(108, 216, 250, 1)",
 	];
 
+	const rejectMarker = (event: any, markerId: any) => {
+	    event.stopPropagation();
+	    setMarkers((prev: any) => {
+	        const { [markerId]: _, ...rest } = prev;
+	        return rest;
+	    });
+	}
+
 	return (
 		<MarkersContext.Provider value={{
 			markers, setMarkers,
@@ -51,6 +59,7 @@ export const MarkersProvider = ({children}: any) => {
 			radius, setRadius,
 			addPin, setAddPin,
 			providers, colorPalette,
+			rejectMarker
 		}}>
 			{children}
 		</MarkersContext.Provider>

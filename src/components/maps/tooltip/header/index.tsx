@@ -4,7 +4,7 @@ import './styles.scss';
 // Context imports
 import { useMarkers } from 'context/agents/markers';
 
-export const Header = ({ markerId, activeFeature, setActiveFeature }: any) => {
+export const Header = ({ markerId, activeFeature, setActiveFeature, currentMarker }: any) => {
 	const { updateMarkers } = useMarkers();
 
 	const isActiveColor = (name: any) => 
@@ -21,14 +21,14 @@ export const Header = ({ markerId, activeFeature, setActiveFeature }: any) => {
 
 	const SectionItem = ({ name }: any) => {
 		return (
-			<div style={{backgroundColor: isActiveColor(name), display: "grid", gridTemplateRows: "auto min-content", justifyItems: "center"}}>
+			<div className="section-item" style={{backgroundColor: isActiveColor(name) }}>
 				<img 
 					src={process.env.PUBLIC_URL + `/static/icons/${name}.svg`} 
 					alt={name}
 					className="boundary-icon"
 					onClick={() => onClick(name)}
 				/>
-				<div className="header-title">{name}</div>
+				{/*<div className="header-title">{name}</div>*/}
 			</div>
 		)
 	}
@@ -40,8 +40,38 @@ export const Header = ({ markerId, activeFeature, setActiveFeature }: any) => {
 				<SectionItem name={"iso"}/>
 			</section>
 			<section className="section-selectors">
-				<SectionItem name={"fill"}/>
-				<SectionItem name={"stroke"}/>
+				<div 
+					className="section-item" 
+					style={{backgroundColor: isActiveColor("fill") }}
+					onClick={() => onClick("fill")}
+				>
+					<div 
+						style={{
+							width: "25px", 
+							height: "25px", 
+							borderRadius: "50%", 
+							backgroundColor: currentMarker.fillColor
+						}}
+						
+					/>
+					<div className="header-title">fill</div>
+				</div>
+				<div 
+					className="section-item" 
+					onClick={() => onClick("stroke")}
+					style={{backgroundColor: isActiveColor("stroke") 
+				}}>
+					<div 
+						style={{
+							width: "20px", 
+							height: "20px", 
+							borderRadius: "50%", 
+							border: `4px solid ${currentMarker.stroke}`
+						}}
+						
+					/>
+					<div className="header-title">stroke</div>
+				</div>
 			</section>
 		</div>
 	)

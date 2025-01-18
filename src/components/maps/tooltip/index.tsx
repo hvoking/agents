@@ -20,6 +20,8 @@ export const Tooltip = ({ optionsCoords }: any) => {
 
   if (!currentMarkerId) return <></>;
 
+  const currentMarker = markers[currentMarkerId];
+
   return (
     <Marker longitude={lng} latitude={lat} draggable={true}>
       <div className="popup-item" onClick={(e: any) => e.stopPropagation()}>
@@ -27,12 +29,13 @@ export const Tooltip = ({ optionsCoords }: any) => {
           markerId={currentMarkerId} 
           activeFeature={activeFeature}
           setActiveFeature={setActiveFeature}
+          currentMarker={currentMarker}
         />
         <Options 
           markerId={currentMarkerId} 
           activeFeature={activeFeature} 
           colorPalette={colorPalette}
-          currentMarker={markers[currentMarkerId]}
+          currentMarker={currentMarker}
         />
       </div>
     </Marker>
