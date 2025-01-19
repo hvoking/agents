@@ -1,5 +1,5 @@
 // React imports
-import { useState, useContext, createContext } from 'react';
+import { useContext, createContext } from 'react';
 
 // App imports
 import { fillProperties, toFeatureCollection, filterFeatures, getColor } from './helpers';
@@ -26,6 +26,18 @@ export const MaskProvider = ({children}: any) => {
 	const map = mapRef.current;
 	mapFeatures.value = map?.queryRenderedFeatures();
 
+	const createFeature = (geometry: any, item: any, fillProperty: any) => {
+		const currentFeature = {
+			type: 'Feature',
+			geometry: geometry,
+			properties: {
+				...item.properties,
+				...getColor(item.layer.paint, fillProperty),
+			},
+		}
+		return currentFeature
+	}
+
 	const getGeoJson = (boundary: any, source: string, geometryType: string) => {
 		let features = filterFeatures(mapFeatures.value, boundary, source, geometryType);
 		const fillProperty = fillProperties[geometryType] || 'fill-color';
@@ -37,26 +49,12 @@ export const MaskProvider = ({children}: any) => {
 		
 		const currentProperties = features.flatMap((item: any) => {
 			if (turf.booleanWithin(item.geometry, boundary)) {
-				return [{
-					type: 'Feature',
-					geometry: item.geometry,
-					properties: {
-						...item.properties,
-						...getColor(item.layer.paint, fillProperty),
-					},
-				},];
+				return createFeature(item.geometry, item, fillProperty);
 			}
 
 			return turf.lineSplit(item, boundary)
 				.features.filter((line) => turf.booleanWithin(line.geometry, boundary))
-				.map((line) => ({
-					type: 'Feature',
-					geometry: line.geometry,
-					properties: {
-						...item.properties,
-						...getColor(item.layer.paint, fillProperty),
-					},
-				}));
+				.map((line) => (createFeature(line.geometry, item, fillProperty)));
 			});
 
 		return { type: 'FeatureCollection', features: currentProperties};

@@ -19,7 +19,7 @@ import { Map } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 export const MapContainer = () => {
-	const { addPin, markers } = useMarkers();
+	const { markers } = useMarkers();
 	const { viewport, mapRef, mapStyle } = useGeo();
 	const { addAgent } = useMapEvents();
 	const { onContextMenu, optionsCoords, setOptionsCoords, messageCoords, addChatbot } = useBoundaryEvents();
