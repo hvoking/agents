@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 // App imports
 import { Response } from './response';
-import { Container } from './container';
+import { Input } from './input';
 import './styles.scss';
 
 // Context imports
@@ -64,7 +64,7 @@ export const Chat = ({ coords }: any) => {
 					responseData={responseData} 
 					markerId={currentMarkerId || ''}
 				/>
-				<Container
+				<Input
 					markerId={currentMarkerId}
 					currentMarker={currentMarker}
 					providers={providers}

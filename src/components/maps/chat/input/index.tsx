@@ -18,7 +18,7 @@ const color: any = {
 	"Polygon": 'fill-color',
 }
 
-export const Container = ({ markerId, currentMarker, providers, setRequestData, updateResponse, setRequestText }: any) => {
+export const Input = ({ markerId, currentMarker, providers, setRequestData, updateResponse, setRequestText }: any) => {
 	const { searchText, handleChange, onKeyDown, cleanSuggestions } = useChatEvents();
 	const { sharedGeoJsonDataMap } = useMask();
 	const { currentAddress } = useReverseGeocodingApi();
@@ -71,4 +71,4 @@ export const Container = ({ markerId, currentMarker, providers, setRequestData, 
 	)
 }
 
-Container.displayName="Container";
+Input.displayName="Input";
