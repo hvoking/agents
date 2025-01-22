@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/geomiro/static/css/main.15f77acc.css",
-    "main.js": "/geomiro/static/js/main.d9529b02.js",
-    "static/js/879.210a202c.chunk.js": "/geomiro/static/js/879.210a202c.chunk.js",
-    "index.html": "/geomiro/index.html",
-    "main.15f77acc.css.map": "/geomiro/static/css/main.15f77acc.css.map",
-    "main.d9529b02.js.map": "/geomiro/static/js/main.d9529b02.js.map",
-    "879.210a202c.chunk.js.map": "/geomiro/static/js/879.210a202c.chunk.js.map"
+    "main.css": "/agents/static/css/main.1fb80e9a.css",
+    "main.js": "/agents/static/js/main.dec37179.js",
+    "static/js/879.fa7b241c.chunk.js": "/agents/static/js/879.fa7b241c.chunk.js",
+    "index.html": "/agents/index.html",
+    "main.1fb80e9a.css.map": "/agents/static/css/main.1fb80e9a.css.map",
+    "main.dec37179.js.map": "/agents/static/js/main.dec37179.js.map",
+    "879.fa7b241c.chunk.js.map": "/agents/static/js/879.fa7b241c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.15f77acc.css",
-    "static/js/main.d9529b02.js"
+    "static/css/main.1fb80e9a.css",
+    "static/js/main.dec37179.js"
   ]
 }
