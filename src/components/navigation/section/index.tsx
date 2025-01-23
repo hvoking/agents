@@ -15,7 +15,7 @@ export const Section = ({ section, title }: any) => {
 			onClick={() => setActivePage(section)}
 		>
 			<img src={iconPath} alt={title} width="30px"/>
-			<span>{title}</span>
+			<span className="section-text">{title}</span>
 		</div>
 	)
 }

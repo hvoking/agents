@@ -6,13 +6,23 @@ import './styles.scss';
 
 // Context imports
 import { useMarkers } from 'context/agents/markers';
+import { useDraggable } from 'context/draggable';
 
 export const Sections = () => {
 	const { activePage } = useMarkers();
+	const { handleStart, draggableRef } = useDraggable();
+
 	if (!activePage) return null;
 
 	return (
-		<div className="topics">
+		<div className="topics" ref={draggableRef}>
+			<div 
+				className="draggable-top" 
+				onMouseDown={handleStart} 
+			    onTouchStart={handleStart}
+			>
+				<div className="draggable-tab"></div>
+			</div>
 			{activePage === "agent" && <Add/>}
 			{activePage === "features" && <Features/>}
 			{activePage === "basemaps" && <Basemaps/>}

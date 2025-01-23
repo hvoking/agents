@@ -1,4 +1,27 @@
+.logo-wrapper {
+	grid-area: lw;
+}
+.navigation-wrapper {
+	grid-area: nw
+}
+.map-wrapper {
+	grid-area: mw;
+}
 .main-wrapper {
 	display: grid; 
 	grid-template-columns: min-content auto;
+	grid-template-rows: min-content auto;
+	grid-template-areas: 
+		"lw mw"
+		"nw mw"
+}
+@media screen and (max-width: 768px) {
+	.main-wrapper {
+		grid-template-columns: auto;
+		grid-template-rows: min-content auto min-content;
+		grid-template-areas: 
+			"lw"
+			"mw"
+			"nw";
+	}	
 }

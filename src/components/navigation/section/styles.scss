@@ -18,3 +18,9 @@
   background-color: $primary;
   color: $panel-bg;
 }
+
+@media screen and (max-width: 768px) {
+  .section-text {
+    display: none;
+  }
+}
