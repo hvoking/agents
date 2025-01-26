@@ -1,6 +1,6 @@
 @import 'variables';
 
-.navigation-wrapper {
+.nav-wrapper {
   background: $panel-bg;
   display: grid; 
   align-content: start;
@@ -14,7 +14,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .navigation-wrapper {
+  .nav-wrapper {
     display: flex; 
     justify-content: space-between;
     padding: 0;

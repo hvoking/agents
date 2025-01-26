@@ -1,7 +1,7 @@
 .logo-wrapper {
 	grid-area: lw;
 }
-.navigation-wrapper {
+.nav-wrapper {
 	grid-area: nw
 }
 .map-wrapper {
@@ -9,6 +9,7 @@
 }
 .main-wrapper {
 	display: grid; 
+	overflow: hidden;
 	grid-template-columns: min-content auto;
 	grid-template-rows: min-content auto;
 	grid-template-areas: 
