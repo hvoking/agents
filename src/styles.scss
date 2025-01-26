@@ -5,13 +5,10 @@ body {
   font-family: 'Roboto', sans-serif;
   color: $text-dark;
   line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-tap-highlight-color:transparent;
 }
 .App {
-  height: 100vh;
-  overflow: hidden;
   display: grid;
+  overflow: hidden;
+  height: 100vh;
   max-height: calc(var(--vh, 1vh) * 100);
 }
