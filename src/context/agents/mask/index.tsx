@@ -41,10 +41,9 @@ export const MaskProvider = ({children}: any) => {
 	const getGeoJson = (boundary: any, source: string, geometryType: string) => {
 		let features = filterFeatures(mapFeatures.value, boundary, source, geometryType);
 		const fillProperty = fillProperties[geometryType] || 'fill-color';
-		const featureCollection = toFeatureCollection(features, fillProperty);
 		
 		if (geometryType !== 'LineString') {
-			return featureCollection
+			return toFeatureCollection(features, fillProperty);
 		}
 		
 		const currentProperties = features.flatMap((item: any) => {

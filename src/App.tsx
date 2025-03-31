@@ -20,3 +20,5 @@ export const App = () => {
     </div>
   );
 }
+
+App.displayName="App";

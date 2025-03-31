@@ -7,7 +7,6 @@ import { Input } from './input';
 import './styles.scss';
 
 // Context imports
-
 import { useBedrockApi } from 'context/api/bedrock';
 import { useMarkers } from 'context/agents/markers';
 
@@ -39,11 +38,7 @@ export const Chat = ({ coords }: any) => {
 	useEffect(() => {
 		const fetchBedrockModel = async () => {
 			const modelResponse = await fetchBedrock(requestText, requestData);
-			
-			const documentValues = modelResponse
-			  .filter((item: any) => item.content && item.content.document)
-			  .map((item: any) => item.content.document);
-			updateResponse("assistant", documentValues);
+			updateResponse("assistant", modelResponse);
 		};
 
 		if (requestData && currentMarkerId) fetchBedrockModel();
