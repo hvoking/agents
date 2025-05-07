@@ -7,7 +7,7 @@ import { Input } from './input';
 import './styles.scss';
 
 // Context imports
-import { useBedrockApi } from 'context/api/bedrock';
+import { useRagApi } from 'context/api/rag';
 import { useMarkers } from 'context/agents/markers';
 
 // Third-party imports
@@ -18,7 +18,7 @@ export const Chat = ({ coords }: any) => {
 
     // Context hooks
     const { markers, providers, currentMarkerId } = useMarkers();
-    const { fetchBedrock } = useBedrockApi();
+    const { fetchRag } = useRagApi();
 
     // Refs and state
     const [ requestData, setRequestData ] = useState<any>(null);
@@ -37,7 +37,7 @@ export const Chat = ({ coords }: any) => {
 
 	useEffect(() => {
 		const fetchBedrockModel = async () => {
-			const modelResponse = await fetchBedrock(requestText, requestData);
+			const modelResponse = await fetchRag(requestText, requestData);
 			updateResponse("assistant", modelResponse);
 		};
 

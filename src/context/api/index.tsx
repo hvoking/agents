@@ -1,16 +1,16 @@
 import { GoogleApiProvider } from './google';
 import { StylesApiProvider } from './styles';
 import { IsochroneApiProvider } from './isochrone';
-import { BedrockApiProvider } from './bedrock';
+import { RagApiProvider } from './rag';
 
 export const ApiProvider = ({ children }: any) => {
 	return (
 		<GoogleApiProvider>
 		<StylesApiProvider>
 		<IsochroneApiProvider>
-		<BedrockApiProvider>
+		<RagApiProvider>
 			{children}
-		</BedrockApiProvider>
+		</RagApiProvider>
 		</IsochroneApiProvider>
 		</StylesApiProvider>
 		</GoogleApiProvider>
