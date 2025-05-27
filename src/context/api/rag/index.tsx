@@ -12,7 +12,7 @@ export const RagApiProvider = ({children}: any) => {
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
 				question,
-				metaData: JSON.stringify(metaData),
+				meta_data: JSON.stringify(metaData),
 			}),
 		});
 		const receivedData = await res.json();
