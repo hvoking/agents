@@ -3,7 +3,7 @@ import { Card } from './card';
 import './styles.scss';
 
 // Context imports
-import { useMarkers } from 'context/agents/markers';
+import { useMarkers } from 'context/markers';
 
 export const Features = () => {
   const { markers } = useMarkers();

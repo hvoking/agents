@@ -4,7 +4,7 @@ import { getEraserLayer } from './eraser';
 import { getFillLayer } from './fill';
 
 // Third party imports
-import { Source, Layer } from 'react-map-gl';
+import { Source, Layer } from 'react-map-gl/mapbox';
 
 export const Boundary = ({ marker, boundary }: any) => {
   const { id, stroke, strokeWidth, strokeOpacity, fillColor, fillOpacity } = marker;

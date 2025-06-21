@@ -1,4 +1,5 @@
-import { AgentsProvider } from './agents';
+import { MarkersProvider } from './markers';
+import { MaskProvider } from './mask';
 import { GeoProvider } from './geo';
 import { ApiProvider } from './api';
 import { EventsProvider } from './events';
@@ -7,7 +8,8 @@ import { SizesProvider } from './sizes';
 export const MainProvider = ({children}: any) => {
   return (
     <GeoProvider>
-    <AgentsProvider>
+    <MarkersProvider>
+    <MaskProvider>
     <ApiProvider>
     <EventsProvider>
     <SizesProvider>
@@ -15,7 +17,8 @@ export const MainProvider = ({children}: any) => {
     </SizesProvider>
     </EventsProvider>
     </ApiProvider>
-    </AgentsProvider>
+    </MaskProvider>
+    </MarkersProvider>
     </GeoProvider>
   )
 }

@@ -8,8 +8,8 @@ import { Footer } from './footer';
 import './styles.scss';
 
 // Context imports
-import { useMask } from 'context/agents/mask';
-import { useMarkers } from 'context/agents/markers';
+import { useMask } from 'context/mask';
+import { useMarkers } from 'context/markers';
 
 export const Card = ({ marker }: any) => {
 	const [ activeCharts, setActiveCharts ] = useState(true);

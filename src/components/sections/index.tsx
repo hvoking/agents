@@ -5,7 +5,7 @@ import { Basemaps } from './basemaps';
 import './styles.scss';
 
 // Context imports
-import { useMarkers } from 'context/agents/markers';
+import { useMarkers } from 'context/markers';
 import { useDraggable } from 'context/events/draggable';
 
 export const Sections = () => {

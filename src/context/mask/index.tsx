@@ -27,13 +27,13 @@ export const MaskProvider = ({children}: any) => {
 	mapFeatures.value = map?.queryRenderedFeatures();
 
 	const createFeature = (geometry: any, item: any, fillProperty: any) => {
+		const { properties, layer } = item;
+		const color = getColor(layer.paint, fillProperty);
+
 		const currentFeature = {
 			type: 'Feature',
-			geometry: geometry,
-			properties: {
-				...item.properties,
-				...getColor(item.layer.paint, fillProperty),
-			},
+			geometry,
+			properties: { ...properties, ...color },
 		}
 		return currentFeature
 	}
@@ -41,10 +41,9 @@ export const MaskProvider = ({children}: any) => {
 	const getGeoJson = (boundary: any, source: string, geometryType: string) => {
 		let features = filterFeatures(mapFeatures.value, boundary, source, geometryType);
 		const fillProperty = fillProperties[geometryType] || 'fill-color';
+		const isLine = geometryType !== 'LineString';
 		
-		if (geometryType !== 'LineString') {
-			return toFeatureCollection(features, fillProperty);
-		}
+		if (isLine) return toFeatureCollection(features, fillProperty);
 		
 		const currentProperties = features.flatMap((item: any) => {
 			if (turf.booleanWithin(item.geometry, boundary)) {
@@ -60,7 +59,10 @@ export const MaskProvider = ({children}: any) => {
 	};
 
 	return (
-		<MaskContext.Provider value={{ getGeoJson, sharedGeoJsonDataMap }}>
+		<MaskContext.Provider value={{ 
+			getGeoJson, 
+			sharedGeoJsonDataMap 
+		}}>
 			{children}
 		</MaskContext.Provider>
 	)

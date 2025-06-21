@@ -8,10 +8,10 @@ import './styles.scss';
 
 // Context imports
 import { useRagApi } from 'context/api/rag';
-import { useMarkers } from 'context/agents/markers';
+import { useMarkers } from 'context/markers';
 
 // Third-party imports
-import { Popup } from 'react-map-gl';
+import { Popup } from 'react-map-gl/mapbox';
 
 export const Chat = ({ coords }: any) => {
 	const { lng, lat } = coords;

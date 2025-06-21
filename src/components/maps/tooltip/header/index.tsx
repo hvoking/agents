@@ -2,7 +2,7 @@
 import './styles.scss';
 
 // Context imports
-import { useMarkers } from 'context/agents/markers';
+import { useMarkers } from 'context/markers';
 
 export const Header = ({ markerId, activeFeature, setActiveFeature, currentMarker }: any) => {
 	const { updateMarkers } = useMarkers();

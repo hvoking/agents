@@ -2,10 +2,10 @@
 import './styles.scss';
 
 // Context imports
-import { useMarkers } from 'context/agents/markers';
+import { useMarkers } from 'context/markers';
 
 // Third-party imports
-import { Marker } from 'react-map-gl';
+import { Marker } from 'react-map-gl/mapbox';
 
 export const CustomMarker = ({ marker }: any) => {
 	const { updateMarkers } = useMarkers();

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 // Context imports
-import { useMarkers } from 'context/agents/markers';
+import { useMarkers } from 'context/markers';
 
 export const Wrapper = ({ markerId, innerWidth, innerHeight, colorScale, markerProperty }: any) => {
     const { updateMarkers } = useMarkers();

@@ -7,10 +7,10 @@ import { Options } from './options';
 import './styles.scss';
 
 // Context imports
-import { useMarkers } from 'context/agents/markers';
+import { useMarkers } from 'context/markers';
 
 // Third-party imports
-import { Marker } from 'react-map-gl';
+import { Marker } from 'react-map-gl/mapbox';
 
 export const Tooltip = ({ optionsCoords }: any) => {
   const { markers, currentMarkerId, colorPalette } = useMarkers();

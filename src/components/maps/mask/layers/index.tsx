@@ -4,7 +4,7 @@ import { Points } from './points';
 import { Polygons } from './polygons';
 
 // Context imports
-import { useMarkers } from 'context/agents/markers';
+import { useMarkers } from 'context/markers';
 
 export const Layers = ({ boundary, marker }: any) => {
 	const { providers } = useMarkers();

@@ -2,7 +2,7 @@
 import { useCallback } from 'react';
 
 // Context imports
-import { useMarkers } from 'context/agents/markers';
+import { useMarkers } from 'context/markers';
 
 // Third-party imports
 import * as d3 from 'd3';

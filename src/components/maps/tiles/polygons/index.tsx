@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { useStylesApi } from 'context/api/styles';
 
 // Third party imports
-import { Source, Layer } from 'react-map-gl';
+import { Source, Layer } from 'react-map-gl/mapbox';
 
 export const Polygons = ({ tableSchema, tableName, styleName }: any) => {
 	const { fetchData, getTilesUrl } = useStylesApi();

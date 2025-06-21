@@ -2,7 +2,7 @@
 import './styles.scss';
 
 // Context imports
-import { useMarkers } from 'context/agents/markers'
+import { useMarkers } from 'context/markers'
 
 const baseUrl = process.env.PUBLIC_URL + "/static/iso/";
 

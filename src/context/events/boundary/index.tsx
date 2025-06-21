@@ -2,7 +2,7 @@
 import { useState, useMemo, useContext, createContext } from 'react';
 
 // Context imports
-import { useMarkers } from 'context/agents/markers';
+import { useMarkers } from 'context/markers';
 import { useGeo } from 'context/geo';
 
 const BoundaryEventsContext: React.Context<any> = createContext(null);
@@ -33,23 +33,29 @@ export const BoundaryEventsProvider = ({children}: any) => {
 
 	const onContextMenu = (event: any) => {
 		event.preventDefault();
+
 		const map = mapRef.current.getMap();
+		const { point, lngLat } = event;
+
 	    if (map.isMoving() || map.isZooming() || map.isRotating()) {
 	      return;
 	    }
 	    setMessageCoords(null);
-		const markerId = isInside(event.point);
-		!markerId ? setOptionsCoords(null) : setOptionsCoords(event.lngLat);
+		const markerId = isInside(point);
+		!markerId ? setOptionsCoords(null) : setOptionsCoords(lngLat);
 	}
 
 	const addChatbot = (event: any) => {
 		const map = mapRef.current.getMap();
+		const { point, lngLat } = event;
+
 	    if (map.isMoving() || map.isZooming() || map.isRotating()) {
 	      return;
 	    }
-		const markerId = isInside(event.point);
+		const markerId = isInside(point);
+
 		if (!messageCoords) {
-			!markerId ? setMessageCoords(null) : setMessageCoords(event.lngLat);
+			!markerId ? setMessageCoords(null) : setMessageCoords(lngLat);
 		}
 		else {
 			setMessageCoords(null);

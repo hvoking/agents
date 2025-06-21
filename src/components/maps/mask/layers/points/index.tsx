@@ -2,10 +2,10 @@
 import { getPointsStyle } from '../../styles/points';
 
 // Context imports
-import { useMask } from 'context/agents/mask';
+import { useMask } from 'context/mask';
 
 // Third-party imports
-import { Source, Layer } from 'react-map-gl';
+import { Source, Layer } from 'react-map-gl/mapbox';
 
 export const Points = ({ boundary, layer, markerId }: any) => {
   const { getGeoJson, sharedGeoJsonDataMap } = useMask();

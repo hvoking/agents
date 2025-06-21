@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react';
 import './styles.scss';
 
 // Context imports
-import { useMarkers } from 'context/agents/markers';
+import { useMarkers } from 'context/markers';
 
 export const Cursor = () => {
 	const { addPin, currentImage } = useMarkers();

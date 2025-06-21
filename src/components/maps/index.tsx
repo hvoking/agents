@@ -12,10 +12,10 @@ import { Chat } from './chat';
 import { useGeo } from 'context/geo';
 import { useMapEvents } from 'context/events/maps';
 import { useBoundaryEvents } from 'context/events/boundary';
-import { useMarkers } from 'context/agents/markers';
+import { useMarkers } from 'context/markers';
 
 // Third-party imports
-import { Map } from 'react-map-gl';
+import { Map } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 export const MapContainer = () => {
@@ -31,17 +31,19 @@ export const MapContainer = () => {
 		setOptionsCoords(null);
 		addAgent(event);
 	}
+
+	const onLoad = () => setIsMapLoaded(true);
 	
 	return (
 		<Wrapper> 
-		  <Map
+			<Map
 				ref={mapRef}
 				initialViewState={viewport}
 				mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
 				mapStyle={mapStyle}
 				onClick={handleClick}
-				onLoad={() => setIsMapLoaded(true)}
-		        onContextMenu={onContextMenu}
+				onLoad={onLoad}
+				onContextMenu={onContextMenu}
 			>
 				{isMapLoaded && 
 					<>
@@ -57,3 +59,5 @@ export const MapContainer = () => {
 		</Wrapper>
 	)
 }
+
+MapContainer.displayName="MapContainer";

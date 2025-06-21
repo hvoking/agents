@@ -2,7 +2,7 @@
 import './styles.scss';
 
 // Context imports
-import { useMarkers } from 'context/agents/markers';
+import { useMarkers } from 'context/markers';
 
 export const Grid = ({ imageUrls }: any) => {
 	const { setAddPin, setCurrentImage, setCurrentName, providers } = useMarkers();

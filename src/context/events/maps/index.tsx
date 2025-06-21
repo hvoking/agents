@@ -2,7 +2,7 @@
 import { useEffect, useContext, createContext } from 'react';
 
 // Context imports
-import { useMarkers } from 'context/agents/markers';
+import { useMarkers } from 'context/markers';
 
 const MapEventsContext: React.Context<any> = createContext(null);
 
@@ -34,7 +34,10 @@ export const MapEventsProvider = ({children}: any) => {
 				routingProfile: "walking",
 				geometryType: "circle",
 			};
-			setMarkers((prev: any) => ({ ...prev, [newMarker.id]: newMarker }));
+			setMarkers((prev: any) => ({ 
+				...prev, 
+				[newMarker.id]: newMarker 
+			}));
 			setAddPin(false);
 		}
 	};
@@ -42,6 +45,7 @@ export const MapEventsProvider = ({children}: any) => {
 	useEffect(() => {
 		const handleKeyDown = (event: any) => event.keyCode === 27 && setAddPin(false);
 		window.addEventListener('keydown', handleKeyDown);
+		
 		return () => {
 			window.removeEventListener('keydown', handleKeyDown);
 		};

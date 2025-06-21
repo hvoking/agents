@@ -4,7 +4,7 @@ import './styles.scss';
 
 // Context imports
 import { useChatEvents } from 'context/events/chat';
-import { useMask } from 'context/agents/mask';
+import { useMask } from 'context/mask';
 import { useReverseGeocodingApi } from 'context/api/google/reverse';
 
 const prefix: any = {
