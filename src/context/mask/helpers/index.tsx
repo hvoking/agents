@@ -2,9 +2,9 @@
 import * as turf from '@turf/turf';
 
 export const fillProperties: any = {
-	'Point': 'circle-color',
-	'Polygon': 'fill-color',
-	'LineString': 'line-color'
+	Point: 'circle-color',
+	Polygon: 'fill-color',
+	LineString: 'line-color'
 }
 
 export const getColor = (paint: any, property: string) => {
@@ -40,20 +40,34 @@ export const toFeatureCollection = (features: any[], paintProperty: string) => {
 	return ({ type: 'FeatureCollection', features: updatedFeatures })
 };
 
-export const filterGeometries = (mapFeatures: any[], boundary: any, source: string) =>
-  mapFeatures.filter((item) => {
-    if (item.source === source) {
-    	return turf.booleanPointInPolygon(turf.centroid(item.geometry), boundary);
-    }
-    return false;
-  });
+export const filterGeometries = (features: any[], boundary: any, source: string) =>
+  features.filter(({ source: src, geometry }) =>
+    src === source && turf.booleanPointInPolygon(turf.centroid(geometry), boundary)
+  );
 
-export const filterLines = (mapFeatures: any[], boundary: any, source: string, geometryType: string) => {
-  const lines =  mapFeatures.filter((item) => {
-    if (item.source === source && item.geometry.type === geometryType) {
-    	return turf.booleanIntersects(item.geometry, boundary);
-    }
-    return false;
-  });
-  return lines;
-};
+export const filterLines = (mapFeatures: any[], boundary: any, source: string, geometryType: string, fillProperty: any) => {
+    const lines = mapFeatures.reduce((total: any[], item: any) => {
+      if (item.source !== source || item.geometry.type !== geometryType) return total;
+
+      const { geometry, layer } = item;
+      const color = getColor(layer.paint, fillProperty);
+
+      const properties = { ...item.properties, ...color }
+
+      if (turf.booleanWithin(geometry, boundary)) {
+        total.push({type: 'Feature', geometry, properties});
+      } 
+      else if (turf.booleanIntersects(geometry, boundary)) {
+        const split = turf.lineSplit(item, boundary);
+
+        for (const feature of split.features) {
+          if (turf.booleanWithin(feature.geometry, boundary)) {
+            total.push({type: 'Feature', geometry: feature.geometry, properties});
+          }
+        }
+      }
+
+      return total;
+    }, []);
+    return lines;
+  };

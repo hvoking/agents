@@ -18,11 +18,8 @@ export const Lines = ({ boundary, layer, markerId }: any) => {
 	const layerId = `lines-layer-${markerId}`;
 
 	const geojsonProperties = geoJsonData.features.map((item: any) => item.properties);
-
-	sharedGeoJsonDataMap.value = {
-		...sharedGeoJsonDataMap.value,
-		[sourceId]: geojsonProperties,
-	};
+	
+	sharedGeoJsonDataMap.value = {...sharedGeoJsonDataMap.value, [sourceId]: geojsonProperties };
 
 	const layerStyle = getLinesStyle(layerId, sourceId);
 
