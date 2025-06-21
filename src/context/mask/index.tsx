@@ -2,14 +2,13 @@
 import { useContext, createContext } from 'react';
 
 // App imports
-import { fillProperties, toFeatureCollection, filterGeometries, filterLines, getColor } from './helpers';
+import { fillProperties, toFeatureCollection, filterGeometries, filterLines } from './helpers';
 
 // Context imports
 import { useGeo } from 'context/geo';
 import { useMarkers } from 'context/markers';
 
 // Third-party imports
-import * as turf from '@turf/turf'
 import { signal } from '@preact/signals-react';
 
 const MaskContext: React.Context<any> = createContext(null)

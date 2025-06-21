@@ -17,8 +17,8 @@ export const Chat = ({ coords }: any) => {
 	const { lng, lat } = coords;
 
     // Context hooks
-    const { markers, providers, currentMarkerId } = useMarkers();
     const { fetchRag } = useRagApi();
+    const { markers, providers, currentMarkerId } = useMarkers();
 
     // Refs and state
     const [ requestData, setRequestData ] = useState<any>(null);
@@ -30,17 +30,16 @@ export const Chat = ({ coords }: any) => {
     		...prev,
     		[currentMarkerId]: [
     			...(prev[currentMarkerId] || []),
-    			{ sender: sender, message: message },
+    			{ sender, message },
     		],
     	}));
-    }
+    };
 
 	useEffect(() => {
 		const fetchBedrockModel = async () => {
 			const modelResponse = await fetchRag(requestText, requestData);
 			updateResponse("assistant", modelResponse);
 		};
-
 		if (requestData && currentMarkerId) fetchBedrockModel();
 	}, [ requestText, requestData ]);
 

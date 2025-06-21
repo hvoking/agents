@@ -8,18 +8,18 @@ import { useMask } from 'context/mask';
 import { useReverseGeocodingApi } from 'context/api/google/reverse';
 
 const prefix: any = {
-	"LineString": "lines-source-",
-	"Point": "points-source-",
-	"Polygon": "polygons-source-",
+	LineString: "lines-source-",
+	Point: "points-source-",
+	Polygon: "polygons-source-",
 }
 const color: any = {
-	"LineString": 'line-color',
-	"Point": 'circle-color',
-	"Polygon": 'fill-color',
+	LineString: 'line-color',
+	Point: 'circle-color',
+	Polygon: 'fill-color',
 }
 
 export const Input = ({ markerId, currentMarker, providers, setRequestData, updateResponse, setRequestText }: any) => {
-	const { searchText, handleChange, onKeyDown, cleanSuggestions } = useChatEvents();
+	const { searchText, handleChange, cleanSuggestions, setSearchText } = useChatEvents();
 	const { sharedGeoJsonDataMap } = useMask();
 	const { currentAddress } = useReverseGeocodingApi();
 
@@ -51,19 +51,31 @@ export const Input = ({ markerId, currentMarker, providers, setRequestData, upda
 		}
 	};
 
+	const onClick = () => sendRequest(searchText);
+
+	const onKeyDown = (e: any) => {
+		if (e.keyCode === 13) { // enter
+			const currentText: any = e.target.value;
+			sendRequest(currentText);
+		}
+		else if (e.keyCode === 27) { // scape
+			setSearchText("");
+		}
+	};
+
 	return (
 		<div className="chat-input-container">
 			<textarea
 				className="chat-input"
 				placeholder="Type your message here..."
 				value={searchText ? searchText : ""}
-				onChange={handleChange}
 				spellCheck={false}
+				onChange={handleChange}
 				onKeyDown={onKeyDown}
 			/>
 			<button 
 				className="chat-send-button" 
-				onClick={() => sendRequest(searchText)}
+				onClick={onClick}
 			>
 				Send
 			</button>

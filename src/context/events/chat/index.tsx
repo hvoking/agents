@@ -17,16 +17,12 @@ export const ChatEventsProvider = ({children}: any) => {
 		setSearchText("");
 	}
 
-	const onKeyDown = (e: any) => {
-		// scape
-		if (e.keyCode === 27) {
-			setSearchText("");
-		}
-	};
-
 	return (
 		<ChatEventsContext.Provider value={{
-			searchText, handleChange, cleanSuggestions, onKeyDown,
+			searchText, 
+			setSearchText,
+			handleChange, 
+			cleanSuggestions,
 		}}>
 			{children}
 		</ChatEventsContext.Provider>
