@@ -40,22 +40,20 @@ export const toFeatureCollection = (features: any[], paintProperty: string) => {
 	return ({ type: 'FeatureCollection', features: updatedFeatures })
 };
 
-export const filterFeatures = (
-	mapFeatures: any[], 
-	boundary: any, 
-	source: string, 
-	geometryType: string
-) =>
+export const filterGeometries = (mapFeatures: any[], boundary: any, source: string) =>
   mapFeatures.filter((item) => {
-  	const { source: currentSource, geometry } = item;
-  	const isLine = geometryType === 'LineString';
-
-    if (currentSource === source && geometry.type === geometryType) {
-    	const isWithin =  
-	    	isLine ? 
-	    	turf.booleanIntersects(geometry, boundary) :
-	    	turf.booleanPointInPolygon(turf.centroid(geometry), boundary);
-			return isWithin
+    if (item.source === source) {
+    	return turf.booleanPointInPolygon(turf.centroid(item.geometry), boundary);
     }
     return false;
   });
+
+export const filterLines = (mapFeatures: any[], boundary: any, source: string, geometryType: string) => {
+  const lines =  mapFeatures.filter((item) => {
+    if (item.source === source && item.geometry.type === geometryType) {
+    	return turf.booleanIntersects(item.geometry, boundary);
+    }
+    return false;
+  });
+  return lines;
+};

@@ -2,7 +2,7 @@
 import { useContext, createContext } from 'react';
 
 // App imports
-import { fillProperties, toFeatureCollection, filterFeatures, getColor } from './helpers';
+import { fillProperties, toFeatureCollection, filterLines, filterGeometries, getColor } from './helpers';
 
 // Context imports
 import { useGeo } from 'context/geo';
@@ -26,43 +26,46 @@ export const MaskProvider = ({children}: any) => {
 	const map = mapRef.current;
 	mapFeatures.value = map?.queryRenderedFeatures();
 
-	const createFeature = (geometry: any, item: any, fillProperty: any) => {
-		const { properties, layer } = item;
+	const toGeojsonFeature = (geometry: any, item: any, fillProperty: any) => {
+		const { properties: currentProperties, layer } = item;
 		const color = getColor(layer.paint, fillProperty);
-
-		const currentFeature = {
-			type: 'Feature',
-			geometry,
-			properties: { ...properties, ...color },
-		}
+		const properties = { ...currentProperties, ...color };
+		const currentFeature = { type: 'Feature', geometry, properties }
 		return currentFeature
 	}
 
-	const getGeoJson = (boundary: any, source: string, geometryType: string) => {
-		let features = filterFeatures(mapFeatures.value, boundary, source, geometryType);
-		const fillProperty = fillProperties[geometryType] || 'fill-color';
-		const isLine = geometryType !== 'LineString';
-		
-		if (isLine) return toFeatureCollection(features, fillProperty);
-		
-		const currentProperties = features.flatMap((item: any) => {
+	const getLinesFeatures = (features: any, boundary: any, fillProperty: any) => {
+		const linesFeatures = features.flatMap((item: any) => {
 			if (turf.booleanWithin(item.geometry, boundary)) {
-				return createFeature(item.geometry, item, fillProperty);
+				return toGeojsonFeature(item.geometry, item, fillProperty);
 			}
 
-			return turf.lineSplit(item, boundary)
-				.features.filter((line) => turf.booleanWithin(line.geometry, boundary))
-				.map((line) => (createFeature(line.geometry, item, fillProperty)));
-			});
+			const linesSplit = turf.lineSplit(item, boundary);
+			const linesWithin = linesSplit.features.filter((line) => turf.booleanWithin(line.geometry, boundary));
+			const linesGeojson = linesWithin.map((line) => (toGeojsonFeature(line.geometry, item, fillProperty)));
+			
+			return linesGeojson;
+		});
 
-		return { type: 'FeatureCollection', features: currentProperties};
+		return linesFeatures;
+	}
+
+	const getGeojson = (boundary: any, source: string, geometryType: string) => {
+		const fillProperty = fillProperties[geometryType] || 'fill-color';
+		const isLine = geometryType === 'LineString';
+		
+		if (!isLine) {
+			const geomFeatures = filterGeometries(mapFeatures.value, boundary, source);
+			return toFeatureCollection(geomFeatures, fillProperty);
+		}
+		const features = filterLines(mapFeatures.value, boundary, source, geometryType);
+		const linesFeatures = getLinesFeatures(features, boundary, fillProperty);
+
+		return { type: 'FeatureCollection', features: linesFeatures};
 	};
 
 	return (
-		<MaskContext.Provider value={{ 
-			getGeoJson, 
-			sharedGeoJsonDataMap 
-		}}>
+		<MaskContext.Provider value={{ getGeojson, sharedGeoJsonDataMap }}>
 			{children}
 		</MaskContext.Provider>
 	)
