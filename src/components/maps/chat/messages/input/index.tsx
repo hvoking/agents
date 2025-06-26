@@ -1,9 +1,11 @@
+// React imports
+import { useState } from 'react';
+
 // App imports
 import { processData } from './data';
 import './styles.scss';
 
 // Context imports
-import { useMapEvents } from 'context/events/maps';
 import { useMask } from 'context/mask';
 import { useReverseGeocodingApi } from 'context/api/google/reverse';
 
@@ -19,9 +21,18 @@ const color: any = {
 }
 
 export const Input = ({ markerId, currentMarker, providers, setRequestData, updateResponse, setRequestText }: any) => {
-	const { searchText, handleChange, cleanSuggestions, setSearchText } = useMapEvents();
+	const [ searchText, setSearchText ] = useState<any>(null);
 	const { sharedGeoJsonDataMap } = useMask();
 	const { currentAddress } = useReverseGeocodingApi();
+
+	const handleChange = (e: any) => {
+		const query = e.target.value;
+		setSearchText(query);
+	};
+
+	const cleanSuggestions = () => {
+		setSearchText("");
+	}
 
     const sendRequest = (currentText: any) => {
     	setRequestText(currentText);
@@ -40,11 +51,12 @@ export const Input = ({ markerId, currentMarker, providers, setRequestData, upda
 
 				const data = sharedGeoJsonDataMap.value[sourcePrefix + markerId];
 				const processedData = processData(data, columnName, colorLabel);
+				
 				const geoInfo = {
-					"geobot_info": currentMarker, 
-					"data_provider_info": currentProvider, 
-					"current_layer_data": processedData,
-					"location_info": currentAddress,
+					geobot_info: currentMarker, 
+					data_provider_info: currentProvider, 
+					current_layer_data: processedData,
+					location_info: currentAddress,
 				}
 				processedData && setRequestData(geoInfo)
 			}

@@ -2,7 +2,8 @@ import { MarkersProvider } from './markers';
 import { MaskProvider } from './mask';
 import { GeoProvider } from './geo';
 import { ApiProvider } from './api';
-import { EventsProvider } from './events';
+import { DraggableProvider } from './draggable';
+import { BoundaryProvider } from './boundary';
 import { SizesProvider } from './sizes';
 
 export const MainProvider = ({children}: any) => {
@@ -11,11 +12,13 @@ export const MainProvider = ({children}: any) => {
     <MarkersProvider>
     <MaskProvider>
     <ApiProvider>
-    <EventsProvider>
+    <DraggableProvider>
+    <BoundaryProvider>
     <SizesProvider>
       {children}
     </SizesProvider>
-    </EventsProvider>
+    </BoundaryProvider>
+    </DraggableProvider>
     </ApiProvider>
     </MaskProvider>
     </MarkersProvider>

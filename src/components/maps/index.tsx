@@ -9,7 +9,7 @@ import { Chat } from './chat';
 
 // Context imports
 import { useGeo } from 'context/geo';
-import { useBoundaryEvents } from 'context/events/boundary';
+import { useBoundary } from 'context/boundary';
 
 // Third-party imports
 import { Map } from 'react-map-gl/mapbox';
@@ -17,7 +17,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 export const MapContainer = () => {
 	const { viewport, mapRef, mapStyle } = useGeo();
-	const { onContextMenu, onClick } = useBoundaryEvents();
+	const { onContextMenu, onClick } = useBoundary();
 	
 	const [ isMapLoaded, setIsMapLoaded ] = useState(false);
 	

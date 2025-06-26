@@ -2,20 +2,50 @@
 import { useState, useContext, createContext } from 'react';
 
 // Context imports
-import { useMapEvents } from 'context/events/maps';
 import { useMarkers } from 'context/markers';
 import { useGeo } from 'context/geo';
 
-const BoundaryEventsContext: React.Context<any> = createContext(null);
+const BoundaryContext: React.Context<any> = createContext(null);
 
-export const useBoundaryEvents = () => useContext(BoundaryEventsContext)
+export const useBoundary = () => useContext(BoundaryContext)
 
-export const BoundaryEventsProvider = ({children}: any) => {
+export const BoundaryProvider = ({children}: any) => {
 	const { mapRef } = useGeo();
-	const { markers, setCurrentMarkerId } = useMarkers();
-	const { addAgent } = useMapEvents();
+	const { markers, setMarkers, setCurrentMarkerId, addPin, setAddPin, currentImage, currentName } = useMarkers();
+
 	const [ optionsCoords, setOptionsCoords ] = useState<any>(null);
 	const [ messageCoords, setMessageCoords ] = useState<any>(null);
+
+	const getId = (markers: any) => {
+	    const ids = Object.keys(markers).map(Number);
+	    const maxId = ids.length ? Math.max(...ids) : 0;
+	    return maxId + 1;
+	};
+
+    const addAgent = (event: any) => {
+    	if (addPin === true) {
+			const newMarker = {
+				id: getId(markers),
+				center: event.lngLat,
+				image: currentImage,
+				name: currentName,
+				radius: 0.5,
+				contoursMinutes: 10,
+				fillColor: "rgba(166, 204, 245, 0.8)",
+				fillOpacity: 0.1,
+				stroke: "rgba(166, 204, 245, 1)",
+				strokeWidth: 4,
+				strokeOpacity: 0.8,
+				routingProfile: "walking",
+				geometryType: "circle",
+			};
+			setMarkers((prev: any) => ({ 
+				...prev, 
+				[newMarker.id]: newMarker 
+			}));
+			setAddPin(false);
+		}
+	};
 
 	const isInside = (point: any) => {
 		const map = mapRef.current;
@@ -75,15 +105,15 @@ export const BoundaryEventsProvider = ({children}: any) => {
 	}
 
 	return (
-		<BoundaryEventsContext.Provider value={{ 
+		<BoundaryContext.Provider value={{ 
 			onContextMenu, onClick,
 			optionsCoords, setOptionsCoords,
 			messageCoords, setMessageCoords,
 			addChatbot
 		}}>
 			{children}
-		</BoundaryEventsContext.Provider>
+		</BoundaryContext.Provider>
 	)
 }
 
-BoundaryEventsContext.displayName = "BoundaryEventsContext";
+BoundaryContext.displayName = "BoundaryContext";

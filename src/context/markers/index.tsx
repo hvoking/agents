@@ -1,5 +1,5 @@
 // React imports
-import { useState, useContext, createContext } from 'react';
+import { useState, useEffect, useContext, createContext } from 'react';
 
 // App imports
 import { providers } from './data';
@@ -47,6 +47,15 @@ export const MarkersProvider = ({children}: any) => {
 	        return rest;
 	    });
 	}
+
+	useEffect(() => {
+		const handleKeyDown = (event: any) => event.keyCode === 27 && setAddPin(false);
+		window.addEventListener('keydown', handleKeyDown);
+		
+		return () => {
+			window.removeEventListener('keydown', handleKeyDown);
+		};
+	}, []);
 
 	return (
 		<MarkersContext.Provider value={{

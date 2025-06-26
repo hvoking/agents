@@ -10,13 +10,13 @@ import './styles.scss';
 import { useMarkers } from 'context/markers';
 
 // Context imports
-import { useBoundaryEvents } from 'context/events/boundary';
+import { useBoundary } from 'context/boundary';
 
 // Third-party imports
 import { Marker } from 'react-map-gl/mapbox';
 
 export const Tooltip = () => {
-  const { optionsCoords } = useBoundaryEvents();
+  const { optionsCoords } = useBoundary();
 
   const { markers, currentMarkerId, colorPalette } = useMarkers();
   const [ activeFeature, setActiveFeature ] = useState<any>(null);

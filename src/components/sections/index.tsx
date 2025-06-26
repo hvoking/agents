@@ -6,7 +6,7 @@ import './styles.scss';
 
 // Context imports
 import { useMarkers } from 'context/markers';
-import { useDraggable } from 'context/events/draggable';
+import { useDraggable } from 'context/draggable';
 
 export const Sections = () => {
 	const { activePage } = useMarkers();
