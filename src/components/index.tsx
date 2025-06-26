@@ -1,13 +1,11 @@
 // App imports
-import { MapContainer } from './maps';
 import { Logo } from './logo';
-import { Nav } from './nav'
-import './styles.scss';
-
-
-import { Location } from './maps/location';
-import { Cursor } from './maps/cursor';
+import { Nav } from './nav';
+import { MapContainer } from './maps';
 import { Sections } from './sections';
+import { Location } from './location';
+import { Cursor } from './cursor';
+import './styles.scss';
 
 export const Main = () => {
   return (

@@ -2,6 +2,7 @@
 import { useState, useContext, createContext } from 'react';
 
 // Context imports
+import { useMapEvents } from 'context/events/maps';
 import { useMarkers } from 'context/markers';
 import { useGeo } from 'context/geo';
 
@@ -12,7 +13,7 @@ export const useBoundaryEvents = () => useContext(BoundaryEventsContext)
 export const BoundaryEventsProvider = ({children}: any) => {
 	const { mapRef } = useGeo();
 	const { markers, setCurrentMarkerId } = useMarkers();
-
+	const { addAgent } = useMapEvents();
 	const [ optionsCoords, setOptionsCoords ] = useState<any>(null);
 	const [ messageCoords, setMessageCoords ] = useState<any>(null);
 
@@ -67,9 +68,15 @@ export const BoundaryEventsProvider = ({children}: any) => {
 		}
 	}
 
+	const onClick = (event: any) => {
+		setOptionsCoords(null);
+		addChatbot(event);
+		addAgent(event);
+	}
+
 	return (
 		<BoundaryEventsContext.Provider value={{ 
-			onContextMenu, 
+			onContextMenu, onClick,
 			optionsCoords, setOptionsCoords,
 			messageCoords, setMessageCoords,
 			addChatbot
