@@ -1,5 +1,5 @@
 // App imports
-import { Logo } from './logo';
+import { Header } from './header';
 import { Nav } from './nav';
 import { MapContainer } from './maps';
 import { Sections } from './sections';
@@ -10,7 +10,7 @@ import './styles.scss';
 export const Main = () => {
   return (
     <div className="main-wrapper"> 
-      <Logo/>
+      <Header/>
       <Nav/>
       <div className="map-wrapper">
         <MapContainer/>

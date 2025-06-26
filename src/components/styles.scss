@@ -1,5 +1,5 @@
-.logo-wrapper {
-	grid-area: lg;
+.header {
+	grid-area: hd;
 }
 .nav-wrapper {
 	grid-area: nw
@@ -13,7 +13,7 @@
 	grid-template-columns: min-content auto;
 	grid-template-rows: min-content auto;
 	grid-template-areas: 
-		"lg mw"
+		"hd mw"
 		"nw mw"
 }
 @media screen and (max-width: 768px) {
@@ -21,7 +21,7 @@
 		grid-template-columns: auto;
 		grid-template-rows: min-content auto min-content;
 		grid-template-areas: 
-			"lg"
+			"hd"
 			"mw"
 			"nw";
 	}	
