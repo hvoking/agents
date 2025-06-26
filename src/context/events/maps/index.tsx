@@ -1,5 +1,5 @@
 // React imports
-import { useEffect, useContext, createContext } from 'react';
+import { useState, useEffect, useContext, createContext } from 'react';
 
 // Context imports
 import { useMarkers } from 'context/markers';
@@ -10,6 +10,17 @@ export const useMapEvents = () => useContext(MapEventsContext)
 
 export const MapEventsProvider = ({children}: any) => {
 	const { markers, setMarkers, addPin, setAddPin, currentImage, currentName } = useMarkers();
+
+	const [ searchText, setSearchText ] = useState<any>(null);
+	
+	const handleChange = (e: any) => {
+		const query = e.target.value;
+		setSearchText(query);
+	};
+
+	const cleanSuggestions = () => {
+		setSearchText("");
+	}
 
 	const getId = (markers: any) => {
 	    const ids = Object.keys(markers).map(Number);
@@ -52,7 +63,13 @@ export const MapEventsProvider = ({children}: any) => {
 	}, []);
 
 	return (
-		<MapEventsContext.Provider value={{ addAgent }}>
+		<MapEventsContext.Provider value={{ 
+			addAgent,
+			searchText, 
+			setSearchText,
+			handleChange, 
+			cleanSuggestions,
+		}}>
 			{children}
 		</MapEventsContext.Provider>
 	)

@@ -17,28 +17,30 @@ export const DraggableProvider = ({children}: any) => {
   const handleStart = (e: any) => {
     e.stopPropagation();
     e.preventDefault();
-      offsetY.current = (e.clientY || (e.touches && e.touches[0].clientY)) - draggableRef.current.getBoundingClientRect().top;
-      isDragging.current = true;
+    const bounding = draggableRef.current.getBoundingClientRect();
+    offsetY.current = (e.clientY || (e.touches && e.touches[0].clientY)) - bounding.top;
+    isDragging.current = true;
 
-      document.addEventListener('mousemove', handleMove);
-      document.addEventListener('mouseup', handleEnd);
-      document.addEventListener('touchmove', handleMove);
-      document.addEventListener('touchend', handleEnd);
+    document.addEventListener('mousemove', handleMove);
+    document.addEventListener('mouseup', handleEnd);
+    document.addEventListener('touchmove', handleMove);
+    document.addEventListener('touchend', handleEnd);
   };
 
   const handleMove = (e: any) => {
     e.stopPropagation();
     e.preventDefault();
-      if (isDragging.current) {
-        const clientY = e.clientY || (e.touches && e.touches[0].clientY);
-        const offset = clientY - offsetY.current;
-          const newTop = offset < 0 ? 0 : offset;
-          if (newTop) {
-              requestAnimationFrame(() => {
-                  draggableRef.current.style.top = `${newTop}px`;
-              });
-          }
+    
+    if (isDragging.current) {
+      const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+      const offset = clientY - offsetY.current;
+      const newTop = offset < 0 ? 0 : offset;
+      if (newTop) {
+        requestAnimationFrame(() => {
+          draggableRef.current.style.top = `${newTop}px`;
+        });
       }
+    }
   };
 
   const handleEnd = () => {

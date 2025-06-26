@@ -3,7 +3,7 @@ import { processData } from './data';
 import './styles.scss';
 
 // Context imports
-import { useChatEvents } from 'context/events/chat';
+import { useMapEvents } from 'context/events/maps';
 import { useMask } from 'context/mask';
 import { useReverseGeocodingApi } from 'context/api/google/reverse';
 
@@ -19,7 +19,7 @@ const color: any = {
 }
 
 export const Input = ({ markerId, currentMarker, providers, setRequestData, updateResponse, setRequestText }: any) => {
-	const { searchText, handleChange, cleanSuggestions, setSearchText } = useChatEvents();
+	const { searchText, handleChange, cleanSuggestions, setSearchText } = useMapEvents();
 	const { sharedGeoJsonDataMap } = useMask();
 	const { currentAddress } = useReverseGeocodingApi();
 

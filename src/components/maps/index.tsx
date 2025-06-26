@@ -26,9 +26,9 @@ export const MapContainer = () => {
 	
 	const [ isMapLoaded, setIsMapLoaded ] = useState(false);
 
-	const handleClick = (event: any) => {
-		addChatbot(event)
+	const onClick = (event: any) => {
 		setOptionsCoords(null);
+		addChatbot(event);
 		addAgent(event);
 	}
 
@@ -41,7 +41,7 @@ export const MapContainer = () => {
 				initialViewState={viewport}
 				mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
 				mapStyle={mapStyle}
-				onClick={handleClick}
+				onClick={onClick}
 				onLoad={onLoad}
 				onContextMenu={onContextMenu}
 			>
@@ -51,8 +51,8 @@ export const MapContainer = () => {
 						{Object.entries(markers).map(([ key, value ]: any) => 
 							<Mask key={key} marker={value}/>
 						)}
-						{optionsCoords && <Tooltip optionsCoords={optionsCoords}/>}
-						{messageCoords && <Chat coords={messageCoords}/>}
+						<Tooltip optionsCoords={optionsCoords}/>
+						<Chat coords={messageCoords}/>
 					</>
 				}
 			</Map>

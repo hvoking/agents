@@ -1,5 +1,5 @@
 // React imports
-import { useState, useMemo, useContext, createContext } from 'react';
+import { useState, useContext, createContext } from 'react';
 
 // Context imports
 import { useMarkers } from 'context/markers';
@@ -16,13 +16,11 @@ export const BoundaryEventsProvider = ({children}: any) => {
 	const [ optionsCoords, setOptionsCoords ] = useState<any>(null);
 	const [ messageCoords, setMessageCoords ] = useState<any>(null);
 
-	const markerLayers = useMemo(() => 
-		Object.keys(markers).map((id) => `boundary-fill-${id}`), [markers]);
-
 	const isInside = (point: any) => {
 		const map = mapRef.current;
 		if (!map) return null;
 
+		const markerLayers = Object.keys(markers).map((id) => `boundary-fill-${id}`);
 		const features = map.queryRenderedFeatures(point, { layers: markerLayers });
 		if (!features.length) return null;
 
@@ -33,29 +31,36 @@ export const BoundaryEventsProvider = ({children}: any) => {
 
 	const onContextMenu = (event: any) => {
 		event.preventDefault();
-
 		const map = mapRef.current.getMap();
-		const { point, lngLat } = event;
 
 	    if (map.isMoving() || map.isZooming() || map.isRotating()) {
 	      return;
 	    }
-	    setMessageCoords(null);
+
+	    const { point, lngLat } = event;
 		const markerId = isInside(point);
-		!markerId ? setOptionsCoords(null) : setOptionsCoords(lngLat);
+
+		setMessageCoords(null);
+		
+		!markerId ? 
+		setOptionsCoords(null) : 
+		setOptionsCoords(lngLat);
 	}
 
 	const addChatbot = (event: any) => {
 		const map = mapRef.current.getMap();
-		const { point, lngLat } = event;
 
 	    if (map.isMoving() || map.isZooming() || map.isRotating()) {
 	      return;
 	    }
+
+	    const { point, lngLat } = event;
 		const markerId = isInside(point);
 
 		if (!messageCoords) {
-			!markerId ? setMessageCoords(null) : setMessageCoords(lngLat);
+			!markerId ? 
+			setMessageCoords(null) : 
+			setMessageCoords(lngLat);
 		}
 		else {
 			setMessageCoords(null);

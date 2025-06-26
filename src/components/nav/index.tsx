@@ -5,10 +5,10 @@ import './styles.scss';
 export const Nav = () => {
 	return (
 		<div className="nav-wrapper">
-        <Section section={"agent"} title={"Add Agent"} />
-        <Section section={"features"} title={"Features"} />
-        <Section section={"basemaps"} title={"Basemaps"} />
-      </div>
+            <Section section={"agent"} title={"Add Agent"} />
+            <Section section={"features"} title={"Features"} />
+            <Section section={"basemaps"} title={"Basemaps"} />
+        </div>
 	)
 }
 

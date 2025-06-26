@@ -1,13 +1,12 @@
-export const getPointsStyle = ( layerId: string, sourceId: string ) => {
+export const getPointsStyle = ( id: string, source: string ) => {
   const layerStyle: any = {
-      id: layerId,
-      type: "circle",
-      source: sourceId,
-      paint: {
-        'circle-radius': 3,
-        'circle-color': ['get', 'circle-color']
-      }
-    };
-
+    id,
+    type: "circle",
+    source,
+    paint: {
+      'circle-radius': 3,
+      'circle-color': ['get', 'circle-color']
+    }
+  };
   return layerStyle
 }

@@ -16,10 +16,9 @@ export const Tooltip = ({ optionsCoords }: any) => {
   const { markers, currentMarkerId, colorPalette } = useMarkers();
   const [ activeFeature, setActiveFeature ] = useState<any>(null);
 
+  if (!currentMarkerId || !optionsCoords) return <></>;
+
   const { lng, lat } = optionsCoords;
-
-  if (!currentMarkerId) return <></>;
-
   const currentMarker = markers[currentMarkerId];
 
   return (
