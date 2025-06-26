@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react';
 
 // App imports
-import { Response } from '../response';
-import { Input } from '../input';
+import { Response } from './response';
+import { Input } from './input';
 import './styles.scss';
 
 // Context imports

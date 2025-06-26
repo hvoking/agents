@@ -2,13 +2,18 @@
 import { Messages } from './messages';
 import './styles.scss';
 
+// Context imports
+import { useBoundaryEvents } from 'context/events/boundary';
+
 // Third-party imports
 import { Popup } from 'react-map-gl/mapbox';
 
-export const Chat = ({ coords }: any) => {
-	if (!coords) return <></>;
+export const Chat = () => {
+	const { messageCoords } = useBoundaryEvents();
+	
+	if (!messageCoords) return <></>;
 
-	const { lng, lat } = coords;
+	const { lng, lat } = messageCoords;
 
 	return (
 		<Popup 
