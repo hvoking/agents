@@ -53,7 +53,12 @@ export const DraggableProvider = ({children}: any) => {
 
   return (
     <DraggableContext.Provider value={{ 
-      draggableRef, offsetY, isDragging, handleStart, handleMove, handleEnd
+      draggableRef, 
+      offsetY, 
+      isDragging, 
+      handleStart, 
+      handleMove, 
+      handleEnd
     }}>
       {children}
     </DraggableContext.Provider>

@@ -23,7 +23,15 @@ export const MaskProvider = ({children}: any) => {
 	const sharedGeoJsonDataMap = signal({});
 
 	const map = mapRef.current;
-	mapFeatures.value = map?.queryRenderedFeatures();
+
+	const sourceIds = ['points-airbnb', 'points-foursquare', 'rotterdam_roads', 'buildings-overture'];
+
+	const layerIds = map?.getStyle()
+	  .layers
+	  .filter((layer: any) => sourceIds.includes(layer.source))
+	  .map((layer: any) => layer.id);
+
+	mapFeatures.value = map?.queryRenderedFeatures({ layers: layerIds });
 
 	const getGeojson = (boundary: any, source: string, geometryType: string) => {
 		const fillProperty = fillProperties[geometryType] || 'fill-color';

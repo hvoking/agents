@@ -9,6 +9,7 @@ export const fillProperties: any = {
 
 export const getColor = (paint: any, property: string) => {
     const processedPaint = { ...paint };
+
     if (paint[property]) {
         const color = paint[property];
         const { r, g, b, a } = color;
@@ -25,34 +26,40 @@ export const getColor = (paint: any, property: string) => {
     return processedPaint;
 };
 
-export const toFeatureCollection = (features: any[], paintProperty: string) => {
-	const updatedFeatures = features.map((item) => {
-		const { geometry, properties, layer } = item;
-		const color = getColor(layer.paint, paintProperty);
+export const toFeatureCollection = (originalFeatures: any[], paintProperty: string) => {
+	const features = originalFeatures.map((item) => {
+		const { geometry, properties: itemProperties, layer } = item;
 
-		return ({
-			type: 'Feature',
-			geometry,
-			properties: { ...properties, ...color },
-		})
+		const color = getColor(layer.paint, paintProperty);
+    const properties = { ...itemProperties, ...color }
+
+		return ({ type: 'Feature', geometry, properties })
 	})
 
-	return ({ type: 'FeatureCollection', features: updatedFeatures })
+	return ({ type: 'FeatureCollection', features })
 };
 
 export const filterGeometries = (features: any[], boundary: any, source: string) =>
   features.filter(({ source: src, geometry }) =>
-    src === source && turf.booleanPointInPolygon(turf.centroid(geometry), boundary)
+    src === source && 
+    turf.booleanPointInPolygon(turf.centroid(geometry), boundary)
   );
 
-export const filterLines = (mapFeatures: any[], boundary: any, source: string, geometryType: string, fillProperty: any) => {
+export const filterLines = (
+  mapFeatures: any[], 
+  boundary: any, 
+  source: string, 
+  geometryType: string, 
+  fillProperty: any
+) => {
     const lines = mapFeatures.reduce((total: any[], item: any) => {
-      if (item.source !== source || item.geometry.type !== geometryType) return total;
+      const { source: src, geometry, layer, properties: itemProperties } = item;
 
-      const { geometry, layer } = item;
+      if (src !== source || geometry.type !== geometryType) return total;
+
       const color = getColor(layer.paint, fillProperty);
 
-      const properties = { ...item.properties, ...color }
+      const properties = { ...itemProperties, ...color }
 
       if (turf.booleanWithin(geometry, boundary)) {
         total.push({type: 'Feature', geometry, properties});
@@ -62,7 +69,12 @@ export const filterLines = (mapFeatures: any[], boundary: any, source: string, g
 
         for (const feature of split.features) {
           if (turf.booleanWithin(feature.geometry, boundary)) {
-            total.push({type: 'Feature', geometry: feature.geometry, properties});
+            const featureWithin = {
+              type: 'Feature', 
+              geometry: feature.geometry, 
+              properties
+            }
+            total.push(featureWithin);
           }
         }
       }

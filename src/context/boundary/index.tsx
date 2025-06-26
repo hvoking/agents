@@ -47,6 +47,28 @@ export const BoundaryProvider = ({children}: any) => {
 		}
 	};
 
+	const addChatbot = (event: any) => {
+		const map = mapRef.current.getMap();
+
+	    if (map.isMoving() || map.isZooming() || map.isRotating()) {
+	      return;
+	    }
+
+	    if (addPin) {return;}
+
+	    const { point, lngLat } = event;
+		const markerId = isInside(point);
+
+		if (!messageCoords) {
+			!markerId ? 
+			setMessageCoords(null) : 
+			setMessageCoords(lngLat);
+		}
+		else {
+			setMessageCoords(null);
+		}
+	}
+
 	const isInside = (point: any) => {
 		const map = mapRef.current;
 		if (!map) return null;
@@ -76,26 +98,6 @@ export const BoundaryProvider = ({children}: any) => {
 		!markerId ? 
 		setOptionsCoords(null) : 
 		setOptionsCoords(lngLat);
-	}
-
-	const addChatbot = (event: any) => {
-		const map = mapRef.current.getMap();
-
-	    if (map.isMoving() || map.isZooming() || map.isRotating()) {
-	      return;
-	    }
-
-	    const { point, lngLat } = event;
-		const markerId = isInside(point);
-
-		if (!messageCoords) {
-			!markerId ? 
-			setMessageCoords(null) : 
-			setMessageCoords(lngLat);
-		}
-		else {
-			setMessageCoords(null);
-		}
 	}
 
 	const onClick = (event: any) => {
