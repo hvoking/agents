@@ -3,7 +3,7 @@ import { Messages } from './messages';
 import './styles.scss';
 
 // Context imports
-import { useBoundary } from 'context/boundary';
+import { useBoundary } from 'context/events/boundary';
 
 // Third-party imports
 import { Popup } from 'react-map-gl/mapbox';

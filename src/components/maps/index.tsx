@@ -9,7 +9,7 @@ import { Chat } from './chat';
 
 // Context imports
 import { useGeo } from 'context/geo';
-import { useBoundary } from 'context/boundary';
+import { useBoundary } from 'context/events/boundary';
 
 // Third-party imports
 import { Map } from 'react-map-gl/mapbox';

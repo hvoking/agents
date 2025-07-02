@@ -10,7 +10,7 @@ import './styles.scss';
 import { useMarkers } from 'context/markers';
 
 // Context imports
-import { useBoundary } from 'context/boundary';
+import { useBoundary } from 'context/events/boundary';
 
 // Third-party imports
 import { Marker } from 'react-map-gl/mapbox';
