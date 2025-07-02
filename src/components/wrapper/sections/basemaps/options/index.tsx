@@ -3,14 +3,14 @@ export const listOfBaseMaps = [
 		"provider": "light",
 		"mapas": {
 			"Positron": "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
-			"Mapbox Light": "mapbox://styles/mapbox/light-v10",
+			"Mapbox Light": "mapbox://styles/mapbox/light-v11",
 			
 		}
 	},
 	{
 		"provider": "satellite",
 		"mapas": {
-			"Satellite": "mapbox://styles/mapbox/satellite-v9",
+			"Satellite": "mapbox://styles/mapbox/satellite-streets-v12",
 			"Mapbox Dark": "mapbox://styles/mapbox/dark-v10",
 		}
 	},

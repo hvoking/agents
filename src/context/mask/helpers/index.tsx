@@ -35,7 +35,6 @@ export const toFeatureCollection = (originalFeatures: any[], paintProperty: stri
 
 		return ({ type: 'Feature', geometry, properties })
 	})
-
 	return ({ type: 'FeatureCollection', features })
 };
 
@@ -45,41 +44,55 @@ export const filterGeometries = (features: any[], boundary: any, source: string)
     turf.booleanPointInPolygon(turf.centroid(geometry), boundary)
   );
 
-export const filterLines = (
-  mapFeatures: any[], 
-  boundary: any, 
-  source: string, 
-  geometryType: string, 
-  fillProperty: any
-) => {
-    const lines = mapFeatures.reduce((total: any[], item: any) => {
-      const { source: src, geometry, layer, properties: itemProperties } = item;
+const getLineFeatures = (geometry: any, properties: any) => {
+  if (geometry.type === 'LineString') {
+    return [{
+      type: 'Feature',
+      geometry,
+      properties,
+    }];
+  } 
+  else if (geometry.type === 'MultiLineString') {
+    return geometry.coordinates.map((coordinates: any) => ({
+      type: 'Feature',
+      geometry: { type: 'LineString', coordinates },
+      properties,
+    }));
+  }
+  return [];
+};
 
-      if (src !== source || geometry.type !== geometryType) return total;
+const getFeaturesInside = (lineFeatures: any[], boundary: any) => {
+  return lineFeatures.flatMap((line) => {
+    if (turf.booleanWithin(line, boundary)) {
+      return [line];
+    }
+    if (turf.booleanIntersects(line, boundary)) {
+      const split = turf.lineSplit(line, boundary);
+      return split.features
+        .filter((feature) => turf.booleanWithin(feature, boundary))
+        .map((feature) => ({
+          ...feature,
+          properties: line.properties,
+        }));
+    }
+    return [];
+  });
+};
 
-      const color = getColor(layer.paint, fillProperty);
+export const filterLines = (mapFeatures: any[], boundary: any, source: string, fillProperty: any) => {
+  if (!mapFeatures) return [];
 
-      const properties = { ...itemProperties, ...color }
+  return mapFeatures.flatMap((item: any) => {
+    const { geometry, layer, source: src, properties: itemProperties } = item;
 
-      if (turf.booleanWithin(geometry, boundary)) {
-        total.push({type: 'Feature', geometry, properties});
-      } 
-      else if (turf.booleanIntersects(geometry, boundary)) {
-        const split = turf.lineSplit(item, boundary);
+    if (src !== source) return [];
 
-        for (const feature of split.features) {
-          if (turf.booleanWithin(feature.geometry, boundary)) {
-            const featureWithin = {
-              type: 'Feature', 
-              geometry: feature.geometry, 
-              properties
-            }
-            total.push(featureWithin);
-          }
-        }
-      }
+    const color = getColor(layer.paint, fillProperty);
+    const properties = { ...color, ...itemProperties };
 
-      return total;
-    }, []);
-    return lines;
-  };
+    const lineFeatures = getLineFeatures(geometry, properties);
+    const featuresInside = getFeaturesInside(lineFeatures, boundary);
+    return featuresInside;
+  });
+};

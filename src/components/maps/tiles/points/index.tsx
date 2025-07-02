@@ -21,13 +21,10 @@ export const Points = ({ tableSchema, tableName, styleName }: any) => {
 		loadData();
 	}, []);
 
-  	const layers = styleData
-  		.map((style: any, index: number) => {
-	  		style.paint['circle-opacity'] = 0;
-			return (
-				<Layer key={index} {...style}/>
-			)
-		});
+  	const layers = styleData?.map((style: any, index: number) => {
+  		style.paint['circle-opacity'] = 0;
+		return <Layer key={index} {...style}/>
+	});
 	
 	return (
 		<Source 

@@ -23,10 +23,19 @@ export const ReverseGeocodingApiProvider = ({children}: any) => {
 			&longitude=${lng}
 		`;
 		const url = tempUrl.replace(/\s/g, '');
-		const res = await fetch(url);
-		const receivedData = await res.json();
-		const placeInformation = receivedData.address_components;
-		return placeInformation
+		try {
+			const res = await fetch(url);
+			if (!res.ok) {
+	  			throw new Error(`HTTP error! status: ${res.status}`);
+	  		}
+			const receivedData = await res.json();
+			const placeInformation = receivedData.address_components;
+			return placeInformation
+		}
+		catch (error) {
+			console.error("Error fetching address:", error);
+			return null;
+		}
 	}
 
 	useEffect(() => {
@@ -39,10 +48,19 @@ export const ReverseGeocodingApiProvider = ({children}: any) => {
 				&longitude=${longitude}
 			`;
 			const url = tempUrl.replace(/\s/g, '');
-			const res = await fetch(url);
-			const receivedData = await res.json();
-			const placeInformation = receivedData.address_components;
-			setCurrentAddress(placeInformation);
+			try {
+				const res = await fetch(url);
+				if (!res.ok) {
+		  			throw new Error(`HTTP error! status: ${res.status}`);
+		  		}
+				const receivedData = await res.json();
+				const placeInformation = receivedData.address_components;
+				setCurrentAddress(placeInformation);
+			}
+			catch (error) {
+				console.error("Error fetching address:", error);
+				return null;
+			}
 		}
 		fetchData();
 	}, [ viewport ]);

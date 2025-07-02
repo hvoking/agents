@@ -24,7 +24,12 @@ export const MaskProvider = ({children}: any) => {
 
 	const map = mapRef.current;
 
-	const sourceIds = ['points-airbnb', 'points-foursquare', 'rotterdam_roads', 'buildings-overture'];
+	const sourceIds = [
+		'points-airbnb', 
+		'points-foursquare', 
+		'rotterdam_roads', 
+		'buildings-overture'
+	];
 
 	const layerIds = map?.getStyle()
 	  .layers
@@ -32,7 +37,7 @@ export const MaskProvider = ({children}: any) => {
 	  .map((layer: any) => layer.id);
 
 	mapFeatures.value = map?.queryRenderedFeatures({ layers: layerIds });
-
+	
 	const getGeojson = (boundary: any, source: string, geometryType: string) => {
 		const fillProperty = fillProperties[geometryType] || 'fill-color';
 		const isLine = geometryType === 'LineString';
@@ -41,12 +46,15 @@ export const MaskProvider = ({children}: any) => {
 			const geomFeatures = filterGeometries(mapFeatures.value, boundary, source);
 			return toFeatureCollection(geomFeatures, fillProperty);
 		}
-		const features = filterLines(mapFeatures.value, boundary, source, geometryType, fillProperty);
+		const features = filterLines(mapFeatures.value, boundary, source, fillProperty);
 		return { type: 'FeatureCollection', features};
 	};
 
 	return (
-		<MaskContext.Provider value={{ getGeojson, sharedGeoJsonDataMap }}>
+		<MaskContext.Provider value={{ 
+			getGeojson, 
+			sharedGeoJsonDataMap 
+		}}>
 			{children}
 		</MaskContext.Provider>
 	)
