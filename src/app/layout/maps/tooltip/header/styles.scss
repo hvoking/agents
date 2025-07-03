@@ -1,0 +1,39 @@
+@import 'global';
+
+.header-selector {
+  display: flex;
+  gap: 5px;
+  padding: 2px;
+  border-radius: 4px;
+  background-color: $card-bg;
+  box-shadow: $box-shadow;
+  width: min-content;
+}
+.section-selectors {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.header-title {
+  font-size: 16px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.boundary-selectors {
+  display: flex;
+  border-right: 1px solid $border-color;
+  align-items: center;
+}
+.boundary-icon {
+  cursor: pointer; 
+  border-radius: 3px;
+  width: 30px;
+  padding: 4px;
+}
+.section-item {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 5px;
+}

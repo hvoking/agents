@@ -5,7 +5,7 @@ import { ApiProvider } from './api';
 import { EventsProvider } from './events';
 import { SizesProvider } from './sizes';
 
-export const MainProvider = ({children}: any) => {
+export const ContextProvider = ({children}: any) => {
   return (
     <GeoProvider>
     <MarkersProvider>
@@ -23,4 +23,4 @@ export const MainProvider = ({children}: any) => {
   )
 }
 
-MainProvider.displayName="MainProvider";
+ContextProvider.displayName="ContextProvider";
