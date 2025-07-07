@@ -6,7 +6,6 @@ import { fillProperties, toFeatureCollection, filterGeometries, filterLines } fr
 
 // Context imports
 import { useGeo } from 'context/geo';
-import { useMarkers } from 'context/markers';
 
 // Third-party imports
 import { signal } from '@preact/signals-react';
@@ -17,12 +16,8 @@ export const useMask = () => useContext(MaskContext)
 
 export const MaskProvider = ({children}: any) => {
 	const { mapRef } = useGeo();
-	const { radius } = useMarkers();
 
-	const mapFeatures = signal<any[]>([]);
 	const sharedGeoJsonDataMap = signal({});
-
-	const map = mapRef.current;
 
 	const sourceIds = [
 		'points-airbnb', 
@@ -31,22 +26,22 @@ export const MaskProvider = ({children}: any) => {
 		'buildings-overture'
 	];
 
-	const layerIds = map?.getStyle()
-	  .layers
-	  .filter((layer: any) => sourceIds.includes(layer.source))
-	  .map((layer: any) => layer.id);
-
-	mapFeatures.value = map?.queryRenderedFeatures({ layers: layerIds });
-	
 	const getGeojson = (boundary: any, source: string, geometryType: string) => {
 		const fillProperty = fillProperties[geometryType] || 'fill-color';
 		const isLine = geometryType === 'LineString';
+
+		const layerIds = mapRef.current.getStyle()
+		  .layers
+		  .filter((layer: any) => sourceIds.includes(layer.source))
+		  .map((layer: any) => layer.id);
+
+		const mapFeatures = mapRef.current.queryRenderedFeatures({ layers: layerIds });
 		
 		if (!isLine) {
-			const geomFeatures = filterGeometries(mapFeatures.value, boundary, source);
+			const geomFeatures = filterGeometries(mapFeatures, boundary, source);
 			return toFeatureCollection(geomFeatures, fillProperty);
 		}
-		const features = filterLines(mapFeatures.value, boundary, source, fillProperty);
+		const features = filterLines(mapFeatures, boundary, source, fillProperty);
 		return { type: 'FeatureCollection', features};
 	};
 

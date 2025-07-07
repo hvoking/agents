@@ -3,6 +3,7 @@ import { Sections } from './sections';
 import { Location } from './location';
 import { Cursor } from './cursor';
 import { Maps } from './maps';
+import { Search } from './search';
 import './styles.scss';
 
 export const Layout = () => {
@@ -12,6 +13,7 @@ export const Layout = () => {
       <Sections/>
       <Location/>
       <Cursor/>
+      <Search/>
     </div>
   );
 };

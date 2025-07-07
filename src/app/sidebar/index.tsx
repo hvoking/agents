@@ -2,7 +2,7 @@
 import { Header } from './header';
 import { Nav } from './nav';
 
-export const Left = () => {
+export const Sidebar = () => {
 	return (
 		<>
 			<Header/>
@@ -11,4 +11,4 @@ export const Left = () => {
 	)
 }
 
-Left.displayName="Left";
+Sidebar.displayName="Sidebar";

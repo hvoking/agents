@@ -20,17 +20,30 @@ export const GoogleDetailsApiProvider = ({children}: any) => {
 	    	?place_id=${placeId}
 	    `;
 	    const url = tempUrl.replace(/\s/g, '');
-	    const res = await fetch(url);
-	    const receivedData = await res.json();
-	    setGoogleDetailsData(receivedData)
+	    try {
+	    	const res = await fetch(url);
+			if (!res.ok) {
+	  			throw new Error(`HTTP error! status: ${res.status}`);
+	  		}
+	    	const receivedData = await res.json();
+	    	setGoogleDetailsData(receivedData)	
+	    }
+	    catch (error) {
+	    	console.error("Error fetching address:", error);
+	    	return null;
+	    }
 	  }
 	  placeId && fetchData();
 	}, [ placeId ]);
 
 	useEffect(() => {
 		if (googleDetailsData) {
-			const { lng, lat } = googleDetailsData.result.geometry.location;
-			setViewport((prev: any) => ({...prev, longitude: lng, latitude: lat}));
+			const { lng, lat } = googleDetailsData.geometry.location;
+			setViewport((prev: any) => ({
+				...prev, 
+				longitude: lng, 
+				latitude: lat
+			}));
 		}
 	}, [ googleDetailsData, setViewport ])
 
