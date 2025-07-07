@@ -7,7 +7,7 @@ import './styles.scss';
 
 // Context imports
 import { useMask } from 'context/mask';
-import { useReverseGeocodingApi } from 'context/api/google/reverse';
+import { useGoogleReverseApi } from 'context/api/google/reverse';
 
 const prefix: any = {
 	LineString: "lines-source-",
@@ -23,7 +23,7 @@ const color: any = {
 export const Input = ({ markerId, currentMarker, providers, setRequestData, updateResponse, setRequestText }: any) => {
 	const [ searchText, setSearchText ] = useState<any>(null);
 	const { sharedGeoJsonDataMap } = useMask();
-	const { currentAddress } = useReverseGeocodingApi();
+	const { currentAddress } = useGoogleReverseApi();
 
 	const handleChange = (e: any) => {
 		const query = e.target.value;

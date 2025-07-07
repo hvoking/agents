@@ -1,15 +1,15 @@
 // App imports
 import { GoogleSearchApiProvider } from './search';
 import { GoogleDetailsApiProvider } from './details';
-import { ReverseGeocodingApiProvider } from './reverse';
+import { GoogleReverseApiProvider } from './reverse';
 
 export const GoogleApiProvider = ({children}: any) => {
   return (
     <GoogleSearchApiProvider>
     <GoogleDetailsApiProvider>
-    <ReverseGeocodingApiProvider>
+    <GoogleReverseApiProvider>
       {children}
-    </ReverseGeocodingApiProvider>
+    </GoogleReverseApiProvider>
     </GoogleDetailsApiProvider>
     </GoogleSearchApiProvider>
   )

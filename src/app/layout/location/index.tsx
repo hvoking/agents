@@ -2,10 +2,10 @@
 import './styles.scss';
 
 // Context imports
-import { useReverseGeocodingApi } from 'context/api/google/reverse';
+import { useGoogleReverseApi } from 'context/api/google/reverse';
 
 export const Location = () => {
-	const { placeInfo } = useReverseGeocodingApi();
+	const { placeInfo } = useGoogleReverseApi();
 
 	return (
 		<div className="map-location">

@@ -4,11 +4,11 @@ import { useState, useEffect, useContext, createContext } from 'react';
 // Context imports
 import { useGeo } from 'context/geo';
 
-const ReverseGeocodingApiContext: React.Context<any> = createContext(null)
+const GoogleReverseApiContext: React.Context<any> = createContext(null)
 
-export const useReverseGeocodingApi = () => useContext(ReverseGeocodingApiContext)
+export const useGoogleReverseApi = () => useContext(GoogleReverseApiContext)
 
-export const ReverseGeocodingApiProvider = ({children}: any) => {
+export const GoogleReverseApiProvider = ({children}: any) => {
 	const { viewport } = useGeo();
 	const [ currentAddress, setCurrentAddress ] = useState<any>(null);
 
@@ -82,10 +82,15 @@ export const ReverseGeocodingApiProvider = ({children}: any) => {
 	const placeInfo = city ? [ city, country ].join(", ") : country ? country : ""; 
 
 	return (
-		<ReverseGeocodingApiContext.Provider value={{ getCurrentAddress, currentAddress, setCurrentAddress, placeInfo }}>
+		<GoogleReverseApiContext.Provider value={{ 
+			getCurrentAddress, 
+			currentAddress, 
+			setCurrentAddress, 
+			placeInfo 
+		}}>
 			{children}
-		</ReverseGeocodingApiContext.Provider>
+		</GoogleReverseApiContext.Provider>
 	)
 }
 
-ReverseGeocodingApiContext.displayName = "ReverseGeocodingApiContext";
+GoogleReverseApiContext.displayName = "GoogleReverseApiContext";

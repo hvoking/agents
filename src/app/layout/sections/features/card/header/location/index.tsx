@@ -5,11 +5,11 @@ import { useState, useEffect } from 'react';
 import './styles.scss';
 
 // Context imports
-import { useReverseGeocodingApi } from 'context/api/google/reverse';
+import { useGoogleReverseApi } from 'context/api/google/reverse';
 
 export const Location = ({ marker }: any) => {
 	const [ addressName, setAddressName ] = useState('')
-	const { getCurrentAddress } = useReverseGeocodingApi();
+	const { getCurrentAddress } = useGoogleReverseApi();
 
 	useEffect(() => {
 		const loadData = async () => {
