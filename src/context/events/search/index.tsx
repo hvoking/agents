@@ -28,6 +28,12 @@ export const SearchProvider = ({children}: any) => {
     return total
   }, []);
 
+  const cleanSuggestions = () => {
+    setSearchText("");
+    setSuggestionIndex(0);
+    setSuggestionsActive(false);
+  }
+
   const handleChange = (e: any) => {
     const query = e.target.value;
     setSearchText(query);
@@ -60,23 +66,14 @@ export const SearchProvider = ({children}: any) => {
       const currentSearchValue: any = suggestions && suggestions[suggestionIndex]
       getCurrentPrediction(currentSearchValue)
       currentSearchValue && setSearchText(currentSearchValue);
-      setSuggestionIndex(0);
-      setSuggestionsActive(false);
+      cleanSuggestions();
     }
 
     // scape
     else if (e.keyCode === 27) {
-      setSearchText("");
-      setSuggestionIndex(0);
-      setSuggestionsActive(false);
+      cleanSuggestions();
     }
   };
-
-  const cleanSuggestions = () => {
-    setSearchText("");
-    setSuggestionIndex(0);
-    setSuggestionsActive(false);
-  }
 
   const getCurrentPrediction = (currentSearchValue: any) => {
     googleSearchData && googleSearchData.predictions.forEach((item: any) => {
@@ -90,8 +87,7 @@ export const SearchProvider = ({children}: any) => {
   const handleClick = (e: any) => {
     const currentSearchValue = e.target.innerText.trim();
     getCurrentPrediction(currentSearchValue)
-    setSearchText(currentSearchValue);
-    setSuggestionsActive(false);
+    cleanSuggestions();
   };
 
   return (
