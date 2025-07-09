@@ -15,7 +15,7 @@ import { useBoundary } from 'context/events/boundary';
 import { Map } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-export const Maps = () => {
+export const Viewer = () => {
 	const { viewport, mapRef, mapStyle } = useGeo();
 	const { onContextMenu, onClick } = useBoundary();
 	
@@ -43,4 +43,4 @@ export const Maps = () => {
 	)
 }
 
-Maps.displayName="Maps";
+Viewer.displayName="Viewer";
