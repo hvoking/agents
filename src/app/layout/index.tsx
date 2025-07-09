@@ -4,9 +4,9 @@ import { Widgets } from './widgets';
 import { Maps } from './maps';
 import './styles.scss';
 
-export const Viewer = () => {
+export const Layout = () => {
   return (
-    <div className="viewer">
+    <div className="layout">
       <Maps/>
       <Sections/>
       <Widgets/>
@@ -14,4 +14,4 @@ export const Viewer = () => {
   );
 };
 
-Viewer.displayName = "Viewer";
+Layout.displayName = "Layout";

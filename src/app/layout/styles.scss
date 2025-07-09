@@ -4,8 +4,8 @@
 .nav-wrapper {
 	grid-area: nw
 }
-.viewer {
-	grid-area: vw;
+.layout {
+	grid-area: ly;
 	position: relative;
 }
 .main-wrapper {
@@ -13,8 +13,8 @@
 	grid-template-columns: min-content auto;
 	grid-template-rows: min-content auto;
 	grid-template-areas: 
-		"hd vw"
-		"nw vw"
+		"hd ly"
+		"nw ly"
 }
 @media screen and (max-width: 768px) {
 	.main-wrapper {
@@ -22,7 +22,7 @@
 		grid-template-rows: min-content auto min-content;
 		grid-template-areas: 
 			"hd"
-			"vw"
+			"ly"
 			"nw";
 	}	
 }

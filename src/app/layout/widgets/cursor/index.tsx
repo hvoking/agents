@@ -28,19 +28,12 @@ export const Cursor = () => {
 	if (!addPin) return <></>;
 
 	return (
-		<div 
+		<img 
 			ref={customCursorRef} 
-			className="maps-go-circle maps-custom-cursor"
-		>
-			<div className="map-pin-wrapper">
-				<img 
-					className="map-pin-image"
-					src={currentImage} 
-					alt="add-pin" 
-					width="100%"
-				/>
-			</div>
-		</div>
+			className="custom-cursor"
+			src={currentImage} 
+			alt="add-pin" 
+		/>
 	)
 }
 

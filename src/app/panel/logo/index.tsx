@@ -4,12 +4,12 @@ import './styles.scss';
 // Context imports
 import { useMarkers } from 'context/markers';
 
-export const Header = () => {
+export const Logo = () => {
 	const { setActivePage } = useMarkers();
 	const onClick = () => setActivePage(null);
 	
 	return (
-		<div className="header">
+		<div className="logo">
 			<img 
 				src={process.env.PUBLIC_URL + "/static/logos/logo.svg"} 
 				alt="logo" 
@@ -20,4 +20,4 @@ export const Header = () => {
 	)
 }
 
-Header.displayName="Header";
+Logo.displayName="Logo";

@@ -1,6 +1,6 @@
 @import 'global';
 
-.nav-wrapper {
+.menu {
   background: $panel-bg;
   display: grid; 
   align-content: start;
@@ -14,7 +14,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .nav-wrapper {
+  .menu {
     display: flex; 
     justify-content: space-between;
     padding: 0;

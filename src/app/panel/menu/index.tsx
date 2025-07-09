@@ -2,9 +2,9 @@
 import { Section } from './section';
 import './styles.scss';
 
-export const Nav = () => {
+export const Menu = () => {
 	return (
-		<div className="nav-wrapper">
+		<div className="menu">
             <Section section={"agent"} title={"Add Agent"} />
             <Section section={"features"} title={"Features"} />
             <Section section={"basemaps"} title={"Basemaps"} />
@@ -12,4 +12,4 @@ export const Nav = () => {
 	)
 }
 
-Nav.displayName="Nav";
+Menu.displayName="Menu";

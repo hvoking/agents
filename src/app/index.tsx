@@ -1,6 +1,6 @@
 // App imports
-import { Viewer } from './viewer';
-import { Sidebar } from './sidebar';
+import { Layout } from './layout';
+import { Panel } from './panel';
 import './styles.scss';
 
 // Context imports
@@ -18,8 +18,8 @@ export const App = () => {
   return (
     <ContextProvider>
       <div className="main-wrapper"> 
-        <Sidebar/>
-        <Viewer/>
+        <Panel/>
+        <Layout/>
       </div>
     </ContextProvider>
   );
