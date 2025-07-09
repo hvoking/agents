@@ -1,5 +1,5 @@
 // App imports
-import { Layout } from './layout';
+import { Viewer } from './viewer';
 import { Sidebar } from './sidebar';
 import './styles.scss';
 
@@ -19,7 +19,7 @@ export const App = () => {
     <ContextProvider>
       <div className="main-wrapper"> 
         <Sidebar/>
-        <Layout/>
+        <Viewer/>
       </div>
     </ContextProvider>
   );

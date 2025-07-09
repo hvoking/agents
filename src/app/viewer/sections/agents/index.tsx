@@ -2,7 +2,7 @@
 import { Grid } from './grid';
 import './styles.scss';
 
-export const Add = () => {
+export const Agents = () => {
 	return (
 		<div className="agent-selection">
 		  <h2>Select Your Agent</h2>
@@ -14,4 +14,4 @@ export const Add = () => {
 	);
 };
 
-Add.displayName="Add";
+Agents.displayName="Agents";

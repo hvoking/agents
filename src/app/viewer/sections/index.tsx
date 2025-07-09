@@ -1,5 +1,5 @@
 // App imports
-import { Add } from './add';
+import { Agents } from './agents';
 import { Features } from './features';
 import { Basemaps } from './basemaps';
 import './styles.scss';
@@ -23,7 +23,7 @@ export const Sections = () => {
 			>
 				<div className="draggable-tab"></div>
 			</div>
-			{activePage === "agent" && <Add/>}
+			{activePage === "agent" && <Agents/>}
 			{activePage === "features" && <Features/>}
 			{activePage === "basemaps" && <Basemaps/>}
 		</div>
