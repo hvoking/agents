@@ -9,7 +9,18 @@ import { Marker } from 'react-map-gl/mapbox';
 
 export const CustomMarker = ({ marker }: any) => {
 	const { updateMarkers } = useMarkers();
-	const { id, center, image, name } = marker;
+	const { id, center, image, name, geometryType } = marker;
+
+	const onDrag = (e: any) => {
+		if (geometryType !== "iso") {
+			updateMarkers(id, "center", e.lngLat);
+		}
+	}
+	const onDragEnd = (e: any) => {
+		if (geometryType === "iso") {
+			updateMarkers(id, "center", e.lngLat);
+		}
+	}
 
 	return (
 		<Marker
@@ -18,7 +29,8 @@ export const CustomMarker = ({ marker }: any) => {
 			latitude={center.lat}
 			anchor="bottom"
 			draggable
-            onDrag={(e: any) => updateMarkers(id, "center", e.lngLat)}
+            onDrag={onDrag}
+            onDragEnd={onDragEnd}
 		>
 			<div className="custom-marker">
 				<img 
