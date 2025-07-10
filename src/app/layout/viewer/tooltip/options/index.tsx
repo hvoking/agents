@@ -4,16 +4,16 @@ import { Mobility } from './mobility';
 import { Color } from './color';
 import './styles.scss';
 
-export const Options = ({ markerId, activeFeature, colorPalette, currentMarker }: any) => {
+export const Options = ({ activeFeature, colorPalette, currentMarker }: any) => {
 	if (!activeFeature) return <></>;
 
-	const { radius, contoursMinutes, fillOpacity, strokeWidth, strokeOpacity } = currentMarker;
+	const { id, radius, contoursMinutes, fillOpacity, strokeWidth, strokeOpacity } = currentMarker;
 	
 	return (
 		<div className="options-wrapper">
 		  {activeFeature === "circle" && 
   				<Slider 
-  					markerId={markerId} 
+  					markerId={id}
   					markerProperty='radius'
   					minBound={0} 
   					maxBound={1}
@@ -23,9 +23,9 @@ export const Options = ({ markerId, activeFeature, colorPalette, currentMarker }
   			}
   			{activeFeature === "iso" && 
 	  			<>
-	  				<Mobility markerId={markerId}/>
+	  				<Mobility markerId={id}/>
 	  				<Slider 
-	  					markerId={markerId} 
+	  					markerId={id}
 	  					minBound={5} 
 	  					maxBound={15} 
 	  					markerProperty={"contoursMinutes"} 
@@ -37,7 +37,7 @@ export const Options = ({ markerId, activeFeature, colorPalette, currentMarker }
 			{activeFeature === "fill" && 
 				<>
 					<Slider 
-						markerId={markerId} 
+						markerId={id}
 						minBound={0} 
 						maxBound={1} 
 						markerProperty={'fillOpacity'}
@@ -45,7 +45,7 @@ export const Options = ({ markerId, activeFeature, colorPalette, currentMarker }
 						initialState={fillOpacity}
 					/>
 					<Color 
-						markerId={markerId} 
+						markerId={id}
 						colorPalette={colorPalette}
 						markerProperty={'fillColor'}
 					/>
@@ -54,7 +54,7 @@ export const Options = ({ markerId, activeFeature, colorPalette, currentMarker }
 			{activeFeature === "stroke" && 
 				<>
 					<Slider 
-						markerId={markerId} 
+						markerId={id}
 						minBound={0} 
 						maxBound={10} 
 						markerProperty={'strokeWidth'} 
@@ -62,7 +62,7 @@ export const Options = ({ markerId, activeFeature, colorPalette, currentMarker }
 						initialState={strokeWidth}
 					/>
 					<Slider 
-						markerId={markerId} 
+						markerId={id}
 						minBound={0} 
 						maxBound={1} 
 						markerProperty={'strokeOpacity'} 
@@ -70,7 +70,7 @@ export const Options = ({ markerId, activeFeature, colorPalette, currentMarker }
 						initialState={strokeOpacity}
 					/>
 					<Color 
-						markerId={markerId} 
+						markerId={id}
 						colorPalette={colorPalette}
 						markerProperty={'stroke'}
 					/>

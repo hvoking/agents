@@ -4,7 +4,8 @@ import './styles.scss';
 // Context imports
 import { useMarkers } from 'context/markers';
 
-export const Header = ({ markerId, activeFeature, setActiveFeature, currentMarker }: any) => {
+export const Header = ({ currentMarker, activeFeature, setActiveFeature }: any) => {
+	const { id } = currentMarker;
 	const { updateMarkers } = useMarkers();
 
 	const isActiveColor = (name: any) => 
@@ -15,7 +16,7 @@ export const Header = ({ markerId, activeFeature, setActiveFeature, currentMarke
 	const onClick = (boundaryType: any) => {
 		setActiveFeature(boundaryType)
 		if (boundaryType === "circle" || boundaryType === "iso") {
-			updateMarkers(markerId, "geometryType", boundaryType);
+			updateMarkers(id, "geometryType", boundaryType);
 		}
 	}
 

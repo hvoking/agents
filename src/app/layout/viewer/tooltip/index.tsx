@@ -27,19 +27,18 @@ export const Tooltip = () => {
   const currentMarker = markers[currentMarkerId];
 
   return (
-    <Marker longitude={lng} latitude={lat} draggable={true}>
+    <Marker longitude={lng} latitude={lat} draggable>
       <div className="popup-item" onClick={(e: any) => e.stopPropagation()}>
         <Header 
-          markerId={currentMarkerId} 
-          activeFeature={activeFeature}
+          currentMarker={currentMarker} 
+          activeFeature={activeFeature} 
           setActiveFeature={setActiveFeature}
-          currentMarker={currentMarker}
         />
         <Options 
-          markerId={currentMarkerId} 
+          currentMarker={currentMarker}
           activeFeature={activeFeature} 
           colorPalette={colorPalette}
-          currentMarker={currentMarker}
+          
         />
       </div>
     </Marker>
