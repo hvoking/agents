@@ -4,9 +4,9 @@ import { Widgets } from './widgets';
 import { Viewer } from './viewer';
 import './styles.scss';
 
-export const Layout = () => {
+export const Canvas = () => {
   return (
-    <div className="layout">
+    <div className="canvas">
       <Viewer/>
       <Sections/>
       <Widgets/>
@@ -14,4 +14,4 @@ export const Layout = () => {
   );
 };
 
-Layout.displayName = "Layout";
+Canvas.displayName = "Canvas";

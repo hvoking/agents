@@ -1,6 +1,6 @@
 // App imports
-import { Layout } from './layout';
 import { Panel } from './panel';
+import { Canvas } from './canvas';
 import './styles.scss';
 
 // Context imports
@@ -18,8 +18,8 @@ export const App = () => {
   return (
     <ContextProvider>
       <div className="main-wrapper"> 
+        <Canvas/>
         <Panel/>
-        <Layout/>
       </div>
     </ContextProvider>
   );
