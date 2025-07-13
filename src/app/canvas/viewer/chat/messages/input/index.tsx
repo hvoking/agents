@@ -40,11 +40,11 @@ export const Input = ({ currentMarker, setRequestData, updateResponse, setReques
     	cleanSuggestions();
 
     	if (currentMarker || currentMarker.length > 0) {
-    		const { id, type: currentType, columnName, provider } = currentMarker;
+    		const { id, geometryType, columnName, provider } = currentMarker;
 
     		if (provider) {
-    			const sourcePrefix = prefix[currentType];
-    			const colorLabel = color[currentType];
+    			const sourcePrefix = prefix[geometryType];
+    			const colorLabel = color[geometryType];
 
 				const data = sharedGeoJsonDataMap.value[sourcePrefix + id];
 				const processedData = processData(data, columnName, colorLabel);

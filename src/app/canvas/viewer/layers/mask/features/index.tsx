@@ -3,37 +3,32 @@ import { Lines } from './lines';
 import { Points } from './points';
 import { Polygons } from './polygons';
 
-// Context imports
-import { useMarkers } from 'context/markers';
-
 export const Features = ({ boundary, marker }: any) => {
-	const { providers } = useMarkers();
-
 	if (!boundary) return <></>;
-	
-	const currentProvider = providers.find((item: any) => item.name === marker.name);
 
+	const { id, geometryType, layer } = marker;
+	
 	return (	
 		<div>
-			{currentProvider.type === 'LineString' && 
+			{geometryType === 'LineString' && 
 				<Lines 
 					boundary={boundary} 
-					layer={currentProvider.layer}
-					markerId={marker.id}
+					layer={layer}
+					markerId={id}
 				/>
 			}
-			{currentProvider.type === 'Polygon' && 
+			{geometryType === 'Polygon' && 
 				<Polygons 
 					boundary={boundary} 
-					layer={currentProvider.layer}
-					markerId={marker.id}
+					layer={layer}
+					markerId={id}
 				/>
 			}
-			{currentProvider.type === 'Point' && 
+			{geometryType === 'Point' && 
 				<Points 
 					boundary={boundary} 
-					layer={currentProvider.layer}
-					markerId={marker.id}
+					layer={layer}
+					markerId={id}
 				/>
 			}
 		</div>

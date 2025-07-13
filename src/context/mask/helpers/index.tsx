@@ -46,11 +46,7 @@ export const filterGeometries = (features: any[], boundary: any, source: string)
 
 const getLineFeatures = (geometry: any, properties: any) => {
   if (geometry.type === 'LineString') {
-    return [{
-      type: 'Feature',
-      geometry,
-      properties,
-    }];
+    return [{ type: 'Feature', geometry, properties }];
   } 
   else if (geometry.type === 'MultiLineString') {
     return geometry.coordinates.map((coordinates: any) => ({

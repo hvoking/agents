@@ -37,7 +37,6 @@ export const MarkersProvider = ({children}: any) => {
 				id: getMarkerId(markers),
 				center: event.lngLat,
 				image: currentImage,
-				...currentProvider,
 				radius: 0.5,
 				contoursMinutes: 10,
 				fillColor: "rgba(166, 204, 245, 0.8)",
@@ -46,7 +45,8 @@ export const MarkersProvider = ({children}: any) => {
 				strokeWidth: 4,
 				strokeOpacity: 0.8,
 				routingProfile: "walking",
-				geometryType: "circle",
+				boundaryType: "circle",
+				...currentProvider,
 			};
 			setMarkers((prev: any) => ({ 
 				...prev, 

@@ -1,37 +1,37 @@
 export const providers = [
 	{
 		name: "streets",
+		label: 'Streets', 
 		provider: "overture", 
 		layer: 'rotterdam_roads', 
-		label: 'Streets', 
-		type: "LineString", 
+		geometryType: "LineString", 
 		columnName: "road_class", 
 		graphicType: "dots"
 	},
 	{
 		name: "buildings",
+		label: 'Buildings', 
 		provider: "overture", 
 		layer: 'buildings-overture', 
-		label: 'Buildings', 
-		type: "Polygon", 
+		geometryType: "Polygon", 
 		columnName: "subtype", 
 		graphicType: "dots"
 	},
 	{
 		name: "foursquare",
+		label: 'Points of Interest', 
 		provider: "foursquare", 
 		layer: 'points-foursquare', 
-		label: 'Points of Interest', 
-		type: "Point", 
+		geometryType: "Point", 
 		columnName: "category", 
 		graphicType: "dots"
 	},
 	{
 		name: "inside_airbnb",
+		label: 'Properties', 
 		provider: "inside_airbnb", 
 		layer: 'points-airbnb', 
-		label: 'Properties', 
-		type: "Point", 
+		geometryType: "Point", 
 		columnName: "property_type", 
 		graphicType: "gauge"
 	},

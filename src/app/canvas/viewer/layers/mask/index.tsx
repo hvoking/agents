@@ -17,12 +17,12 @@ export const Mask = ({ marker }: any) => {
 
   const [ boundary, setBoundary ] = useState<any>(null);
 
-  const { id, center, radius, geometryType } = marker; 
+  const { id, center, radius, boundaryType } = marker; 
   const { lng, lat } = center;
 
   useEffect(() => {
     const fetchBoundary = async (marker: any) => {
-      if (geometryType === 'iso') {
+      if (boundaryType === 'iso') {
         const data = await fetchIsochrone(marker);
         setBoundary(data.features[0]);
       } else {

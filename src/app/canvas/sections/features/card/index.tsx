@@ -13,7 +13,7 @@ import { useMask } from 'context/mask';
 export const Card = ({ marker }: any) => {
 	const [ activeCharts, setActiveCharts ] = useState(true);
 	const { sharedGeoJsonDataMap } = useMask();
-	const { id, fillColor, fillOpacity, type: currentType, columnName, graphicType, provider } = marker;
+	const { id, fillColor, fillOpacity, geometryType, columnName, graphicType, provider } = marker;
 
 	const markerColor = fillColor.replace("b", "ba").replace(")", `, ${fillOpacity})`)
 
@@ -22,9 +22,9 @@ export const Card = ({ marker }: any) => {
 	const pointsData = sharedGeoJsonDataMap.value[`points-source-${id}`];
 	const clusterData = sharedGeoJsonDataMap.value[`cluster-source-${id}`];
 
-	const isLine = currentType === "LineString";
-	const isPoint = currentType === 'Point';
-	const isCluster = currentType === 'Cluster';
+	const isLine = geometryType === "LineString";
+	const isPoint = geometryType === 'Point';
+	const isCluster = geometryType === 'Cluster';
 
 	const currentData = 
 		isLine ? linesData : 
