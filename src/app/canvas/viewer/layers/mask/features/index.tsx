@@ -6,7 +6,7 @@ import { Polygons } from './polygons';
 // Context imports
 import { useMarkers } from 'context/markers';
 
-export const Layers = ({ boundary, marker }: any) => {
+export const Features = ({ boundary, marker }: any) => {
 	const { providers } = useMarkers();
 
 	if (!boundary) return <></>;
@@ -40,4 +40,4 @@ export const Layers = ({ boundary, marker }: any) => {
 	)
 }
 
-Layers.displayName="Layers";
+Features.displayName="Features";

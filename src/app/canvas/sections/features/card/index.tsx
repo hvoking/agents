@@ -9,15 +9,11 @@ import './styles.scss';
 
 // Context imports
 import { useMask } from 'context/mask';
-import { useMarkers } from 'context/markers';
 
 export const Card = ({ marker }: any) => {
 	const [ activeCharts, setActiveCharts ] = useState(true);
-	
 	const { sharedGeoJsonDataMap } = useMask();
-	const { providers } = useMarkers();
-
-	const { id, name, fillColor, fillOpacity } = marker;
+	const { id, fillColor, fillOpacity, type: currentType, columnName, graphicType, provider } = marker;
 
 	const markerColor = fillColor.replace("b", "ba").replace(")", `, ${fillOpacity})`)
 
@@ -25,10 +21,6 @@ export const Card = ({ marker }: any) => {
 	const polygonsData = sharedGeoJsonDataMap.value[`polygons-source-${id}`];
 	const pointsData = sharedGeoJsonDataMap.value[`points-source-${id}`];
 	const clusterData = sharedGeoJsonDataMap.value[`cluster-source-${id}`];
-
-	const currentProvider = providers.find((item: any) => item.name === name);
-
-	const { type: currentType, columnName, graphicType, provider } = currentProvider;
 
 	const isLine = currentType === "LineString";
 	const isPoint = currentType === 'Point';

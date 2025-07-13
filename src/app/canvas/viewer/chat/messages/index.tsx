@@ -13,7 +13,7 @@ import { useMarkers } from 'context/markers';
 export const Messages = () => {
     // Context hooks
     const { fetchRag } = useRagApi();
-    const { markers, providers, currentMarkerId } = useMarkers();
+    const { markers, currentMarkerId } = useMarkers();
 
     // Refs and state
     const [ requestData, setRequestData ] = useState<any>(null);
@@ -48,9 +48,7 @@ export const Messages = () => {
 				markerId={currentMarkerId || ''}
 			/>
 			<Input
-				markerId={currentMarkerId}
 				currentMarker={currentMarker}
-				providers={providers}
 				setRequestData={setRequestData}
 				updateResponse={updateResponse}
 				setRequestText={setRequestText}

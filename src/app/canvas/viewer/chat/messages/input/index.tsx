@@ -20,7 +20,7 @@ const color: any = {
 	Polygon: 'fill-color',
 }
 
-export const Input = ({ markerId, currentMarker, providers, setRequestData, updateResponse, setRequestText }: any) => {
+export const Input = ({ currentMarker, setRequestData, updateResponse, setRequestText }: any) => {
 	const [ searchText, setSearchText ] = useState<any>(null);
 	const { sharedGeoJsonDataMap } = useMask();
 	const { currentAddress } = useGoogleReverseApi();
@@ -40,21 +40,18 @@ export const Input = ({ markerId, currentMarker, providers, setRequestData, upda
     	cleanSuggestions();
 
     	if (currentMarker || currentMarker.length > 0) {
-    		const { name } = currentMarker;
-    		const currentProvider = providers.find((item: any) => item.name === name);
+    		const { id, type: currentType, columnName, provider } = currentMarker;
 
-    		if (currentProvider) {
-    			const { type: currentType, columnName } = currentProvider;
-    			
+    		if (provider) {
     			const sourcePrefix = prefix[currentType];
     			const colorLabel = color[currentType];
 
-				const data = sharedGeoJsonDataMap.value[sourcePrefix + markerId];
+				const data = sharedGeoJsonDataMap.value[sourcePrefix + id];
 				const processedData = processData(data, columnName, colorLabel);
 				
 				const geoInfo = {
 					geobot_info: currentMarker, 
-					data_provider_info: currentProvider, 
+					data_provider_info: provider, 
 					current_layer_data: processedData,
 					location_info: currentAddress,
 				}

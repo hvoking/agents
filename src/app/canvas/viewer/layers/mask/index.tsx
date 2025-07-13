@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 // App imports
 import { CustomMarker } from './marker';
 import { Boundary } from './boundary';
-import { Layers } from './layers';
+import { Features } from './features';
 
 // Context imports
 import { useIsochroneApi } from 'context/api/isochrone';
@@ -36,7 +36,7 @@ export const Mask = ({ marker }: any) => {
   return (
     <div key={id}>
       <Boundary marker={marker} boundary={boundary}/>
-      <Layers marker={marker} boundary={boundary}/>
+      <Features marker={marker} boundary={boundary}/>
       <CustomMarker marker={marker}/>
     </div>
   )

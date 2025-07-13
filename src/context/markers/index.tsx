@@ -12,7 +12,7 @@ export const MarkersProvider = ({children}: any) => {
 	const [ markers, setMarkers ] = useState<any>({});
 	const [ currentMarkerId, setCurrentMarkerId ] = useState<any>(null);
 	const [ currentImage, setCurrentImage ] = useState<any>(null);
-	const [ currentName, setCurrentName ] = useState<any>(null);
+	const [ currentProvider, setCurrentProvider ] = useState<any>(null);
 
 	const [ activePage, setActivePage ] = useState<any>(null);
 
@@ -25,13 +25,19 @@ export const MarkersProvider = ({children}: any) => {
 	    return maxId + 1;
 	};
 
+	const activateMarker = (src: any, provider: any) => {
+		setAddPin((prev: boolean) => !prev);
+		setCurrentImage(src);
+		setCurrentProvider(provider);
+	}
+
 	const addMarker = (event: any) => {
     	if (addPin === true) {
 			const newMarker = {
 				id: getMarkerId(markers),
 				center: event.lngLat,
 				image: currentImage,
-				name: currentName,
+				...currentProvider,
 				radius: 0.5,
 				contoursMinutes: 10,
 				fillColor: "rgba(166, 204, 245, 0.8)",
@@ -95,12 +101,12 @@ export const MarkersProvider = ({children}: any) => {
 			updateMarkers,
 			currentMarkerId, setCurrentMarkerId,
 			currentImage, setCurrentImage,
-			currentName, setCurrentName,
+			currentProvider, setCurrentProvider,
 			activePage, setActivePage,
 			radius, setRadius,
 			addPin, setAddPin,
 			providers, colorPalette,
-			rejectMarker
+			rejectMarker, activateMarker
 		}}>
 			{children}
 		</MarkersContext.Provider>
