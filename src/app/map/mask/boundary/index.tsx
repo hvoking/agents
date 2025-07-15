@@ -32,7 +32,7 @@ export const Boundary = ({ marker, boundary }: any) => {
       >
         {layers.map((currentLayer: any) => 
           <Layer key={currentLayer.id} {...currentLayer}/>)
-      }
+        }
       </Source>
     )
 }

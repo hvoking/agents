@@ -7,17 +7,12 @@ import { fillProperties, toFeatureCollection, filterGeometries, filterLines } fr
 // Context imports
 import { useGeo } from 'context/geo';
 
-// Third-party imports
-import { signal } from '@preact/signals-react';
-
 const MaskContext: React.Context<any> = createContext(null)
 
 export const useMask = () => useContext(MaskContext)
 
 export const MaskProvider = ({children}: any) => {
 	const { mapRef } = useGeo();
-
-	const sharedGeoJsonDataMap = signal({});
 
 	const sourceIds = [
 		'points-airbnb', 
@@ -26,30 +21,35 @@ export const MaskProvider = ({children}: any) => {
 		'buildings-overture'
 	];
 
+	const getLayersIdsBySourceLayer = (sourceLayer: string) => {
+		return mapRef?.current?.getStyle()
+			.layers
+			.filter((layer: any) => layer['source'] === sourceLayer)
+			.map((layer: any) => layer.id);
+	}
+
+	const getFeaturesBySource = (currentSource: any) => {
+		const layers = getLayersIdsBySourceLayer(currentSource);
+		const currentFeatures = mapRef.current.queryRenderedFeatures({ layers });
+		return currentFeatures;
+	}
+
 	const getGeojson = (boundary: any, source: string, geometryType: string) => {
 		const fillProperty = fillProperties[geometryType] || 'fill-color';
-		const isLine = geometryType === 'LineString';
+		const isLine = geometryType === 'LineString' || geometryType === 'MultiLineString';
 
-		const layerIds = mapRef.current.getStyle()
-		  .layers
-		  .filter((layer: any) => sourceIds.includes(layer.source))
-		  .map((layer: any) => layer.id);
+		const currentFeatures = getFeaturesBySource(source);
 
-		const mapFeatures = mapRef.current.queryRenderedFeatures({ layers: layerIds });
-		
 		if (!isLine) {
-			const geomFeatures = filterGeometries(mapFeatures, boundary, source);
+			const geomFeatures = filterGeometries(currentFeatures, boundary);
 			return toFeatureCollection(geomFeatures, fillProperty);
 		}
-		const features = filterLines(mapFeatures, boundary, source, fillProperty);
+		const features = filterLines(currentFeatures, boundary, source, fillProperty);
 		return { type: 'FeatureCollection', features};
 	};
 
 	return (
-		<MaskContext.Provider value={{ 
-			getGeojson, 
-			sharedGeoJsonDataMap 
-		}}>
+		<MaskContext.Provider value={{ getGeojson }}>
 			{children}
 		</MaskContext.Provider>
 	)

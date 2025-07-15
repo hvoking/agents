@@ -46,6 +46,7 @@ export const MarkersProvider = ({children}: any) => {
 				strokeOpacity: 0.8,
 				routingProfile: "walking",
 				boundaryType: "circle",
+				activeTrash: false,
 				...currentProvider,
 			};
 			setMarkers((prev: any) => ({ 

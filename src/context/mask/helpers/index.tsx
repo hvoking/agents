@@ -26,24 +26,6 @@ export const getColor = (paint: any, property: string) => {
     return processedPaint;
 };
 
-export const toFeatureCollection = (originalFeatures: any[], paintProperty: string) => {
-	const features = originalFeatures.map((item) => {
-		const { geometry, properties: itemProperties, layer } = item;
-
-		const color = getColor(layer.paint, paintProperty);
-    const properties = { ...itemProperties, ...color }
-
-		return ({ type: 'Feature', geometry, properties })
-	})
-	return ({ type: 'FeatureCollection', features })
-};
-
-export const filterGeometries = (features: any[], boundary: any, source: string) =>
-  features.filter(({ source: src, geometry }) =>
-    src === source && 
-    turf.booleanPointInPolygon(turf.centroid(geometry), boundary)
-  );
-
 const getLineFeatures = (geometry: any, properties: any) => {
   if (geometry.type === 'LineString') {
     return [{ type: 'Feature', geometry, properties }];
@@ -91,4 +73,22 @@ export const filterLines = (mapFeatures: any[], boundary: any, source: string, f
     const featuresInside = getFeaturesInside(lineFeatures, boundary);
     return featuresInside;
   });
+};
+
+
+export const filterGeometries = (features: any[], boundary: any) =>
+  features.filter(({ geometry }) =>
+    turf.booleanPointInPolygon(turf.centroid(geometry), boundary)
+  );
+  
+export const toFeatureCollection = (originalFeatures: any[], paintProperty: string) => {
+  const features = originalFeatures.map((item) => {
+    const { geometry, properties: itemProperties, layer } = item;
+
+    const color = getColor(layer.paint, paintProperty);
+    const properties = { ...itemProperties, ...color }
+
+    return ({ type: 'Feature', geometry, properties })
+  })
+  return ({ type: 'FeatureCollection', features })
 };

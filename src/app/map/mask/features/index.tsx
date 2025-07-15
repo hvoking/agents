@@ -3,32 +3,27 @@ import { Lines } from './lines';
 import { Points } from './points';
 import { Polygons } from './polygons';
 
-export const Features = ({ boundary, marker }: any) => {
-	if (!boundary) return <></>;
+export const Features = ({ marker }: any) => {
+	const { geometryType, layer } = marker;
 
-	const { id, geometryType, layer } = marker;
-	
 	return (	
 		<div>
 			{geometryType === 'LineString' && 
 				<Lines 
-					boundary={boundary} 
-					layer={layer}
-					markerId={id}
+					source={layer}
+					marker={marker}
 				/>
 			}
 			{geometryType === 'Polygon' && 
 				<Polygons 
-					boundary={boundary} 
-					layer={layer}
-					markerId={id}
+					source={layer}
+					marker={marker}
 				/>
 			}
 			{geometryType === 'Point' && 
 				<Points 
-					boundary={boundary} 
-					layer={layer}
-					markerId={id}
+					source={layer}
+					marker={marker}
 				/>
 			}
 		</div>

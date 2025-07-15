@@ -3,22 +3,24 @@ import { useState } from 'react';
 
 // App imports
 import { Tiles } from './tiles';
-import { Layers } from './layers';
 import { Tooltip } from './tooltip';
 import { Chat } from './chat';
+import { Mask } from './mask';
 
 // Context imports
 import { useGeo } from 'context/geo';
 import { useBoundary } from 'context/events/boundary';
+import { useMarkers } from 'context/markers';
 
 // Third-party imports
 import { Map } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-export const Viewer = () => {
+export const MapView = () => {
 	const { viewport, mapRef, mapStyle } = useGeo();
+	const { markers } = useMarkers();
 	const { onContextMenu, onClick } = useBoundary();
-	
+
 	const [ isMapLoaded, setIsMapLoaded ] = useState(false);
 	
 	return (
@@ -34,7 +36,9 @@ export const Viewer = () => {
 			{isMapLoaded && 
 				<>
 					<Tiles/>
-					<Layers/>
+					{Object.entries(markers).map(([ key, value ]: any) => 
+						<Mask key={key} marker={value}/>
+					)}
 					<Tooltip/>
 					<Chat/>
 				</>
@@ -43,4 +47,4 @@ export const Viewer = () => {
 	)
 }
 
-Viewer.displayName="Viewer";
+MapView.displayName="MapView";
