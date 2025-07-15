@@ -1,5 +1,5 @@
 import { MarkersProvider } from './markers';
-import { MaskProvider } from './mask';
+import { LayersProvider } from './layers';
 import { GeoProvider } from './geo';
 import { ApiProvider } from './api';
 import { EventsProvider } from './events';
@@ -9,7 +9,7 @@ export const ContextProvider = ({children}: any) => {
   return (
     <GeoProvider>
     <MarkersProvider>
-    <MaskProvider>
+    <LayersProvider>
     <ApiProvider>
     <EventsProvider>
     <SizesProvider>
@@ -17,7 +17,7 @@ export const ContextProvider = ({children}: any) => {
     </SizesProvider>
     </EventsProvider>
     </ApiProvider>
-    </MaskProvider>
+    </LayersProvider>
     </MarkersProvider>
     </GeoProvider>
   )
