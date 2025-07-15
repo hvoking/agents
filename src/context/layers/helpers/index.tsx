@@ -1,3 +1,6 @@
+// App imports
+import { roadColors, buildingColors } from '../styles';
+
 // Third-party imports
 import * as turf from '@turf/turf';
 
@@ -7,7 +10,7 @@ export const fillProperties: any = {
 	LineString: 'line-color'
 }
 
-export const getColor = (paint: any, property: string) => {
+export const processColor = (paint: any, property: string) => {
     const processedPaint = { ...paint };
 
     if (paint[property]) {
@@ -24,6 +27,12 @@ export const getColor = (paint: any, property: string) => {
         `.replace(/\s/g, '');
     }
     return processedPaint;
+};
+
+const getColor = (layerType: any, layerPaint: any, property: string) => {
+  const resultPaint = Object.assign({}, layerPaint);
+  resultPaint[property] = property === 'line-color' ? roadColors[layerType] : buildingColors[layerType];
+  return resultPaint;
 };
 
 const getLineFeatures = (geometry: any, properties: any) => {
@@ -63,8 +72,8 @@ export const filterLines = (mapFeatures: any[], boundary: any, source: string, f
 
   return mapFeatures.flatMap((item: any) => {
     const { geometry, layer, properties: itemProperties } = item;
-
-    const color = getColor(layer.paint, fillProperty);
+    const color = getColor(itemProperties.type, layer.paint, fillProperty);
+    // const color = getColor(layer.paint, fillProperty);
     const properties = { ...color, ...itemProperties };
 
     const lineFeatures = getLineFeatures(geometry, properties);
@@ -79,11 +88,12 @@ export const filterGeometries = (features: any[], boundary: any) =>
     turf.booleanPointInPolygon(turf.centroid(geometry), boundary)
   );
   
-export const toFeatureCollection = (originalFeatures: any[], paintProperty: string) => {
+export const toFeatureCollection = (originalFeatures: any[], fillProperty: string) => {
   const features = originalFeatures.map((item) => {
     const { geometry, properties: itemProperties, layer } = item;
 
-    const color = getColor(layer.paint, paintProperty);
+    // const color = getColor(layer.paint, fillProperty);
+    const color = processColor(layer.paint, fillProperty);
     const properties = { ...itemProperties, ...color }
 
     return ({ type: 'Feature', geometry, properties })

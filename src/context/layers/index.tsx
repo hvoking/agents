@@ -16,9 +16,17 @@ export const LayersProvider = ({children}: any) => {
 
 	const getLayersIdsBySourceLayer = (sourceLayer: string) => {
 		return mapRef?.current?.getStyle()
-			.layers
-			.filter((layer: any) => layer['source'] === sourceLayer)
-			.map((layer: any) => layer.id);
+		.layers
+		.filter((layer: any) => {
+			if (layer['source-layer'] === 'default') {
+				return layer['source'] === sourceLayer	
+			}
+			else {
+				return layer['source-layer'] === sourceLayer
+			}
+			
+		})
+		.map((layer: any) => layer.id);
 	}
 
 	const getFeaturesBySource = (currentSource: any) => {

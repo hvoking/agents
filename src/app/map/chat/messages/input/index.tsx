@@ -8,12 +8,6 @@ import './styles.scss';
 // Context imports
 import { useGoogleReverseApi } from 'context/api/google/reverse';
 
-const color: any = {
-	LineString: 'line-color',
-	Point: 'circle-color',
-	Polygon: 'fill-color',
-}
-
 export const Input = ({ currentMarker, setRequestData, updateResponse, setRequestText }: any) => {
 	const [ searchText, setSearchText ] = useState<any>(null);
 	const { currentAddress } = useGoogleReverseApi();
@@ -33,12 +27,10 @@ export const Input = ({ currentMarker, setRequestData, updateResponse, setReques
     	cleanSuggestions();
 
     	if (currentMarker || currentMarker.length > 0) {
-    		const { id, data, geometryType, columnName, provider } = currentMarker;
+    		const { data, columnName, provider } = currentMarker;
 
     		if (provider) {
-    			const colorLabel = color[geometryType];
-
-				const processedData = processData(data, columnName, colorLabel);
+				const processedData = processData(data, columnName);
 				
 				const geoInfo = {
 					geobot_info: currentMarker, 
