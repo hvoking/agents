@@ -3,7 +3,7 @@ import { useState, useContext, createContext } from 'react';
 
 // Context imports
 import { useMarkers } from 'context/markers';
-import { useLayers } from 'context/layers';
+import { useMask } from 'context/mask';
 import { useIsochroneApi } from 'context/api/isochrone';
 
 // Third-party imports
@@ -15,7 +15,7 @@ export const useMarkerEvents = () => useContext(MarkerEventsContext)
 
 export const MarkerEventsProvider = ({ children }: any) => {
 	const { updateMarkers } = useMarkers();
-	const { getGeojson } = useLayers();
+	const { getGeojson } = useMask();
 	const { fetchIsochrone } = useIsochroneApi();
 
 	const [ dragging, setDragging ] = useState(false);

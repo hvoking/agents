@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Tiles } from './tiles';
 import { Tooltip } from './tooltip';
 import { Chat } from './chat';
-import { Layers } from './layers';
+import { Mask } from './mask';
 
 // Context imports
 import { useGeo } from 'context/geo';
@@ -37,7 +37,7 @@ export const MapView = () => {
 				<>
 					<Tiles/>
 					{Object.entries(markers).map(([ key, marker ]: any) => 
-						<Layers key={key} marker={marker}/>
+						<Mask key={key} marker={marker}/>
 					)}
 					<Tooltip/>
 					<Chat/>
