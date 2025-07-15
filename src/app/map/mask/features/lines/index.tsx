@@ -13,7 +13,7 @@ export const Lines = ({ source, marker }: any) => {
 	const sourceId = `lines-source-${id}`;
 	const layerId = `lines-layer-${id}`;
 
-	const layerStyle = getLinesStyle(layerId, sourceId);
+	const layerStyle: any = getLinesStyle(layerId, source);
 
 	return (
 		<Source 

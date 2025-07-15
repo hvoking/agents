@@ -4,7 +4,7 @@ import { getPointsStyle } from '../../styles/points';
 // Third-party imports
 import { Source, Layer } from 'react-map-gl/mapbox';
 
-export const Points = ({ marker, layer}: any) => {
+export const Points = ({ marker}: any) => {
   const { id, data } = marker;
 
   const sourceId = `points-source-${id}`;

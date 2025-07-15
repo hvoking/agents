@@ -4,9 +4,8 @@ import { getPolygonsStyle } from '../../styles/polygons';
 // Third-party imports
 import { Source, Layer } from 'react-map-gl/mapbox';
 
-export const Polygons = ({ source, marker }: any) => {
+export const Polygons = ({ marker }: any) => {
 	const { id, data } = marker;
-
     const sourceId = `polygons-source-${id}`;
   	const layerId = `polygons-layer-${id}`;
 

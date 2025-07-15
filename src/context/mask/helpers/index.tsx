@@ -2,7 +2,7 @@
 import * as turf from '@turf/turf';
 
 export const fillProperties: any = {
-	Point: 'circle-color',
+	Points: 'circle-color',
 	Polygon: 'fill-color',
 	LineString: 'line-color'
 }
@@ -62,9 +62,7 @@ export const filterLines = (mapFeatures: any[], boundary: any, source: string, f
   if (!mapFeatures) return [];
 
   return mapFeatures.flatMap((item: any) => {
-    const { geometry, layer, source: src, properties: itemProperties } = item;
-
-    if (src !== source) return [];
+    const { geometry, layer, properties: itemProperties } = item;
 
     const color = getColor(layer.paint, fillProperty);
     const properties = { ...color, ...itemProperties };

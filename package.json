@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@preact/signals-react": "^3.2.0",
     "@turf/turf": "^7.1.0",
     "@types/d3": "^7.4.3",
     "@types/node": "^16.7.13",

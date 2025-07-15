@@ -4,30 +4,24 @@ import { Points } from './points';
 import { Polygons } from './polygons';
 
 export const Features = ({ marker }: any) => {
-	const { geometryType, layer } = marker;
+	const { geometryType, source } = marker;
 
 	return (	
-		<div>
+		<>
 			{geometryType === 'LineString' && 
 				<Lines 
-					source={layer}
+					source={source}
 					marker={marker}
 				/>
+			}
+			{geometryType === 'Points' && 
+				<Points marker={marker}/>
 			}
 			{geometryType === 'Polygon' && 
-				<Polygons 
-					source={layer}
-					marker={marker}
-				/>
+				<Polygons marker={marker}/>
 			}
-			{geometryType === 'Point' && 
-				<Points 
-					source={layer}
-					marker={marker}
-				/>
-			}
-		</div>
+		</>
 	)
 }
 
-Features.displayName="Features";
+Features.displayName='Features';

@@ -14,13 +14,6 @@ export const useMask = () => useContext(MaskContext)
 export const MaskProvider = ({children}: any) => {
 	const { mapRef } = useGeo();
 
-	const sourceIds = [
-		'points-airbnb', 
-		'points-foursquare', 
-		'rotterdam_roads', 
-		'buildings-overture'
-	];
-
 	const getLayersIdsBySourceLayer = (sourceLayer: string) => {
 		return mapRef?.current?.getStyle()
 			.layers

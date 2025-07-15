@@ -21,7 +21,7 @@ export const Boundary = ({ marker, boundary }: any) => {
   const fillLayer = getFillLayer(fillId, sourceId, fillColor, fillOpacity);
   const borderLayer = getStrokeLayer(borderId, sourceId, stroke, strokeOpacity, strokeWidth);
 
-  const layers: any = [ eraserLayer, fillLayer, borderLayer ]
+  const layers: any = [ eraserLayer, fillLayer, borderLayer ];
     
     return (
       <Source 

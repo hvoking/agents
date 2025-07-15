@@ -6,14 +6,8 @@ import { processData } from './data';
 import './styles.scss';
 
 // Context imports
-import { useMask } from 'context/mask';
 import { useGoogleReverseApi } from 'context/api/google/reverse';
 
-const prefix: any = {
-	LineString: "lines-source-",
-	Point: "points-source-",
-	Polygon: "polygons-source-",
-}
 const color: any = {
 	LineString: 'line-color',
 	Point: 'circle-color',
@@ -22,7 +16,6 @@ const color: any = {
 
 export const Input = ({ currentMarker, setRequestData, updateResponse, setRequestText }: any) => {
 	const [ searchText, setSearchText ] = useState<any>(null);
-	const { sharedGeoJsonDataMap } = useMask();
 	const { currentAddress } = useGoogleReverseApi();
 
 	const handleChange = (e: any) => {
@@ -40,13 +33,11 @@ export const Input = ({ currentMarker, setRequestData, updateResponse, setReques
     	cleanSuggestions();
 
     	if (currentMarker || currentMarker.length > 0) {
-    		const { id, geometryType, columnName, provider } = currentMarker;
+    		const { id, data, geometryType, columnName, provider } = currentMarker;
 
     		if (provider) {
-    			const sourcePrefix = prefix[geometryType];
     			const colorLabel = color[geometryType];
 
-				const data = sharedGeoJsonDataMap.value[sourcePrefix + id];
 				const processedData = processData(data, columnName, colorLabel);
 				
 				const geoInfo = {
