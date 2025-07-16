@@ -1,6 +1,3 @@
-// App imports
-import { getPolygonsStyle } from '../styles/polygons';
-
 // Third-party imports
 import { Source, Layer } from 'react-map-gl/mapbox';
 
@@ -9,7 +6,18 @@ export const Polygons = ({ marker }: any) => {
     const sourceId = `polygons-source-${id}`;
   	const layerId = `polygons-layer-${id}`;
 
-	const layerStyle = getPolygonsStyle(layerId, sourceId);
+	const layerStyle: any = {
+		id: layerId,
+		source: sourceId,
+		type: "fill-extrusion",
+		paint: {
+			"fill-extrusion-color": ["get", "fill-color"],
+			'fill-extrusion-height': ['coalesce', ['get', 'height'], 10],
+			'fill-extrusion-base': 0,
+			"fill-extrusion-vertical-gradient": true,
+			"fill-extrusion-opacity": 0.6,
+		},
+	};
 
 	return (
 		<Source 

@@ -1,6 +1,3 @@
-// App imports
-import { getPointsStyle } from '../styles/points';
-
 // Third-party imports
 import { Source, Layer } from 'react-map-gl/mapbox';
 
@@ -10,7 +7,15 @@ export const Points = ({ marker}: any) => {
   const sourceId = `points-source-${id}`;
   const layerId = `points-layer-${id}`;
 
-  const layerStyle = getPointsStyle(layerId, sourceId);
+  const layerStyle: any = {
+    id: layerId,
+    source: sourceId,
+    type: "circle",
+    paint: {
+      'circle-radius': 3,
+      'circle-color': ['get', 'circle-color']
+    }
+  };
 
   return (
     <Source 

@@ -16,12 +16,20 @@ export const providersArray = [
 		geometryType: "LineString",
 	},
 	{
-		name: "buildings",
+		name: "buildings_overture",
 		provider: "overture", 
 		source: 'buildings-overture',
 		layer: 'buildings-overture', 
 		geometryType: "Polygon", 
 		columnName: "subtype", 
+	},
+	{
+		name: "buildings",
+		provider: "mapbox", 
+		source: 'composite',
+		layer: 'building', 
+		columnName: "type", 
+		geometryType: "Polygon", 
 	},
 	{
 		name: "foursquare",

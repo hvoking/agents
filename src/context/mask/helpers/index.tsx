@@ -1,53 +1,58 @@
-// App imports
-import { roadColors, buildingColors } from '../styles';
-
 // Third-party imports
 import * as turf from '@turf/turf';
 
-export const fillProperties: any = {
-	Points: 'circle-color',
-	Polygon: 'fill-color',
-	LineString: 'line-color'
-}
+// Constants
+export const fillProperties: Record<string, string> = {
+  Points: 'circle-color',
+  Polygon: 'fill-color',
+  LineString: 'line-color',
+};
+
+const colorPalette = [
+  'rgba(216, 131, 255, 0.6)',
+  'rgba(247, 121, 118, 0.6)',
+  'rgba(250, 189, 74, 0.6)',
+  'rgba(255, 232, 8, 0.6)',
+  'rgba(82, 227, 225, 0.6)',
+  'rgba(123, 210, 223, 0.6)',
+  'rgba(2, 194, 178, 0.6)',
+  'rgba(255, 152, 0, 0.6)',
+  'rgba(155, 48, 255, 0.6)',
+  'rgba(34, 255, 102, 0.6)'
+]
+
+// Utils
+const hashStringToNumber = (str: any): number =>
+  [...str].reduce((acc, c) => acc + c.charCodeAt(0), 0);
+
+const getFeatureColor = (feature: string, palette: string[]): string => {
+  const hash = hashStringToNumber(feature);
+  return palette[hash % palette.length];
+};
 
 export const processColor = (paint: any, property: string) => {
-  const resultPaint = Object.assign({}, paint);
-
-  if (paint[property]) {
-      const color = paint[property];
-      const { r, g, b, a } = color;
-
-      resultPaint[property] = `
-      	rgba(
-      		${Math.round(r * 255)}, 
-      		${Math.round(g * 255)}, 
-      		${Math.round(b * 255)}, 
-      		${a}
-      	)
-      `.replace(/\s/g, '');
-  }
-  return resultPaint;
-};
-
-const getColor = (layerType: any, paint: any, property: string) => {
-  const resultPaint = Object.assign({}, paint);
-
-  const color =
-    property === 'line-color'
-      ? roadColors[layerType]
-      : buildingColors[layerType];
-
+  const result: any = {};
+  const color = paint[property];
   if (color) {
-    resultPaint[property] = color;
+    const { r, g, b, a } = color;
+    result[property] = `
+      rgba(
+        ${Math.round(r * 255)}, 
+        ${Math.round(g * 255)}, 
+        ${Math.round(b * 255)}, 
+        ${a}
+      )
+    `.replace(/\s/g, '');
   }
-  return resultPaint;
+  return result;
 };
 
-const getLineFeatures = (geometry: any, properties: any) => {
+// Geometry Utils
+const extractLineFeatures = (geometry: any, properties: Record<string, any>) => {
   if (geometry.type === 'LineString') {
     return [{ type: 'Feature', geometry, properties }];
-  } 
-  else if (geometry.type === 'MultiLineString') {
+  }
+  if (geometry.type === 'MultiLineString') {
     return geometry.coordinates.map((coordinates: any) => ({
       type: 'Feature',
       geometry: { type: 'LineString', coordinates },
@@ -57,55 +62,51 @@ const getLineFeatures = (geometry: any, properties: any) => {
   return [];
 };
 
-const getFeaturesInside = (lineFeatures: any[], boundary: any) => {
-  return lineFeatures.flatMap((line) => {
-    if (turf.booleanWithin(line, boundary)) {
-      return [line];
-    }
-    if (turf.booleanIntersects(line, boundary)) {
-      const split = turf.lineSplit(line, boundary);
+const getFeaturesWithinBoundary = (features: any[], boundary: any) => {
+  return features.flatMap((feature) => {
+    if (turf.booleanWithin(feature, boundary)) return [feature];
+
+    if (turf.booleanIntersects(feature, boundary)) {
+      const split = turf.lineSplit(feature, boundary);
       return split.features
-        .filter((feature) => turf.booleanWithin(feature, boundary))
-        .map((feature) => ({
-          ...feature,
-          properties: line.properties,
-        }));
+        .filter((f) => turf.booleanWithin(f, boundary))
+        .map((f) => ({ ...f, properties: feature.properties }));
     }
     return [];
   });
 };
 
-export const filterLines = (mapFeatures: any[], boundary: any, source: string, fillProperty: any) => {
+// Main Exports
+export const filterLines = (mapFeatures: any[], boundary: any, source: string, fillProperty: string) => {
   if (!mapFeatures) return [];
 
-  return mapFeatures.flatMap((item: any) => {
-    const { geometry, layer, properties: itemProperties } = item;
-    const color =
-      item.source === 'composite' ?
-      getColor(itemProperties.type, layer.paint, fillProperty) :
-      processColor(layer.paint, fillProperty);
-      
-    const properties = { ...color, ...itemProperties };
+  return mapFeatures.flatMap(({ geometry, layer, properties, source: src }: any) => {
+    const color = src === 'composite'
+      ? getFeatureColor(properties.type, colorPalette)
+      : processColor(layer.paint, fillProperty)[fillProperty];
 
-    const lineFeatures = getLineFeatures(geometry, properties);
-    const featuresInside = getFeaturesInside(lineFeatures, boundary);
-    return featuresInside;
+    const enrichedProperties = { ...properties, [fillProperty]: color };
+    const lineFeatures = extractLineFeatures(geometry, enrichedProperties);
+    return getFeaturesWithinBoundary(lineFeatures, boundary);
   });
 };
-
 
 export const filterGeometries = (features: any[], boundary: any) =>
   features.filter(({ geometry }) =>
     turf.booleanPointInPolygon(turf.centroid(geometry), boundary)
   );
-  
-export const toFeatureCollection = (originalFeatures: any[], fillProperty: string) => {
-  const features = originalFeatures.map((item) => {
-    const { geometry, properties: itemProperties, layer } = item;
-    const color = processColor(layer.paint, fillProperty);
-    const properties = { ...itemProperties, ...color }
 
-    return ({ type: 'Feature', geometry, properties })
-  })
-  return ({ type: 'FeatureCollection', features })
+export const toFeatureCollection = (originalFeatures: any[], fillProperty: string): any => {
+  const features = originalFeatures.map(({ geometry, properties, layer, source }: any) => {
+    const color = source === 'composite'
+      ? getFeatureColor(properties.type, colorPalette)
+      : processColor(layer.paint, fillProperty)[fillProperty];
+
+    return {
+      type: 'Feature',
+      geometry,
+      properties: { ...properties, [fillProperty]: color},
+    };
+  });
+  return { type: 'FeatureCollection', features };
 };

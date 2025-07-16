@@ -1,6 +1,3 @@
-// App imports
-import { getLinesStyle } from '../styles/lines';
-
 // Third-party imports
 import { Source, Layer } from 'react-map-gl/mapbox';
 
@@ -10,7 +7,21 @@ export const Lines = ({ marker }: any) => {
 	const sourceId = `lines-source-${id}`;
 	const layerId = `lines-layer-${id}`;
 
-	const layerStyle = getLinesStyle(layerId, sourceId);
+	  const layerStyle: any = {
+	    id: layerId,
+	    source: sourceId,
+	    type: "line",
+	    paint: {
+	      'line-width': [
+	        'interpolate',
+	        ['linear'],
+	        ['zoom'],
+	        13, ['*', ['get', 'line-width'], 1],
+	        16, ['*', ['get', 'line-width'], 2]
+	      ],
+	      'line-color': ['get', 'line-color'],
+	    },
+	  };
 
 	return (
 		<Source 
