@@ -1,5 +1,13 @@
 export const providersArray = [
 	{
+		name: "streets_overture",
+		provider: "overture", 
+		source: 'rotterdam_roads',
+		layer: 'rotterdam_roads',
+		columnName: "road_class", 
+		geometryType: "LineString",
+	},
+	{
 		name: "streets",
 		provider: "mapbox", 
 		source: 'composite',

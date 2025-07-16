@@ -1,6 +1,7 @@
 // App imports
 import { Points } from './points';
 import { Polygons } from './polygons';
+import { Lines } from './lines';
 
 export const Tiles = () => {
 	return (
@@ -14,6 +15,11 @@ export const Tiles = () => {
 				tableSchema={"agents"} 
 				tableName={"rotterdam_foursquare"} 
 				styleName={"points-foursquare"}
+			/>
+			<Lines 
+				tableSchema={"agents"} 
+				tableName={"rotterdam_roads"} 
+				styleName={"rotterdam_roads"}
 			/>
 			<Polygons 
 				tableSchema={"agents"} 

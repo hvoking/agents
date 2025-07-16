@@ -9,10 +9,7 @@ export const Features = ({ marker }: any) => {
 	return (	
 		<>
 			{geometryType === 'LineString' && 
-				<Lines 
-					source={source}
-					marker={marker}
-				/>
+				<Lines marker={marker}/>
 			}
 			{geometryType === 'Points' && 
 				<Points marker={marker}/>

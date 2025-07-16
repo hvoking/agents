@@ -3,12 +3,7 @@ import { Slider } from '../utils/slider';
 import { Mobility } from '../utils/mobility';
 import { Color } from '../utils/color';
 
-// Context imports
-import { useMarkers } from 'context/markers';
-
 export const Stroke = ({ id, strokeWidth, strokeOpacity }: any) => {
-	const { colorPalette } = useMarkers();
-
 	return (
 		<>
 			<Slider 
@@ -29,7 +24,6 @@ export const Stroke = ({ id, strokeWidth, strokeOpacity }: any) => {
 			/>
 			<Color 
 				markerId={id}
-				colorPalette={colorPalette}
 				markerProperty={'stroke'}
 			/>
 		</>

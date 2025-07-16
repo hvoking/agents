@@ -11,27 +11,35 @@ export const fillProperties: any = {
 }
 
 export const processColor = (paint: any, property: string) => {
-    const processedPaint = { ...paint };
+  const resultPaint = Object.assign({}, paint);
 
-    if (paint[property]) {
-        const color = paint[property];
-        const { r, g, b, a } = color;
+  if (paint[property]) {
+      const color = paint[property];
+      const { r, g, b, a } = color;
 
-        processedPaint[property] = `
-        	rgba(
-        		${Math.round(r * 255)}, 
-        		${Math.round(g * 255)}, 
-        		${Math.round(b * 255)}, 
-        		${a}
-        	)
-        `.replace(/\s/g, '');
-    }
-    return processedPaint;
+      resultPaint[property] = `
+      	rgba(
+      		${Math.round(r * 255)}, 
+      		${Math.round(g * 255)}, 
+      		${Math.round(b * 255)}, 
+      		${a}
+      	)
+      `.replace(/\s/g, '');
+  }
+  return resultPaint;
 };
 
-const getColor = (layerType: any, layerPaint: any, property: string) => {
-  const resultPaint = Object.assign({}, layerPaint);
-  resultPaint[property] = property === 'line-color' ? roadColors[layerType] : buildingColors[layerType];
+const getColor = (layerType: any, paint: any, property: string) => {
+  const resultPaint = Object.assign({}, paint);
+
+  const color =
+    property === 'line-color'
+      ? roadColors[layerType]
+      : buildingColors[layerType];
+
+  if (color) {
+    resultPaint[property] = color;
+  }
   return resultPaint;
 };
 
@@ -72,8 +80,11 @@ export const filterLines = (mapFeatures: any[], boundary: any, source: string, f
 
   return mapFeatures.flatMap((item: any) => {
     const { geometry, layer, properties: itemProperties } = item;
-    const color = getColor(itemProperties.type, layer.paint, fillProperty);
-    // const color = getColor(layer.paint, fillProperty);
+    const color =
+      item.source === 'composite' ?
+      getColor(itemProperties.type, layer.paint, fillProperty) :
+      processColor(layer.paint, fillProperty);
+      
     const properties = { ...color, ...itemProperties };
 
     const lineFeatures = getLineFeatures(geometry, properties);
@@ -91,8 +102,6 @@ export const filterGeometries = (features: any[], boundary: any) =>
 export const toFeatureCollection = (originalFeatures: any[], fillProperty: string) => {
   const features = originalFeatures.map((item) => {
     const { geometry, properties: itemProperties, layer } = item;
-
-    // const color = getColor(layer.paint, fillProperty);
     const color = processColor(layer.paint, fillProperty);
     const properties = { ...itemProperties, ...color }
 

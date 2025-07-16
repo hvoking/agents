@@ -2,12 +2,7 @@
 import { Slider } from '../utils/slider';
 import { Color } from '../utils/color';
 
-// Context imports
-import { useMarkers } from 'context/markers';
-
 export const Fill = ({ id, fillOpacity }: any) => {
-	const { colorPalette } = useMarkers();
-
 	return (
 		<>
 			<Slider 
@@ -20,7 +15,6 @@ export const Fill = ({ id, fillOpacity }: any) => {
 			/>
 			<Color 
 				markerId={id}
-				colorPalette={colorPalette}
 				markerProperty={'fillColor'}
 			/>
 		</>
