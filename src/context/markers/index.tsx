@@ -1,9 +1,6 @@
 // React imports
 import { useState, useEffect, useContext, createContext } from 'react';
 
-// App imports
-import { providers } from './data';
-
 const MarkersContext: React.Context<any> = createContext(null);
 
 export const useMarkers = () => useContext(MarkersContext)
@@ -106,7 +103,7 @@ export const MarkersProvider = ({children}: any) => {
 			activePage, setActivePage,
 			radius, setRadius,
 			addPin, setAddPin,
-			providers, colorPalette,
+			colorPalette,
 			rejectMarker, activateMarker
 		}}>
 			{children}

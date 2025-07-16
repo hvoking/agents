@@ -1,11 +1,13 @@
 // App imports
 import './styles.scss';
 
+import { providers } from './data';
+
 // Context imports
 import { useMarkers } from 'context/markers';
 
 export const Grid = ({ imageUrls }: any) => {
-	const { activateMarker, providers } = useMarkers();
+	const { activateMarker } = useMarkers();
 	const baseUrl = process.env.PUBLIC_URL + '/static/agents/';
 
 	return (
