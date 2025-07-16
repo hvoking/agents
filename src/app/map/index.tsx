@@ -3,8 +3,6 @@ import { useState } from 'react';
 
 // App imports
 import { Tiles } from './tiles';
-import { Tooltip } from './tooltip';
-import { Chat } from './chat';
 import { Mask } from './mask';
 
 // Context imports
@@ -17,9 +15,9 @@ import { Map } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 export const MapView = () => {
-	const { markers } = useMarkers();
+	const { markers, addMarker } = useMarkers();
 	const { viewport, mapRef, mapStyle } = useGeo();
-	const { onContextMenu, onClick } = useBoundary();
+	const { onContextMenu } = useBoundary();
 
 	const [ isMapLoaded, setIsMapLoaded ] = useState(false);
 	
@@ -30,7 +28,7 @@ export const MapView = () => {
 			mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
 			mapStyle={mapStyle}
 			onLoad={() => setIsMapLoaded(true)}
-			onClick={onClick}
+			onClick={addMarker}
 			onContextMenu={onContextMenu}
 		>
 			{isMapLoaded && 
@@ -39,8 +37,6 @@ export const MapView = () => {
 					{Object.entries(markers).map(([ key, marker ]: any) => 
 						<Mask key={key} marker={marker}/>
 					)}
-					<Tooltip/>
-					<Chat/>
 				</>
 			}
 		</Map>

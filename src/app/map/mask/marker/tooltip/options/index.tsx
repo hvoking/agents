@@ -4,10 +4,12 @@ import { Mobility } from './mobility';
 import { Color } from './color';
 import './styles.scss';
 
-export const Options = ({ activeFeature, colorPalette, currentMarker }: any) => {
-	if (!activeFeature) return <></>;
+// Context imports
+import { useMarkers } from 'context/markers';
 
-	const { id, radius, contoursMinutes, fillOpacity, strokeWidth, strokeOpacity } = currentMarker;
+export const Options = ({ marker, activeFeature }: any) => {
+	const { colorPalette } = useMarkers();
+	const { id, radius, contoursMinutes, fillOpacity, strokeWidth, strokeOpacity } = marker;
 	
 	return (
 		<div className="options-wrapper">

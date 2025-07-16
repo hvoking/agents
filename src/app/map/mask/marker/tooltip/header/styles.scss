@@ -2,12 +2,11 @@
 
 .header-selector {
   display: flex;
-  gap: 5px;
-  padding: 2px;
-  border-radius: 4px;
+  gap: 10px;
+  padding: 5px;
+  border-radius: 10px;
   background-color: $card-bg;
   box-shadow: $box-shadow;
-  width: min-content;
 }
 .section-selectors {
   display: flex;
@@ -24,6 +23,7 @@
   display: flex;
   border-right: 1px solid $border-color;
   align-items: center;
+  padding-right: 10px;
 }
 .boundary-icon {
   cursor: pointer; 
@@ -36,4 +36,5 @@
   align-items: center;
   gap: 2px;
   padding: 5px;
+  border-radius: 5px;
 }

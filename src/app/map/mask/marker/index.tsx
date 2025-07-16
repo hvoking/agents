@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react';
 
 // App imports
+import { Cross } from './cross';
+import { Tooltip } from './tooltip';
 import './styles.scss';
 
 // Context imports
@@ -49,7 +51,10 @@ export const CustomMarker = ({ marker, setBoundary }: any) => {
 			onDragStart={(e: any) => onDragStart(e, id)}
 			onDragEnd={(e: any) => onDragEnd(e, id, boundaryType, setDragPosition)}
 		>
-			<div className="custom-marker">
+			<div 
+				className="custom-marker"
+				onClick={(e: any) => activateTrash(e, id, activeTrash)}
+			>
 				<img 
 					src={image} 
 					alt="agent-avatar"
@@ -59,6 +64,8 @@ export const CustomMarker = ({ marker, setBoundary }: any) => {
 					{name}
 				</div>
 			</div>
+			{activeTrash && <Cross onClick={(e: any) => rejectMarker(e, id)}/>}
+			{activeTrash && <Tooltip marker={marker}/>}
 	    </Marker>
 	)
 }
