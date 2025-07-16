@@ -2,6 +2,7 @@
 import { Agents } from './agents';
 import { Features } from './features';
 import { Basemaps } from './basemaps';
+import { Cross } from './cross';
 import './styles.scss';
 
 // Context imports
@@ -51,6 +52,7 @@ export const Sections = () => {
 			</div>
 			<div className="sections">
 		      <div className="section-grid">
+				<Cross/>
 		        <h2>{title}</h2>
 		        <p className="section-items">{subtitle}</p>
 		        <Component/>

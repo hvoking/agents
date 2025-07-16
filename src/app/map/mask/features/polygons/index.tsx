@@ -1,5 +1,5 @@
 // App imports
-import { getPolygonsStyle } from '../../styles/polygons';
+import { getPolygonsStyle } from '../styles/polygons';
 
 // Third-party imports
 import { Source, Layer } from 'react-map-gl/mapbox';
