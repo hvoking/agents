@@ -9,11 +9,11 @@ export const Logo = () => {
 	const onClick = () => setActivePage(null);
 	
 	return (
-		<div className="logo">
+		<div className="logo-wrapper">
 			<img 
+				className="logo-img"
 				src={process.env.PUBLIC_URL + "/static/logos/logo.svg"} 
 				alt="logo" 
-				height="40px"
 				onClick={onClick}
 			/>
 		</div>

@@ -23,7 +23,7 @@ export const Charts = ({ data, name, colorLabel, backgroundColor }: any) => {
 
 	const onClick = () => {
 		setGraphicTypeIndex((prev: any) => {
-			if (prev < 1) return prev + 1;
+			if (prev < 2) return prev + 1;
 			return 0;
 		})
 	}

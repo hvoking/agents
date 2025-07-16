@@ -1,7 +1,6 @@
-export const providers = [
+export const providersArray = [
 	{
 		name: "streets",
-		label: 'Streets', 
 		provider: "mapbox", 
 		source: 'composite',
 		layer: 'road',
@@ -10,7 +9,6 @@ export const providers = [
 	},
 	{
 		name: "buildings",
-		label: 'Buildings',
 		provider: "overture", 
 		source: 'buildings-overture',
 		layer: 'buildings-overture', 
@@ -19,7 +17,6 @@ export const providers = [
 	},
 	{
 		name: "foursquare",
-		label: 'Points of Interest', 
 		provider: "foursquare", 
 		source: 'points-foursquare',
 		layer: 'points-foursquare', 
@@ -28,7 +25,6 @@ export const providers = [
 	},
 	{
 		name: "inside_airbnb",
-		label: 'Properties', 
 		provider: "inside_airbnb", 
 		source: 'points-airbnb',
 		layer: 'points-airbnb', 
