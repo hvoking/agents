@@ -7,7 +7,6 @@ import { Mask } from './mask';
 
 // Context imports
 import { useGeo } from 'context/geo';
-import { useBoundary } from 'context/events/boundary';
 import { useMarkers } from 'context/markers';
 
 // Third-party imports
@@ -17,7 +16,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 export const MapView = () => {
 	const { markers, addMarker } = useMarkers();
 	const { viewport, mapRef, mapStyle } = useGeo();
-	const { onContextMenu } = useBoundary();
 
 	const [ isMapLoaded, setIsMapLoaded ] = useState(false);
 	
@@ -29,7 +27,6 @@ export const MapView = () => {
 			mapStyle={mapStyle}
 			onLoad={() => setIsMapLoaded(true)}
 			onClick={addMarker}
-			onContextMenu={onContextMenu}
 		>
 			{isMapLoaded && 
 				<>

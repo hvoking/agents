@@ -60,7 +60,7 @@ export const Input = ({ currentMarker, setRequestData, updateResponse, setReques
 			<textarea
 				className="chat-input"
 				placeholder="Type your message here..."
-				value={searchText ? searchText : ""}
+				value={searchText || ""}
 				spellCheck={false}
 				onChange={handleChange}
 				onKeyDown={onKeyDown}

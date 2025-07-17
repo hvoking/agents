@@ -10,12 +10,10 @@ import './styles.scss';
 import { useRagApi } from 'context/api/rag';
 import { useMarkers } from 'context/markers';
 
-export const Messages = () => {
-    // Context hooks
+export const Chat = () => {
     const { fetchRag } = useRagApi();
     const { markers, currentMarkerId } = useMarkers();
 
-    // Refs and state
     const [ requestData, setRequestData ] = useState<any>(null);
     const [ requestText, setRequestText ] = useState('');
     const [ responseData, setResponseData ] = useState<any>({});
@@ -42,7 +40,9 @@ export const Messages = () => {
 
 	return (
 		<div className="chat-interface">
-			<div className="chat-header">Ask Agent</div>
+			<div className="chat-header">
+				Ask Agent
+			</div>
 			<Response 
 				responseData={responseData} 
 				markerId={currentMarkerId || ''}
@@ -57,4 +57,3 @@ export const Messages = () => {
 	)
 }
 
-Messages.displayName="Messages";
