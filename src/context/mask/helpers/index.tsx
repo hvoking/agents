@@ -19,7 +19,7 @@ const colorPalette = [
   'rgba(255, 152, 0, 0.6)',
   'rgba(155, 48, 255, 0.6)',
   'rgba(34, 255, 102, 0.6)'
-]
+];
 
 // Utils
 const hashStringToNumber = (str: any): number =>

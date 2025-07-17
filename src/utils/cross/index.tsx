@@ -1,12 +1,7 @@
 // App imports
 import './styles.scss';
 
-// Context imports
-import { useMarkers } from 'context/markers';
-
-export const Cross = () => {
-	const { setActivePage } = useMarkers();
-
+export const Cross = ({ setActivePage }: any) => {
 	return (
 		<div className="sections-cross" onClick={() => setActivePage(false)}>
 			<svg 

@@ -1,5 +1,5 @@
 // App imports
-import { basemapsArray } from './data';
+import { basemaps } from 'context/data/basemaps';
 import './styles.scss'
 
 // Context imports
@@ -10,7 +10,7 @@ export const Basemaps = () => {
 
 	return (
 		<div className="agent-grid">
-			{basemapsArray.map((item, index) => {
+			{basemaps.map((item, index) => {
 			  	const [[name, { url, img }]] = Object.entries(item);
 			  	const imageUrl = process.env.PUBLIC_URL + `/static/basemaps/${img}.png`;
 

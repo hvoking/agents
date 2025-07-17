@@ -2,8 +2,10 @@
 import { Agents } from './agents';
 import { Features } from './features';
 import { Basemaps } from './basemaps';
-import { Cross } from './cross';
 import './styles.scss';
+
+// Utils imports
+import { Cross } from 'utils/cross';
 
 // Context imports
 import { useMarkers } from 'context/markers';
@@ -31,7 +33,7 @@ const sections = [
 ];
 
 export const Sections = () => {
-	const { activePage } = useMarkers();
+	const { activePage, setActivePage } = useMarkers();
 	const { handleStart, draggableRef } = useDraggable();
 
 	if (!activePage) return null;
@@ -52,7 +54,7 @@ export const Sections = () => {
 			</div>
 			<div className="sections">
 		      <div className="section-grid">
-				<Cross/>
+				<Cross setActivePage={setActivePage}/>
 		        <h2>{title}</h2>
 		        <p className="section-items">{subtitle}</p>
 		        <Component/>

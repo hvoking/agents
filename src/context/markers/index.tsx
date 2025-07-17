@@ -13,7 +13,6 @@ export const MarkersProvider = ({children}: any) => {
 
 	const [ activePage, setActivePage ] = useState<any>(null);
 
-	const [ radius, setRadius ] = useState(0.5);
 	const [ addPin, setAddPin ] = useState(false);
 
 	const getMarkerId = (markers: any) => {
@@ -90,7 +89,6 @@ export const MarkersProvider = ({children}: any) => {
 			currentImage, setCurrentImage,
 			currentProvider, setCurrentProvider,
 			activePage, setActivePage,
-			radius, setRadius,
 			addPin, setAddPin,
 			rejectMarker, activateMarker
 		}}>

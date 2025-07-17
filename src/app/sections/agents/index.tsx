@@ -1,7 +1,7 @@
 // App imports
 import './styles.scss';
 
-import { providersArray } from './providers';
+import { providers } from 'context/data/providers';
 
 // Context imports
 import { useMarkers } from 'context/markers';
@@ -12,7 +12,7 @@ export const Agents = ({ imageUrls }: any) => {
 
 	return (
 		<div className="agent-grid">
-		  {providersArray.map((item: any) => {
+		  {providers.map((item: any) => {
 		  	const name = item.name;
 		  	
 		  	const url = baseUrl + name + '.svg';
