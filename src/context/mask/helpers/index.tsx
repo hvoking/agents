@@ -2,12 +2,6 @@
 import * as turf from '@turf/turf';
 
 // Constants
-export const fillProperties: Record<string, string> = {
-  Points: 'circle-color',
-  Polygon: 'fill-color',
-  LineString: 'line-color',
-};
-
 const colorPalette = [
   'rgba(216, 131, 255, 0.6)',
   'rgba(247, 121, 118, 0.6)',
@@ -20,6 +14,12 @@ const colorPalette = [
   'rgba(155, 48, 255, 0.6)',
   'rgba(34, 255, 102, 0.6)'
 ];
+
+const fillProperties: Record<string, string> = {
+  Points: 'circle-color',
+  Polygon: 'fill-color',
+  LineString: 'line-color',
+};
 
 // Utils
 const hashStringToNumber = (str: any): number =>
@@ -110,3 +110,38 @@ export const toFeatureCollection = (originalFeatures: any[], fillProperty: strin
   });
   return { type: 'FeatureCollection', features };
 };
+
+const getLayersIdsBySourceLayer = (currentMap: any, sourceLayer: string) => {
+  return currentMap.getStyle()
+  .layers
+  .filter((layer: any) => {
+    if (layer['source-layer'] === 'default') {
+      return layer['source'] === sourceLayer  
+    }
+    else {
+      return layer['source-layer'] === sourceLayer
+    }
+    
+  })
+  .map((layer: any) => layer.id);
+}
+
+const getFeaturesBySource = (currentMap: any, currentSource: any) => {
+  const layers = getLayersIdsBySourceLayer(currentMap, currentSource);
+  const currentFeatures = currentMap.queryRenderedFeatures({ layers });
+  return currentFeatures;
+}
+
+export const getGeojson = (currentMap: any, boundary: any, source: string, geometryType: string) => {
+    const fillProperty = fillProperties[geometryType] || 'fill-color';
+    const isLine = geometryType === 'LineString' || geometryType === 'MultiLineString';
+
+    const currentFeatures = getFeaturesBySource(currentMap, source);
+
+    if (!isLine) {
+      const geomFeatures = filterGeometries(currentFeatures, boundary);
+      return toFeatureCollection(geomFeatures, fillProperty);
+    }
+    const features = filterLines(currentFeatures, boundary, source, fillProperty);
+    return { type: 'FeatureCollection', features};
+  };

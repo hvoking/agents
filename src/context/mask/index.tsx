@@ -1,56 +1,76 @@
 // React imports
-import { useContext, createContext } from 'react';
+import { useState, useContext, createContext } from 'react';
 
 // App imports
-import { fillProperties, toFeatureCollection, filterGeometries, filterLines } from './helpers';
+import { getGeojson } from './helpers';
 
 // Context imports
+import { useMarkers } from 'context/markers';
+import { useIsochroneApi } from 'context/api/isochrone';
 import { useGeo } from 'context/geo';
 
-const MaskContext: React.Context<any> = createContext(null)
+// Third-party imports
+import * as turf from '@turf/turf';
+
+const MaskContext: React.Context<any> = createContext(null);
 
 export const useMask = () => useContext(MaskContext)
 
-export const MaskProvider = ({children}: any) => {
+export const MaskProvider = ({ children }: any) => {
 	const { mapRef } = useGeo();
+	const { updateMarkers } = useMarkers();
+	const { fetchIsochrone } = useIsochroneApi();
 
-	const getLayersIdsBySourceLayer = (sourceLayer: string) => {
-		return mapRef?.current?.getStyle()
-		.layers
-		.filter((layer: any) => {
-			if (layer['source-layer'] === 'default') {
-				return layer['source'] === sourceLayer	
-			}
-			else {
-				return layer['source-layer'] === sourceLayer
-			}
-			
-		})
-		.map((layer: any) => layer.id);
-	}
+	const [ dragging, setDragging ] = useState(false);
 
-	const getFeaturesBySource = (currentSource: any) => {
-		const layers = getLayersIdsBySourceLayer(currentSource);
-		const currentFeatures = mapRef.current.queryRenderedFeatures({ layers });
-		return currentFeatures;
-	}
+	const onDragStart = (e: any, id: any) =>  {
+		setDragging(true);
+		updateMarkers(id, 'activeTrash', false);
+	};
 
-	const getGeojson = (boundary: any, source: string, geometryType: string) => {
-		const fillProperty = fillProperties[geometryType] || 'fill-color';
-		const isLine = geometryType === 'LineString' || geometryType === 'MultiLineString';
-
-		const currentFeatures = getFeaturesBySource(source);
-
-		if (!isLine) {
-			const geomFeatures = filterGeometries(currentFeatures, boundary);
-			return toFeatureCollection(geomFeatures, fillProperty);
+	const onDrag = (e: any, id: any, boundaryType: any) => {
+		if (boundaryType !== "iso") {
+			updateMarkers(id, "center", e.lngLat);
 		}
-		const features = filterLines(currentFeatures, boundary, source, fillProperty);
-		return { type: 'FeatureCollection', features};
+	};
+
+	const onDragEnd = (e: any, id: any, boundaryType: any) => {
+		setTimeout(() => setDragging(false), 0);
+		if (boundaryType === "iso") {
+			updateMarkers(id, "center", e.lngLat);
+		}
+	};
+
+	const activateTrash = (e: any, id: any, activeTrash: any) => {
+		e.stopPropagation();
+		!dragging && updateMarkers(id, 'activeTrash', activeTrash ? false : true);
+	};
+
+	const getBoundary = async (marker: any, setBoundary: any) => {
+		const { id, center, radius, boundaryType, layer, geometryType } = marker;
+		const currentMap = mapRef.current;
+		
+		if (boundaryType === 'iso') {
+			const data = await fetchIsochrone(marker);
+			const currentBoundary = data.features[0];
+			updateMarkers(id, 'data', getGeojson(currentMap, currentBoundary, layer, geometryType));
+			setBoundary(currentBoundary);
+		} else if (center) {
+			const circle = turf.circle([center.lng, center.lat], radius);
+			const geojson = getGeojson(currentMap, circle, layer, geometryType);
+			updateMarkers(id, 'data', geojson);
+			setBoundary(circle);
+		}
 	};
 
 	return (
-		<MaskContext.Provider value={{ getGeojson }}>
+		<MaskContext.Provider value={{
+			onDragStart,
+			onDrag,
+			onDragEnd,
+			getBoundary,
+			activateTrash
+		}}>
 			{children}
 		</MaskContext.Provider>
 	)

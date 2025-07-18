@@ -9,15 +9,15 @@ export const ContextProvider = ({children}: any) => {
   return (
     <GeoProvider>
     <MarkersProvider>
-    <MaskProvider>
     <ApiProvider>
     <EventsProvider>
+    <MaskProvider>
     <SizesProvider>
       {children}
     </SizesProvider>
+    </MaskProvider>
     </EventsProvider>
     </ApiProvider>
-    </MaskProvider>
     </MarkersProvider>
     </GeoProvider>
   )
