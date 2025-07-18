@@ -7,6 +7,7 @@ export const useMarkers = () => useContext(MarkersContext)
 
 export const MarkersProvider = ({children}: any) => {
 	const [ markers, setMarkers ] = useState<any>({});
+
 	const [ currentMarkerId, setCurrentMarkerId ] = useState<any>(null);
 	const [ currentImage, setCurrentImage ] = useState<any>(null);
 	const [ currentProvider, setCurrentProvider ] = useState<any>(null);
@@ -37,8 +38,8 @@ export const MarkersProvider = ({children}: any) => {
 				contoursMinutes: 10,
 				fillColor: "rgba(166, 204, 245, 0.8)",
 				fillOpacity: 0.1,
-				stroke: "rgba(166, 204, 245, 1)",
 				strokeWidth: 4,
+				strokeColor: "rgba(166, 204, 245, 1)",
 				strokeOpacity: 0.8,
 				routingProfile: "walking",
 				boundaryType: "circle",

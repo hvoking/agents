@@ -5,11 +5,11 @@ import './styles.scss';
 import { useMarkers } from 'context/markers';
 
 export const Header = ({ marker, activeFeature, setActiveFeature }: any) => {
-	const { id, fillColor, stroke } = marker;
+	const { id, fillColor, strokeColor } = marker;
 	const { updateMarkers } = useMarkers();
 
 	document.documentElement.style.setProperty('--fillColor', fillColor);
-	document.documentElement.style.setProperty('--strokeColor', stroke);
+	document.documentElement.style.setProperty('--strokeColor', strokeColor);
 
 	const isActiveColor = (name: any) => 
 		activeFeature === name ? 

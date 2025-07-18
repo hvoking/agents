@@ -24,7 +24,7 @@ export const Stroke = ({ id, strokeWidth, strokeOpacity }: any) => {
 			/>
 			<Color 
 				markerId={id}
-				markerProperty={'stroke'}
+				markerProperty={'strokeColor'}
 			/>
 		</>
 	)

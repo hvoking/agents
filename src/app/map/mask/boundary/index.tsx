@@ -1,27 +1,27 @@
 // App imports
-import { getStrokeLayer } from './stroke';
-import { getEraserLayer } from './eraser';
-import { getFillLayer } from './fill';
+import { getFillLayer } from 'utils/layers/boundary/fill';
+import { getStrokeLayer } from 'utils/layers/boundary/stroke';
+import { getEraserLayer } from 'utils/layers/boundary/eraser';
 
 // Third party imports
 import { Source, Layer } from 'react-map-gl/mapbox';
 
 export const Boundary = ({ marker, boundary }: any) => {
-  const { id, stroke, strokeWidth, strokeOpacity, fillColor, fillOpacity } = marker;
+  const { id, fillColor, fillOpacity, strokeColor, strokeWidth, strokeOpacity } = marker;
   
   const sourceId = `boundary-source-${id}`;
 
   if (!boundary) return <></>
 
   const fillId = `boundary-fill-${id}`;
-  const borderId = `boundary-stroke-${id}`;
+  const strokeId = `boundary-stroke-${id}`;
   const eraserId = `boundary-eraser-${id}`;
-
-  const eraserLayer = getEraserLayer(eraserId, sourceId);
+  
   const fillLayer = getFillLayer(fillId, sourceId, fillColor, fillOpacity);
-  const borderLayer = getStrokeLayer(borderId, sourceId, stroke, strokeOpacity, strokeWidth);
+  const strokeLayer = getStrokeLayer(strokeId, sourceId, strokeWidth, strokeColor, strokeOpacity);
+  const eraserLayer = getEraserLayer(eraserId, sourceId);
 
-  const layers: any = [ eraserLayer, fillLayer, borderLayer ];
+  const layers: any = [ eraserLayer, fillLayer, strokeLayer ];
     
     return (
       <Source 
