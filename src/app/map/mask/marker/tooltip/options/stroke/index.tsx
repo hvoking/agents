@@ -1,6 +1,5 @@
 // App imports
 import { Slider } from '../utils/slider';
-import { Mobility } from '../utils/mobility';
 import { Color } from '../utils/color';
 
 export const Stroke = ({ id, strokeWidth, strokeOpacity }: any) => {

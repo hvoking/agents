@@ -6,13 +6,15 @@ import { Polygons } from './polygons';
 export const Features = ({ marker }: any) => {
 	const { geometryType } = marker;
 
-	return (	
-		<>
-			{geometryType === 'LineString' && <Lines marker={marker}/>}
-			{geometryType === 'Points' && <Points marker={marker}/>}
-			{geometryType === 'Polygon' && <Polygons marker={marker}/>}
-		</>
-	)
+	const componentMap: any = {
+		Points: Points,
+		LineString: Lines,
+		Polygon: Polygons
+	};
+
+	const Component = componentMap[geometryType];
+
+	return Component ? <Component marker={marker} /> : null;
 }
 
 Features.displayName='Features';
